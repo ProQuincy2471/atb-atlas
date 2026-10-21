@@ -1,18 +1,21 @@
-# ATB Atlas V8 — exploración con contexto
+# ATB Atlas V9 — Cartografía intuitiva
 
-## Cambios funcionales
+**Cambios publicados:** renovación de la experiencia de lectura y estudio. Se conservan los datos clínicos y el historial de versiones previas.
 
-- Mapa visible desde el primer tramo de la página; controles secundarios plegados inicialmente.
-- Enfoque directo en cinco patógenos de alto rendimiento para estudiar sus relaciones por antibiótico.
-- Filtros combinables de grupos, familias, estado microbiológico, búsqueda y evidencia registrada.
-- Orden alfabético, por familia y por cantidad de relaciones documentadas.
-- Densidad de tabla cómoda/compacta.
-- Paletas editables individualmente y cuatro esquemas completos.
-- Vistas personalizadas compartibles por URL con filtros en fragmento `#/mapa?...`.
-- Marcadores locales de antibióticos; modo de visualización solo guardados.
-- Tarjetas de lectura clínica vinculadas a las notas editoriales existentes.
-- Sin animaciones ni efectos en movimiento.
+### Nuevas funciones
+- Mapa Micro × ATB reorganizado con selector escalonado, filtros combinables, pagina de 16 filas, leyenda interpretativa y un inspector contextual.
+- Orientaciones por grupo, especie e inversa, con foco individual de ATB o patógeno.
+- Catálogos de fármacos y de microorganismos, sin listas interminables.
+- Fichas clínicas de más fácil lectura y navegación cruzada.
+- Biblioteca de 22 síndromes, comparador, 22 módulos de aprendizaje (12 existentes + 7 resistencia + 3 de integración), 12 perfiles de grupos y 15 referencias.
+- Paletas Prisma, Aurora, Tinta y Alto contraste, editables localmente.
+- Vistas guardadas y URL de filtros compartibles.
 
-## Estado del conocimiento
+### Seguridad editorial
+- Se mantienen las 130 relaciones piloto originales; no se completaron cruces sin validación.
+- `No evaluado` se muestra explícitamente como **ausencia de datos**, nunca como resistencia.
+- Información académica; no generador de prescripción.
 
-Se conserva el catálogo V7: 111 antibióticos, 79 microorganismos, 22 síndromes y 130 relaciones explícitas en revisión. Las relaciones ausentes siguen como «sin evaluar». No se ha producido una validación individual adicional de cobertura ni nuevos esquemas terapéuticos.
+### Verificación
+- `node --check` del código JavaScript.
+- Pruebas funcionales simuladas con Playwright en 1440 y 390 píxeles, incluidas rutas, búsqueda, filtros, inspector, comparación, paleta, y comprobación de errores de JavaScript; sin desbordamiento general en móvil.

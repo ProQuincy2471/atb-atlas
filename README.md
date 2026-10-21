@@ -1,36 +1,41 @@
-# ATB Atlas V8 · Microbiología visual
+# ATB Atlas V9 — Visual Studio para microbiología y antibioticoterapia
 
-Sitio estático e interactivo publicado con GitHub Pages. Rediseño completo del frontend, sin animaciones.
+Sitio web estático de enseñanza médica, desplegable en GitHub Pages. Sin backend, sin IA obligatoria y sin animaciones.
 
-## Modos
+## Tres formas de entrar
 
-- **Micro × ATB**: mapa por familias y grupos microbiológicos; vista por especie y vista invertida; filtros; inspector de cruces.
-- **Solo antibióticos**: catálogo de 111 agentes, familias/subgrupos, mecanismo, contexto y cobertura registrada.
-- **Solo microorganismos**: catálogo de 79 especies y fenotipos, estructura, morfología, pistas clínicas, enfermedades y relaciones de espectro.
-- Clínica y síndromes, comparador de hasta cuatro fármacos, lecciones y bibliografía.
+- **Micro × ATB**: un mapa de espectro con filas de antibióticos y columnas de microorganismos. El color identifica el grupo taxonómico; el símbolo explica el estado **registrado** de la relación.
+- **Solo ATB**: biblioteca organizada por familia y subgrupo, con mecanismos, limitaciones, interacciones de espectro y enlaces.
+- **Solo Micro**: fichas organizadas por grupo, con identidad, morfología, pistas clínicas, síndromes y antibióticos relacionados. Puede mostrar microfotografías de CDC PHIL con sus créditos.
 
-## Principios de interfaz
+También incluye escenarios clínicos, comparador hasta de cuatro antibióticos, lecciones, guías y referencias.
 
-- Identidad microbiológica = color de grupo personalizable. Actividad = símbolo/estado independiente del color de identidad.
-- 12 grupos de color editable desde la web. Los cambios se guardan en el navegador (`localStorage`) sin cuenta ni backend.
-- Iconografía SVG de la biblioteca pública Font Awesome Free empaquetada en `assets/icons/`; ver `LICENSE-ICONS.md`.
-- Fuentes: Plus Jakarta Sans y DM Sans (Google Fonts; con alternativas locales). Sin animaciones CSS o JavaScript.
-- Microfotografías de CDC PHIL solo cuando existen en el catálogo y con atribución/enlace de origen.
+## Cambios V9
 
-## Datos
+- Selector principal en tres pasos con listas agrupadas por familia o microorganismo.
+- Accesos rápidos a Pseudomonas, MRSA, E. coli BLEE, neumococo y B. fragilis.
+- Filtros combinables sin una lista larga: grupo, familia, estado, orden; modo por grupos, especies o inverso.
+- Hasta 16 antibióticos por página con cabeceras de familia; mapa con desplazamiento interno.
+- Leyenda ampliada para evitar confundir identidad cromática con actividad.
+- Inspector por cruce con estado, explicación, condiciones y fuentes; desgloses por especies.
+- 12 perfiles educativos de grupos microbiológicos; ampliación de la sección Aprender con contenido de IDSA 2025/2026 y siete módulos de resistencia de la biblioteca existente.
+- Paleta con doce colores editables, cuatro combinaciones predefinidas, guardado local y exportación JSON.
+- Vistas personalizadas guardadas en el navegador y enlaces con filtros compartibles.
+- Interfaz adaptable a móviles y sin animaciones.
 
-`data/atlas.json` y `data/insights.json` fueron conservados del catálogo V4/V5: 111 antibióticos, 79 microorganismos/fenotipos, 22 síndromes, 130 relaciones explícitas. Las relaciones no documentadas permanecen marcadas «sin evaluar»; no se puede inferir resistencia de la ausencia de información. Las relaciones registradas aún están sujetas a revisión clínica individual.
+## Datos y verificación
 
-Este es un recurso de estudio, no un sistema de recomendación de prescripción.
+Se **preserva** el archivo `data/atlas.json` de V4-V8: 111 antibióticos, 79 microorganismos/fenotipos, 22 síndromes y 130 relaciones explícitas piloto, además de 15 referencias base. No se presentan cruces ausentes como resistencia. Las relaciones piloto no han sido revisadas clínicamente de forma individual. Una recomendación de tratamiento requiere identificación del organismo, antibiograma, foco, gravedad, farmacocinética, comorbilidades, resistencia local y una guía clínica apropiada.
 
-## Despliegue
+Se conserva `data/insights.json`, con notas originales educativas vinculadas con guías públicas. El nuevo material de enseñanza se elaboró como **paráfrasis original**, no como transcripción extensa de libros.
 
-GitHub Pages mediante `.github/workflows/deploy-pages.yml` existente. Abrir `index.html` desde un servidor HTTP; la lectura `fetch` del JSON puede fallar con `file://`.
+## Publicar
 
+El repositorio `ProQuincy2471/atb-atlas` utiliza GitHub Actions para publicar automáticamente el sitio. No hay etapa de compilación: `index.html`, `app.js`, `styles.css` y `data/` son archivos estáticos. Los SVG de iconos se sirven localmente desde `assets/icons/` y conservan su aviso de licencia en `LICENSE-ICONS.md`.
 
-## V8 additions
-- Contextual pathogen focus chips; evidence/status/sort/density filters; shareable map view URLs.
-- Four preconfigured 12-group palettes plus individual color editing.
-- Local bookmarked antibiotic profiles and bookmarked-only map view.
-- Clinical context notes linked to the existing guidance corpus (no generated susceptibility).
-- No motion effects.
+## Guías clínicas enlazadas
+
+- [IDSA 2026, AMR Gram-negative guidance](https://www.idsociety.org/practice-guideline/amr-guidance/)
+- [IDSA 2025, complicated UTI](https://www.idsociety.org/practice-guideline/complicated-urinary-tract-infections/)
+
+Las versiones de las guías deben re-verificarse periódicamente; este sitio no sustituye guías actualizadas, un antibiograma o juicio clínico.
