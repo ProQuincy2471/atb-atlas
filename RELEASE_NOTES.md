@@ -1,15 +1,18 @@
-# ATB ATLAS / Edición 05 — Rework visual integral
+# ATB Atlas V8 — exploración con contexto
 
-- Reconstrucción completa de layout, navegación y lenguaje visual.
-- Tres modos principales inmediatos: Micro × Antibióticos, Solo Antibióticos y Solo Microorganismos.
-- Mapa de espectro continuo mediante bandas segmentadas por especies, leyenda siempre visible, filtros taxonómicos de color, modo matriz y modo invertido.
-- Inspector contextual de grupos/especies con trazabilidad del estado de cada relación.
-- Atlas de microorganismos ampliado con estructura, taxonomía, clínica, resistencia y fotografías selectas CDC PHIL.
-- Fichas de antibióticos reorganizadas por mecanismo, relación, utilidad contextual y limitaciones.
-- Comparador de hasta 4 fármacos, explorador clínico por 22 síndromes, doce lecciones y 7 notas originales enlazadas con IDSA 2026.
-- Configuración editable de 12 colores, presets, exportación JSON y persistencia local con fallback seguro.
-- Búsqueda global Ctrl/Cmd+K. Adaptación para escritorio y móvil con matriz con desplazamiento horizontal interno.
-- Se conservó V4 `data/atlas.json`: 111 antibióticos, 79 microorganismos, 22 síndromes, 130 relaciones sin inventar susceptibilidades nuevas.
-- QA local: test de 7 rutas, inspector, búsqueda, inversión de matriz y persistencia de colores, cero errores JavaScript; sin overflow horizontal del documento en 390 px.
+## Cambios funcionales
 
-**Precaución**: la catalogación no equivale a validación clínica. Cada relación requiere una revisión editorial individual.
+- Mapa visible desde el primer tramo de la página; controles secundarios plegados inicialmente.
+- Enfoque directo en cinco patógenos de alto rendimiento para estudiar sus relaciones por antibiótico.
+- Filtros combinables de grupos, familias, estado microbiológico, búsqueda y evidencia registrada.
+- Orden alfabético, por familia y por cantidad de relaciones documentadas.
+- Densidad de tabla cómoda/compacta.
+- Paletas editables individualmente y cuatro esquemas completos.
+- Vistas personalizadas compartibles por URL con filtros en fragmento `#/mapa?...`.
+- Marcadores locales de antibióticos; modo de visualización solo guardados.
+- Tarjetas de lectura clínica vinculadas a las notas editoriales existentes.
+- Sin animaciones ni efectos en movimiento.
+
+## Estado del conocimiento
+
+Se conserva el catálogo V7: 111 antibióticos, 79 microorganismos, 22 síndromes y 130 relaciones explícitas en revisión. Las relaciones ausentes siguen como «sin evaluar». No se ha producido una validación individual adicional de cobertura ni nuevos esquemas terapéuticos.

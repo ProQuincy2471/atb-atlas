@@ -1,4 +1,4 @@
-# ATB Atlas V7 · Microbiología visual
+# ATB Atlas V8 · Microbiología visual
 
 Sitio estático e interactivo publicado con GitHub Pages. Rediseño completo del frontend, sin animaciones.
 
@@ -26,3 +26,11 @@ Este es un recurso de estudio, no un sistema de recomendación de prescripción.
 ## Despliegue
 
 GitHub Pages mediante `.github/workflows/deploy-pages.yml` existente. Abrir `index.html` desde un servidor HTTP; la lectura `fetch` del JSON puede fallar con `file://`.
+
+
+## V8 additions
+- Contextual pathogen focus chips; evidence/status/sort/density filters; shareable map view URLs.
+- Four preconfigured 12-group palettes plus individual color editing.
+- Local bookmarked antibiotic profiles and bookmarked-only map view.
+- Clinical context notes linked to the existing guidance corpus (no generated susceptibility).
+- No motion effects.
