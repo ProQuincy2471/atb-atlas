@@ -1,47 +1,28 @@
-# ATB Atlas · Edición 05
+# ATB Atlas V7 · Microbiología visual
 
-Aplicación de educación médica sobre microbiología clínica y espectro antimicrobiano, diseñada como un atlas bidireccional y publicada como sitio estático (sin backend) mediante GitHub Pages.
+Sitio estático e interactivo publicado con GitHub Pages. Rediseño completo del frontend, sin animaciones.
 
-## Tres entradas principales
+## Modos
 
-1. **Micro × ATB**: cartografía del espectro mediante bandas de grupos microbiológicos; matriz exacta y matriz invertida. Cada segmento de la banda corresponde a una especie. La banda NO indica susceptibilidad colectiva del grupo.
-2. **Solo antibióticos**: catálogo farmacológico por familia y subgrupo, con fichas de mecanismo, limitaciones y relaciones registradas.
-3. **Solo microorganismos**: catálogo taxonómico, mapas legibles de identidad, pistas clínicas, enfermedades, relaciones documentadas, fotos oficiales CDC para organismos seleccionados.
+- **Micro × ATB**: mapa por familias y grupos microbiológicos; vista por especie y vista invertida; filtros; inspector de cruces.
+- **Solo antibióticos**: catálogo de 111 agentes, familias/subgrupos, mecanismo, contexto y cobertura registrada.
+- **Solo microorganismos**: catálogo de 79 especies y fenotipos, estructura, morfología, pistas clínicas, enfermedades y relaciones de espectro.
+- Clínica y síndromes, comparador de hasta cuatro fármacos, lecciones y bibliografía.
 
-Secciones adicionales: clínica por síndrome, comparador hasta cuatro antibióticos, doce lecciones microbiológicas, notas docentes originales basadas en IDSA 2026, referencias y configuración de colores.
+## Principios de interfaz
 
-## Sistema visual
+- Identidad microbiológica = color de grupo personalizable. Actividad = símbolo/estado independiente del color de identidad.
+- 12 grupos de color editable desde la web. Los cambios se guardan en el navegador (`localStorage`) sin cuenta ni backend.
+- Iconografía SVG de la biblioteca pública Font Awesome Free empaquetada en `assets/icons/`; ver `LICENSE-ICONS.md`.
+- Fuentes: Plus Jakarta Sans y DM Sans (Google Fonts; con alternativas locales). Sin animaciones CSS o JavaScript.
+- Microfotografías de CDC PHIL solo cuando existen en el catálogo y con atribución/enlace de origen.
 
-- El color identifica el grupo microbiológico, no el estado de susceptibilidad.
-- Los símbolos identifican el estado de la relación documentada (`✓` habitual, `≈` condicional, `×` sin actividad útil, `·` sin evaluar).
-- El aspecto de una banda se construye **por especie**, mostrando visualmente cobertura mixta y vacíos de conocimiento.
-- Las 12 tonalidades pueden personalizarse en la UI, con persistencia en `localStorage` cuando está disponible, presets y copia JSON.
+## Datos
 
-## Estructura
+`data/atlas.json` y `data/insights.json` fueron conservados del catálogo V4/V5: 111 antibióticos, 79 microorganismos/fenotipos, 22 síndromes, 130 relaciones explícitas. Las relaciones no documentadas permanecen marcadas «sin evaluar»; no se puede inferir resistencia de la ausencia de información. Las relaciones registradas aún están sujetas a revisión clínica individual.
 
-- `index.html` — documento principal
-- `styles.css` — sistema visual, tarjetas editoriales, layouts responsive, taxonomía y estados de cobertura
-- `app.js` — navegación, matriz, inspector, buscador global, bibliotecas, comparador y preferencias
-- `data/atlas.json` — corpus heredado de V4 sin rellenar celdas desconocidas
-- `data/insights.json` — anotaciones docentes originales, vínculos oficiales IDSA y microfotografías CDC
-- `data/palette.json` — paleta heredada de V4, conservada como referencia
+Este es un recurso de estudio, no un sistema de recomendación de prescripción.
 
-## Verificación y limitaciones
+## Despliegue
 
-Corpus vigente: 111 antibióticos, 79 microorganismos/fenotipos, 22 síndromes, 130 relaciones explícitas. Las relaciones **no** están revisadas clínicamente de manera exhaustiva. Los cruces que no tienen datos permanecen como **sin evaluar**. No utilizar como recomendador de prescripción ni como sustituto de antibiograma, clínica, PK/PD, guías y conocimiento local.
-
-Fuentes académicas adjuntas se utilizaron como referencia para la organización y elaboración de resúmenes originales; no se redistribuyen ilustraciones o tablas protegidas. Las imágenes microbiológicas seleccionadas enlazan a CDC PHIL con atribución y están identificadas como ilustrativas, no diagnósticas. La iconografía de interfaz es de la biblioteca pública Lucide (cargada por CDN). 
-
-## Ejecución local
-
-```bash
-python -m http.server 8000
-```
-
-Abrir `http://localhost:8000/` desde el directorio de la aplicación. En GitHub Pages, publicar la raíz del repositorio usando el workflow existente.
-
-## Fuentes que requieren actualización independiente
-
-- IDSA 2026: https://www.idsociety.org/practice-guideline/amr-guidance/
-- IDSA cUTI 2025: https://www.idsociety.org/practice-guideline/complicated-urinary-tract-infections
-- CDC PHIL: https://phil.cdc.gov
+GitHub Pages mediante `.github/workflows/deploy-pages.yml` existente. Abrir `index.html` desde un servidor HTTP; la lectura `fetch` del JSON puede fallar con `file://`.
