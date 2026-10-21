@@ -1,50 +1,33 @@
-# ATB Atlas V11 — Laboratorio interactivo
+# ATB Atlas — Fieldguide V12
 
-# ATB Atlas V9 — Visual Studio para microbiología y antibioticoterapia
+A static educational microbiology and antimicrobial-spectrum atlas for GitHub Pages. This edition is a substantial UI/UX rebuild, not a recoloring of V11.
 
-Sitio web estático de enseñanza médica, desplegable en GitHub Pages. Sin backend, sin IA obligatoria y sin animaciones.
+## What is new
 
-## Tres formas de entrar
+- **Spectrum Studio:** an editorial map with microorganism territories as color-coded columns and antibiotic families as grouped rows. Within a cell, separate status symbols represent each species/phenotype. No group-wide susceptibility is inferred.
+- **Two reading lenses:** grouped spectrum bands or precise, clickable species indicators.
+- **Persistent contextual inspector:** territory → species → individual drug–pathogen relation → clinical note and sources.
+- **Intent navigation:** Micro × ATB, microorganism-first, and antibiotic-first explorers.
+- **Full catalog views:** 79 microorganism and phenotype profiles and 111 antimicrobials organized by their actual family/group.
+- **Clinical pathways:** 22 syndromes linked to differential organisms and guide references.
+- **Head-to-head comparison** and a small interactive laboratory with drag-and-drop ordering and explanatory quizzes.
+- **Chromatic studio:** four built-in palette systems and 12 editable microorganism-group colors, stored locally.
+- **Study continuity:** save and restore map views; bookmark organism and drug profiles; share page links.
+- **Responsive layout** with intrinsic horizontal scrolling of large spectrum tables rather than a horizontally overflowing page.
+- Icons are local SVGs from the existing Font Awesome Free bundle. No new generated illustration or image assets. The app uses photographic references only where an attribution/source is documented in `insights.json`.
 
-- **Micro × ATB**: un mapa de espectro con filas de antibióticos y columnas de microorganismos. El color identifica el grupo taxonómico; el símbolo explica el estado **registrado** de la relación.
-- **Solo ATB**: biblioteca organizada por familia y subgrupo, con mecanismos, limitaciones, interacciones de espectro y enlaces.
-- **Solo Micro**: fichas organizadas por grupo, con identidad, morfología, pistas clínicas, síndromes y antibióticos relacionados. Puede mostrar microfotografías de CDC PHIL con sus créditos.
+## Files
 
-También incluye escenarios clínicos, comparador hasta de cuatro antibióticos, lecciones, guías y referencias.
+- `index.html`, `app.js`, `styles.css` — the frontend, no build step.
+- `data/atlas.json` — existing catalog and provisional coverage relations; unchanged in V12.
+- `data/insights.json` — existing teaching notes and attributed CDC images; unchanged in V12.
+- `assets/icons/` — bundled SVG icon library.
+- `qa_v12.py` — local UI smoke test using Playwright; injects actual JSON into a browser for environments restricting localhost.
 
-## Cambios V9
+## Deploy
 
-- Selector principal en tres pasos con listas agrupadas por familia o microorganismo.
-- Accesos rápidos a Pseudomonas, MRSA, E. coli BLEE, neumococo y B. fragilis.
-- Filtros combinables sin una lista larga: grupo, familia, estado, orden; modo por grupos, especies o inverso.
-- Hasta 16 antibióticos por página con cabeceras de familia; mapa con desplazamiento interno.
-- Leyenda ampliada para evitar confundir identidad cromática con actividad.
-- Inspector por cruce con estado, explicación, condiciones y fuentes; desgloses por especies.
-- 12 perfiles educativos de grupos microbiológicos; ampliación de la sección Aprender con contenido de IDSA 2025/2026 y siete módulos de resistencia de la biblioteca existente.
-- Paleta con doce colores editables, cuatro combinaciones predefinidas, guardado local y exportación JSON.
-- Vistas personalizadas guardadas en el navegador y enlaces con filtros compartibles.
-- Interfaz adaptable a móviles y sin animaciones.
+Publish the repository root from GitHub Actions (GitHub Pages). `index.html` uses relative asset paths compatible with `https://proquincy2471.github.io/atb-atlas/`.
 
-## Datos y verificación
+## Editorial guardrails
 
-Se **preserva** el archivo `data/atlas.json` de V4-V8: 111 antibióticos, 79 microorganismos/fenotipos, 22 síndromes y 130 relaciones explícitas piloto, además de 15 referencias base. No se presentan cruces ausentes como resistencia. Las relaciones piloto no han sido revisadas clínicamente de forma individual. Una recomendación de tratamiento requiere identificación del organismo, antibiograma, foco, gravedad, farmacocinética, comorbilidades, resistencia local y una guía clínica apropiada.
-
-Se conserva `data/insights.json`, con notas originales educativas vinculadas con guías públicas. El nuevo material de enseñanza se elaboró como **paráfrasis original**, no como transcripción extensa de libros.
-
-## Publicar
-
-El repositorio `ProQuincy2471/atb-atlas` utiliza GitHub Actions para publicar automáticamente el sitio. No hay etapa de compilación: `index.html`, `app.js`, `styles.css` y `data/` son archivos estáticos. Los SVG de iconos se sirven localmente desde `assets/icons/` y conservan su aviso de licencia en `LICENSE-ICONS.md`.
-
-## Guías clínicas enlazadas
-
-- [IDSA 2026, AMR Gram-negative guidance](https://www.idsociety.org/practice-guideline/amr-guidance/)
-- [IDSA 2025, complicated UTI](https://www.idsociety.org/practice-guideline/complicated-urinary-tract-infections/)
-
-Las versiones de las guías deben re-verificarse periódicamente; este sitio no sustituye guías actualizadas, un antibiograma o juicio clínico.
-
-
-## Nuevo en V11
-- Ruta separada `#/laboratorio`, con tres modos: mesa Micro × ATB, ruta clínica en tres pasos y quiz didáctico de seis preguntas explicadas.
-- Mesa para seleccionar y reordenar hasta cuatro antibióticos con arrastrar y soltar o botones accesibles. Los estados se calculan desde `data/atlas.json`.
-- Animaciones breves de entrada y paneles; se pueden desactivar desde el menú lateral, se respeta `prefers-reduced-motion`.
-- El contenido no prescribe, no sustituye antibiograma o guías, y los cruces piloto no equivalen a evidencia revisada.
+The catalog lists **111 antibiotics, 79 organisms or phenotypes, 22 syndromes and 130 explicit preliminary relations**. These do not constitute a validated susceptibility matrix. Absent relationships display as **not evaluated**, never as resistance or inactivity. Clinical interpretations require local antibiogram, infection site, source control, individual context, and current guidelines. This is not a prescribing support tool.
