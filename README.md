@@ -1,84 +1,58 @@
-# ATB Atlas V3 — Cartografía antimicrobiana
+# ATB Atlas — Edición V4
 
-Proyecto estático independiente para GitHub Pages.
+**Versión pública:** https://proquincy2471.github.io/atb-atlas/#/cruce
 
-**URL de publicación:** https://proquincy2471.github.io/atb-atlas/
+Atlas didáctico en español de microorganismos, antibióticos y síndromes clínicos. Funciona íntegramente en **GitHub Pages** sin servidor, cuenta ni IA. Inspiración: cartografía de espectro por familias con microorganismos agrupados como en las referencias del usuario; desarrollo visual y textos originales.
 
-## Pantallas
+## Navegación
 
-| Ruta | Función |
-| --- | --- |
-| `#/atlas` | Spectrum Bands por familias, con territorios taxonómicos y microorganismos individuales |
-| `#/matriz` | Cruces antibiótico × patógeno, estados y documentación |
-| `#/biblioteca` | Catálogos simultáneos de antimicrobianos y patógenos |
-| `#/identidad` | Taxonomía clínica diagramática navegable |
-| `#/sindromes` | Relación síndrome → microorganismos → antibióticos con actividad documentada |
-| `#/comparar` | Comparación de hasta 4 antimicrobianos |
-| `#/antibiotico/:id` | Ficha por antimicrobiano |
-| `#/microorganismo/:id` | Ficha por patógeno |
-| `#/sindrome/:id` | Ficha por síndrome |
-| `#/acerca` | Metodología y fuentes |
+- **Micro × ATB** — dos lecturas: bandas por familias y matriz precisa, con inversión de ejes, búsqueda, filtros y panel inspector.
+- **Solo antibióticos** — 111 medicamentos catalogados, 26 familias y decenas de subgrupos, mecanismo, perlas, límites y relaciones identificadas.
+- **Solo microorganismos** — 79 patógenos o fenotipos, diferenciados en 12 grupos microbiológicos, con identidad, morfología, asociaciones clínicas, pistas y relaciones conocidas.
+- **Comparar** — hasta cuatro antibióticos en un formato de contraste por especie.
+- **Síndromes** — 22 escenarios con pistas clínicas, posibles agentes y enlaces a fuentes.
+- **Aprender** — 12 lecciones de estructura, Gram, anaerobiosis, virulencia, resistencia y selección.
+- **Guías y fuentes** — fuentes IDSA oficiales y bibliografía académica.
 
-## Diseño
+### Lectura de la cobertura
 
-- Lenguaje de atlas editorial: fondo cálido, retícula, encabezados de coordenadas, banda continua por fila, jerarquía taxonómica y divisores definidos.
-- Ocho grupos de microorganismos con **color editable individual**.
-- Seis familias de antibióticos con color editable independiente.
-- Representación cromática + tramas/texto: las celdas usan `active`, `conditional`, `none` y `unknown`.
-- **Ausencia de dato NO equivale a resistencia.** Cada microorganismo tiene una celda independiente incluso en Spectrum Bands.
-- Los iconos de interfaz son de la biblioteca pública **Lucide** (ISC); se obtienen mediante su script UMD alojado en jsDelivr. Se requiere internet para los iconos; la funcionalidad del atlas no depende de ellos.
-- Colores y efectos reducidos. No se utiliza IA para inferir cobertura.
+**Color = grupo microbiológico.** Se puede personalizar individualmente desde el botón de paleta, guardar en el navegador y exportar como JSON. Valores predeterminados en `data/palette.json`.
 
-## Cambiar colores
+**Símbolo = interpretación de cada cruce específico:** ✓ actividad habitual; ≈ condicionada; × ausencia de actividad útil; · sin evaluar. Una celda sin evaluar **no significa resistencia**. Los colores de grupo nunca equivalen a cobertura.
 
-1. En la aplicación, abre el icono de paleta en el encabezado o pulsa **Cambiar colores** en el Mapa de identidad.
-2. Cambia cada color mediante el selector del navegador.
-3. El navegador persiste los ajustes en `localStorage` con la clave `atb-atlas-palette-v3`.
-4. Se pueden elegir tres presets, restablecer ajustes y descargar un JSON de paleta.
-5. Para establecer valores **globales** (antes de que un visitante haya personalizado), edita `data/palette.json` en el repositorio y confirma los cambios. La edición global no sustituye ajustes locales ya guardados.
+### Catálogo ampliado ≠ bases de susceptibilidad
 
-### Identificadores de grupos microbiológicos
+El catálogo de 111 agentes y 79 organismos es una **taxonomía para aprendizaje**, no un antibiograma. Contiene **130 relaciones explícitas**, muchas heredadas del piloto sin revisión clínica individual, y el resto se marca *sin evaluar*. **No se generan relaciones por mera pertenencia a una familia.** Las notas clínicas son educativas; no constituyen recomendaciones de tratamiento individual.
 
-- `staphylococci`: Estafilococos.
-- `streptococci`: Estreptococos.
-- `enterococci`: Enterococos.
-- `enterobacterales`: Enterobacterales.
-- `nonfermenters`: No fermentadores.
-- `respiratory`: Respiratorios gramnegativos.
-- `anaerobes`: Anaerobios.
-- `atypicals`: Atípicos.
+El catálogo incluye agentes recientes, especializados y medicamentos en investigación o de disponibilidad regional limitada. Los agentes antituberculosos están separados de los antibacterianos de uso general. Verificar estado regulatorio y recomendaciones locales.
 
-## Datos
+## Datos y actualización
 
-Se conserva el corpus piloto en `data/knowledge.json`. A 21/oct/2026 contiene 20 antibióticos, 16 organismos o fenotipos, 8 síndromes y 114 relaciones registradas.
+- `data/atlas.json`: catálogo y conocimiento; no copiar/redistribuir textos extensos o figuras de los libros.
+- `data/palette.json`: colores predeterminados.
+- `data/knowledge.json`: contenido piloto legado, mantenido para trazabilidad.
+- `tools/validate_v4.py`: auditoría de IDs, relaciones y referencias.
+- `tools/build_content_v4.py`, `tools/enrich_data_v4.py`: scripts reproducibles a partir de `data/knowledge.v3.json`; **no ejecutar a menos que se quiera reconstruir y revisar cambios**.
 
-- Las bandas usan segmentos individuales: **no consolidan por defecto el estado de varios organismos de un grupo**.
-- Una relación sin registro se representa como `unknown` (sin evaluar), nunca `none`.
-- **La sección clínica presenta actividad microbiológica documentada, no listas de prescripción**.
-- Todas las relaciones son provisionales y requieren revisión editorial clínico-farmacológica antes de considerarse una fuente prescriptiva.
+## Bibliografía principal
 
-## Desarrollo y publicación
+- IDSA 2026 AMR Guidance — https://www.idsociety.org/practice-guideline/amr-guidance/
+- IDSA 2025 Complicated UTI — https://www.idsociety.org/practice-guideline/complicated-urinary-tract-infections
+- IDSA 2024 Intraabdominal infection (diagnóstico Parte 1) — https://www.idsociety.org/practice-guideline/intra-abdominal-infections/
+- ATS/IDSA 2019 CAP — https://www.idsociety.org/practice-guideline/community-acquired-pneumonia-cap-in-adults/
+- IDSA 2014 SSTI — https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/
+- CDC STI Treatment — https://www.cdc.gov/std/treatment-guidelines/default.htm
+- Murray, Rosenthal & Pfaller, *Medical Microbiology*, 10ª ed., Elsevier, 2026 (aportado por el usuario).
+- Cornelissen & Hobbs, *Lippincott Illustrated Reviews: Microbiology*, 4ª ed., 2020 (aportado por el usuario).
+- Levinson et al., *Review of Medical Microbiology & Immunology*, 15ª ed., 2018 (aportado por el usuario).
+- Saif ul Islam, *Infectious Diseases*, 2023 (aportado por el usuario).
 
-Sitio estático, sin compilación ni servicios privados. GitHub Actions despliega la rama `main` automáticamente.
+Fuentes bibliográficas citadas para síntesis **original** de conocimiento; ningún libro completo, ilustración ni tabla del material con copyright se incorpora a la aplicación pública.
 
-Archivos:
+## Uso técnico
 
-- `index.html`: documento principal y carga de Lucide.
-- `styles.css`: sistema visual, diseño responsive y patrones.
-- `app.js`: motor de interacción, vínculos y estados.
-- `data/knowledge.json`: corpus de relaciones.
-- `data/palette.json`: tema editable global.
+Servir `index.html` en un servidor HTTP estático; también funciona en GitHub Pages con rutas `#/...`. Se evita el `file://` ya que los datos se cargan mediante `fetch`. Se usa biblioteca pública **Lucide** para iconografía. Algunas micrografías de referencia provienen de NIGMS/NIH y Wikimedia Commons con los créditos indicados.
 
-Para probar localmente:
+## Estado editorial
 
-```bash
-python -m http.server 8000
-```
-
-Abrir `http://localhost:8000/#/atlas`.
-
-## Fuentes y limitaciones
-
-Ver `#/acerca` y `data/knowledge.json.sources`. El corpus piloto se documenta con bibliografía base de OMS AWaRe, IDSA, UCSF y OpenStax. No se autoriza inferir sensibilidad individual, dosis, primera línea ni tratamiento empírico a partir de la representación visual.
-
-**Advertencia:** herramienta educativa experimental; no sustituye antibiogramas, evaluación clínica, microbiología, guías vigentes ni políticas de resistencia local.
+**Borrador educativo: no apto para prescripción.** Toda decisión clínica requiere microorganismo/AST, sitio, PK/PD, riesgo, contraindicaciones, fuentes primarias y guías locales. Solo se deben marcar como revisadas las relaciones que pasen un control editorial clínico individual.
