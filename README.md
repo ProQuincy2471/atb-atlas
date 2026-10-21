@@ -1,56 +1,84 @@
-# ATB Atlas — el cerebro inicial
+# ATB Atlas V3 — Cartografía antimicrobiana
 
-Una **prueba de concepto independiente** para GitHub Pages. Permite entrar desde un antibiótico, un microorganismo o un síndrome clínico. Los enlaces entre las tres entidades están almacenados como datos estructurados; no se requiere backend, cuenta ni IA.
+Proyecto estático independiente para GitHub Pages.
 
-**Estado del contenido: borrador editorial pendiente de revisión clínica experta por registro. NO utilizar para prescribir.**
+**URL de publicación:** https://proquincy2471.github.io/atb-atlas/
 
-## Abrir y publicar
+## Pantallas
 
-1. Crea un repositorio de GitHub (por ejemplo `atb-atlas`).
-2. Sube los archivos que están dentro de esta carpeta al **directorio raíz** de la rama `main` (incluye `index.html`, `app.js`, `styles.css`, carpeta `data/` y `.nojekyll`).
-3. Abre **Settings → Pages → Build and deployment → Deploy from a branch → main → /(root) → Save**.
-4. El enlace público suele tener el formato `https://TU-USUARIO.github.io/atb-atlas/`, según el nombre del repositorio. GitHub Pages puede tardar varios minutos en publicar.
-5. Puedes compartir un enlace directo a una ficha, como `.../atb-atlas/#/microorganismo/e-coli-blee`.
+| Ruta | Función |
+| --- | --- |
+| `#/atlas` | Spectrum Bands por familias, con territorios taxonómicos y microorganismos individuales |
+| `#/matriz` | Cruces antibiótico × patógeno, estados y documentación |
+| `#/biblioteca` | Catálogos simultáneos de antimicrobianos y patógenos |
+| `#/identidad` | Taxonomía clínica diagramática navegable |
+| `#/sindromes` | Relación síndrome → microorganismos → antibióticos con actividad documentada |
+| `#/comparar` | Comparación de hasta 4 antimicrobianos |
+| `#/antibiotico/:id` | Ficha por antimicrobiano |
+| `#/microorganismo/:id` | Ficha por patógeno |
+| `#/sindrome/:id` | Ficha por síndrome |
+| `#/acerca` | Metodología y fuentes |
 
-No hay dependencias de npm. Para probar en local (con Python instalado), ejecuta `python3 -m http.server 8000` desde la raíz del proyecto y abre `http://localhost:8000/`. No abras `index.html` directamente como `file://` porque `fetch()` de JSON requiere HTTP en varios navegadores.
+## Diseño
 
-## Estructura del cerebro
+- Lenguaje de atlas editorial: fondo cálido, retícula, encabezados de coordenadas, banda continua por fila, jerarquía taxonómica y divisores definidos.
+- Ocho grupos de microorganismos con **color editable individual**.
+- Seis familias de antibióticos con color editable independiente.
+- Representación cromática + tramas/texto: las celdas usan `active`, `conditional`, `none` y `unknown`.
+- **Ausencia de dato NO equivale a resistencia.** Cada microorganismo tiene una celda independiente incluso en Spectrum Bands.
+- Los iconos de interfaz son de la biblioteca pública **Lucide** (ISC); se obtienen mediante su script UMD alojado en jsDelivr. Se requiere internet para los iconos; la funcionalidad del atlas no depende de ellos.
+- Colores y efectos reducidos. No se utiliza IA para inferir cobertura.
 
-- `data/knowledge.json`: antibióticos, microorganismos, síndromes, asociaciones de espectro, reglas contextuales y citas.
-- `app.js`: presenta vistas reversibles, busca, filtra, construye la matriz y permite compartir enlaces profundos.
-- `styles.css` + `index.html`: diseño y acceso web público.
-- `tools/build_data.py`: fuente de trabajo para regenerar el JSON de ejemplo.
-- `tools/validate.py`: auditoría básica de integridad referencial y cobertura de fuentes.
+## Cambiar colores
 
-### Cinco conceptos que nunca debemos mezclar
+1. En la aplicación, abre el icono de paleta en el encabezado o pulsa **Cambiar colores** en el Mapa de identidad.
+2. Cambia cada color mediante el selector del navegador.
+3. El navegador persiste los ajustes en `localStorage` con la clave `atb-atlas-palette-v3`.
+4. Se pueden elegir tres presets, restablecer ajustes y descargar un JSON de paleta.
+5. Para establecer valores **globales** (antes de que un visitante haya personalizado), edita `data/palette.json` en el repositorio y confirma los cambios. La edición global no sustituye ajustes locales ya guardados.
 
-1. **Especie / fenotipo:** *E. coli* sin resistencia definida no equivale a *E. coli* BLEE.
-2. **Actividad de espectro:** `active`, `conditional`, `none`, `unknown` describen una relación general, **no** un antibiograma individual.
-3. **Idoneidad por foco:** las reglas de sitio (`siteRules`) se interpretan independientemente de actividad microbiológica.
-4. **Etiología clínica:** `syndromes[].consider[]` describe patógenos que pueden considerarse, **no** probabilidades ni diagnóstico.
-5. **Recomendación terapéutica:** este prototipo todavía **no** genera regímenes, dosis o clasificaciones de primera línea para casos individuales.
+### Identificadores de grupos microbiológicos
 
-**La ausencia de relación no debe convertirse en un 'no cubre'.** Se muestra como **Sin evaluar**. Las combinaciones con `conditional` no son negativas ni positivas absolutas. El fenotipo, el sitio, los puntos de corte, las concentraciones en tejido, la susceptibilidad local y otros factores pueden cambiar la conclusión.
+- `staphylococci`: Estafilococos.
+- `streptococci`: Estreptococos.
+- `enterococci`: Enterococos.
+- `enterobacterales`: Enterobacterales.
+- `nonfermenters`: No fermentadores.
+- `respiratory`: Respiratorios gramnegativos.
+- `anaerobes`: Anaerobios.
+- `atypicals`: Atípicos.
 
-## Extender los datos
+## Datos
 
-- Agregar un antibiótico en `antibiotics` con ID único y campos obligatorios.
-- Agregar una entidad específica en `pathogens`; separar especies y fenotipos (MRSA, BLEE, AmpC, CRE, DTR).
-- Agregar relaciones individuales en `spectrum`. Cada vínculo debe tener `sources`, `note`, `status` y conservar `review='pendiente_revision_editorial'` hasta una revisión registrada.
-- Agregar asociaciones etiológicas en `syndromes[].consider` con condición explícita.
-- Agregar reglas específicas de foco en `siteRules` para evitar simplificaciones peligrosas.
-- Registrar versión y fecha de fuente; priorizar documentos vigentes y antibiogramas locales para contexto, sin inventar tasas de resistencia.
+Se conserva el corpus piloto en `data/knowledge.json`. A 21/oct/2026 contiene 20 antibióticos, 16 organismos o fenotipos, 8 síndromes y 114 relaciones registradas.
 
-## Fuentes y derechos
+- Las bandas usan segmentos individuales: **no consolidan por defecto el estado de varios organismos de un grupo**.
+- Una relación sin registro se representa como `unknown` (sin evaluar), nunca `none`.
+- **La sección clínica presenta actividad microbiológica documentada, no listas de prescripción**.
+- Todas las relaciones son provisionales y requieren revisión editorial clínico-farmacológica antes de considerarse una fuente prescriptiva.
 
-Fuentes de orientación documental: OMS AWaRe Antibiotic Book (2022), guía IDSA AMR (2026), UCSF spectrum guide, OpenStax *Microbiology* y el camino clínico de neumonía IDSA. Los materiales didácticos PowerPoint proporcionados por el usuario se utilizaron para identificar necesidades pedagógicas (preguntas de espectro, casos, sitios), no para reproducir tablas, figuras ni declaraciones clínicas literalmente. Todos los párrafos son paráfrasis breves originales.
+## Desarrollo y publicación
 
-Si en una versión futura se adaptan páginas, diagramas o texto de OpenStax (CC BY-NC-SA 4.0) o de OMS (CC BY-NC-SA 3.0 IGO), deben respetarse sus licencias y obligaciones de atribución y compartir bajo las mismas condiciones, además de los requisitos propios de traducciones OMS. El diseño actual no utiliza sus imágenes ni logos.
+Sitio estático, sin compilación ni servicios privados. GitHub Actions despliega la rama `main` automáticamente.
 
-## Próximos pasos antes de un lanzamiento clínico
+Archivos:
 
-- Revisión experta línea por línea con control de versiones y fecha.
-- Expandir por fenotipo / especie y contexto clínico, incluir farmacocinética por foco.
-- Distinguir empírico vs dirigido, terapia combinada, alternativas, efectos adversos, ajuste renal, embarazo y poblaciones especiales.
-- Incorporar vigencia de guías y un módulo opcional para consultar antibiogramas institucionales que no se propaguen a todo el país.
-- Revisar accesibilidad, enlaces y visualización en móvil.
+- `index.html`: documento principal y carga de Lucide.
+- `styles.css`: sistema visual, diseño responsive y patrones.
+- `app.js`: motor de interacción, vínculos y estados.
+- `data/knowledge.json`: corpus de relaciones.
+- `data/palette.json`: tema editable global.
+
+Para probar localmente:
+
+```bash
+python -m http.server 8000
+```
+
+Abrir `http://localhost:8000/#/atlas`.
+
+## Fuentes y limitaciones
+
+Ver `#/acerca` y `data/knowledge.json.sources`. El corpus piloto se documenta con bibliografía base de OMS AWaRe, IDSA, UCSF y OpenStax. No se autoriza inferir sensibilidad individual, dosis, primera línea ni tratamiento empírico a partir de la representación visual.
+
+**Advertencia:** herramienta educativa experimental; no sustituye antibiogramas, evaluación clínica, microbiología, guías vigentes ni políticas de resistencia local.
