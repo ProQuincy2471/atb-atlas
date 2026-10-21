@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2d63aa">
+  <meta name="description" content="ATB Atlas: explorador educativo de antibióticos, microorganismos y síndromes clínicos. Prototipo editorial en revisión.">
+  <title>ATB Atlas — Espectro, patógenos y clínica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="site-header">
+      <a href="#/microorganismo/e-coli-blee" class="logo" aria-label="ATB Atlas, inicio"><span class="logo-mark">A<span>+</span></span><span class="logo-name">ATB <strong>ATLAS</strong><small>MICROBIOLOGÍA · ESPECTRO · CLÍNICA</small></span></a>
+      <div class="header-right"><span class="phase-pill"><span class="phase-dot"></span> EDICIÓN PILOTO</span><a class="about-link" href="#/acerca">Sobre el proyecto <span aria-hidden="true">↗</span></a></div>
+    </header>
+    <main>
+      <section class="intro">
+        <div class="eyebrow"><span class="eyebrow-line"></span> NO SOLO QUÉ CUBRE. TAMBIÉN POR QUÉ.</div>
+        <h1>Entiende los <em>antibióticos</em><br>desde cualquier ángulo.</h1>
+        <p>Comienza por un fármaco, un microorganismo o un síndrome clínico. Explora las conexiones y descubre dónde cambian las reglas.</p>
+        <div class="intro-stat"><span>01</span> Antibiótico <i>↔</i> <span>02</span> Microorganismo <i>↔</i> <span>03</span> Clínica</div>
+      </section>
+      <section class="workspace" aria-label="Explorador">
+        <nav class="tabs" id="nav" aria-label="Modos de exploración">
+          <a data-page="microorganismo" href="#/microorganismo/e-coli-blee">Microorganismos</a>
+          <a data-page="antibiotico" href="#/antibiotico/cefepima">Antibióticos</a>
+          <a data-page="sindrome" href="#/sindrome/nac">Síndromes clínicos</a>
+          <a data-page="mapa" href="#/mapa">Mapa de espectro</a>
+        </nav>
+        <div id="app" class="app-loading">Preparando el atlas…</div>
+      </section>
+      <section class="reading-note"><div class="reading-icon">i</div><div><strong>Cómo leer este atlas</strong><p>Los colores representan relaciones educativas revisables, no resultados de antibiograma. <b>Sin evaluar</b> nunca significa resistencia. La idoneidad clínica depende del foco, la susceptibilidad, el paciente y las guías locales.</p></div></section>
+    </main>
+    <footer><span>ATB ATLAS · ESTRUCTURA EXPERIMENTAL</span><span>Fuentes documentadas · Sin IA · Compatible con GitHub Pages</span></footer>
+  </div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
