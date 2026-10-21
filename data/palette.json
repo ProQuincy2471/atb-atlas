@@ -1,0 +1,23 @@
+{
+  "version": "3.0",
+  "theme": "Editorial Terrain",
+  "notes": "Valores por defecto. Los cambios hechos en el panel Colores se almacenan localmente por navegador.",
+  "groups": {
+    "staphylococci": "#D7524C",
+    "streptococci": "#DD7859",
+    "enterococci": "#905BA3",
+    "enterobacterales": "#CF8E23",
+    "nonfermenters": "#147F86",
+    "respiratory": "#4F79C7",
+    "anaerobes": "#658C3D",
+    "atypicals": "#7B61D6"
+  },
+  "family": {
+    "penicillins": "#2D7489",
+    "cephalosporins": "#CF6E42",
+    "carbapenems": "#C39722",
+    "quinolones": "#46804B",
+    "antiMRSA": "#92476B",
+    "other": "#64717E"
+  }
+}
