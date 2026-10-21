@@ -1,14 +1,15 @@
-# Edición 04 / notas de entrega
+# ATB ATLAS / Edición 05 — Rework visual integral
 
-- Navegación primaria: Micro × ATB, solo antibióticos y solo microorganismos.
-- Navegación secundaria: Comparar, Síndromes, Aprender, Guías y fuentes.
-- 111 medicamentos catalogados a través de 26 familias y sus subgrupos; incluidos agentes recientes y de disponibilidad regional limitada.
-- 79 especies o fenotipos, 12 grupos taxonómicos y perfiles clínicos diferenciados.
-- 22 síndromes, 12 lecciones, 15 referencias y 130 relaciones explícitas; no se completan datos faltantes artificialmente.
-- Nueva semiótica cromática: color exclusivamente para taxón; símbolos invariables para actividad.
-- Personalización de los 12 colores en el navegador, guardado persistente y exportación JSON.
-- Matriz reversible, atlas por bandas segmentadas y comparación de 2–4 antibióticos.
-- Revisión estructural automatizada y pruebas de interacción en navegador (Chromium).
-- Nuevos textos educativos escritos de forma original a partir de referencias aportadas y fuentes públicas IDSA.
+- Reconstrucción completa de layout, navegación y lenguaje visual.
+- Tres modos principales inmediatos: Micro × Antibióticos, Solo Antibióticos y Solo Microorganismos.
+- Mapa de espectro continuo mediante bandas segmentadas por especies, leyenda siempre visible, filtros taxonómicos de color, modo matriz y modo invertido.
+- Inspector contextual de grupos/especies con trazabilidad del estado de cada relación.
+- Atlas de microorganismos ampliado con estructura, taxonomía, clínica, resistencia y fotografías selectas CDC PHIL.
+- Fichas de antibióticos reorganizadas por mecanismo, relación, utilidad contextual y limitaciones.
+- Comparador de hasta 4 fármacos, explorador clínico por 22 síndromes, doce lecciones y 7 notas originales enlazadas con IDSA 2026.
+- Configuración editable de 12 colores, presets, exportación JSON y persistencia local con fallback seguro.
+- Búsqueda global Ctrl/Cmd+K. Adaptación para escritorio y móvil con matriz con desplazamiento horizontal interno.
+- Se conservó V4 `data/atlas.json`: 111 antibióticos, 79 microorganismos, 22 síndromes, 130 relaciones sin inventar susceptibilidades nuevas.
+- QA local: test de 7 rutas, inspector, búsqueda, inversión de matriz y persistencia de colores, cero errores JavaScript; sin overflow horizontal del documento en 390 px.
 
-*Estado editorial: educativo; no apto para prescripción. Cada nuevo cruce requiere validación clínica individual.*
+**Precaución**: la catalogación no equivale a validación clínica. Cada relación requiere una revisión editorial individual.
