@@ -1,21 +1,9 @@
-# ATB Atlas V9 — Cartografía intuitiva
+# ATB Atlas V10
 
-**Cambios publicados:** renovación de la experiencia de lectura y estudio. Se conservan los datos clínicos y el historial de versiones previas.
-
-### Nuevas funciones
-- Mapa Micro × ATB reorganizado con selector escalonado, filtros combinables, pagina de 16 filas, leyenda interpretativa y un inspector contextual.
-- Orientaciones por grupo, especie e inversa, con foco individual de ATB o patógeno.
-- Catálogos de fármacos y de microorganismos, sin listas interminables.
-- Fichas clínicas de más fácil lectura y navegación cruzada.
-- Biblioteca de 22 síndromes, comparador, 22 módulos de aprendizaje (12 existentes + 7 resistencia + 3 de integración), 12 perfiles de grupos y 15 referencias.
-- Paletas Prisma, Aurora, Tinta y Alto contraste, editables localmente.
-- Vistas guardadas y URL de filtros compartibles.
-
-### Seguridad editorial
-- Se mantienen las 130 relaciones piloto originales; no se completaron cruces sin validación.
-- `No evaluado` se muestra explícitamente como **ausencia de datos**, nunca como resistencia.
-- Información académica; no generador de prescripción.
-
-### Verificación
-- `node --check` del código JavaScript.
-- Pruebas funcionales simuladas con Playwright en 1440 y 390 píxeles, incluidas rutas, búsqueda, filtros, inspector, comparación, paleta, y comprobación de errores de JavaScript; sin desbordamiento general en móvil.
+- Nuevo Laboratorio interactivo en ruta independiente.
+- Mesa con arrastrar, reordenar, controles por teclado y desglose de relaciones reales.
+- Ruta clínica por etapas enlazada a los 22 síndromes.
+- Reto educativo de seis preguntas con retroalimentación específica.
+- Animaciones funcionales opcionales con control de accesibilidad.
+- Se conservan el catálogo y la taxonomía V9 (111 ATB, 79 microorganismos, 22 síndromes, 130 relaciones explícitas).
+- Sin inferir susceptibilidad ni recomendaciones clínicas a partir de huecos de la base.

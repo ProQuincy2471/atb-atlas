@@ -1,3 +1,5 @@
+# ATB Atlas V10 — Laboratorio interactivo
+
 # ATB Atlas V9 — Visual Studio para microbiología y antibioticoterapia
 
 Sitio web estático de enseñanza médica, desplegable en GitHub Pages. Sin backend, sin IA obligatoria y sin animaciones.
@@ -39,3 +41,10 @@ El repositorio `ProQuincy2471/atb-atlas` utiliza GitHub Actions para publicar au
 - [IDSA 2025, complicated UTI](https://www.idsociety.org/practice-guideline/complicated-urinary-tract-infections/)
 
 Las versiones de las guías deben re-verificarse periódicamente; este sitio no sustituye guías actualizadas, un antibiograma o juicio clínico.
+
+
+## Nuevo en V10
+- Ruta separada `#/laboratorio`, con tres modos: mesa Micro × ATB, ruta clínica en tres pasos y quiz didáctico de seis preguntas explicadas.
+- Mesa para seleccionar y reordenar hasta cuatro antibióticos con arrastrar y soltar o botones accesibles. Los estados se calculan desde `data/atlas.json`.
+- Animaciones breves de entrada y paneles; se pueden desactivar desde el menú lateral, se respeta `prefers-reduced-motion`.
+- El contenido no prescribe, no sustituye antibiograma o guías, y los cruces piloto no equivalen a evidencia revisada.
