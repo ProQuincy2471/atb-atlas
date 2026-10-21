@@ -597,7 +597,8 @@
       "limitations": "No cobertura útil para Pseudomonas."
     },
     {
-      "id": "ceftobiprol",      "name": "Ceftobiprol",
+      "id": "ceftobiprol",
+      "name": "Ceftobiprol",
       "family": "Cefalosporinas",
       "subgroup": "Actividad frente a MRSA",
       "mechanism": "Inhibición de síntesis de pared celular (PBPs)",
@@ -1196,7 +1197,8 @@
       "newer": true,
       "evidence": "catalogo_sin_relacion",
       "review": "pendiente_revision_clinica",
-      "referenceKeys": [        "IDSA26"
+      "referenceKeys": [
+        "IDSA26"
       ],
       "context": "Estudia esta subfamilia, su mecanismo y las indicaciones autorizadas en tu región.",
       "limitations": "No inferir susceptibilidad del patógeno ni idoneidad clínica sin revisión individual."
@@ -1795,7 +1797,8 @@
       "newer": false,
       "evidence": "catalogo_sin_relacion",
       "review": "pendiente_revision_clinica",
-      "referenceKeys": [        "MURRAY26"
+      "referenceKeys": [
+        "MURRAY26"
       ],
       "context": "Estudia esta subfamilia, su mecanismo y las indicaciones autorizadas en tu región.",
       "limitations": "No inferir susceptibilidad del patógeno ni idoneidad clínica sin revisión individual."
@@ -2394,7 +2397,8 @@
       "identity": "Enterobacteral con resistencia a carbapenémicos, por diversos mecanismos.",
       "clinical": "ITU y bacteriemia asociadas a resistencia avanzada.",
       "pearl": "CRE no implica automáticamente KPC: buscar mecanismo (KPC, NDM, OXA-48-like, otros).",
-      "aliases": [],      "syndromeIds": [],
+      "aliases": [],
+      "syndromeIds": [],
       "referenceKeys": [
         "MURRAY26"
       ],
@@ -2993,7 +2997,8 @@
       "referenceKeys": [
         "MURRAY26"
       ],
-      "review": "detalle_educativo_preliminar"    },
+      "review": "detalle_educativo_preliminar"
+    },
     {
       "id": "fusobacterium-necrophorum",
       "name": "Fusobacterium necrophorum",
@@ -3592,7 +3597,8 @@
       "site": "Respiratorio",
       "summary": "Diagnóstico diferencial viral y pruebas dirigidas; evitar antibióticos innecesarios.",
       "clues": [
-        "Criterios clínicos y pruebas",        "Complicaciones",
+        "Criterios clínicos y pruebas",
+        "Complicaciones",
         "No tratar virosis"
       ],
       "pathogenIds": [
@@ -4191,7 +4197,8 @@
       "antibiotic": "piptazo",
       "pathogen": "e-coli",
       "status": "conditional",
-      "note": "Actividad posible, condicionada a antibiograma y patrones de resistencia.",      "clinical": "depende_de_foco",
+      "note": "Actividad posible, condicionada a antibiograma y patrones de resistencia.",
+      "clinical": "depende_de_foco",
       "sources": [
         "WHO22"
       ],
@@ -4790,7 +4797,8 @@
     },
     {
       "antibiotic": "daptomicina",
-      "pathogen": "b-fragilis",      "status": "none",
+      "pathogen": "b-fragilis",
+      "status": "none",
       "note": "No constituye cobertura adecuada frente a B. fragilis.",
       "clinical": "depende_de_foco",
       "sources": [
@@ -5389,7 +5397,8 @@
       "review": "orientacion_educativa_no_validada"
     },
     {
-      "antibiotic": "aztreonam-avibactam",      "pathogen": "e-coli-blee",
+      "antibiotic": "aztreonam-avibactam",
+      "pathogen": "e-coli-blee",
       "status": "conditional",
       "note": "No equivalente a sensibilidad indiscriminada; considerar fenotipo y disponibilidad.",
       "clinical": "condicionada_por_contexto",
