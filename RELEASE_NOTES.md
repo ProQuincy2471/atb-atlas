@@ -1,26 +1,21 @@
-# ATB Atlas V19.0.0 — Living Fieldguide
+# ATB Atlas V20.0.0 — Implementación web del atlas ilustrado
 
-**Tipo:** ampliación editorial y rework de identidad/navegación sobre V18.
+## Referencias
+Recreación como interfaz web interactiva de las cinco capturas de diseño aprobadas en la conversación. Los JPG recortados de las referencias del usuario se usan solamente como ilustraciones didácticas. No constituyen micrografías diagnósticas ni fotografías de producto. El resto de la interfaz es HTML/CSS/JS/SVG y controles funcionales.
 
-## Identidad visual
-- Nueva navegación por «volúmenes», distinta identidad cromática e iconografía en cada módulo.
-- Encabezados de capítulo con progreso y señalización editorial; controles compactos en la biblioteca.
-- Visuales educativos: trayectoria Gram/estructura → morfología → especie, circuito farmacológico clase → diana → PK/PD y contexto por órgano.
-- Mapa y comparador con leyendas interpretativas destacadas.
+## Funciones nuevas
+1. Mapa cartográfico SVG: seis territorios visuales, órganos, curvas de conexión, modos taxonómico / clínico / cobertura, controles de capas y panel contextual. Las rutas son conexiones conceptuales, no equivalen a susceptibilidad.
+2. Microorganismos: fichas continuas con cabecera ilustrada, identidad, morfología, enfermedades vinculadas, factores de riesgo, fisiopatología, relación ATB, preguntas y fuentes; panel de conocimiento específico.
+3. Antibióticos: fichas continuas, mecanismos, clase, esquema ilustrativo, recuentos de cruces por grupo, indicaciones, dosis con fuente WHO cuando existen, seguridad y preguntas.
+4. Síndromes: encabezado editorial por sistema, resumen, ficha continua de enfermedad WHO, panel de riesgo y contexto, conservación de niveles de evidencia.
+5. Comparador: franja previa con siete candidatos ordenados por disponibilidad de datos y etiquetados según actividad preliminar o interés conceptual (no recomendaciones).
+6. Navegación global compacta, paletas por sección, buscador, índices jerárquicos y responsive.
 
-## Conocimiento añadido
-- 12 territorios con ficha microbiológica de grupo.
-- 26 familias farmacológicas: mecanismo, PK/PD conceptual y límites de espectro.
-- 14 perfiles de microorganismos/fenotipos con información individual ampliada.
-- 17 perfiles de antibióticos con notas individuales de seguridad, formulación y errores frecuentes.
-- 15 sistemas con información de reconocimiento y pasos diagnósticos orientadores; se reutilizan 37 capítulos del manual WHO.
-- Enlaces explícitos a WHO, IDSA ITU complicada y IDSA AMR.
+## Integridad del corpus
+`atlas.json`, `insights.json`, `who-conditions.json`, `fundamentals.json`, `study-quiz.json` y `editorial-knowledge.json` permanecen sin modificar. Se conserva la posibilidad de editar colores, buscar y explorar el corpus existente.
 
-## Integridad
-- Se preservan 111 antibióticos, 79 microorganismos, 22 síndromes, 37 condiciones WHO, 24 capítulos y 30 preguntas originales.
-- Se preservan los 130 cruces históricos, sin ampliarlos artificialmente.
-- Validación estática y ejecución simulada de las ocho rutas, selectores y navegación rápida.
+## Advertencias
+Los 130 cruces del corpus son preliminares. La falta de un cruce no implica resistencia. Las 37 enfermedades WHO no equivalen a 37 esquemas individuales completos: los campos de tratamiento y dosis aparecen solo cuando existía material cotejado.
 
-## Pendiente
-- Revisión clínica individual por especie/antibiótico y ampliación homogénea de todas las enfermedades.
-- Pruebas visuales de navegador real antes de considerar cerrada la QA de diseño.
+## Verificación
+`node --check v20.js` y VM de renderizado de 8 secciones, 111 drogas, 79 microorganismos y 37 enfermedades. El entorno impide navegación HTTP/file en Chromium local con `ERR_BLOCKED_BY_ADMINISTRATOR`; no declarar QA de navegador visual completada.
