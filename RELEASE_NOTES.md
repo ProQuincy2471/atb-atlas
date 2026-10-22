@@ -1,9 +1,12 @@
-# Fieldguide V12 — Complete interface rebuild
+# ATB Atlas V13 — Spectrum Instrument
 
-- Replaced V11 shell with a dedicated editorial workbench: dark-ink side navigation, Fraunces display type, warm canvas, vermilion/berry/chlorophyll and independently configurable territory pigments.
-- Recreated the coverage visualization: grouped antibiotic-family rows, species-level micro status segments, sticky group headers, two precision lenses, group strip and paged results.
-- Added a persistent contextual inspector and direct access to individual relationships and their sources.
-- Reorganized the microbe and antibiotic catalogs into searchable group-based libraries with parallel profile panes.
-- Rebuilt clinical, comparison, learning, evidence and laboratory workspaces, with bookmark, color and view persistence.
-- Retained the existing clinical corpus and all prior preliminary-review flags; no fabricated coverage data.
-- Passed an offline browser UI test on all eight routes, map inspector, palette, quiz and 390px mobile width. Test is included in the repository.
+- Rebuilt the page composition: removed permanent sidebar, repeated welcome tiles, separate control column and oversized static inspector.
+- Made the spectrum map the principal first-screen interaction.
+- Added focused presets, color-coded territory chips and an optional 4-field filter panel.
+- Replaced visual grid clutter with contiguous species-specific coverage ribbons that disclose the number of evaluated relations.
+- Added an on-demand context sheet, opening beside the map on desktop and from the bottom on mobile, with Escape-to-dismiss support.
+- Reworked typography, contrast, spacing and micro-legend into a coherent editorial instrument style.
+- Retained all seven other application routes, catalogs, interactive laboratory, clinical context, saved preferences and editable color system.
+- No antibiotic/pathogen/syndrome records or their clinical status classifications were modified.
+
+**Safety note:** Coverage is preliminary educational data. No data != no activity or resistance.

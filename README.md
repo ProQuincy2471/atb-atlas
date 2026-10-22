@@ -1,33 +1,25 @@
-# ATB Atlas — Fieldguide V12
+# ATB Atlas V13 — Spectrum Instrument
 
-A static educational microbiology and antimicrobial-spectrum atlas for GitHub Pages. This edition is a substantial UI/UX rebuild, not a recoloring of V11.
+ATB Atlas is a static educational atlas hosted on GitHub Pages. V13 changes the application's presentation and workflow, while retaining the V12 clinical data and the existing source-backed relations.
 
-## What is new
+## Experience
 
-- **Spectrum Studio:** an editorial map with microorganism territories as color-coded columns and antibiotic families as grouped rows. Within a cell, separate status symbols represent each species/phenotype. No group-wide susceptibility is inferred.
-- **Two reading lenses:** grouped spectrum bands or precise, clickable species indicators.
-- **Persistent contextual inspector:** territory → species → individual drug–pathogen relation → clinical note and sources.
-- **Intent navigation:** Micro × ATB, microorganism-first, and antibiotic-first explorers.
-- **Full catalog views:** 79 microorganism and phenotype profiles and 111 antimicrobials organized by their actual family/group.
-- **Clinical pathways:** 22 syndromes linked to differential organisms and guide references.
-- **Head-to-head comparison** and a small interactive laboratory with drag-and-drop ordering and explanatory quizzes.
-- **Chromatic studio:** four built-in palette systems and 12 editable microorganism-group colors, stored locally.
-- **Study continuity:** save and restore map views; bookmark organism and drug profiles; share page links.
-- **Responsive layout** with intrinsic horizontal scrolling of large spectrum tables rather than a horizontally overflowing page.
-- Icons are local SVGs from the existing Font Awesome Free bundle. No new generated illustration or image assets. The app uses photographic references only where an attribution/source is documented in `insights.json`.
+- Horizontal instrument navigation instead of a permanent multi-section sidebar.
+- Map-first workspace with family-grouped antibiotic rows and color-coded microbiological territories.
+- Quick-focus selectors for Pseudomonas, MRSA, E. coli BLEE, pneumococcus, and B. fragilis.
+- Contextual filters, precision mode, and an on-demand inspector that opens beside the map on desktop or as a bottom sheet on mobile.
+- Symbols and explanations remain separate from taxonomic group colors.
+- Existing Antibiotics, Microorganisms, Clinical Syndromes, Comparator, Laboratory, Learning, and Sources screens remain connected.
+- Color editor, saved views, global search, and accessibility / reduced-motion handling remain available.
 
-## Files
+## Clinical interpretation
 
-- `index.html`, `app.js`, `styles.css` — the frontend, no build step.
-- `data/atlas.json` — existing catalog and provisional coverage relations; unchanged in V12.
-- `data/insights.json` — existing teaching notes and attributed CDC images; unchanged in V12.
-- `assets/icons/` — bundled SVG icon library.
-- `qa_v12.py` — local UI smoke test using Playwright; injects actual JSON into a browser for environments restricting localhost.
+The database currently catalogs 111 antibiotics, 79 microorganisms / phenotypes, 22 syndromes and 130 explicitly stored antibiotic-pathogen relations. The many other combinations are **not evaluated** and must not be interpreted as resistance or a negative spectrum result. Explicit relations in this pilot remain subject to individual clinical review. The atlas is not a prescribing tool.
 
 ## Deploy
 
-Publish the repository root from GitHub Actions (GitHub Pages). `index.html` uses relative asset paths compatible with `https://proquincy2471.github.io/atb-atlas/`.
+This is plain static HTML/CSS/JavaScript using `data/atlas.json`, `data/insights.json`, and `assets/icons/*.svg`. Publish with GitHub Pages using the existing deployment workflow. No build tools or backend are needed.
 
-## Editorial guardrails
+## Accessibility
 
-The catalog lists **111 antibiotics, 79 organisms or phenotypes, 22 syndromes and 130 explicit preliminary relations**. These do not constitute a validated susceptibility matrix. Absent relationships display as **not evaluated**, never as resistance or inactivity. Clinical interpretations require local antibiogram, infection site, source control, individual context, and current guidelines. This is not a prescribing support tool.
+Keyboard search: Cmd/Ctrl + K. Escape closes the currently open modal or spectrum detail. Reduced-motion users do not receive entrance animations.
