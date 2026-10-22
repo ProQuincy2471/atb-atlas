@@ -1,0 +1,485 @@
+{
+  "meta": {
+    "edition": "V16",
+    "editorial": "Explicaciones didácticas originales, revisar fuentes e individualizar tratamiento"
+  },
+  "chapters": [
+    {
+      "id": "f01",
+      "stage": "Inicio",
+      "num": "01",
+      "title": "La pregunta antes del antibiótico",
+      "lead": "Antes de pensar en fármacos, formula una hipótesis: ¿es infección?, ¿dónde está?, ¿qué microorganismos tienen probabilidad real?, ¿qué gravedad y qué huésped?",
+      "detail": "La tabla de espectro comienza al final del razonamiento, no al principio. Colonización o contaminación no equivalen a infección; un cultivo sin contexto puede inducir tratamiento innecesario.",
+      "keys": [
+        "Infección no es sinónimo de cultivo positivo",
+        "Definir sitio, huésped y gravedad",
+        "Elegir amplitud tras construir el diagnóstico"
+      ],
+      "case": "Un hemocultivo con un coagulasa negativo aislado exige contexto; no prueba por sí solo bacteriemia clínicamente significativa.",
+      "question": "¿Cuál es la primera decisión: elegir meropenem o confirmar síndrome y probabilidad de infección?",
+      "answer": "Confirmar síndrome y probabilidad de infección",
+      "refs": [
+        "IDSA_STEW",
+        "MURRAY26"
+      ]
+    },
+    {
+      "id": "f02",
+      "stage": "Bases microbiológicas",
+      "num": "02",
+      "title": "Qué nos dice realmente el Gram",
+      "lead": "La tinción de Gram separa grandes patrones de pared bacteriana: grampositivos con pared gruesa de peptidoglucano y gramnegativos con membrana externa y espacio periplásmico.",
+      "detail": "La tinción no identifica especie ni predice susceptibilidad. Debe combinarse con disposición, morfología, cultivos, pruebas bioquímicas o métodos moleculares.",
+      "keys": [
+        "Grampositivo ≠ “todo cubierto por vancomicina”",
+        "Gramnegativo ≠ Enterobacterales",
+        "Fenotipo de resistencia no se deduce de coloración"
+      ],
+      "case": "Coco grampositivo en racimos orienta hacia Staphylococcus; cadenas sugieren Streptococcus/Enterococcus, siempre sujetos a identificación.",
+      "question": "¿Un bacilo gramnegativo identifica E. coli?",
+      "answer": "No; es un grupo morfológico, no una especie",
+      "refs": [
+        "MURRAY26",
+        "LIPP20"
+      ]
+    },
+    {
+      "id": "f03",
+      "stage": "Bases microbiológicas",
+      "num": "03",
+      "title": "Cocos, bacilos y agrupaciones",
+      "lead": "La forma y agrupación son pistas de reconocimiento, no diagnósticos definitivos: cocos en racimos, cadenas, diplococos, bacilos curvos, ramificados o cocobacilos.",
+      "detail": "Organizar microbiología por imagen mental evita memorizar listas sin estructura. La confirmación requiere laboratorio y correlación clínica.",
+      "keys": [
+        "Racimos → estafilococos",
+        "Cadenas → estreptococos/enterococos",
+        "Diplococos pueden señalar neumococo o Neisseria según Gram"
+      ],
+      "case": "Nocardia puede verse como bacilo filamentoso ramificado: no debe confundirse automáticamente con un anaerobio como Actinomyces.",
+      "question": "¿Qué datos agregas después de “coco en cadenas”?",
+      "answer": "Gram, hemólisis, contexto y pruebas específicas",
+      "refs": [
+        "MURRAY26",
+        "LIPP20"
+      ]
+    },
+    {
+      "id": "f04",
+      "stage": "Bases microbiológicas",
+      "num": "04",
+      "title": "Aerobios, anaerobios y atípicos",
+      "lead": "Los requerimientos de oxígeno y el nicho celular cambian qué antibióticos tienen sentido. Anaerobios abdominales, anaerobios orales y bacterias atípicas no son intercambiables.",
+      "detail": "Algunos atípicos carecen de pared clásica o viven dentro de células. Por eso ciertos betalactámicos no resuelven cobertura atípica aunque sean excelentes frente a neumococo.",
+      "keys": [
+        "Metronidazol es referencia conceptual para anaerobios seleccionados",
+        "Beta-lactámico solo no resuelve atípicos sin pared",
+        "B. fragilis no representa todos los anaerobios orales"
+      ],
+      "case": "La CAP puede requerir distinguir neumococo y atípicos, con decisiones de esquema según gravedad y guía.",
+      "question": "¿Ceftriaxona sola demuestra cobertura adecuada de Mycoplasma?",
+      "answer": "No; el patrón biológico es diferente",
+      "refs": [
+        "MURRAY26",
+        "LIPP20"
+      ]
+    },
+    {
+      "id": "f05",
+      "stage": "Bases microbiológicas",
+      "num": "05",
+      "title": "Hábitat, reservorio y puerta de entrada",
+      "lead": "La epidemiología orienta la probabilidad pretest: flora cutánea, intestinal, respiratoria, dispositivos, agua, animales y exposiciones ambientales.",
+      "detail": "El mismo aislamiento significa cosas diferentes en una herida superficial, sangre, orina o líquido cefalorraquídeo.",
+      "keys": [
+        "Piel/dispositivos → estafilococos relevantes",
+        "Intestino → enterobacterales y anaerobios",
+        "Exposición acuática/hospitalaria → considerar no fermentadores según contexto"
+      ],
+      "case": "Un patógeno ambiental en secreciones respiratorias puede representar colonización, en especial en pacientes con dispositivos.",
+      "question": "¿Debe interpretarse igual un aislamiento de piel y un hemocultivo?",
+      "answer": "No; muestra y probabilidad clínica cambian el significado",
+      "refs": [
+        "MURRAY26",
+        "LIPP20"
+      ]
+    },
+    {
+      "id": "f06",
+      "stage": "Bases microbiológicas",
+      "num": "06",
+      "title": "Virulencia y enfermedad",
+      "lead": "Cápsulas, adhesinas, biopelículas, toxinas y supervivencia intracelular explican por qué microorganismos específicos causan ciertos síndromes.",
+      "detail": "Conectar factores de virulencia con el cuadro clínico mejora la memoria y la interpretación de resultados de laboratorio.",
+      "keys": [
+        "Cápsula facilita evasión inmune",
+        "Biopelícula importa en dispositivos",
+        "Toxinas cambian el fenotipo clínico y medidas terapéuticas"
+      ],
+      "case": "S. epidermidis en prótesis se entiende mejor por biopelícula que por una supuesta agresividad sistémica universal.",
+      "question": "¿Qué mecanismo hace importante S. epidermidis en prótesis?",
+      "answer": "Formación de biopelícula",
+      "refs": [
+        "MURRAY26",
+        "LIPP20"
+      ]
+    },
+    {
+      "id": "f07",
+      "stage": "Bases microbiológicas",
+      "num": "07",
+      "title": "Colonización, contaminación e infección",
+      "lead": "Una bacteria puede estar presente sin ser la causa de enfermedad. El sitio anatómico, tipo de muestra, síntomas y evolución son fundamentales.",
+      "detail": "Este principio evita errores de sobremanejo, especialmente ante urocultivos sin síntomas o aislamientos de superficies no estériles.",
+      "keys": [
+        "Positividad de cultivo ≠ diagnóstico",
+        "Calidad de muestra importa",
+        "Antibioterapia puede no estar indicada pese a un aislamiento"
+      ],
+      "case": "Distinguir bacteriuria asintomática de infección urinaria es un ejemplo clásico de esta regla.",
+      "question": "¿Toda bacteriuria asintomática requiere antibiótico?",
+      "answer": "No; existen excepciones específicas",
+      "refs": [
+        "MURRAY26",
+        "LIPP20"
+      ]
+    },
+    {
+      "id": "f08",
+      "stage": "Diagnóstico",
+      "num": "08",
+      "title": "La muestra antes del antibiograma",
+      "lead": "Seleccionar hemocultivos, cultivo de orina, líquido de absceso u otra muestra implica considerar sitio, indicación y momento.",
+      "detail": "La calidad de la muestra puede ser tan importante como la técnica. Una muestra no representativa confunde más que ayuda.",
+      "keys": [
+        "Tomar muestras relevantes cuando sea adecuado",
+        "No retrasar tratamiento urgente por una muestra difícil",
+        "Reevaluar con resultados y evolución"
+      ],
+      "case": "En sepsis grave, la obtención de muestras no debe causar retrasos inaceptables en el tratamiento.",
+      "question": "¿Qué pesa más: repetir cultivos superficiales o obtener una muestra adecuada del foco?",
+      "answer": "Una muestra adecuada del foco",
+      "refs": [
+        "MURRAY26",
+        "LIPP20"
+      ]
+    },
+    {
+      "id": "f09",
+      "stage": "Diagnóstico",
+      "num": "09",
+      "title": "Identificación, PCR y susceptibilidad",
+      "lead": "Identificar un microorganismo no es lo mismo que demostrar susceptibilidad. PCR y pruebas rápidas pueden señalar especie o genes, pero la interpretación depende de método y mecanismo.",
+      "detail": "El antibiograma y los puntos de corte permiten interpretar MIC o diámetros, no equivalen automáticamente a la decisión clínica completa.",
+      "keys": [
+        "Especie ≠ fenotipo",
+        "Gen de resistencia no explica por sí solo todo el aislamiento",
+        "Punto de corte ≠ penetración al tejido"
+      ],
+      "case": "Una prueba que detecta un gen de carbapenemasa modifica la estrategia, pero se integra con susceptibilidad y sitio.",
+      "question": "¿Identificar MRSA por PCR equivale a conocer toda la sensibilidad del aislamiento?",
+      "answer": "No",
+      "refs": [
+        "MURRAY26",
+        "LIPP20"
+      ]
+    },
+    {
+      "id": "f10",
+      "stage": "Espectro",
+      "num": "10",
+      "title": "Qué significa cubrir a un microorganismo",
+      "lead": "El espectro es una representación conceptual de actividad habitual de un fármaco o familia. La actividad real es especie-, fenotipo- y contexto-dependiente.",
+      "detail": "Distingue cobertura in vitro, exposición PK/PD y eficacia clínica. En este atlas, el color del grupo identifica microorganismos y los patrones de celda son relaciones registradas.",
+      "keys": [
+        "Color de grupo ≠ nivel de actividad",
+        "“Sin evaluar” ≠ resistente",
+        "Una relación piloto no autoriza prescribir"
+      ],
+      "case": "Un fármaco puede aparecer “amplio” y ser inadecuado para un foco concreto por penetración o toxicidad.",
+      "question": "¿“Sin evaluar” significa “no cubre”?",
+      "answer": "No; significa ausencia de una relación verificada en la base",
+      "refs": [
+        "IDSA_STEW",
+        "MURRAY26"
+      ]
+    },
+    {
+      "id": "f11",
+      "stage": "Espectro",
+      "num": "11",
+      "title": "Por qué importa la familia antibiótica",
+      "lead": "Las familias comparten mecanismos generales, pero sus generaciones y subgrupos modifican estabilidad enzimática, afinidad por dianas, penetración y espectro.",
+      "detail": "No extrapoles cefazolina, ceftriaxona, ceftazidima, cefepima y ceftarolina como si fueran idénticas.",
+      "keys": [
+        "Familia es un mapa, no una orden",
+        "Subgrupo predice diferencias importantes",
+        "Agente individual y sensibilidad cierran la decisión"
+      ],
+      "case": "Ceftazidima y ceftriaxona son cefalosporinas de 3ª generación, pero no son equivalentes frente a Pseudomonas.",
+      "question": "¿Todas las cefalosporinas tienen actividad anti-Pseudomonas?",
+      "answer": "No",
+      "refs": [
+        "IDSA_STEW",
+        "MURRAY26"
+      ]
+    },
+    {
+      "id": "f12",
+      "stage": "Espectro",
+      "num": "12",
+      "title": "Pared celular y betalactámicos",
+      "lead": "Los betalactámicos actúan sobre PBPs e inhiben transpeptidación de pared. Su actividad depende de llegada a diana, afinidad PBP y betalactamasas, entre otros factores.",
+      "detail": "Penicilinas, cefalosporinas, carbapenémicos y monobactámicos son familias relacionadas pero con espectros no idénticos.",
+      "keys": [
+        "Penicilinas naturales ≠ ureidopenicilinas",
+        "Carbapenémicos no son todos anti-Pseudomonas",
+        "Aztreonam no cubre grampositivos ni anaerobios"
+      ],
+      "case": "Ertapenem no es anti-Pseudomonas, a diferencia de meropenem para aislamientos susceptibles.",
+      "question": "¿Ertapenem y meropenem comparten exactamente la misma cobertura?",
+      "answer": "No",
+      "refs": [
+        "IDSA_STEW",
+        "MURRAY26"
+      ]
+    },
+    {
+      "id": "f13",
+      "stage": "Espectro",
+      "num": "13",
+      "title": "Síntesis proteica como diana",
+      "lead": "Macrólidos, tetraciclinas, aminoglucósidos, lincosamidas y oxazolidinonas actúan en ribosomas, pero difieren en subunidad, cinética, distribución y espectro.",
+      "detail": "Doxiciclina y azitromicina son claves al estudiar bacterias atípicas; linezolid se piensa en determinados grampositivos resistentes.",
+      "keys": [
+        "La misma diana general no implica mismo espectro",
+        "Aminoglucósidos dependen de transporte relacionado con oxígeno",
+        "Vía oral y penetración tienen importancia"
+      ],
+      "case": "Linezolid con excelente biodisponibilidad oral no equivale a opción universal en bacteriemia.",
+      "question": "¿Inhibir proteínas siempre significa cubrir atípicos?",
+      "answer": "No",
+      "refs": [
+        "IDSA_STEW",
+        "MURRAY26"
+      ]
+    },
+    {
+      "id": "f14",
+      "stage": "Espectro",
+      "num": "14",
+      "title": "Ácidos nucleicos, folato y membrana",
+      "lead": "Fluoroquinolonas, rifamicinas, antifolatos y agentes de membrana tienen dianas diversas. Su perfil clínico depende de sitio y toxicidad.",
+      "detail": "La cobertura potencial debe contrastarse con riesgos, regulación y guías; la elección no se hace por contar más casillas verdes.",
+      "keys": [
+        "Fluoroquinolonas: diana DNA girasa/topoisomerasa",
+        "TMP-SMX: bloqueo secuencial del folato",
+        "Daptomicina: actividad frente a grampositivos, no neumonía alveolar"
+      ],
+      "case": "Daptomicina no se recomienda para neumonía por inactivación por surfactante.",
+      "question": "¿Daptomicina es opción para neumonía por MRSA?",
+      "answer": "No",
+      "refs": [
+        "IDSA_STEW",
+        "MURRAY26"
+      ]
+    },
+    {
+      "id": "f15",
+      "stage": "Espectro",
+      "num": "15",
+      "title": "PK/PD sin fórmulas imposibles",
+      "lead": "La exposición del antibiótico importa: tiempo por encima de MIC, pico/MIC o AUC/MIC se relacionan con distintos grupos de fármacos.",
+      "detail": "La localización de la infección, función renal, dosis, intervalo y perfusión pueden modificar la eficacia aunque el aislamiento sea susceptible.",
+      "keys": [
+        "Betalactámicos: exposición temporal",
+        "Aminoglucósidos: actividad concentración-dependiente",
+        "Sitio anatómico y función renal no son accesorios"
+      ],
+      "case": "Un antibiótico activo en orina puede no servir como monoterapia para bacteriemia profunda.",
+      "question": "¿La susceptibilidad aislada garantiza concentraciones efectivas en SNC?",
+      "answer": "No",
+      "refs": [
+        "IDSA_STEW",
+        "MURRAY26"
+      ]
+    },
+    {
+      "id": "f16",
+      "stage": "Clínica",
+      "num": "16",
+      "title": "Reconocer síndromes antes de elegir",
+      "lead": "Neumonía, piel, abdomen, ITU, meningitis y bacteriemia tienen probabilidades microbiológicas distintas. Construye la hipótesis de acuerdo con el foco.",
+      "detail": "El enfoque sindrómico ayuda a no añadir MRSA, Pseudomonas o anaerobios por rutina.",
+      "keys": [
+        "Foco define patógenos más probables",
+        "Gravedad define urgencia y amplitud",
+        "Cultivos y evolución permiten ajustar"
+      ],
+      "case": "En CAP, cobertura MRSA o Pseudomonas no debe añadirse universalmente sin factores de riesgo validados.",
+      "question": "¿Se cubre Pseudomonas en toda CAP?",
+      "answer": "No",
+      "refs": [
+        "IDSA_STEW",
+        "MURRAY26"
+      ]
+    },
+    {
+      "id": "f17",
+      "stage": "Clínica",
+      "num": "17",
+      "title": "Riesgo de resistencia y antibióticos previos",
+      "lead": "Algunos antecedentes modifican la probabilidad de resistencia: aislamientos previos, antibióticos recientes, contexto de atención y epidemiología local.",
+      "detail": "La IDSA 2025 para ITU complicada propone un proceso en cuatro pasos: gravedad, factores de resistencia, consideraciones del paciente y antibiograma cuando corresponde.",
+      "keys": [
+        "Usar datos de cultivos previos",
+        "No confundir riesgo con resistencia demostrada",
+        "Consultar antibiograma institucional"
+      ],
+      "case": "Una ITU complicada sin sepsis y sin riesgo de resistencia no necesita asumir carbapenémico desde el inicio.",
+      "question": "¿Un antibiótico más amplio siempre es mejor en ITU complicada?",
+      "answer": "No",
+      "refs": [
+        "IDSA_STEW",
+        "MURRAY26"
+      ]
+    },
+    {
+      "id": "f18",
+      "stage": "Clínica",
+      "num": "18",
+      "title": "De-escalamiento y control del foco",
+      "lead": "Cultivo y evolución son oportunidades para simplificar o cambiar tratamiento. El drenaje, retiro de dispositivo o alivio de obstrucción pueden determinar el éxito más que añadir antibióticos.",
+      "detail": "La decisión completa incluye estabilidad clínica, susceptibilidad, acceso, seguridad y posibilidad de transición IV→oral.",
+      "keys": [
+        "Control de foco cuando corresponde",
+        "De-escalar ante datos suficientes",
+        "Evaluar vía IV/oral según síndrome y estabilidad"
+      ],
+      "case": "Un absceso no drenado puede seguir activo pese a un fármaco con espectro adecuado.",
+      "question": "¿Qué intervención puede ser indispensable además del antibiótico en un absceso?",
+      "answer": "Drenaje o control del foco",
+      "refs": [
+        "IDSA_STEW",
+        "MURRAY26"
+      ]
+    },
+    {
+      "id": "f19",
+      "stage": "Resistencia",
+      "num": "19",
+      "title": "Resistencia intrínseca vs adquirida",
+      "lead": "La resistencia intrínseca pertenece a la biología habitual de la especie; la adquirida surge mediante mutaciones o genes. También existen mecanismos de tolerancia y biopelícula.",
+      "detail": "Separarlas evita convertir “no cubre” en una etiqueta inespecífica. Una especie puede tener susceptibilidad heterogénea dentro de una misma familia.",
+      "keys": [
+        "Intrínseca no depende de exposición individual",
+        "Adquirida puede vincularse a enzimas o diana",
+        "Biopelícula complica eficacia clínica"
+      ],
+      "case": "Las cefalosporinas no tienen actividad fiable frente a enterococos por propiedades intrínsecas.",
+      "question": "¿Resistencia intrínseca equivale a que el paciente recibió antibióticos previamente?",
+      "answer": "No",
+      "refs": [
+        "IDSA26"
+      ]
+    },
+    {
+      "id": "f20",
+      "stage": "Resistencia",
+      "num": "20",
+      "title": "BLEE, AmpC y carbapenemasas",
+      "lead": "Estos mecanismos no son etiquetas equivalentes. BLEE, AmpC, KPC y metalo-beta-lactamasas difieren en comportamiento frente a cefalosporinas e inhibidores.",
+      "detail": "Usa guía IDSA AMR 2026 y microbiología del aislamiento para seleccionar opciones; no extrapoles de una sola familia a todos los mecanismos.",
+      "keys": [
+        "BLEE puede afectar cefalosporinas extendidas",
+        "AmpC depende de especie y riesgo de inducción",
+        "NDM/KPC requieren diferenciación mecanística"
+      ],
+      "case": "Un inhibidor eficaz contra KPC no necesariamente cubre NDM.",
+      "question": "¿KPC y NDM son el mismo mecanismo?",
+      "answer": "No",
+      "refs": [
+        "IDSA26"
+      ]
+    },
+    {
+      "id": "f21",
+      "stage": "Resistencia",
+      "num": "21",
+      "title": "Pseudomonas DTR y Acinetobacter CRAB",
+      "lead": "Son retos diferenciados de patógenos no fermentadores. La susceptibilidad a agentes nuevos y el síndrome determinan la selección.",
+      "detail": "La guía IDSA AMR 2026 diferencia Pseudomonas de difícil tratamiento, Acinetobacter resistente a carbapenémicos y Stenotrophomonas por su biología y opciones distintas.",
+      "keys": [
+        "No extrapolar susceptible → DTR",
+        "CRAB no equivale a cualquier Acinetobacter",
+        "Colonización respiratoria no significa infección"
+      ],
+      "case": "La selección anti-DTR requiere conocer el aislamiento y sitio; no basta una banda de espectro general.",
+      "question": "¿Cualquier antibiótico anti-Pseudomonas cubre Pseudomonas DTR?",
+      "answer": "No",
+      "refs": [
+        "IDSA26"
+      ]
+    },
+    {
+      "id": "f22",
+      "stage": "Aplicación",
+      "num": "22",
+      "title": "Lectura integrada: un caso de neumonía",
+      "lead": "Paciente con neumonía: empieza por gravedad, foco, factores de MRSA/Pseudomonas y necesidad de cobertura de atípicos; después revisa el espectro individual.",
+      "detail": "Una tabla de antibióticos ayuda a comprobar la hipótesis, pero no reemplaza los criterios de ingreso, toma de muestras y guía apropiada.",
+      "keys": [
+        "Neumococo y atípicos son referencias de base",
+        "MRSA/Pseudomonas según riesgos validados",
+        "Reevaluar ante microbiología"
+      ],
+      "case": "Ceftriaxona y azitromicina cubren problemas distintos en un esquema combinado.",
+      "question": "¿Primero elegir antibiótico o establecer gravedad y riesgos?",
+      "answer": "Establecer gravedad y riesgos",
+      "refs": [
+        "IDSA_STEW",
+        "MURRAY26"
+      ]
+    },
+    {
+      "id": "f23",
+      "stage": "Aplicación",
+      "num": "23",
+      "title": "Lectura integrada: piel y absceso",
+      "lead": "Piel no es un único síndrome. Purulencia, profundidad, necrosis, exposición y dispositivos modifican el razonamiento.",
+      "detail": "MSSA, MRSA y estreptococo beta-hemolítico son piezas frecuentes pero no intercambiables; drenaje puede ser decisivo.",
+      "keys": [
+        "Separar celulitis no purulenta de absceso",
+        "Considerar drenaje y control de foco",
+        "Evitar inferir MRSA por morfología"
+      ],
+      "case": "Un absceso pequeño puede requerir drenaje como intervención principal según contexto.",
+      "question": "¿Celulitis no purulenta y absceso purulento tienen idéntica probabilidad microbiológica?",
+      "answer": "No",
+      "refs": [
+        "IDSA_STEW",
+        "MURRAY26"
+      ]
+    },
+    {
+      "id": "f24",
+      "stage": "Aplicación",
+      "num": "24",
+      "title": "Lectura integrada: abdomen e ITU",
+      "lead": "Abdomen puede requerir enterobacterales y anaerobios; ITU depende de gravedad, obstrucción, bacteriemia y resistencia previa. No transpolar esquemas.",
+      "detail": "La conexión entre síndrome y antibiótico tiene varias capas: tipo de muestra, foco, agente, PK/PD, sensibilidad y epidemiología.",
+      "keys": [
+        "Abdomen: pensar en control de foco",
+        "ITU: distinguir cistitis de pielonefritis/cUTI",
+        "Elegir la amplitud mínima adecuada"
+      ],
+      "case": "Cefepima activa frente a muchos gramnegativos no proporciona por sí sola cobertura adecuada de anaerobios intraabdominales.",
+      "question": "¿Se puede usar el mismo criterio de cobertura para abdomen y orina?",
+      "answer": "No",
+      "refs": [
+        "IDSA_STEW",
+        "MURRAY26"
+      ]
+    }
+  ]
+}

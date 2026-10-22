@@ -1,25 +1,35 @@
-# ATB Atlas V13 — Spectrum Instrument
+# ATB Atlas V16 — Editorial Clinical Atlas
 
-ATB Atlas is a static educational atlas hosted on GitHub Pages. V13 changes the application's presentation and workflow, while retaining the V12 clinical data and the existing source-backed relations.
+Aplicación estática compatible con GitHub Pages. Rework integral de la experiencia del Atlas de microbiología y antibióticos.
 
-## Experience
+## Navegación
 
-- Horizontal instrument navigation instead of a permanent multi-section sidebar.
-- Map-first workspace with family-grouped antibiotic rows and color-coded microbiological territories.
-- Quick-focus selectors for Pseudomonas, MRSA, E. coli BLEE, pneumococcus, and B. fragilis.
-- Contextual filters, precision mode, and an on-demand inspector that opens beside the map on desktop or as a bottom sheet on mobile.
-- Symbols and explanations remain separate from taxonomic group colors.
-- Existing Antibiotics, Microorganisms, Clinical Syndromes, Comparator, Laboratory, Learning, and Sources screens remain connected.
-- Color editor, saved views, global search, and accessibility / reduced-motion handling remain available.
+- **Mapa:** 111 antibióticos y 79 microorganismos, 12 grupos taxonómicos, bandas con cruces documentados, vista por especies, inspector de evidencia, filtros, ordenación y paginación.
+- **Microorganismos:** catálogo agrupado con fichas de morfología, enfermedades, clínica, referencias, fotografías CDC atribuidas cuando están disponibles.
+- **Antibióticos:** 111 agentes en 26 familias, mecanismos, subgrupos, limitaciones, relaciones registradas y fuentes.
+- **Síndromes:** 22 perfiles con preguntas clínicas, agentes y referencias.
+- **Comparador:** hasta 4 fármacos frente a un mismo microorganismo; muestra solo relaciones existentes.
+- **Aprender:** 24 capítulos progresivos desde Gram hasta resistencias y aplicación, con autoevaluación y progreso local.
+- **Laboratorio:** ruta síndrome → microorganismo → antibiótico → interpretación.
+- **Fuentes:** 15 entradas bibliográficas y guías clínicas.
 
-## Clinical interpretation
+## Publicación
 
-The database currently catalogs 111 antibiotics, 79 microorganisms / phenotypes, 22 syndromes and 130 explicitly stored antibiotic-pathogen relations. The many other combinations are **not evaluated** and must not be interpreted as resistance or a negative spectrum result. Explicit relations in this pilot remain subject to individual clinical review. The atlas is not a prescribing tool.
+GitHub Pages usa la raíz del repositorio (index.html). No requiere compilador ni backend. Se apoya en archivos JSON del directorio `data/` y SVG libres almacenados en `assets/icons/`.
 
-## Deploy
+## Calidad de los datos
 
-This is plain static HTML/CSS/JavaScript using `data/atlas.json`, `data/insights.json`, and `assets/icons/*.svg`. Publish with GitHub Pages using the existing deployment workflow. No build tools or backend are needed.
+El catálogo **no constituye un antibiograma**. La base histórica conserva 130 relaciones explícitas preliminares y sin validación clínica individual. El estado **sin evaluar** significa ausencia de un registro y nunca debe inferirse como resistencia. El componente de aprendizaje conceptual está separado de la capa de relaciones y las referencias.
 
-## Accessibility
+## Cambios editoriales
 
-Keyboard search: Cmd/Ctrl + K. Escape closes the currently open modal or spectrum detail. Reduced-motion users do not receive entrance animations.
+El contenido de Fundamentos se redactó como material docente original. Las referencias del repositorio son bibliografía de apoyo, no una auditoría de cada frase o relación. Confirmar siempre guía vigente, población, sitio de infección, cultivos, PK/PD y susceptibilidad.
+
+## Archivos
+
+- `index.html`, `styles.css`, `app.js`
+- `data/atlas.json` y `data/insights.json` (corpus conservado)
+- `data/fundamentals.json` (nuevo)
+- `assets/icons` (SVG existentes)
+
+© Iconos: conservar archivo de licencia de iconografía del repositorio. Código fuente y recursos conforme a licencias de origen.
