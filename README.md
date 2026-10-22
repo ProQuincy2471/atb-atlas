@@ -1,35 +1,31 @@
-# ATB Atlas V16 — Editorial Clinical Atlas
+# ATB Atlas — V17 | Chromatic Field Notes
 
-Aplicación estática compatible con GitHub Pages. Rework integral de la experiencia del Atlas de microbiología y antibióticos.
+Revisión de identidad visual y exploración con un lenguaje cromático propio, manteniendo intacto el catálogo clínico de V16.
 
-## Navegación
+## Qué cambió
 
-- **Mapa:** 111 antibióticos y 79 microorganismos, 12 grupos taxonómicos, bandas con cruces documentados, vista por especies, inspector de evidencia, filtros, ordenación y paginación.
-- **Microorganismos:** catálogo agrupado con fichas de morfología, enfermedades, clínica, referencias, fotografías CDC atribuidas cuando están disponibles.
-- **Antibióticos:** 111 agentes en 26 familias, mecanismos, subgrupos, limitaciones, relaciones registradas y fuentes.
-- **Síndromes:** 22 perfiles con preguntas clínicas, agentes y referencias.
-- **Comparador:** hasta 4 fármacos frente a un mismo microorganismo; muestra solo relaciones existentes.
-- **Aprender:** 24 capítulos progresivos desde Gram hasta resistencias y aplicación, con autoevaluación y progreso local.
-- **Laboratorio:** ruta síndrome → microorganismo → antibiótico → interpretación.
-- **Fuentes:** 15 entradas bibliográficas y guías clínicas.
+- Shell violeta profundo, encabezados editoriales de alto contraste, navegación destacada.
+- **12 pigmentos microbiológicos** visibles y personalizables; una banda cromática de acceso directo y tarjetas de taxonomía mejor identificadas.
+- Cabeceras de matriz a color completo y bandas de espectro con señales semánticas independientes del color del organismo.
+- Cuatro presets: Resonancia, Tropical Lab, Nocturno y Museo Médico.
+- Dossiers interactivos para los perfiles: mapa de relaciones registradas por grupo en antibióticos y lista de cruces documentados en microorganismos.
+- Tratamientos visuales específicos para Clínica, Comparador, Aprender, Laboratorio y Fuentes, con más contraste y mejores jerarquías.
+- Iconografía SVG local, sin depender de CDN para los iconos.
 
-## Publicación
+## Integridad de datos
 
-GitHub Pages usa la raíz del repositorio (index.html). No requiere compilador ni backend. Se apoya en archivos JSON del directorio `data/` y SVG libres almacenados en `assets/icons/`.
+Se reutilizan `data/atlas.json`, `data/insights.json` y `data/fundamentals.json` de V16 sin cambios. La base contiene 111 antibióticos, 79 microorganismos, 22 síndromes y 130 relaciones preliminares.
 
-## Calidad de los datos
+Una relación registrada no constituye susceptibilidad clínica validada, y un vacío no significa resistencia. Los dossiers muestran **disponibilidad de cruces** y no probabilidades de cobertura ni porcentajes de éxito clínico.
 
-El catálogo **no constituye un antibiograma**. La base histórica conserva 130 relaciones explícitas preliminares y sin validación clínica individual. El estado **sin evaluar** significa ausencia de un registro y nunca debe inferirse como resistencia. El componente de aprendizaje conceptual está separado de la capa de relaciones y las referencias.
+## Archivos del despliegue
 
-## Cambios editoriales
+- `index.html`
+- `app.js`
+- `styles.css`
+- `data/` (sin cambios)
+- `assets/icons/` (sin cambios)
 
-El contenido de Fundamentos se redactó como material docente original. Las referencias del repositorio son bibliografía de apoyo, no una auditoría de cada frase o relación. Confirmar siempre guía vigente, población, sitio de infección, cultivos, PK/PD y susceptibilidad.
+## Verificación
 
-## Archivos
-
-- `index.html`, `styles.css`, `app.js`
-- `data/atlas.json` y `data/insights.json` (corpus conservado)
-- `data/fundamentals.json` (nuevo)
-- `assets/icons` (SVG existentes)
-
-© Iconos: conservar archivo de licencia de iconografía del repositorio. Código fuente y recursos conforme a licencias de origen.
+Probados 8 módulos, selector de paleta, inspector, mapa por especie, navegación y pantallas de 1512px / 390px. Iconos SVG representados, sin errores de JavaScript observados y sin overflow global.
