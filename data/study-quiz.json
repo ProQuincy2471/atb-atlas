@@ -1,0 +1,398 @@
+{
+  "meta": {
+    "type": "original questions, not reproduced from Lippincott Q&A",
+    "count": 30
+  },
+  "questions": [
+    {
+      "id": "q001",
+      "chapter": "f01",
+      "question": "¿Cuál es la primera pregunta antes de elegir un antibiótico?",
+      "options": [
+        "¿Existe un síndrome compatible con infección bacteriana?",
+        "¿Cuál es el antibiótico más reciente?",
+        "¿Cuánto espectro puedo cubrir?",
+        "¿Qué fármaco tiene más presentaciones?"
+      ],
+      "correct": 0,
+      "explanation": "El diagnóstico sindrómico y la probabilidad de infección bacteriana vienen antes del tratamiento."
+    },
+    {
+      "id": "q002",
+      "chapter": "f01",
+      "question": "¿Por qué un cultivo positivo aislado puede no justificar tratamiento?",
+      "options": [
+        "Puede representar colonización o contaminación",
+        "Siempre requiere carbapenémico",
+        "La tinción Gram determina la dosis",
+        "La ausencia de fiebre excluye infección"
+      ],
+      "correct": 0,
+      "explanation": "La interpretación integra huésped, sitio, muestra y síntomas."
+    },
+    {
+      "id": "q003",
+      "chapter": "f02",
+      "question": "La tinción Gram sirve principalmente para:",
+      "options": [
+        "Distinguir grandes patrones de pared bacteriana",
+        "Demostrar susceptibilidad específica",
+        "Establecer la CMI de vancomicina",
+        "Predecir todos los genes de resistencia"
+      ],
+      "correct": 0,
+      "explanation": "Gram no identifica de manera concluyente ni proporciona un antibiograma."
+    },
+    {
+      "id": "q004",
+      "chapter": "f02",
+      "question": "Un diplococo grampositivo observado en esputo de CAP orienta inicialmente a:",
+      "options": [
+        "Streptococcus pneumoniae",
+        "Escherichia coli",
+        "Pseudomonas aeruginosa",
+        "Mycoplasma pneumoniae"
+      ],
+      "correct": 0,
+      "explanation": "La morfología es orientadora, no confirmatoria, y debe corroborarse por pruebas y clínica."
+    },
+    {
+      "id": "q005",
+      "chapter": "f03",
+      "question": "Cocos grampositivos en racimos sugieren:",
+      "options": [
+        "Estafilococos",
+        "Neisseria",
+        "Bacilos entéricos",
+        "Mycobacterium"
+      ],
+      "correct": 0,
+      "explanation": "La disposición en racimos orienta a Staphylococcus; no determina MSSA/MRSA."
+    },
+    {
+      "id": "q006",
+      "chapter": "f04",
+      "question": "¿Por qué un beta-lactámico carece de sentido frente a Mycoplasma?",
+      "options": [
+        "Mycoplasma carece de pared celular clásica",
+        "Es una bacteria grampositiva anaerobia",
+        "Produce siempre BLEE",
+        "No se distribuye al pulmón"
+      ],
+      "correct": 0,
+      "explanation": "Los beta-lactámicos inhiben síntesis de pared; sin esa diana, no hay actividad esperable."
+    },
+    {
+      "id": "q007",
+      "chapter": "f04",
+      "question": "¿Cuál es una pareja conceptual de cobertura anaerobia abdominal?",
+      "options": [
+        "Metronidazol y Bacteroides fragilis",
+        "Cefepima sola y Bacteroides fragilis",
+        "Vancomicina IV y Pseudomonas",
+        "Aztreonam y estreptococos"
+      ],
+      "correct": 0,
+      "explanation": "Metronidazol actúa sobre múltiples anaerobios; cefepima sola no ofrece cobertura adecuada para B. fragilis."
+    },
+    {
+      "id": "q008",
+      "chapter": "f05",
+      "question": "¿Qué dato aumenta sospecha de Pseudomonas en infección respiratoria?",
+      "options": [
+        "Bronquiectasias y aislamiento previo",
+        "Rinitis aguda sin comorbilidad",
+        "Faringitis estreptocócica confirmada",
+        "Cistitis simple no complicada"
+      ],
+      "correct": 0,
+      "explanation": "La ecología del huésped y cultivos previos importan más que el adjetivo “grave” aislado."
+    },
+    {
+      "id": "q009",
+      "chapter": "f06",
+      "question": "¿Qué factor de virulencia facilita un absceso por B. fragilis?",
+      "options": [
+        "Cápsula polisacárida",
+        "Ausencia de pared",
+        "Proteína M de GAS",
+        "PBP2a"
+      ],
+      "correct": 0,
+      "explanation": "La cápsula y el ambiente mixto favorecen formación de abscesos."
+    },
+    {
+      "id": "q010",
+      "chapter": "f07",
+      "question": "Un cultivo de orina con crecimiento bacteriano pero sin síntomas puede representar:",
+      "options": [
+        "Bacteriuria asintomática",
+        "Siempre pielonefritis",
+        "Necesariamente sepsis",
+        "Fracaso de ceftriaxona"
+      ],
+      "correct": 0,
+      "explanation": "Bacteriuria asintomática no equivale a infección urinaria sintomática y tiene indicaciones restringidas de tratamiento."
+    },
+    {
+      "id": "q011",
+      "chapter": "f08",
+      "question": "¿Qué cambia al obtener muestra antes de iniciar antibiótico?",
+      "options": [
+        "Mejora oportunidad de identificar etiología y susceptibilidad",
+        "Elimina toda necesidad de exploración física",
+        "Garantiza que el cultivo sea positivo",
+        "Permite omitir control de foco"
+      ],
+      "correct": 0,
+      "explanation": "Cuando no retrasa manejo crítico, cultivos adecuados ayudan a orientar tratamiento definitivo."
+    },
+    {
+      "id": "q012",
+      "chapter": "f09",
+      "question": "Una PCR positiva para un gen de resistencia significa:",
+      "options": [
+        "Debes interpretar el resultado con organismo y fenotipo",
+        "La terapia está determinada sin más datos",
+        "La CMI siempre es 0",
+        "No hace falta contexto clínico"
+      ],
+      "correct": 0,
+      "explanation": "Genotipo y fenotipo aportan datos diferentes."
+    },
+    {
+      "id": "q013",
+      "chapter": "f10",
+      "question": "La palabra «cubre» equivale a:",
+      "options": [
+        "Actividad microbiológica plausible, no indicación clínica automática",
+        "Curación garantizada",
+        "Penetración universal",
+        "Elección preferida en todos los síndromes"
+      ],
+      "correct": 0,
+      "explanation": "El uso depende de sitio, PK/PD, susceptibilidad y evidencia clínica."
+    },
+    {
+      "id": "q014",
+      "chapter": "f10",
+      "question": "¿Qué representa una casilla sin datos de ATB Atlas?",
+      "options": [
+        "Combinación no evaluada en el corpus",
+        "Resistencia definitiva",
+        "CMI elevada confirmada",
+        "Antibiótico contraindicado"
+      ],
+      "correct": 0,
+      "explanation": "El mapa separa ausencia de registro de actividad/no actividad."
+    },
+    {
+      "id": "q015",
+      "chapter": "f11",
+      "question": "¿Qué explica que ceftriaxona y ceftazidima cubran diferente?",
+      "options": [
+        "Subgrupo, estructura, afinidad y espectro dentro de cefalosporinas",
+        "Todo antibiótico con “cef” es idéntico",
+        "Siempre cambia la vía oral",
+        "La duración de infusión sola determina espectro"
+      ],
+      "correct": 0,
+      "explanation": "Mismo mecanismo general no implica mismo perfil microbiológico."
+    },
+    {
+      "id": "q016",
+      "chapter": "f12",
+      "question": "Los beta-lactámicos bactericidas actúan principalmente por:",
+      "options": [
+        "Inhibición de PBPs y transpeptidación de pared",
+        "Bloqueo de subunidad 30S",
+        "Daño reductivo de ADN anaerobio",
+        "Bloqueo de síntesis de folato"
+      ],
+      "correct": 0,
+      "explanation": "Las PBPs participan en construcción de peptidoglucano."
+    },
+    {
+      "id": "q017",
+      "chapter": "f13",
+      "question": "¿Qué antibiótico actúa en la subunidad 30S?",
+      "options": [
+        "Doxiciclina",
+        "Vancomicina",
+        "Meropenem",
+        "Metronidazol"
+      ],
+      "correct": 0,
+      "explanation": "Las tetraciclinas impiden unión de aminoacil-tRNA al ribosoma 30S."
+    },
+    {
+      "id": "q018",
+      "chapter": "f13",
+      "question": "¿Qué antibiótico actúa sobre la iniciación 50S?",
+      "options": [
+        "Linezolid",
+        "Ceftriaxona",
+        "Fosfomicina",
+        "Daptomicina"
+      ],
+      "correct": 0,
+      "explanation": "Linezolid es una oxazolidinona que inhibe formación del complejo de iniciación."
+    },
+    {
+      "id": "q019",
+      "chapter": "f14",
+      "question": "Metronidazol requiere principalmente:",
+      "options": [
+        "Activación reductiva en ambiente anaerobio",
+        "PBP2a de MRSA",
+        "Oxígeno abundante para activación",
+        "Pared gruesa de peptidoglucano"
+      ],
+      "correct": 0,
+      "explanation": "La activación anaerobia daña el ADN."
+    },
+    {
+      "id": "q020",
+      "chapter": "f15",
+      "question": "Para beta-lactámicos, el índice PK/PD importante suele ser:",
+      "options": [
+        "Tiempo libre por encima de CMI",
+        "Concentración urinaria aislada",
+        "Sólo unión a albúmina",
+        "Pico máximo absoluto, sin contexto"
+      ],
+      "correct": 0,
+      "explanation": "La exposición tiempo-dependiente influye en optimización de betalactámicos."
+    },
+    {
+      "id": "q021",
+      "chapter": "f15",
+      "question": "¿Por qué nitrofurantoína no es apropiada para pielonefritis?",
+      "options": [
+        "Concentración tisular renal insuficiente",
+        "Ausencia de actividad urinaria",
+        "Todas las bacterias renales son MRSA",
+        "Sólo puede administrarse IV"
+      ],
+      "correct": 0,
+      "explanation": "La exposición en sitio infectado importa incluso con actividad urinaria."
+    },
+    {
+      "id": "q022",
+      "chapter": "f16",
+      "question": "En abdomen perforado, además de gramnegativos, a menudo debes cubrir:",
+      "options": [
+        "Anaerobios entéricos",
+        "Legionella",
+        "Mycoplasma",
+        "Borrelia"
+      ],
+      "correct": 0,
+      "explanation": "El intestino contiene anaerobios relevantes y el control de foco es importante."
+    },
+    {
+      "id": "q023",
+      "chapter": "f17",
+      "question": "En ITU complicada, un cultivo previo reciente con BLEE modifica:",
+      "options": [
+        "La probabilidad de resistencia y elección empírica",
+        "La tinción Gram de la sangre",
+        "El peso del paciente",
+        "La necesidad universal de vancomicina"
+      ],
+      "correct": 0,
+      "explanation": "IDSA 2025 recomienda integrar aislamientos urinarios previos, exposición a fármacos y gravedad."
+    },
+    {
+      "id": "q024",
+      "chapter": "f18",
+      "question": "Un absceso abdominal que requiere drenaje se resuelve mejor con:",
+      "options": [
+        "Antibióticos adecuados y control del foco",
+        "Escalamiento de dosis solamente",
+        "Vancomicina IV por definición",
+        "Esperar sin evaluar la fuente"
+      ],
+      "correct": 0,
+      "explanation": "El control del foco es parte del tratamiento."
+    },
+    {
+      "id": "q025",
+      "chapter": "f19",
+      "question": "¿Qué ejemplo ilustra resistencia intrínseca?",
+      "options": [
+        "Enterococcus frente a cefalosporinas",
+        "Adquisición de KPC en Klebsiella",
+        "Mutación bajo tratamiento",
+        "Transferencia plasmídica de BLEE"
+      ],
+      "correct": 0,
+      "explanation": "La resistencia intrínseca forma parte del patrón natural de una especie."
+    },
+    {
+      "id": "q026",
+      "chapter": "f20",
+      "question": "¿Son equivalentes BLEE y carbapenemasa?",
+      "options": [
+        "No, mecanismos y consecuencias difieren",
+        "Sí, representan el mismo gen",
+        "Sólo cambian la tinción Gram",
+        "Ambas significan sensibilidad universal a cefepima"
+      ],
+      "correct": 0,
+      "explanation": "La familia de betalactamasas y su espectro de hidrólisis importan."
+    },
+    {
+      "id": "q027",
+      "chapter": "f21",
+      "question": "La categoría DTR de Pseudomonas se refiere a:",
+      "options": [
+        "Resistencia difícil de tratar según definiciones de susceptibilidad",
+        "Misma situación que una BLEE",
+        "Carencia de pared bacteriana",
+        "Producción obligatoria de cápsula"
+      ],
+      "correct": 0,
+      "explanation": "DTR no es sinónimo de ausencia total de opciones y requiere perfil de susceptibilidad."
+    },
+    {
+      "id": "q028",
+      "chapter": "f22",
+      "question": "En CAP leve sin factores validados de MRSA, la conducta razonable es:",
+      "options": [
+        "No añadir cobertura MRSA automáticamente",
+        "Siempre agregar vancomicina",
+        "Siempre elegir meropenem",
+        "Evitar investigar gravedad"
+      ],
+      "correct": 0,
+      "explanation": "Riesgos y gravedad definen ampliaciones de cobertura."
+    },
+    {
+      "id": "q029",
+      "chapter": "f23",
+      "question": "En absceso cutáneo, ¿qué medida puede ser fundamental?",
+      "options": [
+        "Incisión/drenaje cuando está indicado",
+        "Sólo antibiótico intravenoso",
+        "Antifúngico en todos los casos",
+        "Evitar evaluar purulencia"
+      ],
+      "correct": 0,
+      "explanation": "Drenar un absceso puede ser esencial y cambia necesidad de antimicrobianos."
+    },
+    {
+      "id": "q030",
+      "chapter": "f24",
+      "question": "¿Por qué cefepima sola es incompleta en abdomen polimicrobiano?",
+      "options": [
+        "Carece de cobertura anaerobia abdominal confiable",
+        "No cubre ningún gramnegativo",
+        "No es betalactámico",
+        "Sólo tiene vía oral"
+      ],
+      "correct": 0,
+      "explanation": "Revisar Bacteroides/anaerobios, y controlar el foco."
+    }
+  ]
+}

@@ -1,0 +1,883 @@
+{
+  "meta": {
+    "source": "WHO AWaRe (Access, Watch, Reserve) antibiotic book, 2022",
+    "sourceUrl": "https://www.who.int/publications/i/item/9789240062382",
+    "license": "CC BY-NC-SA 3.0 IGO; uso educativo no comercial; adaptación original; la OMS no avala este sitio",
+    "scope": "Índice completo de capítulos de enfermedades con una selección de síntesis y dosis adultas verificadas",
+    "adultDoses": "Para adultos con función renal/hepática normal. No usar como prescripción individual."
+  },
+  "conditions": [
+    {
+      "id": "who-04",
+      "title": "Bronquitis aguda",
+      "system": "Respiratorio",
+      "chapter": 4,
+      "page": 29,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-05",
+      "title": "Otitis media aguda",
+      "system": "Otorrinolaringología",
+      "chapter": 5,
+      "page": 36,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-06",
+      "title": "Faringitis estreptocócica",
+      "system": "Otorrinolaringología",
+      "chapter": 6,
+      "page": 46,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "dosificacion_fuente",
+      "overview": "Faringitis bacteriana, particularmente por estreptococo betahemolítico grupo A. La mayoría de las faringitis son virales; primero establecer probabilidad y necesidad de pruebas.",
+      "risks": [
+        "Edad escolar y contacto estrecho",
+        "Brotes comunitarios",
+        "Fiebre sin tos, exudado y adenopatía anterior aumentan sospecha, no confirman"
+      ],
+      "pathogens": [
+        "Streptococcus pyogenes"
+      ],
+      "why": "S. pyogenes conserva susceptibilidad a penicilina; la clave no es amplitud sino confirmar que el síndrome la necesita.",
+      "first": [
+        {
+          "drug": "Amoxicilina",
+          "dose": "500 mg VO cada 8 h",
+          "basis": "WHO AWaRe 2022, cap. 6",
+          "note": "Adultos; duración dependiente del riesgo de fiebre reumática y contexto OMS."
+        },
+        {
+          "drug": "Penicilina V",
+          "dose": "500 mg VO cada 6 h",
+          "basis": "WHO AWaRe 2022, cap. 6",
+          "note": "Alternativa de primera elección OMS"
+        }
+      ],
+      "alternatives": [
+        {
+          "drug": "Cefalexina",
+          "dose": "500 mg VO cada 8 h",
+          "basis": "WHO AWaRe 2022, cap. 6",
+          "note": "No utilizar en alergia inmediata importante sin valoración."
+        }
+      ],
+      "redflags": [
+        "Signos de absceso periamigdalino",
+        "Obstrucción de vía aérea"
+      ],
+      "linkedSyndromeId": "faringitis"
+    },
+    {
+      "id": "who-07",
+      "title": "Sinusitis aguda bacteriana",
+      "system": "Otorrinolaringología",
+      "chapter": 7,
+      "page": 61,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-08",
+      "title": "Infección odontógena",
+      "system": "Odontología",
+      "chapter": 8,
+      "page": 72,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-09",
+      "title": "Linfadenitis bacteriana aguda",
+      "system": "Piel y tejidos blandos",
+      "chapter": 9,
+      "page": 95,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-10",
+      "title": "Infección bacteriana ocular",
+      "system": "Oftalmología",
+      "chapter": 10,
+      "page": 105,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-11",
+      "title": "Tracoma",
+      "system": "Oftalmología",
+      "chapter": 11,
+      "page": 140,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-12",
+      "title": "Neumonía comunitaria leve",
+      "system": "Respiratorio",
+      "chapter": 12,
+      "page": 147,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "dosificacion_fuente",
+      "overview": "Infección del parénquima pulmonar adquirida fuera del hospital. Antes del antibiótico: determinar gravedad, condiciones de hospitalización y etiología probable.",
+      "risks": [
+        "Edad avanzada y comorbilidades cardiopulmonares",
+        "Infección viral previa, incluida influenza",
+        "Exposición epidemiológica y situaciones que elevan riesgo de patógenos resistentes"
+      ],
+      "pathogens": [
+        "Streptococcus pneumoniae",
+        "Haemophilus influenzae",
+        "Mycoplasma pneumoniae",
+        "Legionella pneumophila"
+      ],
+      "why": "En neumonía leve, un betalactámico como amoxicilina cubre neumococo, mientras que los atípicos tienen biología distinta. La OMS distingue escenarios leves y graves.",
+      "first": [
+        {
+          "drug": "Amoxicilina",
+          "dose": "1 g por vía oral cada 8 h",
+          "basis": "WHO AWaRe 2022, cap. 12, pág. 150",
+          "note": "Adulto con función renal normal; caso leve a moderado. Una de las opciones de primera elección OMS."
+        }
+      ],
+      "alternatives": [
+        {
+          "drug": "Doxiciclina",
+          "dose": "100 mg VO cada 12 h",
+          "basis": "WHO AWaRe 2022, cap. 12, pág. 150",
+          "note": "Alternativa según contexto."
+        },
+        {
+          "drug": "Amoxicilina/clavulanato",
+          "dose": "875/125 mg VO cada 8 h",
+          "basis": "WHO AWaRe 2022, cap. 12, pág. 150",
+          "note": "Otra alternativa OMS."
+        }
+      ],
+      "redflags": [
+        "Hipoxemia, hipotensión, confusión o dificultad respiratoria",
+        "Necesidad de ingreso o manejo crítico cambia esquemas."
+      ],
+      "linkedSyndromeId": "nac"
+    },
+    {
+      "id": "who-13",
+      "title": "Exacerbación de EPOC",
+      "system": "Respiratorio",
+      "chapter": 13,
+      "page": 162,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-14",
+      "title": "Gastroenteritis aguda infecciosa",
+      "system": "Gastrointestinal",
+      "chapter": 14,
+      "page": 169,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-15",
+      "title": "Fiebre entérica / tifoidea",
+      "system": "Gastrointestinal",
+      "chapter": 15,
+      "page": 185,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-16",
+      "title": "Impétigo, erisipela y celulitis leves",
+      "system": "Piel y tejidos blandos",
+      "chapter": 16,
+      "page": 193,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-17",
+      "title": "Infección de quemaduras",
+      "system": "Piel y tejidos blandos",
+      "chapter": 17,
+      "page": 206,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-18",
+      "title": "Heridas y mordeduras infectadas",
+      "system": "Piel y tejidos blandos",
+      "chapter": 18,
+      "page": 215,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "sintesis_revisar",
+      "overview": "Infección cutánea secundaria a herida humana o animal. La flora suele ser polimicrobiana, con anaerobios y especies de boca.",
+      "risks": [
+        "Mordedura profunda o cerca de articulación",
+        "Inmunodepresión",
+        "Retraso en atención de herida"
+      ],
+      "pathogens": [
+        "Pasteurella multocida",
+        "Streptococcus",
+        "Staphylococcus",
+        "Anaerobios orales"
+      ],
+      "why": "Amoxicilina-clavulanato abarca flora oral y anaerobios, a diferencia de cefalexina sola para ciertos patógenos de mordeduras.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [
+        "Lesión profunda, tenosinovitis",
+        "Sepsis o infección del espacio cerrado"
+      ],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-19",
+      "title": "Infección urogenital por clamidia",
+      "system": "ITS",
+      "chapter": 19,
+      "page": 230,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-20",
+      "title": "Infección gonocócica",
+      "system": "ITS",
+      "chapter": 20,
+      "page": 241,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "sintesis_revisar",
+      "overview": "Infección por Neisseria gonorrhoeae, a menudo urogenital, rectal o faríngea. Debe evaluarse sitio, coinfecciones y contactos.",
+      "risks": [
+        "Exposición sexual sin barrera",
+        "Parejas nuevas o múltiples",
+        "Antecedente de ITS"
+      ],
+      "pathogens": [
+        "Neisseria gonorrhoeae"
+      ],
+      "why": "La elección del antimicrobiano depende de susceptibilidad, localización y vigilancia de resistencia; no usar fluoroquinolonas empíricas sin base.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [
+        "Diseminación, artritis, oftalmía",
+        "Seguimiento de parejas y pruebas de coinfección"
+      ],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-21",
+      "title": "Sífilis",
+      "system": "ITS",
+      "chapter": 21,
+      "page": 254,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-22",
+      "title": "Tricomoniasis",
+      "system": "ITS",
+      "chapter": 22,
+      "page": 271,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-23",
+      "title": "Cistitis / ITU baja",
+      "system": "Urinario",
+      "chapter": 23,
+      "page": 278,
+      "setting": "general",
+      "source": "WHO AWaRe 2022",
+      "level": "dosificacion_fuente",
+      "overview": "Infección localizada a la vejiga, generalmente con disuria, urgencia y polaquiuria, sin fiebre ni datos sistémicos. Distinguir cistitis de pielonefritis o ITU complicada.",
+      "risks": [
+        "Actividad sexual y antecedentes de ITU",
+        "Instrumentación o alteraciones urinarias",
+        "Embarazo o sexo masculino requieren razonamiento particular"
+      ],
+      "pathogens": [
+        "Escherichia coli",
+        "Staphylococcus saprophyticus",
+        "Klebsiella spp."
+      ],
+      "why": "Nitrofurantoína alcanza concentraciones urinarias elevadas pero no sirve para parénquima renal: el sitio de infección pesa tanto como el espectro.",
+      "first": [
+        {
+          "drug": "Nitrofurantoína",
+          "dose": "100 mg VO cada 12 h (liberación modificada), durante 5 días",
+          "basis": "WHO AWaRe 2022, cap. 23, pág. 281",
+          "note": "OMS la señala como opción preferida para ITU baja; no indicada para pielonefritis."
+        }
+      ],
+      "alternatives": [
+        {
+          "drug": "Trimetoprim/sulfametoxazol",
+          "dose": "160/800 mg VO cada 12 h, durante 3 días",
+          "basis": "WHO AWaRe 2022, cap. 23, pág. 281",
+          "note": "Sólo donde susceptibilidad local e individual lo permitan."
+        },
+        {
+          "drug": "Amoxicilina/clavulanato",
+          "dose": "500/125 mg VO cada 8 h, durante 3–5 días",
+          "basis": "WHO AWaRe 2022, cap. 23, pág. 281",
+          "note": "Alternativa OMS sujeta a riesgo de resistencia."
+        }
+      ],
+      "redflags": [
+        "Fiebre, dolor en flanco o vómitos sugieren infección alta",
+        "Sepsis o embarazo modifican evaluación"
+      ],
+      "linkedSyndromeId": "cistitis"
+    },
+    {
+      "id": "who-24",
+      "title": "Sepsis y choque séptico del adulto",
+      "system": "Sistémico",
+      "chapter": 24,
+      "page": 295,
+      "setting": "hospital",
+      "source": "WHO AWaRe 2022",
+      "level": "sintesis_revisar",
+      "overview": "Disfunción orgánica potencialmente mortal relacionada con infección. El síndrome exige búsqueda rápida del foco, cultivos cuando proceda, control del foco y reanimación.",
+      "risks": [
+        "Dispositivos y hospitalización reciente",
+        "Inmunosupresión o fragilidad",
+        "Focos abdominales, urinarios o respiratorios"
+      ],
+      "pathogens": [
+        "Depende del foco: grampositivos y gramnegativos",
+        "Añadir cobertura MRSA sólo si riesgo clínico razonable"
+      ],
+      "why": "Una terapia empírica debe cubrir patógenos probables de manera rápida, pero reducirse al conocer foco y susceptibilidad. No existe antibiótico universal.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [
+        "Choque, alteración de conciencia, oliguria, hipoperfusión",
+        "El tratamiento es emergente; estas fichas no sustituyen un protocolo de sepsis"
+      ],
+      "linkedSyndromeId": "sepsis"
+    },
+    {
+      "id": "who-25",
+      "title": "Sepsis del neonato y pediatría",
+      "system": "Pediatría",
+      "chapter": 25,
+      "page": 319,
+      "setting": "hospital",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-26",
+      "title": "Meningitis bacteriana",
+      "system": "Sistema nervioso",
+      "chapter": 26,
+      "page": 345,
+      "setting": "hospital",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": "meningitis"
+    },
+    {
+      "id": "who-27",
+      "title": "Neumonía comunitaria grave",
+      "system": "Respiratorio",
+      "chapter": 27,
+      "page": 362,
+      "setting": "hospital",
+      "source": "WHO AWaRe 2022",
+      "level": "dosificacion_fuente",
+      "overview": "NAC con alteración de oxigenación, compromiso hemodinámico o puntuaciones de gravedad elevadas. Requiere ingreso y manejo clínico acorde.",
+      "risks": [
+        "Edad / comorbilidades",
+        "Aspiración y enfermedad neurológica",
+        "Patógenos atípicos según exposición"
+      ],
+      "pathogens": [
+        "Streptococcus pneumoniae",
+        "Haemophilus influenzae",
+        "Legionella spp."
+      ],
+      "why": "La OMS contempla ceftriaxona o cefotaxima para enfermedad grave; macrólido puede añadirse según evaluación. El sitio y gravedad importan.",
+      "first": [
+        {
+          "drug": "Ceftriaxona",
+          "dose": "2 g IV cada 24 h",
+          "basis": "WHO AWaRe 2022, cap. 12, pág. 150 (recomendación para casos graves en la ficha de NAC)",
+          "note": "Verificar régimen vigente de NAC grave, comorbilidades y función renal/hepática."
+        }
+      ],
+      "alternatives": [],
+      "redflags": [
+        "Falla respiratoria, choque, confusión",
+        "Escalamiento a cuidados críticos"
+      ],
+      "linkedSyndromeId": "nac"
+    },
+    {
+      "id": "who-28",
+      "title": "Neumonía intrahospitalaria",
+      "system": "Respiratorio",
+      "chapter": 28,
+      "page": 381,
+      "setting": "hospital",
+      "source": "WHO AWaRe 2022",
+      "level": "sintesis_revisar",
+      "overview": "Neumonía de inicio ≥48 horas después de ingreso, sin incubación al ingreso. El marco microbiológico cambia respecto a CAP.",
+      "risks": [
+        "Ventilación mecánica",
+        "Antibióticos IV previos",
+        "Colonización previa por MRSA o Pseudomonas"
+      ],
+      "pathogens": [
+        "Pseudomonas aeruginosa",
+        "Enterobacterales",
+        "Staphylococcus aureus, incluido MRSA según riesgo"
+      ],
+      "why": "La elección inicial depende del antibiograma local, factores de riesgo y gravedad; no basta elegir ceftriaxona por tratarse de neumonía.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [
+        "Hipoxemia grave y choque",
+        "Riesgo de MDR precisa estrategia individualizada"
+      ],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-29",
+      "title": "Colecistitis y colangitis",
+      "system": "Hepatobiliar",
+      "chapter": 29,
+      "page": 396,
+      "setting": "hospital",
+      "source": "WHO AWaRe 2022",
+      "level": "sintesis_revisar",
+      "overview": "Infección biliar por obstrucción e invasión bacteriana. Control del foco (drenaje biliar) puede ser determinante.",
+      "risks": [
+        "Colelitiasis u obstrucción biliar",
+        "Instrumentación / prótesis biliar",
+        "Episodios previos"
+      ],
+      "pathogens": [
+        "Enterobacterales",
+        "Enterococcus en determinadas situaciones",
+        "Anaerobios seleccionados"
+      ],
+      "why": "La penetración y el control de la obstrucción importan tanto como la cobertura. Un antibiótico “amplio” no sustituye drenaje.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [
+        "Ictericia con fiebre y dolor",
+        "Sepsis / choque, necesidad de descompresión urgente"
+      ],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-30",
+      "title": "Absceso hepático piógeno",
+      "system": "Hepatobiliar",
+      "chapter": 30,
+      "page": 414,
+      "setting": "hospital",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-31",
+      "title": "Apendicitis aguda infecciosa",
+      "system": "Gastrointestinal",
+      "chapter": 31,
+      "page": 434,
+      "setting": "hospital",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-32",
+      "title": "Diverticulitis aguda",
+      "system": "Gastrointestinal",
+      "chapter": 32,
+      "page": 454,
+      "setting": "hospital",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-33",
+      "title": "Infección por C. difficile",
+      "system": "Gastrointestinal",
+      "chapter": 33,
+      "page": 464,
+      "setting": "hospital",
+      "source": "WHO AWaRe 2022",
+      "level": "sintesis_revisar",
+      "overview": "Colitis asociada a proliferación de C. difficile tras alteración de microbiota intestinal; desde diarrea a colitis fulminante.",
+      "risks": [
+        "Exposición antibiótica reciente",
+        "Hospitalización o edad avanzada",
+        "Inmunocompromiso"
+      ],
+      "pathogens": [
+        "Clostridioides difficile"
+      ],
+      "why": "Importa administrar un tratamiento activo en la luz intestinal; vancomicina IV no alcanza el sitio de infección para CDI.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [
+        "Íleo, megacolon tóxico, choque",
+        "Recaídas frecuentes exigen estrategia específica"
+      ],
+      "linkedSyndromeId": "c-difficile"
+    },
+    {
+      "id": "who-34",
+      "title": "Pielonefritis / ITU alta",
+      "system": "Urinario",
+      "chapter": 34,
+      "page": 474,
+      "setting": "hospital",
+      "source": "WHO AWaRe 2022",
+      "level": "sintesis_revisar",
+      "overview": "Infección del parénquima renal o tracto superior, habitualmente con fiebre, dolor lumbar o sistémicos, y piuria. Puede asociarse a obstrucción y sepsis.",
+      "risks": [
+        "Obstrucción / litiasis / sonda",
+        "ITU previas por bacterias resistentes",
+        "Alteraciones urológicas y sepsis"
+      ],
+      "pathogens": [
+        "Escherichia coli",
+        "Klebsiella spp.",
+        "Proteus spp.",
+        "Pseudomonas en huéspedes seleccionados"
+      ],
+      "why": "Nitrofurantoína y fosfomicina oral no logran exposición suficiente en riñón: su papel corresponde a cistitis, no pielonefritis.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [
+        "Sepsis o inestabilidad",
+        "Obstrucción infectada requiere drenaje urgente"
+      ],
+      "linkedSyndromeId": "pielonefritis"
+    },
+    {
+      "id": "who-35",
+      "title": "Osteomielitis bacteriana aguda",
+      "system": "Osteoarticular",
+      "chapter": 35,
+      "page": 489,
+      "setting": "hospital",
+      "source": "WHO AWaRe 2022",
+      "level": "sintesis_revisar",
+      "overview": "Infección del tejido óseo, hematógena o por contigüidad, con importancia de cultivos profundos y procedimientos cuando estén indicados.",
+      "risks": [
+        "Diabetes y úlceras",
+        "Heridas abiertas, cirugía, prótesis",
+        "Bacteriemia previa"
+      ],
+      "pathogens": [
+        "Staphylococcus aureus",
+        "Estreptococos",
+        "Bacilos gramnegativos según contexto"
+      ],
+      "why": "La cobertura inicial debe ajustarse a sitio y mecanismo de adquisición; el antibiótico debe tener exposición ósea adecuada.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [
+        "Compromiso neurovascular o sepsis",
+        "Absceso o material infectado puede necesitar cirugía"
+      ],
+      "linkedSyndromeId": "osteomielitis"
+    },
+    {
+      "id": "who-36",
+      "title": "Artritis séptica",
+      "system": "Osteoarticular",
+      "chapter": 36,
+      "page": 507,
+      "setting": "hospital",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": "artritis-septica"
+    },
+    {
+      "id": "who-37",
+      "title": "Fascitis necrosante",
+      "system": "Piel y tejidos blandos",
+      "chapter": 37,
+      "page": 523,
+      "setting": "hospital",
+      "source": "WHO AWaRe 2022",
+      "level": "sintesis_revisar",
+      "overview": "Infección necrosante de piel, fascia y subcutáneo con progresión rápida, toxicidad y necesidad de desbridamiento inmediato.",
+      "risks": [
+        "Diabetes, inmunosupresión",
+        "Herida penetrante o cirugía reciente",
+        "En ocasiones sin predisponentes claros"
+      ],
+      "pathogens": [
+        "Streptococcus pyogenes",
+        "S. aureus",
+        "Flora polimicrobiana aerobia/anaerobia"
+      ],
+      "why": "La cirugía urgente tiene prioridad esencial; el esquema puede requerir cobertura amplia y agentes que reduzcan producción de toxinas.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [
+        "Dolor desproporcionado, progresión rápida",
+        "Shock, bullas, crepitación: valoración quirúrgica urgente"
+      ],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-38",
+      "title": "Piomiositis bacteriana",
+      "system": "Piel y tejidos blandos",
+      "chapter": 38,
+      "page": 535,
+      "setting": "hospital",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-39",
+      "title": "Neutropenia febril",
+      "system": "Hematología",
+      "chapter": 39,
+      "page": 545,
+      "setting": "hospital",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    },
+    {
+      "id": "who-40",
+      "title": "Profilaxis antibiótica quirúrgica",
+      "system": "Quirúrgico",
+      "chapter": 40,
+      "page": 562,
+      "setting": "hospital",
+      "source": "WHO AWaRe 2022",
+      "level": "indice_fuente",
+      "overview": "Incluida como enfermedad en el manual WHO AWaRe. La ficha terapéutica detallada requiere extracción y revisión clínica individual; consulta el capítulo correspondiente.",
+      "risks": [],
+      "pathogens": [],
+      "why": "La selección depende de la localización, gravedad, microorganismos probables y susceptibilidad. No extrapolar recomendaciones de otros síndromes.",
+      "first": [],
+      "alternatives": [],
+      "redflags": [],
+      "linkedSyndromeId": null
+    }
+  ]
+}

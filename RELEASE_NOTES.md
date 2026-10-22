@@ -1,27 +1,13 @@
-# ATB Atlas V17.0.0 — Chromatic Field Notes
+# ATB Atlas V18.0 — Major Editorial + Clinical Rework
 
-## Identidad
-
-Se sustituye el predominio monocromático de V16 por una cabecera editorial oscura y una paleta de doce pigmentos microbiológicos más legible. El color de taxonomía y las marcas de actividad se representan con códigos independientes.
-
-## Mapa
-
-- Banda cromática de navegación por los 12 territorios.
-- Tarjetas de grupos más visibles.
-- Cabeceras coloreadas de la matriz, familias con contraste fuerte y segmentos de actividad más grandes.
-- Leyenda persistente con distinción «actividad», «variable», «no útil» y «sin evaluar».
-- Inspector contextual visualmente diferenciado.
-
-## Fichas
-
-- Antibióticos: dossier interactivo con disponibilidad de pares por grupo.
-- Microorganismos: hasta nueve vínculos de antibióticos documentados, accesibles directamente.
-- No se agregan relaciones ni afirmaciones de susceptibilidad.
-
-## Otros espacios
-
-Diferenciación cromática de Clínica, Comparador, Aprender, Laboratorio y Fuentes, con mejor orientación visual y jerarquía de lectura.
-
-## Compatibilidad
-
-Se preserva el historial de GitHub y todos los archivos de datos. Cambian únicamente interfaz, presentación y documentación.
+- Fichas completas continuas, sin tabs internas, para ATB y especies.
+- Índice tipo árbol por grupo (12) o familia (26), búsqueda compacta y colores identificables.
+- 37 capítulos WHO organizados por sistema (incluye atención primaria, hospital y cirugía) con 13 fichas clínicas inicialmente enriquecidas.
+- Posología vinculada al capítulo OMS, sólo cuando está disponible una extracción verificada y acotada.
+- Mecanismos y limitaciones de antibióticos enriquecidos individualmente en fármacos representativos.
+- Interacciones y candidatos en comparador con selector por especie, estado individual visible y perfil teórico distinguible.
+- Mapa: barra izquierda en vez de inspector vacío permanente, familias + grupos en mapa horizontal paginado.
+- Aprender: 24 capítulos, ejemplo, puntos clave, 30 preguntas originales, recuperación activa y progreso.
+- Laboratorio: explora los 37 capítulos WHO con un código cromático por sistema y permite verificar cruces piloto.
+- Selectores propios con búsqueda interna y tipografía/colores/espaciado revisados.
+- Corpus histórico intacto. Se respetan huecos de evidencia en lugar de afirmar sensibilidad universal.
