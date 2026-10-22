@@ -1,0 +1,563 @@
+{
+  "meta": {
+    "edition": "19.0.0",
+    "status": "didactic_layer_not_susceptibility",
+    "date": "2026-10-22",
+    "rules": [
+      "No extrapolar notas de familia a cobertura por especie",
+      "Sólo mostrar dosis si consta en condición WHO revisada",
+      "No sustituye guías clínicas o antibiograma"
+    ]
+  },
+  "groups": {
+    "staph": {
+      "identity": "Cocos grampositivos en racimos",
+      "biology": "Comensales frecuentes de piel y mucosas; S. aureus destaca por invasión y abscesos.",
+      "identify": "Catalasa y coagulasa ayudan a diferenciar grupos; distinguir MSSA, MRSA y coagulasa negativos.",
+      "syndromes": "Piel purulenta, bacteriemia, endocarditis, catéteres y dispositivos.",
+      "pitfall": "MSSA no es sinónimo de baja gravedad; MRSA es un fenotipo, no una nueva morfología."
+    },
+    "strep": {
+      "identity": "Cocos grampositivos en cadenas o diplococos",
+      "biology": "El patrón hemolítico, el grupo de Lancefield y la cápsula orientan la identidad.",
+      "identify": "Reconocer alfa/beta hemólisis y sitios de infección; neumococo es diplococo encapsulado.",
+      "syndromes": "Faringitis, erisipela, neumonía, meningitis, infecciones invasivas y enfermedad neonatal.",
+      "pitfall": "No extrapolar la cobertura de un estreptococo a enterococos."
+    },
+    "entero": {
+      "identity": "Cocos grampositivos intestinales",
+      "biology": "Colonizan el tubo digestivo y tienen resistencia intrínseca relevante a diversas clases.",
+      "identify": "Especie y susceptibilidad: E. faecalis y E. faecium pueden diferir de forma sustancial.",
+      "syndromes": "Infección urinaria, bacteriemia, endocarditis e infecciones asociadas a cuidados de salud.",
+      "pitfall": "Las cefalosporinas no son cobertura enterocócica fiable."
+    },
+    "gp-rods": {
+      "identity": "Bacilos grampositivos diversos",
+      "biology": "Incluye especies con esporas, toxinas, nichos intracelulares o comportamiento anaerobio.",
+      "identify": "Distinguir Listeria, Bacillus, Corynebacterium y Clostridioides; cultivo/imagen clínica.",
+      "syndromes": "Meningitis en grupos de riesgo, intoxicación alimentaria, heridas y colitis.",
+      "pitfall": "La etiqueta bacilo grampositivo es demasiado amplia para decidir tratamiento."
+    },
+    "enterobacterales": {
+      "identity": "Bacilos gramnegativos entéricos",
+      "biology": "Muchos provienen del intestino y pueden adquirir BLEE, AmpC o carbapenemasas.",
+      "identify": "Fermentación, identificación de especie, cultivos y antibiograma interpretado por foco.",
+      "syndromes": "ITU, infecciones intraabdominales, bacteriemia, neumonía y dispositivos.",
+      "pitfall": "Separar especie de fenotipo de resistencia y no presuponer sensibilidad uniforme."
+    },
+    "nonfermenters": {
+      "identity": "Bacilos gramnegativos no fermentadores",
+      "biology": "Habitan ambientes acuáticos o dispositivos y pueden tener permeabilidad baja y eflujo.",
+      "identify": "Identificar Pseudomonas, Acinetobacter o Stenotrophomonas por separado; AST es fundamental.",
+      "syndromes": "Neumonía hospitalaria, bacteriemia, quemaduras, dispositivos y UCI.",
+      "pitfall": "Ertapenem o ceftriaxona no son sustitutos de un agente antipseudomónico."
+    },
+    "gn-respiratory": {
+      "identity": "Cocobacilos y otros gramnegativos respiratorios",
+      "biology": "Colonización nasofaríngea y enfermedad invasiva varían por cápsula y huésped.",
+      "identify": "Reservorio respiratorio, historia vacunal y pruebas de laboratorio dirigidas.",
+      "syndromes": "Otitis, sinusitis, neumonía, meningitis y exacerbaciones respiratorias.",
+      "pitfall": "El antibiótico depende de especie, betalactamasas y síndrome."
+    },
+    "gn-zoonotic": {
+      "identity": "Gramnegativos de zoonosis y exposiciones",
+      "biology": "Las exposiciones, vectores, agua o alimentos pueden ser más útiles que la tinción aislada.",
+      "identify": "Historia ocupacional, viajes, animales, artrópodos y pruebas microbiológicas específicas.",
+      "syndromes": "Síndromes febriles, gastroenteritis, sepsis y afectación focal variable.",
+      "pitfall": "Preguntar por exposición antes de fijarse solo en el antibiograma."
+    },
+    "anaerobes": {
+      "identity": "Microorganismos adaptados a bajo oxígeno",
+      "biology": "Frecuentes en microbiota oral, intestinal y genital; infección suele ser polimicrobiana.",
+      "identify": "Diferenciar anaerobios por arriba y por debajo del diafragma; control del foco.",
+      "syndromes": "Abscesos, peritonitis, infecciones odontógenas y necrosantes.",
+      "pitfall": "Metronidazol por sí solo no cubre aerobios acompañantes; cefepima sola no cubre bien B. fragilis."
+    },
+    "atypicals": {
+      "identity": "Bacterias intracelulares o sin pared típica",
+      "biology": "Las dianas de pared pueden faltar o ser poco accesibles para algunos patógenos.",
+      "identify": "Exposición, cultivo especial, PCR o antígeno según patógeno.",
+      "syndromes": "Neumonía atípica y síndromes extrapulmonares según agente.",
+      "pitfall": "No interpretar ceftriaxona sola como cobertura de Legionella o Mycoplasma."
+    },
+    "spirochetes": {
+      "identity": "Bacterias helicoidales móviles",
+      "biology": "Se identifican con técnicas serológicas, moleculares o microscópicas especializadas.",
+      "identify": "Historia sexual, viajes, exposición a garrapatas o agua, según especie.",
+      "syndromes": "Sífilis, borreliosis y leptospirosis.",
+      "pitfall": "La especie y etapa de la enfermedad definen prueba y tratamiento."
+    },
+    "mycobacteria": {
+      "identity": "Bacilos ácido-alcohol resistentes y afines",
+      "biology": "Pared rica en lípidos, crecimiento particular y tratamiento multicomponente en TB.",
+      "identify": "Ziehl-Neelsen/auramina, cultivo específico y pruebas moleculares según contexto.",
+      "syndromes": "Tuberculosis pulmonar/extrapulmonar, micobacteriosis no tuberculosas y nocardiosis.",
+      "pitfall": "No extrapolar los regímenes de TB a MNT ni a Nocardia."
+    }
+  },
+  "classes": {
+    "Penicilinas": {
+      "target": "Pared bacteriana",
+      "mechanism": "Unión a PBPs, inhibición de la transpeptidación",
+      "pkpd": "El tiempo sobre CMI condiciona la eficacia de muchos betalactámicos.",
+      "clinical": "Subgrupos muy diferentes: naturales, aminopenicilinas, antiestafilocócicas y antipseudomónicas.",
+      "gap": "No extrapolar anti-Pseudomonas a toda penicilina; alergia y función renal importan."
+    },
+    "Cefalosporinas": {
+      "target": "Pared bacteriana",
+      "mechanism": "PBPs, con generaciones y espectros diferentes",
+      "pkpd": "Actividad vinculada a tiempo sobre CMI.",
+      "clinical": "Cefazolina (MSSA), ceftriaxona (múltiples infecciones), cefepima (anti-Psa) y ceftarolina (MRSA).",
+      "gap": "No cubren enterococos; ceftriaxona no cubre Pseudomonas; no todas cubren MRSA."
+    },
+    "Carbapenémicos": {
+      "target": "Pared bacteriana",
+      "mechanism": "Betalactámicos estables frente a numerosas betalactamasas",
+      "pkpd": "Generalmente exposición dependiente de tiempo sobre CMI.",
+      "clinical": "BLEE y cuadros graves seleccionados; meropenem anti-Pseudomonas frente a ertapenem sin ella.",
+      "gap": "No cubren MRSA; ertapenem no cubre Pseudomonas ni Acinetobacter."
+    },
+    "Monobactámicos": {
+      "target": "Pared bacteriana",
+      "mechanism": "Aztreonam se dirige a gramnegativos aerobios",
+      "pkpd": "Parámetros temporales de betalactámico.",
+      "clinical": "Papel particular en GNR aerobios cuando especie y alergias lo justifican.",
+      "gap": "Sin grampositivos ni anaerobios; no equiparar aztreonam solo con combinaciones recientes."
+    },
+    "Inhibidores especializados": {
+      "target": "Inhibición de betalactamasas",
+      "mechanism": "El inhibidor restaura actividad frente a ciertas enzimas, dependiendo de la pareja",
+      "pkpd": "El objetivo PK/PD se evalúa por combinación y patógeno.",
+      "clinical": "Pensar por mecanismo: KPC, OXA-48, MBL, ESBL, AmpC; cada agente difiere.",
+      "gap": "No tratar toda carbapenemasa como equivalente; MBL suelen requerir otra estrategia."
+    },
+    "Sulbactam avanzado": {
+      "target": "Pared + betalactamasa",
+      "mechanism": "La combinación sulbactam/durlobactam tiene un nicho particular frente a Acinetobacter.",
+      "pkpd": "Optimización de exposición según formulación y contexto.",
+      "clinical": "Valor en infecciones graves por complejo A. baumannii susceptible, con terapia asociada según guía.",
+      "gap": "No es reemplazo universal de carbapenémicos ni de anti-Pseudomonas."
+    },
+    "Sideróforos betalactámicos": {
+      "target": "Pared bacteriana",
+      "mechanism": "Cefiderocol utiliza transporte de hierro para entrar en gramnegativos.",
+      "pkpd": "Betalactámico: relación con tiempo sobre CMI.",
+      "clinical": "Opción de reserva en organismos resistentes, guiada por especie, AST y guía.",
+      "gap": "La heterorresistencia y los resultados clínicos dependen de patógeno y contexto."
+    },
+    "Glicopéptidos / lipoglicopéptidos": {
+      "target": "Pared bacteriana",
+      "mechanism": "Vancomicina se une al extremo D-Ala-D-Ala; otros miembros difieren en PK.",
+      "pkpd": "La vancomicina IV requiere evaluación de exposición/AUC según infección.",
+      "clinical": "Grampositivos, MRSA; la formulación oral de vancomicina es diferente de la IV.",
+      "gap": "Sin gramnegativos; ajustar según función renal y monitoreo cuando corresponda."
+    },
+    "Lipopéptidos": {
+      "target": "Membrana bacteriana",
+      "mechanism": "Despolarización de membrana de grampositivos",
+      "pkpd": "Exposición ligada a concentración y AUC.",
+      "clinical": "Daptomicina en bacteriemia o endocarditis por grampositivos seleccionados.",
+      "gap": "No utilizar en neumonía alveolar por interacción con surfactante."
+    },
+    "Oxazolidinonas": {
+      "target": "Síntesis proteica 50S",
+      "mechanism": "Bloqueo del complejo de iniciación ribosomal",
+      "pkpd": "Exposición relacionada con AUC/CMI.",
+      "clinical": "MRSA, VRE y neumonía por grampositivos sensibles; excelente biodisponibilidad oral de linezolid.",
+      "gap": "Vigilar mielosupresión, interacciones serotoninérgicas y neuropatía con exposiciones prolongadas."
+    },
+    "Macrólidos / ketólidos": {
+      "target": "Síntesis proteica 50S",
+      "mechanism": "Interfieren con elongación del péptido",
+      "pkpd": "Actividad y exposición varían por fármaco y organismo.",
+      "clinical": "Atípicos respiratorios y esquemas combinados para CAP.",
+      "gap": "Resistencia neumocócica local y prolongación del QT pueden modificar utilidad."
+    },
+    "Tetraciclinas / derivados": {
+      "target": "Síntesis proteica 30S",
+      "mechanism": "Impedimento de unión aminoacil-tRNA",
+      "pkpd": "Principalmente dependiente de exposición AUC/CMI.",
+      "clinical": "Doxiciclina para atípicos, zoonosis y algunas infecciones cutáneas; derivados avanzados para nichos específicos.",
+      "gap": "Tigeciclina no es un agente ideal para bacteriemia; no extrapolar a todo gramnegativo."
+    },
+    "Aminoglucósidos": {
+      "target": "Síntesis proteica 30S",
+      "mechanism": "Alteración de lectura del ARNm, bactericidas",
+      "pkpd": "Cmax/CMI es un objetivo importante; vigilar toxicidad.",
+      "clinical": "Gramnegativos aerobios, algunas indicaciones urinarias y sinergia en casos seleccionados.",
+      "gap": "Poco útiles en anaerobios por captación dependiente de oxígeno; nefro/ototoxicidad."
+    },
+    "Fluoroquinolonas": {
+      "target": "Síntesis de ADN",
+      "mechanism": "Inhiben girasa/topoisomerasa IV",
+      "pkpd": "Exposición AUC/CMI.",
+      "clinical": "Ciprofloxacino destaca en ciertos gramnegativos y Pseudomonas susceptible; levofloxacino en respiratorio.",
+      "gap": "Advertencias tendinosas, neurológicas, QT según agente y riesgo de resistencia."
+    },
+    "Sulfonamidas / antifolatos": {
+      "target": "Vía del folato",
+      "mechanism": "Bloqueo de síntesis de folato; TMP-SMX bloquea etapas sucesivas",
+      "pkpd": "Exposición adecuada y susceptibilidad específicas.",
+      "clinical": "P. jirovecii, Nocardia, S. maltophilia y determinadas infecciones urinarias o de piel.",
+      "gap": "Hiperpotasemia, citopenias, alergia y ajuste renal; no cobertura indiscriminada de grampositivos."
+    },
+    "Nitroimidazoles": {
+      "target": "Daño de ácidos nucleicos",
+      "mechanism": "Reducción intracelular en microorganismos sensibles anaerobios",
+      "pkpd": "Actividad en compartimentos anaerobios.",
+      "clinical": "B. fragilis y muchos anaerobios abdominales; algunos protozoos.",
+      "gap": "No cubren aerobios habituales de infecciones mixtas."
+    },
+    "Lincosamidas": {
+      "target": "Síntesis proteica 50S",
+      "mechanism": "Inhiben elongación; clindamicina también reduce síntesis de ciertas toxinas",
+      "pkpd": "Actividad depende de microorganismo y resistencia MLSB.",
+      "clinical": "Anaerobios orales e infecciones por grampositivos seleccionados.",
+      "gap": "Riesgo de C. difficile e inducción de resistencia (D-test) cuando aplique."
+    },
+    "Rifamicinas": {
+      "target": "Síntesis de ARN",
+      "mechanism": "Inhiben ARN polimerasa dependiente de ADN",
+      "pkpd": "Exposición y combinación indicación-específica.",
+      "clinical": "Tuberculosis y algunos esquemas asociados a biopelículas.",
+      "gap": "Resistencia rápida en monoterapia para muchos escenarios, interacciones por inducción enzimática."
+    },
+    "Antimicobacterianos": {
+      "target": "Dianas específicas de micobacterias",
+      "mechanism": "Familias variadas con dianas diversas, generalmente parte de combinaciones",
+      "pkpd": "PK/PD y duración dependen del régimen y susceptibilidad.",
+      "clinical": "TB y micobacteriosis no tuberculosas con esquemas multicomponente.",
+      "gap": "No es una sola familia mecanística; revisar interacciones y toxicidades individuales."
+    },
+    "Fosfonatos": {
+      "target": "Pared bacteriana",
+      "mechanism": "Fosfomicina inhibe MurA en fase temprana de síntesis de pared",
+      "pkpd": "Exposición según formulación y sitio de infección.",
+      "clinical": "Fosfomicina oral en cistitis no complicada seleccionada.",
+      "gap": "La formulación oral no es apropiada para pielonefritis o bacteriemia."
+    },
+    "Nitrofuranos": {
+      "target": "Múltiples dianas",
+      "mechanism": "Nitrofurantoína genera metabolitos activos dentro de la bacteria",
+      "pkpd": "Concentración urinaria determina su utilidad.",
+      "clinical": "Cistitis baja en pacientes adecuados.",
+      "gap": "No usar para pielonefritis/ITU complicada invasiva por mala concentración parenquimatosa."
+    },
+    "Polimixinas": {
+      "target": "Membrana externa",
+      "mechanism": "Interacción con lípido A / lipopolisacáridos",
+      "pkpd": "Exposición y toxicidad complejas.",
+      "clinical": "Rescate frente a algunos GNR resistentes cuando no hay opciones preferibles.",
+      "gap": "Nefrotoxicidad y resultados variables; no de primera elección si hay un betalactámico activo."
+    },
+    "Mupirocina / tópicos": {
+      "target": "Diana local",
+      "mechanism": "Mecanismos locales diversos; mupirocina inhibe isoleucil-tRNA sintetasa",
+      "pkpd": "Concentración tópica; no extrapolar a infecciones sistémicas.",
+      "clinical": "Descolonización y lesiones superficiales en indicaciones específicas.",
+      "gap": "No sustituye cobertura sistémica cuando existe bacteriemia o infección profunda."
+    },
+    "Pleuromutilinas": {
+      "target": "Síntesis proteica 50S",
+      "mechanism": "Unión a centro peptidil-transferasa del ribosoma",
+      "pkpd": "PK dependiente del agente.",
+      "clinical": "Lefamulina es una opción con nichos respiratorios.",
+      "gap": "Interacciones, QT y cobertura no equivalente a otros inhibidores 50S."
+    },
+    "Estreptograminas": {
+      "target": "Síntesis proteica 50S",
+      "mechanism": "Componentes sinérgicos bloquean etapas de traducción",
+      "pkpd": "Exposición depende de combinación.",
+      "clinical": "Grampositivos resistentes seleccionados, incluida actividad frente a algunos VRE faecium.",
+      "gap": "No se extrapola a E. faecalis; toxicidad e interacciones."
+    },
+    "Ácido fusídico": {
+      "target": "Síntesis proteica",
+      "mechanism": "Bloqueo de factor de elongación G",
+      "pkpd": "Exposición y sitio relevantes.",
+      "clinical": "Actividad frente a estafilococos en indicaciones y presentaciones locales.",
+      "gap": "Resistencia rápida con monoterapia sistémica; disponibilidad regional."
+    }
+  },
+  "organisms": {
+    "s-aureus-mssa": {
+      "reservoir": "Piel y narinas",
+      "risk": "Acceso vascular, hemodiálisis, lesiones cutáneas, prótesis",
+      "pathophysiology": "Proteínas de adhesión, toxinas y diseminación hematógena explican abscesos, bacteriemia y focos secundarios.",
+      "diagnosis": "Hemocultivos en bacteriemia; buscar endocarditis y focos metastásicos si corresponde.",
+      "pearl": "MSSA exige pensar en betalactámicos antiestafilocócicos cuando susceptibilidad y contexto los respaldan."
+    },
+    "s-aureus-mrsa": {
+      "reservoir": "Piel y narinas",
+      "risk": "Colonización previa, contacto sanitario, dispositivos, heridas purulentas",
+      "pathophysiology": "PBP2a asociada a resistencia a meticilina con virulencia estafilocócica conservada.",
+      "diagnosis": "Cultivo y susceptibilidad; la morfología no distingue MSSA de MRSA.",
+      "pearl": "Elegir entre vancomicina, linezolid, daptomicina u otros según foco; daptomicina no sirve para neumonía."
+    },
+    "s-pneumoniae": {
+      "reservoir": "Nasofaringe",
+      "risk": "Edad extrema, asplenia, inmunodeficiencia, enfermedad respiratoria",
+      "pathophysiology": "Cápsula polisacárida evita fagocitosis y favorece invasión.",
+      "diagnosis": "Cultivo/antígenos y valoración de susceptibilidad según foco; en meningitis cambian puntos de corte.",
+      "pearl": "No confundir “neumococo” con “atípicos”: los regímenes de CAP tienen objetivos distintos."
+    },
+    "e-coli": {
+      "reservoir": "Flora intestinal",
+      "risk": "Instrumentación urinaria, obstrucción, infecciones previas, hospitalización",
+      "pathophysiology": "Adhesinas (uropatógena), cápsula y factores de colonización facilitan ascenso urinario o bacteriemia.",
+      "diagnosis": "Urocultivo con interpretación clínica; diferenciar colonización de ITU sintomática.",
+      "pearl": "BLEE es un fenotipo posible; no toda E. coli precisa carbapenémico."
+    },
+    "e-coli-blee": {
+      "reservoir": "Flora intestinal",
+      "risk": "Antibióticos previos, hospitalización, colonización por BLEE, instrumentalización",
+      "pathophysiology": "Betalactamasas de espectro extendido inactivan varias cefalosporinas y aztreonam.",
+      "diagnosis": "Susceptibilidad individual y foco; el antibiograma determina terapia definitiva.",
+      "pearl": "Para infección invasiva no urinaria por BLEE, IDSA favorece carbapenémicos; la ITU tiene matices."
+    },
+    "p-aeruginosa": {
+      "reservoir": "Agua y ambientes húmedos",
+      "risk": "UCI, bronquiectasias, quemaduras, dispositivos, antibióticos previos",
+      "pathophysiology": "Eflujo, porinas, betalactamasas y biopelícula influyen en actividad.",
+      "diagnosis": "Cultivo de muestra significativa y AST, diferenciar colonización respiratoria.",
+      "pearl": "Ceftriaxona y ertapenem no cubren Pseudomonas: “gramnegativo” no basta."
+    },
+    "b-fragilis": {
+      "reservoir": "Colon y microbiota gastrointestinal",
+      "risk": "Perforación intestinal, cirugía, abscesos y pérdida de barrera mucosa",
+      "pathophysiology": "Cápsula y sinergia con aerobios participan en abscesos polimicrobianos.",
+      "diagnosis": "Muestra profunda obtenida adecuadamente; el control del foco es decisivo.",
+      "pearl": "Metronidazol cubre anaerobios relevantes pero no sustituye la cobertura aerobia del esquema."
+    },
+    "clostridioides-difficile": {
+      "reservoir": "Colon tras disbiosis",
+      "risk": "Exposición antibiótica, hospitalización, recurrencia, edad avanzada",
+      "pathophysiology": "Toxinas A/B provocan daño epitelial y respuesta inflamatoria; las esporas facilitan persistencia.",
+      "diagnosis": "Probar únicamente cuando la clínica es compatible; PCR positiva aislada no siempre implica infección.",
+      "pearl": "Vancomicina oral difiere de la IV y las guías actualizadas pueden priorizar fidaxomicina."
+    },
+    "legionella": {
+      "reservoir": "Sistemas de agua dulce artificiales",
+      "risk": "Hoteles, viajes, inhalación de aerosoles, inmunosupresión",
+      "pathophysiology": "Replicación intracelular en macrófagos pulmonares.",
+      "diagnosis": "Antígeno urinario específico y PCR respiratoria en casos indicados.",
+      "pearl": "Betalactámicos solos no aportan cobertura relevante contra Legionella."
+    },
+    "mycoplasma": {
+      "reservoir": "Epitelio respiratorio",
+      "risk": "Contacto cercano, brotes escolares, adultos jóvenes",
+      "pathophysiology": "Ausencia de pared celular y adhesión al epitelio ciliado.",
+      "diagnosis": "Prueba molecular cuando necesaria; clínica de neumonía atípica.",
+      "pearl": "No usar betalactámicos para un organismo sin pared típica."
+    },
+    "nocardia-spp": {
+      "reservoir": "Suelo y ambiente",
+      "risk": "Glucocorticoides, trasplante, inmunosupresión celular",
+      "pathophysiology": "Inhalación o inoculación; puede alcanzar SNC y provocar abscesos.",
+      "diagnosis": "Tinción modificada parcialmente ácido-alcohol resistente, cultivos prolongados y especies.",
+      "pearl": "TMP-SMX es referencia conceptual; enfermedad grave exige elección guiada por especie y AST."
+    },
+    "neisseria-gonorrhoeae": {
+      "reservoir": "Mucosas humanas",
+      "risk": "Exposición sexual, antecedente de ITS y contactos",
+      "pathophysiology": "Pili y variación antigénica favorecen adhesión y reinfección.",
+      "diagnosis": "NAAT en sitios de exposición, cultivo si falla terapia y para susceptibilidad.",
+      "pearl": "Las recomendaciones de gonorrea se actualizan más rápido que el manual WHO 2022."
+    },
+    "acinetobacter-baumannii-crab": {
+      "reservoir": "Superficies hospitalarias",
+      "risk": "Ventilación mecánica, UCI, heridas, antibióticos prolongados",
+      "pathophysiology": "Persistencia ambiental, biopelícula y múltiples mecanismos de resistencia.",
+      "diagnosis": "Cultivo con correlación clínica para distinguir colonización de infección.",
+      "pearl": "CRAB exige guías propias; no es simplemente otra Pseudomonas."
+    },
+    "e-faecalis": {
+      "reservoir": "Microbiota intestinal",
+      "risk": "Manipulación genitourinaria, dispositivos, hospitalización",
+      "pathophysiology": "Adhesinas y biopelícula en válvulas/dispositivos.",
+      "diagnosis": "Cultivos, especie y AST; endocarditis puede exigir combinaciones específicas.",
+      "pearl": "Las cefalosporinas por sí solas no cubren enterococo."
+    }
+  },
+  "drugs": {
+    "ceftriaxona": {
+      "clinicalPharmacology": "Penetra SNC inflamado según indicación; no antipseudomónica.",
+      "safety": "Colestasis/lodo biliar y consideraciones neonatales con calcio.",
+      "memory": "Memoriza: no cubre Pseudomonas, enterococos ni atípicos."
+    },
+    "cefepima": {
+      "clinicalPharmacology": "Cefalosporina de 4ª, requiere ajuste por función renal.",
+      "safety": "Neurotoxicidad/encefalopatía especialmente con acumulación.",
+      "memory": "Buena actividad frente a Pseudomonas susceptible, pero sin cobertura anaerobia de B. fragilis."
+    },
+    "ertapenem": {
+      "clinicalPharmacology": "Carbapenémico útil frente a BLEE sensible cuando no se busca Pseudomonas.",
+      "safety": "Ajustar por función renal; convulsiones infrecuentes.",
+      "memory": "Amplio NO significa anti-Pseudomonas."
+    },
+    "meropenem": {
+      "clinicalPharmacology": "Carbapenémico anti-Pseudomonas, penetración tisular dependiente de foco/dosis.",
+      "safety": "Ajuste renal y vigilancia de neurotoxicidad en susceptible.",
+      "memory": "No cubre MRSA, VRE ni todos los organismos resistentes."
+    },
+    "vancomicina-iv": {
+      "clinicalPharmacology": "AUC/CMI objetivo en MRSA grave; monitorizar según guías y función renal.",
+      "safety": "Nefrotoxicidad, reacciones de infusión.",
+      "memory": "IV no trata colitis luminal por C. difficile; oral no alcanza infecciones sistémicas."
+    },
+    "linezolid": {
+      "clinicalPharmacology": "Biodisponibilidad oral cercana a IV; útil en grampositivos resistentes.",
+      "safety": "Trombocitopenia, mielosupresión, neuropatía, interacción serotoninérgica.",
+      "memory": "Actividad frente a MRSA/VRE no implica preferencia universal para bacteriemia."
+    },
+    "daptomicina": {
+      "clinicalPharmacology": "Lipopéptido bactericida en sangre/tejidos apropiados.",
+      "safety": "Miopatía y elevación de CK; vigilar en terapias prolongadas.",
+      "memory": "No sirve para neumonía alveolar por inactivación con surfactante."
+    },
+    "piptazo": {
+      "clinicalPharmacology": "Cubre múltiples GNR, Pseudomonas y anaerobios susceptibles.",
+      "safety": "Reacciones de hipersensibilidad, alteraciones electrolíticas y ajuste renal.",
+      "memory": "En BLEE invasiva no extrapolar susceptibilidad in vitro a idoneidad terapéutica sin guía."
+    },
+    "aztreonam": {
+      "clinicalPharmacology": "Monobactámico orientado a gramnegativos aerobios.",
+      "safety": "Alergia y ajustes según función renal; excepciones de reactividad con ceftazidima.",
+      "memory": "Sin grampositivos ni anaerobios; no equivale a combinación aztreonam/avibactam."
+    },
+    "metronidazol": {
+      "clinicalPharmacology": "Gran actividad frente a anaerobios obligados susceptibles y algunos protozoos.",
+      "safety": "Neuropatía periférica con exposición prolongada, efectos GI.",
+      "memory": "En infección mixta abdominal no cubre los aerobios acompañantes."
+    },
+    "nitrofurantoina": {
+      "clinicalPharmacology": "Altas concentraciones urinarias, no parenquimatosas.",
+      "safety": "Precaución renal y toxicidad pulmonar/hepática en exposiciones prolongadas.",
+      "memory": "Sirve para cistitis seleccionada, no para pielonefritis."
+    },
+    "fosfomicina-oral": {
+      "clinicalPharmacology": "Fosfomicina oral orientada a vejiga en contextos seleccionados.",
+      "safety": "Efectos GI; interpretación depende de especie/formulación.",
+      "memory": "No extrapolar una dosis oral a bacteriemia o infección renal."
+    },
+    "azitromicina": {
+      "clinicalPharmacology": "Actividad intracelular relevante para atípicos.",
+      "safety": "QT, interacciones según agente y resistencia neumocócica.",
+      "memory": "Cubre atípicos, no Pseudomonas."
+    },
+    "ciprofloxacino": {
+      "clinicalPharmacology": "Quinolona con sesgo GNR, actividad anti-Pseudomonas según AST.",
+      "safety": "Tendinopatía, efectos SNC, disglucemia; revisar interacciones.",
+      "memory": "No equiparar actividad neumocócica con quinolonas respiratorias."
+    },
+    "levofloxacino": {
+      "clinicalPharmacology": "Quinolona respiratoria con actividad frente a atípicos.",
+      "safety": "Tendinopatía, QT, efectos SNC, ajustar función renal.",
+      "memory": "Amplitud no sustituye evaluación de seguridad y alternativas estrechas."
+    },
+    "gentamicina": {
+      "clinicalPharmacology": "Concentración pico/CMI y monitorización de niveles según situación.",
+      "safety": "Nefrotoxicidad y ototoxicidad.",
+      "memory": "No monoterapia habitual para infecciones sistémicas fuera de contextos seleccionados."
+    },
+    "ceftarolina": {
+      "clinicalPharmacology": "Betalactámico con afinidad por PBP2a (MRSA).",
+      "safety": "Ajuste renal, neutropenia con tratamiento prolongado.",
+      "memory": "Cubre MRSA pero no Pseudomonas."
+    }
+  },
+  "systems": {
+    "Respiratorio": {
+      "recognition": "Inicio, duración, frecuencia respiratoria, saturación, radiografía cuando proceda.",
+      "risks": "Gravedad respiratoria, enfermedad estructural, aspiración, microbiología previa.",
+      "nextStep": "Valoración de hipoxemia, necesidad de ingreso y muestras cuando correspondan."
+    },
+    "Urinario": {
+      "recognition": "Disuria/urgencia frente a fiebre o dolor lumbar; diferenciar bacteriuria asintomática.",
+      "risks": "Obstrucción, embarazo, instrumentación, urocultivo previo, sepsis.",
+      "nextStep": "Cultivo cuando indicado; buscar obstrucción y signos de infección alta."
+    },
+    "Gastrointestinal": {
+      "recognition": "Diarrea vs síndrome invasivo; dolor focal, hidratación y exposición.",
+      "risks": "Viajes, alimento sospechoso, antibióticos previos, inmunocompromiso.",
+      "nextStep": "Evaluar deshidratación, sangre en heces y necesidad de prueba microbiológica."
+    },
+    "Piel y tejidos blandos": {
+      "recognition": "Purulencia, extensión, dolor, temperatura y afectación sistémica.",
+      "risks": "Diabetes, inmunodepresión, herida, mordedura, dispositivo, necrosis.",
+      "nextStep": "El drenaje/control de foco puede ser esencial; dolor desproporcionado es alarma."
+    },
+    "Otorrinolaringología": {
+      "recognition": "Características de inicio, duración y recurrencia; evitar confundir cuadros virales.",
+      "risks": "Inmunosupresión, complicaciones orbitarias/neurológicas y cronicidad.",
+      "nextStep": "Buscar criterios bacterianos y signos de complicación local."
+    },
+    "Odontología": {
+      "recognition": "Dolor dental, trismus, edema, disfagia y afectación de espacios.",
+      "risks": "Procedimientos dentales, diabetes y progresión rápida.",
+      "nextStep": "El drenaje y tratamiento odontológico del foco suelen ser esenciales."
+    },
+    "Oftalmología": {
+      "recognition": "Agudeza visual, dolor, secreción, fotofobia y uso de lentes.",
+      "risks": "Traumatismo, lentes de contacto, inmunosupresión.",
+      "nextStep": "Pérdida visual o dolor severo exigen evaluación urgente."
+    },
+    "ITS": {
+      "recognition": "Síndrome urogenital, rectal o faríngeo y sitio de exposición.",
+      "risks": "Contacto, coinfecciones, embarazo y pareja(s).",
+      "nextStep": "NAAT/cultivo según patógeno; seguir guías ITS más recientes que WHO 2022."
+    },
+    "Sistémico": {
+      "recognition": "Signos de disfunción orgánica, estado hemodinámico y foco probable.",
+      "risks": "Shock, procedimientos recientes, inmunosupresión y dispositivos.",
+      "nextStep": "Hemocultivos y control de foco sin retrasar atención urgente."
+    },
+    "Pediatría": {
+      "recognition": "Edad exacta, alimentación, temperatura, irritabilidad y perfusión.",
+      "risks": "Prematuridad, edad neonatal, vacunación, foco.",
+      "nextStep": "Esquemas/dosis pediátricos requieren guía por edad/peso y fuente actualizada."
+    },
+    "Sistema nervioso": {
+      "recognition": "Cefalea, fiebre, alteración mental, meningismo, signos focales.",
+      "risks": "Edad, inmunosupresión, neurocirugía, dispositivos.",
+      "nextStep": "Urgencia diagnóstica/terapéutica y criterios de neuroimagen antes de PL."
+    },
+    "Hepatobiliar": {
+      "recognition": "Dolor HCD, fiebre, ictericia, colestasis y ultrasonido.",
+      "risks": "Obstrucción biliar, prótesis, procedimientos y sepsis.",
+      "nextStep": "Evaluar drenaje biliar y control del foco, no solo antibióticos."
+    },
+    "Osteoarticular": {
+      "recognition": "Dolor localizado, incapacidad funcional, derrame, fiebre.",
+      "risks": "Prótesis, bacteriemia, heridas, diabetes, consumo de drogas IV.",
+      "nextStep": "Cultivos y aspiración/drenaje cuando corresponda."
+    },
+    "Hematología": {
+      "recognition": "Fiebre y neutrófilos absolutos; evaluar inestabilidad.",
+      "risks": "Neutropenia profunda/prolongada, catéter y profilaxis previa.",
+      "nextStep": "Emergencia de evaluación rápida; cobertura inicial según riesgo y entorno."
+    },
+    "Quirúrgico": {
+      "recognition": "Tipo de procedimiento, contaminación y tiempo perioperatorio.",
+      "risks": "Prótesis, heridas, duración e instrumentación.",
+      "nextStep": "Profilaxis difiere del tratamiento de infección establecida."
+    }
+  },
+  "sourceLinks": [
+    {
+      "title": "WHO AWaRe antibiotic book (2022)",
+      "url": "https://www.who.int/publications/i/item/9789240062382",
+      "role": "Recomendaciones por síndrome y dosis sólo donde están revisadas"
+    },
+    {
+      "title": "IDSA cUTI (2025)",
+      "url": "https://www.idsociety.org/practice-guideline/complicated-urinary-tract-infections/",
+      "role": "Selección empírica y desescalada según cultivo"
+    },
+    {
+      "title": "IDSA AMR (2026)",
+      "url": "https://www.idsociety.org/practice-guideline/amr-guidance/",
+      "role": "GNR resistentes y esquemas por fenotipo"
+    }
+  ]
+}

@@ -1,51 +1,43 @@
-# ATB Atlas V18 — The Clinical Field Guide
+# ATB Atlas V19 — Living Fieldguide
 
-## Entrega
+**Repositorio:** `ProQuincy2471/atb-atlas` · **Despliegue:** GitHub Pages · aplicación web estática sin Zite.
 
-Reestructuración mayor del ATB Atlas y su información educativa manteniendo la base clínica original (`data/atlas.json`, `data/insights.json`) sin inventar nuevas relaciones de susceptibilidad.
+## Qué es
 
-### Funciones
+ATB Atlas reúne un catálogo educativo preexistente de **111 antibióticos, 79 microorganismos, 22 síndromes**, un índice de **37 enfermedades WHO AWaRe**, **24 capítulos** de Fundamentos y un banco de **30 preguntas originales**. La V19 agrega una capa editorial estructurada y mejora la identidad visual, la jerarquía y la navegación.
 
-1. **Microorganismos**: 79 fichas navegables en un árbol jerárquico y página continua con identidad, enfermedades, factores de riesgo (fichas seleccionadas), patogenia, espectro documentado, práctica y bibliografía.
-2. **Antibióticos**: 111 fichas en 26 familias con mecanismo, territorios, contextos clínicos, dosificación estrictamente acotada a escenario WHO cuando disponible, seguridad/PKPD, aprendizaje y fuentes. Las 111 fichas no tienen la misma profundidad todavía: ver estado de revisión por apartado.
-3. **Síndromes y enfermedades**: 37 capítulos WHO AWaRe 2022, con 13 síntesis clínicas ampliadas y 4 capítulos con una o más pautas específicas extraídas del manual; los restantes están expresamente marcados como índice que requiere revisión individual.
-4. **Mapa**: filtro lateral por familia y territorio, grupos/especies, selección de cruces en contexto y páginas cortas.
-5. **Comparador**: cuatro fármacos, candidatos visibles ordenados por registro individual y, en especies seleccionadas, perfil teórico de interés explícitamente diferenciado.
-6. **Aprender**: 24 capítulos progresivos, 30 preguntas de opción múltiple originales más recuperación abierta, ejemplo aplicado y progreso local.
-7. **Laboratorio**: 37 situaciones del libro WHO con taxonomía por órgano/sistema; cruce fármaco–especie y enlaces de contexto.
-8. **Fuentes**: trazabilidad separada por texto/libro vs indicación terapéutica.
+## Qué se incorporó en V19
 
-### Trazabilidad y licencias
+1. **Navegación editorial:** ocho volúmenes con numeración, color propio, iconografía SVG local y un encabezado específico por sección. La biblioteca taxonómica tiene accesos rápidos y jerarquía compacta.
+2. **Perfiles microbiológicos:** para los doce grupos, identificación, síndromes y errores frecuentes. Para 14 especies/fenotipos prioritarios, reservorio, factores de riesgo, fisiopatología, diagnóstico y diferencias clave. El resto mantiene su ficha individual y recibe orientación del territorio, sin atribuirle datos de otra especie.
+3. **Farmacología:** los 26 grupos del catálogo tienen diana, mecanismo, PK/PD conceptual, aplicaciones y límites. Se añaden notas individuales sobre seguridad, penetración y perlas para 17 antibióticos seleccionados. No se infiere susceptibilidad individual desde notas de clase.
+4. **Enfermedades WHO:** 15 sistemas/órganos incorporan capas de reconocimiento y contexto. Las 37 condiciones conservan sus niveles originales de revisión y solo muestran dosis cuando ya existe una pauta específica rastreada a WHO 2022.
+5. **Mapa:** explicación inicial prominente del lenguaje visual (color = territorio, símbolo = relación registrada).
+6. **Comparador, Aprender y Laboratorio:** guías de interpretación y recorridos por sistema para reducir la carga cognitiva.
 
-**WHO AWaRe 2022:** World Health Organization. *The WHO AWaRe (Access, Watch, Reserve) antibiotic book*. Geneva: WHO; 2022. ISBN 978-92-4-006238-2. [Documento](https://www.who.int/publications/i/item/9789240062382). Licencia CC BY-NC-SA 3.0 IGO. El sitio no está avalado por la OMS, y este resumen original es una adaptación educativa no comercial.
+## Archivos principales
 
-El libro contiene los capítulos de enfermedades y dosificación adulta, empleados como marco de organización. Las dosis recogidas están asociadas a la patología y **no son prescripciones personalizadas**.
+- `index.html` — carga la aplicación y las capas v18 + v19.
+- `app.js`, `styles.css` — catálogo base UI.
+- `v18.js`, `v18.css` — lógica y presentación enciclopédica existente.
+- `v19.js`, `v19.css` — identidad editorial y contenido complementario.
+- `data/atlas.json` — catálogo y **130 relaciones preliminares**. No se modificó.
+- `data/editorial-knowledge.json` — conocimiento didáctico nuevo, etiquetado como **no equivalente a antibiograma**.
+- `data/who-conditions.json` — 37 capítulos WHO 2022, con niveles de revisión explícitos.
+- `tools/build_editorial_knowledge.py` — generador reproducible de datos editoriales (fuente de los perfiles).
 
-**LIR Pharmacology 7ª:** capítulos 28–31, estructura de mecanismos antimicrobianos. **LIR Pharmacology Questions & Answers:** usado como referencia de estilo didáctico; las preguntas del ATB Atlas son originales, no copias del banco.
+## Criterios de seguridad editorial
 
-**Ross & Wilson Pharmacology:** capítulo 11 (Antimicrobial Drugs) y bases PK/PD. **Pharmacotherapy: Principles and Practice 6e:** capítulo 72 de selección/ste­wardship y capítulos 73–87 sobre enfermedades infecciosas.
+- Las relaciones previas permanecen preliminares. **Ausencia de registro ≠ resistencia.**
+- Los perfiles por familia son explicativos, **no** una afirmación de cobertura para una especie.
+- Un capítulo WHO catalogado no significa que exista una pauta revisada; las dosis aparecen únicamente en los capítulos que ya tienen fuente documentada.
+- La guía WHO AWaRe de 2022 está siendo actualizada. Para meningitis, ITS, pediatría y otros temas, se requiere cotejo con guías más recientes.
+- No usar el atlas como prescriptor sin epidemiología local, antibiograma, foco, severidad, función renal/hepática y supervisión clínica.
 
-**IDSA 2025 cUTI:** https://www.idsociety.org/practice-guideline/complicated-urinary-tract-infections/
+## Fuentes relevantes
 
-**IDSA 2024 AMR:** https://www.idsociety.org/practice-guideline/amr-guidance/
+- WHO AWaRe antibiotic book (2022): https://www.who.int/publications/i/item/9789240062382
+- IDSA complicated UTI guideline (2025): https://www.idsociety.org/practice-guideline/complicated-urinary-tract-infections/
+- IDSA AMR treatment guidance (2026): https://www.idsociety.org/practice-guideline/amr-guidance/
 
-### Límites de esta versión
-
-- Los **130 registros ATB × organismo** del proyecto original se conservan como relaciones **preliminares**, no revisadas individualmente.
-- Las casillas sin relación no deben interpretarse como resistentes ni sensibles.
-- Muchos de los 37 capítulos WHO son por ahora entradas de catálogo con enlaces y requieren transcripción/conciliación individual de primera elección, dosis y alternativas.
-- En el comparador, *perfil de interés* significa actividad teórica o contextual reconocida: **no** indica primera elección para todos los casos ni susceptibilidad individual.
-- Dosis de WHO 2022 requieren verificar vigencia, edad, embarazo, alergias, función renal y hepática, antibiograma y guías regionales antes de su aplicación.
-- La interfaz funciona como sitio estático en GitHub Pages sin backend; filtros y progreso viven en el navegador.
-
-## Estructura
-
-- `index.html`, `app.js`, `styles.css`: núcleo V17, sin alterar el corpus.
-- `v18.js`, `v18.css`: rework V18, componentes de navegación y fichas.
-- `data/who-conditions.json`: índice de 37 condiciones y 13 síntesis, dosis documentadas.
-- `data/study-quiz.json`: 30 preguntas originales.
-- `assets/icons/`: SVG locales con iconografía pública estilo Lucide.
-
-## QA
-
-Se probaron las ocho rutas, selectores intra-app, árbol, fichas continuas, comparador, laboratorio, pregunta interactiva e inspector del mapa con el corpus original y viewport de 1440px/390px. Las pruebas no registraron errores de JavaScript ni desbordamiento horizontal del documento.
+La V19 incluye explicaciones originales de estudio y no reproduce preguntas o ilustraciones de libros protegidos.
