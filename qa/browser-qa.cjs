@@ -28,7 +28,7 @@ if(vp.width===1600){
  all.push({viewport:vp,integrity});
  if(integrity.issues.length)throw Error('Incomplete catalog pages: '+integrity.issues.slice(0,15).join(', '));
  await page.locator('[data-act="nav:atb"]').first().click();
- await page.locator('[data-act="v23-spec-status:all"]').first().click();
+ await page.locator('[data-act^="v23-spectrum:"]').first().click();
  const routeAfter=await page.evaluate(()=>state.route);
  if(routeAfter!=='atb')throw Error('Drug spectrum unexpectedly navigates away');
  await page.locator('[data-act="nav:comparar"]').first().click();
