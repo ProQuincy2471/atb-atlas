@@ -3,6 +3,7 @@
  */
 (function(){
 'use strict';
+if(new URLSearchParams(location.search).get('legacy')==='1')return;
 const NX={domain:'bacteria',group:'all',micro:'',query:'',rxQuery:'',rxFamily:'all',status:'relevant',searchOpen:false,searchQuery:'',drawer:false,compact:false};
 window.NEXO_ID=NX;
 const names={bacteria:'Bacterias',virus:'Virus',fungi:'Hongos',parasites:'Parásitos'};
