@@ -3,7 +3,9 @@
 (function installV25(){
 "use strict";
 const e=window.ATLAS25||{},d=window.ATLAS24?.debug;if(!d)return;
-const Hx=x=>H(String(x??'')),search=x=>String(x??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(),groupList=e.microGroups||[],allMicro=[...D.pathogens.map(x=>({...x,kingdom:'bacteria'})),...d.orgs],allDrug=[...D.antibiotics.map(x=>({...x,kingdom:'bacteria'})),...d.drugs];
+const Hx=x=>H(String(x??'')),search=x=>String(x??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(),groupList=e.microGroups||[];
+let allMicro=[],allDrug=[];
+function ensureData(){if(!D||allMicro.length)return;allMicro=[...D.pathogens.map(x=>({...x,kingdom:'bacteria'})),...d.orgs];allDrug=[...D.antibiotics.map(x=>({...x,kingdom:'bacteria'})),...d.drugs];}
 const palette={bacteria:'#256bc0',virus:'#6555ba',fungi:'#b77848',parasites:'#27876e'},labels={bacteria:'Bacterias',virus:'Virus',fungi:'Hongos',parasites:'Parásitos'},domainOrder=['bacteria','virus','fungi','parasites'];
 let map={domain:'bacteria',group:'all',micro:'',query:'',family:'all',status:'all',view:'territories'},cl={query:'',system:'all',selected:'who-12'};
 const cGroups=()=>[...D.groups.map(g=>({id:g.id,label:g.name,color:grpcolor(g.id),ids:D.pathogens.filter(x=>x.groupId===g.id).map(x=>x.id),concept:'Agrupa especies bacterianas relacionadas por morfología, fisiología y epidemiología; la susceptibilidad debe verificarse por fenotipo y sitio clínico.',diagnosis:'Gram, cultivo, prueba molecular, fenotipo de resistencia y calidad de la muestra.'}))];
@@ -38,6 +40,7 @@ function map25(){
 }
 const oldMain=mainPage;
 mainPage=function(){
+ ensureData();
  if(state.route==='mapa'){return '<div class="v25-mapview"><div class="v25-switch"><button data-act="v25-map-view:territories" class="'+(map.view==='territories'?'on':'')+'">Exploración clínica V25</button><button data-act="v25-map-view:classic" class="'+(map.view==='classic'?'on':'')+'">Mapa anterior / matriz</button></div>'+(map.view==='classic'?oldMain():map25())+'</div>';}
  if(state.route==='clinica')return clinical25();
  return oldMain();
