@@ -63,7 +63,7 @@ act=function(a){
 document.addEventListener('input',event=>{if(!['v25-map-query','v25-clinic-query'].includes(event.target.id))return;const id=event.target.id,st=event.target.selectionStart,en=event.target.selectionEnd;event.stopImmediatePropagation();if(id==='v25-map-query')map.query=event.target.value;else cl.query=event.target.value;render();const el=document.getElementById(id);el?.focus();if(el?.setSelectionRange)el.setSelectionRange(st,en)},true);
 document.addEventListener('change',event=>{if(event.target.id==='v25-map-family'){map.family=event.target.value;map.status='all';render()}},true);
 const originalRender=render;
-render=function(){originalRender();if(state.route==='micro'&&d.ui.micro!=='bacteria')fillMicro25()};
+render=function(){originalRender();if(state.route==='micro'){if(d.ui.micro==='bacteria')fillBacteria25();else fillMicro25();}};
 function fillMicro25(){
  const p=d.orgs.find(x=>x.id===d.ui.selectedMicro);if(!p)return;
  const art=document.querySelector('.v24-detail');if(!art||art.querySelector('.v25-org-review'))return;
@@ -83,6 +83,26 @@ function fillMicro25(){
  art.insertAdjacentHTML('beforeend',content);
  const nav=art.querySelector('.v24-anchor');nav?.insertAdjacentHTML('beforeend','<a href="#v25-biology">Revisión avanzada</a><a href="#v25-differential">Diagnóstico crítico</a><a href="#v25-rounds">Ronda clínica</a>');
 }
+
+function fillBacteria25(){
+ const p=D.pathogens.find(x=>x.id===state.micro),art=document.querySelector('.a18-article');
+ if(!p||!art||art.querySelector('.v25-org-review'))return;
+ const g=D.groups.find(x=>x.id===p.groupId),ed=typeof MICRO_EDU!=='undefined'?(MICRO_EDU[p.id]||{}):{},deep=typeof E19!=='undefined'?(E19.organisms[p.id]||{}):{},rel=relsP(p.id);
+ const risk=Array.isArray(ed.risk)?ed.risk.join('; '):deep.risk||'';
+ const path=ed.pathophys||deep.pathophysiology||p.identity;
+ const diagnosis=deep.diagnosis||ed.diagnosis||'Seleccionar muestra pertinente al órgano afectado y corroborar identificación de especie. Interpretar susceptibilidad por fenotipo, no por apariencia al Gram.';
+ const refs=(p.referenceKeys||[]).map(id=>D.guides?.[id]).filter(x=>x?.url);
+ const pairs=rel.filter(x=>['active','conditional','none'].includes(rstatus(x))).slice(0,10);
+ const html='<div class="v25-org-review v25-bacteria-review" style="--review-accent:'+grpcolor(p.groupId)+'"><header><span>MICROBIOLOGÍA BACTERIANA · DOSSIER AVANZADO</span><h2>Identidad → virulencia → diagnóstico → antibioterapia</h2><p>Ficha adicional para interpretar la especie, su fenotipo y el significado clínico de los resultados. Las relaciones preliminares del catálogo se muestran por separado de inferencias farmacológicas.</p></header>'+
+ '<section id="v25-bacterial-identity"><span>07 / MORFOLOGÍA Y ECOLOGÍA</span><h3>Identificación contextual</h3><p><b>Especie y morfología:</b> '+Hx(p.name)+' · '+Hx(p.morphology)+'. '+Hx(ed.definition||p.identity)+'</p>'+(deep.reservoir?'<p><b>Reservorio:</b> '+Hx(deep.reservoir)+'</p>':'')+'</section>'+
+ '<section><span>08 / PATOGENIA</span><h3>De colonización a lesión</h3><p>'+Hx(path)+'</p>'+(risk?'<div class="v25-editorial-emphasis"><b>Huésped y factores de riesgo</b><p>'+Hx(risk)+'</p></div>':'')+'</section>'+
+ '<section><span>09 / SÍNDROMES Y DIFERENCIAL</span><h3>Cuándo sospechar infección verdadera</h3><p>'+Hx(p.clinical)+'</p><p>'+Hx(p.identity)+'</p><div class="v25-editorial-caution"><b>Problema diagnóstico específico</b><p>'+Hx(p.pearl)+'</p></div></section>'+
+ '<section><span>10 / CONFIRMACIÓN MICROBIOLÓGICA</span><h3>Pruebas y calidad de evidencia</h3><p>'+Hx(diagnosis)+'</p><p>Un cultivo de sitio no estéril puede representar colonización. Un aislamiento en sangre, LCR u otro compartimento estéril tiene significado diferente; la decisión depende de número de muestras, sitio, huésped, clínica y fenotipo de susceptibilidad.</p></section>'+
+ '<section><span>11 / SUSCEPTIBILIDAD Y RESPUESTA</span><h3>Antibióticos individualizados</h3><p>'+rel.length+' relaciones disponibles en el catálogo; '+pairs.length+' con estado de actividad explícito. Este inventario no constituye un antibiograma local ni un orden de preferencias.</p><div class="v25-editorial-related">'+pairs.map(rx=>'<button data-act="v25-bact-drug:'+rx.antibiotic+'"><b>'+Hx(A(rx.antibiotic)?.name||rx.antibiotic)+'</b><small>'+Hx(rstatus(rx))+' · '+Hx((rx.note||'').slice(0,85))+'</small><em>Ficha ↗</em></button>').join('')+'</div><p><b>Perla terapéutica:</b> '+Hx(deep.pearl||ed.distinct||p.pearl)+'</p></section>'+
+ '<section><span>12 / RONDA DE RESIDENCIA</span><h3>Interpretación de un aislamiento</h3><div class="v25-rounds"><div><small>RECONOCER</small><p>'+Hx(p.identity)+'</p></div><div><small>CONFIRMAR</small><p>'+Hx(diagnosis)+'</p></div><div><small>NO CONFUNDIR</small><p>'+Hx(p.pearl)+'</p></div></div><div class="v25-sources-inline">'+refs.map(r=>'<a href="'+Hx(r.url)+'" target="_blank" rel="noopener noreferrer">'+Hx(r.title)+' ↗</a>').join('')+'</div></section></div>';
+ art.insertAdjacentHTML('beforeend',html);
+}
+
 function clinical25(){
  const who=(typeof WHO!=='undefined'?WHO.conditions:[]),extras=e.extraConditions||[],all=[...who,...extras],sys=[...new Set(all.map(c=>c.system))];
  const candidates=all.filter(c=>(cl.system==='all'||c.system===cl.system)&&(!cl.query||search(c.title).includes(search(cl.query))));
