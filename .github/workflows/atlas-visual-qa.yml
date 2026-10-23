@@ -28,6 +28,7 @@ jobs:
       - name: Test routes and responsive layouts
         run: node qa/browser-qa.cjs
       - name: Validate viral, fungal and parasitic atlas V24
+        if: always()
         run: node qa/v24-browser.cjs
       - name: Upload viewport captures and diagnostics
         if: always()
