@@ -10,7 +10,7 @@ const server=http.createServer((req,res)=>{
  fs.readFile(fp,(e,d)=>{if(e)return res.writeHead(404).end();res.setHeader('Content-Type',types[path.extname(fp)]||'application/octet-stream');res.end(d)});
 });
 const assert=(x,m)=>{if(!x)throw Error(m)};
-const MICRO_DEEP=['s-aureus-mssa','s-aureus-mrsa','staphylococcus-epidermidis','staphylococcus-lugdunensis','staphylococcus-saprophyticus','s-pyogenes','streptococcus-agalactiae-gbs','s-pneumoniae','streptococcus-anginosus-group','streptococcus-mutans','streptococcus-gallolyticus','estreptococos-viridans','e-faecalis','enterococcus-faecium','enterococcus-faecium-vre','bacillus-anthracis','bacillus-cereus','listeria-monocytogenes','corynebacterium-diphtheriae'];
+const MICRO_DEEP=['s-aureus-mssa','s-aureus-mrsa','staphylococcus-epidermidis','staphylococcus-lugdunensis','staphylococcus-saprophyticus','s-pyogenes','streptococcus-agalactiae-gbs','s-pneumoniae','streptococcus-anginosus-group','streptococcus-mutans','streptococcus-gallolyticus','estreptococos-viridans','e-faecalis','enterococcus-faecium','enterococcus-faecium-vre','bacillus-anthracis','bacillus-cereus','listeria-monocytogenes','corynebacterium-diphtheriae','mycobacterium-tuberculosis','mycobacterium-avium-complex','mycobacterium-leprae','mycobacterium-abscessus-complex','nocardia-spp'];
 const DEEP=['infective-endocarditis','who-16','who-24','who-26','who-27','who-34','who-39'];
 async function main(){
  await new Promise(ok=>server.listen(9177,'127.0.0.1',ok));
