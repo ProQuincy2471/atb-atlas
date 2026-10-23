@@ -10,6 +10,7 @@ const server=http.createServer((req,res)=>{
  fs.readFile(fp,(e,d)=>{if(e)return res.writeHead(404).end();res.setHeader('Content-Type',types[path.extname(fp)]||'application/octet-stream');res.end(d)});
 });
 const assert=(x,m)=>{if(!x)throw Error(m)};
+const MICRO_DEEP=['s-aureus-mssa','s-aureus-mrsa','staphylococcus-epidermidis','staphylococcus-lugdunensis','staphylococcus-saprophyticus'];
 const DEEP=['infective-endocarditis','who-16','who-24','who-26','who-27','who-34','who-39'];
 async function main(){
  await new Promise(ok=>server.listen(9177,'127.0.0.1',ok));
@@ -37,6 +38,10 @@ async function main(){
    await page.evaluate(()=>document.querySelector('#v25-syn-deep').scrollIntoView());await page.waitForTimeout(100);
    await page.screenshot({path:path.join(folder,`deep-${id}-body-${width}.png`)});
   }
+  await go('micro');
+  for(const id of MICRO_DEEP){await page.evaluate(i=>window.act('v24-open-micro:'+i),id);await page.waitForTimeout(250);
+   const m=await page.evaluate(()=>({blocks:document.querySelectorAll('.v25-md-block').length,over:document.documentElement.scrollWidth-innerWidth,leak:/\$\{|undefined|NaN/.test(document.querySelector('#micro-profundo')?.innerText||'')}));
+   checks++;assert(m.blocks>=5&&!m.leak&&m.over<9,`revisión ampliada de microorganismo ${id}@${width}: ${JSON.stringify(m)}`)}
   // comparator: target follows the kingdom of the first chosen agent and sidebar tabs stay readable
   await go('comparar');await page.evaluate(()=>[...document.querySelectorAll('button')].find(x=>/integral/.test(x.textContent))?.click());await page.waitForTimeout(250);
   await page.evaluate(()=>window.act('v24-compare-clear'));await page.waitForTimeout(100);

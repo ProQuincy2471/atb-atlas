@@ -126,6 +126,13 @@ function clinicalReferences(c){
  if(id.startsWith("who-"))refs.push(["IDSA 2026 · AMR","https://www.idsociety.org/practice-guideline/amr-guidance/"]);
  return refs;
 }
+window.ATLAS25=window.ATLAS25||{};
+window.ATLAS25.microDeepHTML=function(id){
+ const d=window.ATLAS25.microDeep?.[id];if(!d)return '';
+ const blocks=[['biologia','Biología y estructura'],['patogenia','Patogenia y factores de virulencia'],['epidemiologia','Epidemiología y transmisión'],['clinica','Manifestaciones clínicas'],['diagnostico','Diagnóstico de laboratorio'],['diferencial','Diagnóstico diferencial y confusiones frecuentes'],['tratamiento','Tratamiento'],['resistencia','Resistencia'],['complicaciones','Complicaciones y seguimiento']];
+ const body=blocks.filter(([k])=>d[k]&&d[k].length).map(([k,t],i)=>'<article class="v25-md-block"><span>'+String(i+1).padStart(2,'0')+'</span><h3>'+Hx(t)+'</h3>'+d[k].map(x=>'<p>'+Hx(x)+'</p>').join('')+'</article>').join('');
+ return '<section class="v20-section v25-microdeep" id="micro-profundo"><div class="v20-section-title"><span class="v20-sectionnum">+</span><div><small>REVISIÓN AMPLIADA · '+Hx(d.reviewed||'')+'</small><h2>Del laboratorio a la decisión clínica</h2></div></div><div class="v20-section-body">'+body+'<p class="v25-md-src"><b>Trazabilidad:</b> '+(d.src||[]).map(Hx).join(' · ')+'. Síntesis editorial original a partir de las obras citadas; contenido educativo, no sustituye la guía local ni el antibiograma.</p></div></section>';
+};
 function deepReview(id){
  const d=window.ATLAS25?.deepReviews?.[id];if(!d)return '';
  const list=a=>'<ul>'+a.map(x=>'<li>'+Hx(x)+'</li>').join('')+'</ul>',cr=d.criteria;
@@ -133,7 +140,7 @@ function deepReview(id){
  '<p class="v25-deep-lead">'+Hx(d.summary)+'</p>'+
  '<div class="v25-deep-box"><h3>'+Hx(cr.label)+'</h3><div class="v25-deep-cols"><div><b>Criterios principales</b>'+list(cr.major)+'</div><div><b>Criterios menores y notas</b>'+list(cr.minor)+'</div></div><p class="v25-deep-rule">'+Hx(cr.rule)+'</p></div>'+
  '<h3>Algoritmo paso a paso</h3><ol class="v25-deep-steps">'+d.algorithm.map(a=>'<li><b>'+Hx(a.t)+'</b><p>'+Hx(a.x)+'</p></li>').join('')+'</ol>'+
- '<h3>Decisiones terapéuticas según escenario</h3><div class="v25-deep-table" role="table"><div role="row" class="v25-deep-th"><span>Escenario</span><span>Conducta orientada por la guía</span><span>Matiz</span></div>'+d.decisions.map(x=>'<div role="row"><b>'+Hx(x.c)+'</b><span>'+Hx(x.p)+'</span><small>'+Hx(x.n)+'</small></div>').join('')+'</div>'+
+ '<h3>Decisiones terapéuticas según escenario</h3><div class="v25-deep-table" role="table"><div role="row" class="v25-deep-th"><span>Escenario</span><span>Conducta orientada por la guía</span><span>Matiz</span></div>'+d.decisions.map(x=>'<div role="row"><b>'+Hx(x.c)+'</b><span>'+Hx(x.p)+'</span><small>'+Hx(x.n)+(x.s?'<em class="v25-deep-src">Fuente: '+Hx(x.s)+'</em>':'')+'</small></div>').join('')+'</div>'+
  '<div class="v25-syndrome-context"><b>'+Hx(d.steroid.title)+'</b><p>'+Hx(d.steroid.x)+'</p></div>'+
  '<h3>Complicaciones</h3><dl class="v25-deep-dl">'+d.complications.map(x=>'<div><dt>'+Hx(x.n)+'</dt><dd>'+Hx(x.x)+'</dd></div>').join('')+'</dl>'+
  '<div class="v25-syndrome-context"><b>Si no mejora</b><p>'+Hx(d.failure)+'</p></div>'+
