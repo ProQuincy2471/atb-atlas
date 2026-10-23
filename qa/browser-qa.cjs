@@ -3,7 +3,7 @@ const {chromium}=require('playwright');
 const root=path.resolve(__dirname,'..'),dir=path.join(root,'qa/results');fs.mkdirSync(dir,{recursive:true});
 const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml','.jpg':'image/jpeg','.png':'image/png'};
 const server=http.createServer((req,res)=>{const u=decodeURIComponent(new URL(req.url,'http://127.0.0.1').pathname),f=path.resolve(root,'.'+(u==='/'?'/index.html':u));if(!f.startsWith(root+path.sep)){res.writeHead(403).end();return;}fs.readFile(f,(err,data)=>{if(err){res.writeHead(404).end(u);return;}res.setHeader('Content-Type',mime[path.extname(f)]||'application/octet-stream');res.end(data)})});
-async function main(){await new Promise(r=>server.listen(9172,'127.0.0.1',r));const browser=await chromium.launch({headless:true,args:['--no-sandbox']}),all=[];
+async function main(){await new Promise(r=>server.listen(9172,'127.0.0.1',r));const browser=await chromium.launch({headless:true,args:['--no-sandbox'],...(process.env.CHROME_BIN?{executablePath:process.env.CHROME_BIN}:{})}),all=[];
 for(const vp of [{width:1600,height:900},{width:1280,height:800},{width:1024,height:768},{width:768,height:900},{width:390,height:844}]){
 const ctx=await browser.newContext({viewport:vp}),page=await ctx.newPage(),jsErrors=[],missingAssets=[];
 page.on('pageerror',e=>jsErrors.push(String(e)));page.on('response',r=>{if(r.status()>=400&&new URL(r.url()).hostname==='127.0.0.1')missingAssets.push(r.url()+':'+r.status())});
@@ -17,7 +17,32 @@ try{await page.goto('http://127.0.0.1:9172/',{waitUntil:'domcontentloaded',timeo
 await page.locator('[data-act="v20-mode:cobertura"]').first().click({timeout:10000});await page.locator('.v21-matrix').waitFor({timeout:12000});await audit('cobertura');
 if(await page.locator('.v21-matrix tbody tr').count()<3)throw Error('Matrix empty');
 await page.locator('[data-act="v21-domain:Atípicos"]').first().click();await page.locator('[data-act^="v21-toggle:"]').first().click();await page.locator('.v21-matrix button.v21-cell').first().click({timeout:10000});await audit('cobertura-interactiva');
-for(const route of ['micro','atb','clinica','comparar','aprender','laboratorio','fuentes']){await page.locator('[data-act="nav:'+route+'"]').first().click({timeout:10000});await audit(route);if(route==='micro'&&!await page.locator('.v20-micro-hero h1').count())throw Error('Micro card unavailable');if(route==='atb'&&!await page.locator('.v21-mechanism').count())throw Error('Mechanism missing');}
+for(const route of ['micro','atb','clinica','comparar','aprender','laboratorio','fuentes']){await page.locator('[data-act="nav:'+route+'"]').first().click({timeout:10000});await audit(route);if(route==='atb'){if(!await page.locator('.v23-spectra').count())throw Error('In-page spectrum missing');await page.locator('[data-act="v23-spec-status:all"]').first().click({timeout:10000});if(!await page.locator('.v23-speclist').count())throw Error('Spectrum filter broken');}if(route==='comparar'){if(!await page.locator('.v23-comp-table').count())throw Error('Comparator table missing');}if(route==='aprender'){if((await page.locator('.v23-learn-reading p').count())<3)throw Error('Learning reviews incomplete');}if(route==='clinica'){if(!await page.locator('.v23-clinical-art img').count())throw Error('Disease illustration missing');}if(route==='micro'&&!await page.locator('.v20-micro-hero h1').count())throw Error('Micro card unavailable');if(route==='atb'&&!await page.locator('.v23-mechanism').count())throw Error('V23 molecular mechanism missing');}
+if(vp.width===1600){
+ const integrity=await page.evaluate(()=>{
+  const issues=[];for(const a of D.antibiotics){const h=drugPageSections(a);if(!h.includes('v23-mechanism')||!h.includes('v23-spectra')||!h.includes('drug-spectrum'))issues.push('drug '+a.id)}
+  for(const c of WHO.conditions){const h=clinicalFull(c);if(!h.includes('v23-clinical-art')||!h.includes('v23-clinical-management'))issues.push('clinical '+c.id)}
+  const old=state.lesson;for(const c of F.chapters){state.lesson=c.id;const h=learningPage();if(!h.includes('v23-learn-reading')||!h.includes('v23-lesson-case')||h.length<2200)issues.push('learning '+c.id)}state.lesson=old;
+  return {drugs:D.antibiotics.length,clinical:WHO.conditions.length,lessons:F.chapters.length,issues};
+ });
+ all.push({viewport:vp,integrity});
+ if(integrity.issues.length)throw Error('Incomplete catalog pages: '+integrity.issues.slice(0,15).join(', '));
+ await page.locator('[data-act="nav:atb"]').first().click();
+ await page.locator('[data-act="v23-spec-status:all"]').first().click();
+ const routeAfter=await page.evaluate(()=>state.route);
+ if(routeAfter!=='atb')throw Error('Drug spectrum unexpectedly navigates away');
+ await page.locator('[data-act="nav:comparar"]').first().click();
+ await page.evaluate(()=>{state.compare=[];render()});
+ const ids=await page.evaluate(()=>D.antibiotics.slice(0,11).map(a=>a.id));
+ for(const id of ids)await page.locator('[data-act="v23-toggle-compare:'+id+'"]').first().click({timeout:10000});
+ const count=await page.evaluate(()=>state.compare.length);
+ if(count!==10)throw Error('Comparator allows '+count+' medications, expected limit of 10');
+ if(!await page.locator('.v23-comp-table').count())throw Error('Ten-drug comparator table unavailable');
+ await page.locator('#v23-compare-micro').selectOption('legionella');
+ const newMicro=await page.evaluate(()=>state.compareMicro);
+ if(newMicro!=='legionella')throw Error('Comparator organism selector broken');
+ await audit('comparador-10-medications');
+}
 }catch(err){all.push({viewport:vp,error:String(err),stack:err.stack})}
 all.push({viewport:vp,jsErrors,missingAssets});await ctx.close();}
 await browser.close();server.close();fs.writeFileSync(path.join(dir,'report.json'),JSON.stringify(all,null,2));
