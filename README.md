@@ -44,3 +44,51 @@ Workflow automático `.github/workflows/atlas-visual-qa.yml`, ejecutado en pull 
 ### V23.1 · Actividad orientativa separada de registros
 
 El módulo `v23-spectrum.js` añade un explorador dentro de las fichas de antibióticos, con comparación por organismo y territorio. Distingue **actividad individual registrada (preliminar)**, **actividad farmacológica habitual descrita** para pares seleccionados, **actividad condicionada**, **ausencia de cobertura clínica habitual** y **pares sin revisión**. Estos estados **no** son porcentajes de eficacia, antibiogramas, ni sustituyen interpretación de MIC/PK-PD, foco o guías. La selección no abandona la ficha ni redirige al mapa.
+
+
+## V24 · Virología, micología y parasitología (23 de octubre de 2026)
+
+La expansión V24 añade tres catálogos con contenido original para residencia de Medicina Interna:
+
+| Dominio | Microorganismos | Agentes farmacológicos |
+|---|---:|---:|
+| Virus / antivirales | 47 | 55 |
+| Hongos / antifúngicos | 33 | 25 |
+| Parásitos / antiparasitarios | 49 | 42 |
+| **Nuevos** | **129** | **122** |
+| Catálogo bacteriano previo | 79 | 111 |
+| **Total de fichas catalogadas** | **208** | **233** |
+
+### Experiencia de navegación
+
+- **Microorganismos:** pestañas Bacterias, Virus, Hongos y Parásitos; fichas con taxonomía, patogenia, diagnóstico, epidemiología y tratamiento.
+- **Antimicrobianos:** Antibióticos, Antivirales, Antifúngicos y Antiparasitarios. Cada medicamento muestra acceso celular, diana, mecanismo, PK/PD, indicaciones, toxicidad, resistencia y espectro por microorganismo.
+- **Mapa:** matriz de cobertura por dominios nuevos, scroll horizontal y filtros de familia/especie; el mapa antibacteriano anterior se conserva.
+- **Comparador:** modo integral con fármacos de los cuatro dominios, sin límite arbitrario de cuatro opciones; también permanece el comparador antibacteriano previo.
+- **Aprender:** doce revisiones adicionales sobre ciclos, diagnóstico, farmacología y síndromes de virus, hongos y parásitos, más los 24 capítulos bacterianos anteriores.
+- **Imágenes:** consulta asíncrona de imágenes de artículos taxonómicos y enlace al archivo/licencia cuando la imagen documental existe. Si no se encuentra material verificable, no se fabrica fotografía microscópica ni representación sintética.
+
+### Criterios de evidencia y seguridad
+
+La etiqueta **actividad habitual descrita** representa la relación farmacológica o indicación conceptual de la molécula frente a un organismo y NO constituye susceptibilidad de aislamiento individual, tasa de curación, antibiograma ni decisión terapéutica. **Variable** requiere fenotipo, especie o contexto. **No caracterizado** nunca se interpreta como resistencia. **No indicado / no fiable** se reserva a una exclusión explícita curada. Existen excepciones entre dominios (p. ej. TMP-SMX para Pneumocystis).
+
+No se muestran pautas de dosis improvisadas; su selección requiere síndrome, gravedad, edad, embarazo, formulación, interacciones, función hepatorrenal, susceptibilidad y disponibilidad regulatoria. Los ARV se interpretan como parte de regímenes combinados y los antipalúdicos por especie, fase y epidemiología de resistencia. Medicamentos en investigación se etiquetan como tales.
+
+### Referencias de actualización
+
+- [NIH · guías ART adultos 2026](https://clinicalinfo.hiv.gov/en/guidelines/hiv-clinical-guidelines-adult-and-adolescent-arv/what-start-initial-combination-regimens)
+- [NIH · infecciones oportunistas en VIH](https://clinicalinfo.hiv.gov/en/guidelines/hiv-clinical-guidelines-adult-and-adolescent-opportunistic-infections/introduction)
+- [CDC · antivirales influenza, marzo 2026](https://www.cdc.gov/flu/hcp/antivirals/summary-clinicians.html)
+- [CDC · Candida auris, octubre 2026](https://www.cdc.gov/candida-auris/hcp/clinical-care/index.html)
+- [CDC · malaria, agosto 2026](https://www.cdc.gov/malaria/hcp/clinical-guidance/treatment-of-uncomplicated-malaria.html)
+- [CDC DPDx · atlas y diagnóstico parasitológico](https://www.cdc.gov/dpdx/az.html)
+- [IDSA · candidiasis](https://www.idsociety.org/practice-guideline/candidiasis/)
+- [ECMM · guía global de mucormicosis](https://www.ecmm.info/guidelines-and-publications/)
+
+### QA de V24
+
+`qa/v24-browser.cjs` comprueba rutas, fichas de los tres grupos, controles de navegación, mecanismo de acción, espectro, mapa, comparador y doce revisiones en resoluciones de 1600, 1280, 768 y 390 px. Resultado de referencia: [GitHub Actions run 39953953960](https://github.com/ProQuincy2471/atb-atlas/actions/runs/39953953960), **success** (37 registros, 0 fallos). La batería previa también reportó 0 incidencias en ese mismo run.
+
+### Alcance clínico
+
+La expansión es una biblioteca académica en desarrollo, no un sistema validado de apoyo a decisiones ni un vademécum de prescripción. Requiere curación y revisión clínica individual antes de cualquier uso asistencial.
