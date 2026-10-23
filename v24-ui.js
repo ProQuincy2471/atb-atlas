@@ -23,15 +23,24 @@ const families={virus:db.antiviralFamilies,fungi:db.antifungalFamilies,parasites
 const safe=s=>H(String(s??""));
 const ui={micro:"bacteria",drugs:"bacteria",map:"bacteria",compare:"integral",learning:"bacteria",lesson:"virus-life",query:"",family:"all",sort:"catalog",selectedMicro:"influenza-a",selectedDrug:"oseltamivir",crossMicro:"influenza-a",crossFamily:"all",crossQuery:"",crossPage:0,compareMicro:"influenza-a",compareQuery:"",compareFamily:"all",compareSelected:["oseltamivir","baloxavir"],compareTab:"all",selectedLesson:"virus-life"};
 const searchNorm=s=>String(s??"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
-const iconFile=k=>k==='virus'?'assets/health/bacteria.svg':k==='fungi'?'assets/health/bacteria.svg':'assets/health/intestine.svg';
+const iconFile=k=>null; // No invented organism imagery: use only matching documentary images.
 const group=p=>{
  if(p.kingdom==='virus')return p.taxonomy.split('·')[0].trim();
  if(p.kingdom==='fungi')return /^candida|^nakaseomyces|^pichia/i.test(p.id)?'Candida y levaduras':/^crypto/.test(p.id)?'Criptococos':/^aspergillus/.test(p.id)?'Aspergillus':/rhizopus|mucor|lichtheimia/.test(p.id)?'Mucorales':/histoplasma|blastomyces|coccidioides|paracoccidioides|sporothrix|talaromyces/.test(p.id)?'Micosis endémicas y dimórficos':/trichophyton|microsporum|epidermophyton/.test(p.id)?'Dermatofitos':'Oportunistas y mohos especiales';
  return /^(plasmodium|babesia)/.test(p.id)?'Hemoparásitos':/leishmania|trypanosoma/.test(p.id)?'Kinetoplástidos':/^(schisto|fasciola|clonorchis|paragonimus)/.test(p.id)?'Trematodos':/taenia|echinococcus|hymenolepis/.test(p.id)?'Cestodos':/sarcoptes|pediculus/.test(p.id)?'Ectoparásitos':/ascaris|trichuris|ancylostoma|necator|strongyloides|toxocara|trichinella|onchocerca|wuchereria|loa-loa|enterobius|angiostrongylus/.test(p.id)?'Nematodos':'Protozoos intestinales / tisulares';
 };
 const legend=[["expected","Actividad habitual descrita"],["variable","Variable / exige AST o contexto"],["excluded","Sin actividad fiable / no indicado"],["unknown","No caracterizado en el atlas"]];
+const crossCoverage24={
+"tmp-smx-paras":["pneumocystis"],
+"ampho-leish":["histoplasma","crypto-neoformans"],
+"metronidazol":["giardia","entamoeba","trichomonas"],
+"tmp-smx":["pneumocystis","cyclospora","cystoisospora","toxoplasma"],
+"clindamicina":["toxoplasma"],
+"doxiciclina":["onchocerca","wuchereria"]
+};
 function relation24(d,p){if(!d||!p)return {status:"unknown",note:"No hay evaluación documentada para este par; no es sinónimo de resistencia."};
- if(d.kingdom!==p.kingdom)return {status:"excluded",note:"La diana de esta familia no corresponde a este dominio biológico; las excepciones clínicas requieren estudio individual."};
+ if(crossCoverage24[d.id]?.includes(p.id))return {status:"variable",note:"Actividad o indicación cruzada documentada por contexto: requiere régimen específico, estadio, exposición y guía clínica; no supone monoterapia universal."};
+ if(d.kingdom!==p.kingdom)return {status:"unknown",note:"No hay relación directa curada para este par entre dominios. Algunas moléculas poseen indicaciones cruzadas: revisar el agente individual; no concluir resistencia."};
  if((d.exclude||[]).includes(p.id))return {status:"excluded",note:"Ausencia de cobertura clínica habitual o uso no recomendado para esta especie/escenario. Ver advertencias del agente."};
  if((d.variable||[]).includes(p.id))return {status:"variable",note:"Actividad posible pero variable; especie, fenotipo, carga, foco o formulación modifican utilidad clínica."};
  if((d.yes||[]).includes(p.id))return {status:"expected",note:"Actividad o indicación farmacológica conocida, siempre condicionada por especie, etapa, resistencia y síndrome."};
@@ -41,7 +50,7 @@ function groupedDrugs(kind){return drugs.filter(x=>x.kingdom===kind)}
 function familyDetails(d){return families[d.kingdom]?.[d.family]||{target:"Diana individual",entry:d.distinct,mechanism:d.distinct,pk:"Depende de formulación y huésped.",resistance:"Interpretar respuesta y mecanismos específicos."}}
 function material(kind){return '<div class="v24-sources">'+db.sources[kind].map(([name,url])=>'<a href="'+url+'" target="_blank" rel="noopener noreferrer">'+safe(name)+' ↗</a>').join('')+'</div>'}
 function shelves(mode){const cur=ui[mode],kinds=mode==='micro'?[["bacteria","Bacterias",D.pathogens.length],...base.map(k=>[k,key[k].short,orgs.filter(p=>p.kingdom===k).length])]:[["bacteria","Antibióticos",D.antibiotics.length],...base.map(k=>[k,key[k].drug,groupedDrugs(k).length])];return '<div class="v24-switch" role="group" aria-label="Elegir familia biológica">'+kinds.map(([id,label,n])=>'<button data-act="v24-mode:'+mode+':'+id+'" class="'+(cur===id?'current':'')+'"><b>'+safe(label)+'</b><small>'+n+' fichas</small></button>').join('')+'</div>'}
-function miniPhoto(p){return '<figure class="v24-photo" data-v24-wiki="'+safe(p.wiki)+'" data-v24-entity="'+safe(p.id)+'"><div class="v24-document-visual"><img src="'+iconFile(p.kingdom)+'" alt="Icono médico de biblioteca Health Icons, no fotografía taxonómica"></div><figcaption>Imagen documental pendiente de carga; se mostrará solo si la fuente coincide con el taxón.</figcaption></figure>'}
+function miniPhoto(p){return '<figure class="v24-photo" data-v24-wiki="'+safe(p.wiki)+'" data-v24-entity="'+safe(p.id)+'"><div class="v24-document-visual"><span class="v24-no-illustration">Archivo documental por taxón<br><small>'+safe(p.name)+'</small></span><img hidden alt=""></div><figcaption>Solo se muestra imagen documental con página de origen y licencia. <a target="_blank" rel="noopener noreferrer" href="https://commons.wikimedia.org/w/index.php?search='+encodeURIComponent(p.wiki)+'&title=Special:MediaSearch&type=image">Consultar acervo ↗</a></figcaption></figure>'}
 function screenHeader(type,k,heading,sub){return '<div class="v24-head" style="--v24-accent:'+key[k].color+'"><span>'+safe(type)+' / '+safe(key[k].short).toUpperCase()+'</span><h1>'+safe(heading)+'</h1><p>'+safe(sub)+'</p></div>'}
 function organismEntry(p){const near=groupedDrugs(p.kingdom).filter(d=>(d.yes||[]).includes(p.id)||(d.variable||[]).includes(p.id));const cls=key[p.kingdom];return '<article class="v24-detail" style="--v24-accent:'+cls.color+'">'+
  '<header class="v24-entity-hero"><div><span class="v24-eyebrow">'+safe(cls.micro).toUpperCase()+' / '+safe(group(p)).toUpperCase()+'</span><h1><i>'+safe(p.name)+'</i></h1><p>'+safe(p.taxonomy)+'</p></div>'+miniPhoto(p)+'</header>'+
@@ -123,7 +132,7 @@ async function photo(p){
 const oldRender=render;
 render=function(){oldRender();const view=document.querySelector('[data-v24-wiki]');if(!view)return;const p=byMicro.get(view.dataset.v24Entity);if(!p)return;
  photo(p).then(x=>{if(!x||!view.isConnected||view.dataset.v24Entity!==p.id)return;
- const img=view.querySelector('img');if(!img)return;img.src=x.image;img.alt='Imagen documental vinculada a '+x.title;
+ const img=view.querySelector('img');if(!img)return;img.src=x.image;img.hidden=false;img.alt='Imagen documental vinculada a '+x.title;view.querySelector('.v24-no-illustration')?.remove();
  view.querySelector('figcaption').innerHTML='Imagen documental · '+safe(x.title)+' · <a href="'+x.url+'" target="_blank" rel="noopener noreferrer">archivo y licencia ↗</a>';
  }).catch(()=>{});
 };
