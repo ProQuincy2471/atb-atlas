@@ -72,3 +72,8 @@ D['m-catarrhalis']={reviewed,src:M,
  epidemiologia:["La fuente del capítulo no detalla la epidemiología más allá de su asociación con enfermedad respiratoria."].slice(0,0)
 };
 })();
+(function(){
+const D=window.ATLAS25.microDeep;
+const sup="Bacteriemia por P. aeruginosa — manejo actual (Compendio VeXtra-Z, material del usuario, fuente secundaria; contrastar con guías vigentes): hemocultivos antes del antibiótico y tratamiento antipseudomónico inmediato sin esperar resultados; si hay catéter central, retirarlo es obligatorio (no intentar rescate con sellos antibióticos); empírico con cefepima, ceftazidima, piperacilina-tazobactam, imipenem o meropenem (el ertapenem no cubre Pseudomonas); con riesgo de multirresistencia (antibiótico IV en 90 días, shock séptico o SDRA previo, hospitalización > 5 días, reemplazo renal) o enfermedad crítica se acepta doble cobertura empírica con un β-lactámico más fluoroquinolona o aminoglucósido; aztreonam en alergia grave a β-lactámicos (generalmente con otro agente no β-lactámico); desescalar a monoterapia con el agente más estrecho al conocer el antibiograma (48–72 h) y no mantener la doble cobertura dirigida; 7 a 14 días si no hay complicaciones y se retira el foco, más tiempo con endocarditis, osteomielitis o control del foco imposible.";
+for(const id of ['p-aeruginosa','pseudomonas-aeruginosa-dtr']){D[id].tratamiento=D[id].tratamiento.concat([sup]);D[id].src=D[id].src.concat(['Compendio VeXtra-Z (material del usuario), Pseudomonas aeruginosa Bacteremia — fuente secundaria']);}
+})();
