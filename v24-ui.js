@@ -21,7 +21,7 @@ const drugs=base.flatMap(k=>(db[k==="virus"?"antivirals":k==="fungi"?"antifungal
 const byMicro=new Map(orgs.map(x=>[x.id,x])),byDrug=new Map(drugs.map(x=>[x.id,x]));
 const families={virus:db.antiviralFamilies,fungi:db.antifungalFamilies,parasites:db.antiparasiticFamilies};
 const safe=s=>H(String(s??""));
-const ui={micro:"bacteria",drugs:"bacteria",map:"bacteria",compare:"integral",lesson:"virus-life",query:"",family:"all",sort:"catalog",selectedMicro:"influenza-a",selectedDrug:"oseltamivir",crossMicro:"influenza-a",crossFamily:"all",crossQuery:"",crossPage:0,compareMicro:"influenza-a",compareQuery:"",compareFamily:"all",compareSelected:["oseltamivir","baloxavir"],compareTab:"all",selectedLesson:"virus-life"};
+const ui={micro:"bacteria",drugs:"bacteria",map:"bacteria",compare:"integral",learning:"bacteria",lesson:"virus-life",query:"",family:"all",sort:"catalog",selectedMicro:"influenza-a",selectedDrug:"oseltamivir",crossMicro:"influenza-a",crossFamily:"all",crossQuery:"",crossPage:0,compareMicro:"influenza-a",compareQuery:"",compareFamily:"all",compareSelected:["oseltamivir","baloxavir"],compareTab:"all",selectedLesson:"virus-life"};
 const searchNorm=s=>String(s??"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 const iconFile=k=>k==='virus'?'assets/health/bacteria.svg':k==='fungi'?'assets/health/bacteria.svg':'assets/health/intestine.svg';
 const group=p=>{
@@ -69,12 +69,13 @@ function library24(section){
  return '<div class="v24-library">'+screenHeader(isMicro?'MICROORGANISMOS':'FARMACOLOGÍA',kind,isMicro?key[kind].micro+' clínica':key[kind].drug,'Atlas de posgrado con fichas individuales, mecanismos moleculares, cuadros clínicos y relaciones de actividad documentadas.')+
  '<div class="v24-columns"><aside class="v24-sidebar"><div class="v24-search"><label>Buscar '+(isMicro?'microorganismo':'fármaco')+'<input id="v24-query" placeholder="Especie, familia, síndrome o molécula…" value="'+safe(ui.query)+'"></label></div><div class="v24-counter">'+filtered.length+' / '+arr.length+' fichas</div><div class="v24-items">'+filtered.map(x=>'<button class="'+(x.id===p.id?'chosen':'')+'" data-act="v24-open-'+(isMicro?'micro':'drug')+':'+x.id+'"><span class="v24-small-dot"></span><span><b>'+safe(x.name)+'</b><small>'+safe(isMicro?group(x):x.family)+'</small></span><span>›</span></button>').join('')+'</div></aside><div class="v24-article">'+(isMicro?organismEntry(p):drugEntry(p))+'</div></div></div>'
 }
+if(typeof NAV!=='undefined'){const tab=NAV.find(x=>x[0]==='atb');if(tab)tab[2]='Antimicrobianos';}
 const oldMain=mainPage;
 mainPage=function(){
  if(state.route==='micro'||state.route==='atb'){const section=state.route==='micro'?'micro':'drugs';return shelves(section)+(ui[section]==='bacteria'?oldMain():library24(section));}
  if(state.route==='mapa'){return '<div class="v24-barmap"><button class="'+(ui.map==='bacteria'?'on':'')+'" data-act="v24-mode:map:bacteria">Mapa bacteriano existente</button><button class="'+(ui.map!=='bacteria'?'on':'')+'" data-act="v24-mode:map:virus">Cobertura ampliada · virus/hongos/parásitos</button></div>'+(ui.map==='bacteria'?oldMain():matrix24());}
  if(state.route==='comparar')return '<div class="v24-barmap"><button class="'+(ui.compare==='classic'?'on':'')+'" data-act="v24-mode:compare:classic">Comparador antibacteriano</button><button class="'+(ui.compare==='integral'?'on':'')+'" data-act="v24-mode:compare:integral">Comparador integral de antimicrobianos</button></div>'+(ui.compare==='classic'?oldMain():compare24());
- if(state.route==='aprender')return oldMain()+learning24();
+ if(state.route==='aprender')return '<div class="v24-barmap"><button class="'+(ui.learning==='bacteria'?'on':'')+'" data-act="v24-mode:learning:bacteria">Fundamentos bacterianos · 24 capítulos</button><button class="'+(ui.learning==='extended'?'on':'')+'" data-act="v24-mode:learning:extended">Virología, micología y parasitología · 12 reviews</button></div>'+(ui.learning==='bacteria'?oldMain():window.learning24());
  return oldMain();
 };
 function fullDrugList(){return [...D.antibiotics.map(a=>({...a,kingdom:"bacteria"})),...drugs]}
@@ -98,7 +99,7 @@ function redraw(){render();}
 const oldAct=act;
 act=function(arg){
  const parts=String(arg).split(':'),op=parts[0],val=parts.slice(1).join(':');
- if(op==='v24-mode'){const k=parts[1],kind=parts[2];if(['micro','drugs','map','compare'].includes(k)){ui[k]=kind;ui.query='';ui.crossPage=0;ui.crossFamily='all';redraw();return;}}
+ if(op==='v24-mode'){const k=parts[1],kind=parts[2];if(['micro','drugs','map','compare','learning'].includes(k)){ui[k]=kind;ui.query='';ui.crossPage=0;ui.crossFamily='all';redraw();return;}}
  if(op==='v24-open-micro'){const p=byMicro.get(val);if(p){ui.micro=p.kingdom;ui.selectedMicro=p.id;ui.query='';if(state.route!=='micro')return goto('micro');redraw();return;}}
  if(op==='v24-open-drug'){const d=byDrug.get(val);if(d){ui.drugs=d.kingdom;ui.selectedDrug=d.id;ui.query='';if(state.route!=='atb')return goto('atb');redraw();return;}}
  if(op==='v24-compare-toggle'){ui.compareSelected=ui.compareSelected.includes(val)?ui.compareSelected.filter(x=>x!==val):[...ui.compareSelected,val];redraw();return;}
