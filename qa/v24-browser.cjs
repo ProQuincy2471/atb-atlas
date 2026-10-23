@@ -27,7 +27,7 @@ for(const viewport of [{width:1600,height:900},{width:1280,height:850},{width:76
  }
  await nav('mapa');await click('v24-mode:map:fungi');assert(await page.locator('.v24-matrix tbody tr').count()>0,'Fungal coverage empty');await snap('cross-matrix');
  await nav('comparar');assert(await page.locator('.v24-compare-scroll table').count()===1,'Integrated compare unavailable');await click('v24-compare-toggle:micafungina');assert(await page.locator('.v24-picked button').count()>=2,'Comparator not adding drugs');await snap('comparator');
- await nav('aprender');await click('v24-mode:learning:extended');assert(await page.locator('.v24-book-chapter section').count()>=5,'Incomplete textbook content');await click('v24-book-lesson:fungi-therapy');assert((await page.locator('.v24-book-chapter').innerText()).includes('equinocandinas'),'Lesson navigation broken');await snap('learning');
+ await nav('aprender');await click('v24-mode:learning:extended');assert(await page.locator('.v24-book-chapter section').count()>=5,'Incomplete textbook content');await page.locator('[data-act="v24-book-lesson:fungi-therapy"]').first().click({timeout:10000});assert((await page.locator('.v24-book-chapter').innerText()).includes('equinocandinas'),'Lesson navigation broken');await snap('learning');
  assert(!js.length,'Page JS errors '+js.join('; '));assert(!missing.length,'Missing local resources '+missing.join('; '));
  }catch(e){checks.push({viewport:viewport.width,error:String(e),stack:e.stack});}
  await ctx.close();
