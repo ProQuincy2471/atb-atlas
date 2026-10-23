@@ -1,0 +1,39 @@
+/* V24 — textbook learning experience */
+.v24-book{min-width:0;margin-top:20px;color:#192f52}
+.v24-book-hero{border:1px solid #dce7f2;border-top:5px solid #5f56bc;border-radius:13px;background:linear-gradient(115deg,#edf0ff,#fff);padding:27px}
+.v24-book-hero small{font:750 12px 'IBM Plex Mono',monospace;color:#6756b3}
+.v24-book-hero h1{font:740 clamp(28px,3vw,43px)/1.15 'DM Sans',sans-serif;margin:11px 0}
+.v24-book-hero p{font-size:16px;line-height:1.7;max-width:89ch;color:#536281}
+.v24-book-nav{display:flex;flex-wrap:wrap;gap:7px;padding:13px 0}
+.v24-book-nav button{background:#fff;border:1px solid #d4deed;border-radius:9px;padding:10px 14px;font-size:14px;font-weight:750}
+.v24-book-nav button.on{background:#eaeafa;color:#5147ae;border-color:#8c89d5}
+.v24-book-layout{display:grid;grid-template-columns:minmax(235px,275px) minmax(0,1fr);gap:15px;align-items:start}
+.v24-book-index,.v24-book-chapter{min-width:0;background:white;border:1px solid #dce5ee;border-radius:13px}
+.v24-book-index{position:sticky;top:80px;max-height:calc(100vh - 95px);overflow:auto;padding:15px}
+.v24-book-index h2{font-size:20px;margin:0 0 12px}.v24-book-index>div{display:grid;gap:5px}
+.v24-book-index button{width:100%;display:grid;grid-template-columns:25px minmax(0,1fr);gap:3px 9px;padding:11px;text-align:left;border-radius:9px}
+.v24-book-index button.on{background:#eef0ff;border:1px solid #b9b9ec}
+.v24-book-index button span{font:750 12px 'IBM Plex Mono',monospace;color:#6458a8;grid-row:1/span 2}.v24-book-index button b{font-size:14px;line-height:1.38}.v24-book-index button small{font-size:11px;color:#667590}
+.v24-book-chapter>header{padding:30px;background:linear-gradient(125deg,#f0efff,#fff);border-bottom:1px solid #dce4ef}
+.v24-book-chapter>header small,.v24-book-chapter section>span{font:750 12px 'IBM Plex Mono',monospace;letter-spacing:.04em;color:#6653b4}
+.v24-book-chapter>header h1{font:750 clamp(29px,3vw,43px)/1.2 'DM Sans',sans-serif;margin:11px 0;max-width:27ch}
+.v24-book-chapter>header p{font-size:16px;line-height:1.66;color:#576783;max-width:79ch}
+.v24-book-anchors{display:flex;gap:7px;overflow-x:auto;padding:12px 18px;scrollbar-width:thin;white-space:nowrap}
+.v24-book-anchors a{font-size:12px;text-decoration:none;font-weight:750;color:#345a95;border:1px solid #d9e4f5;background:#f5f8fd;padding:8px 10px;border-radius:8px}
+.v24-book-chapter section{padding:29px clamp(20px,3vw,38px);border-bottom:1px solid #e5e9f2;scroll-margin-top:80px}
+.v24-book-chapter section:nth-of-type(even){background:#fbfcff}
+.v24-book-chapter section h2{font:750 clamp(24px,2.5vw,33px)/1.22 'DM Sans',sans-serif;color:#242f56;margin:11px 0 18px}
+.v24-book-chapter section>p{font-size:17px;line-height:1.89;color:#36445e;max-width:84ch}
+.v24-book-case{padding:18px;border:1px solid #ebd4cb;border-left:5px solid #c87153;border-radius:10px;background:#fff8f5}
+.v24-book-case b{font:750 12px 'IBM Plex Mono',monospace;color:#af5937}
+.v24-book-case p{font-size:17px;line-height:1.73}
+.v24-book-chapter h3{font-size:19px;color:#334d77;margin:18px 0 7px}
+.v24-book-chapter details{border:1px solid #d7e4f3;background:#f1f7ff;border-radius:10px;padding:14px;margin:16px 0}
+.v24-book-chapter summary{font-size:15px;font-weight:750;color:#155ba5;cursor:pointer}.v24-book-chapter details p{font-size:16px;line-height:1.7}
+.v24-book-chapter footer{padding:21px 25px;background:#f7f9fe;display:flex;gap:20px;align-items:flex-start;justify-content:space-between}
+.v24-book-chapter footer>div{display:flex;gap:8px;flex-wrap:wrap;max-width:80%}
+.v24-book-chapter footer b{display:block;width:100%;font-size:12px;color:#486aa0;letter-spacing:.05em}
+.v24-book-chapter footer a{font-size:12px;color:#1762af;text-decoration:none;border:1px solid #d8e4f0;background:#fff;border-radius:7px;padding:7px}
+.v24-book-chapter footer button{background:#e9f1fd;border:1px solid #c9def4;color:#175ca5;font-size:14px;font-weight:750;border-radius:8px;padding:10px 14px}
+@media(max-width:1150px){.v24-book-layout{grid-template-columns:1fr}.v24-book-index{position:static;max-height:250px;overflow:auto}.v24-book-index>div{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:580px){.v24-book-index>div{grid-template-columns:1fr}.v24-book-hero,.v24-book-chapter>header,.v24-book-chapter section{padding:17px}.v24-book-chapter section>p{font-size:16px;line-height:1.8}.v24-book-chapter footer{flex-direction:column}.v24-book-chapter footer>div{max-width:100%}}

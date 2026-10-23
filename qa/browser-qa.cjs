@@ -17,7 +17,7 @@ try{await page.goto('http://127.0.0.1:9172/',{waitUntil:'domcontentloaded',timeo
 await page.locator('[data-act="v20-mode:cobertura"]').first().click({timeout:10000});await page.locator('.v21-matrix').waitFor({timeout:12000});await audit('cobertura');
 if(await page.locator('.v21-matrix tbody tr').count()<3)throw Error('Matrix empty');
 await page.locator('[data-act="v21-domain:Atípicos"]').first().click();await page.locator('[data-act^="v21-toggle:"]').first().click();await page.locator('.v21-matrix button.v21-cell').first().click({timeout:10000});await audit('cobertura-interactiva');
-for(const route of ['micro','atb','clinica','comparar','aprender','laboratorio','fuentes']){await page.locator('[data-act="nav:'+route+'"]').first().click({timeout:10000});await audit(route);if(route==='atb'){if(!await page.locator('.v23-cov').count())throw Error('In-page spectrum missing');await page.locator('[data-act^="v23-spectrum:"]').first().click({timeout:10000});if(!await page.locator('.v23-organisms').count())throw Error('Spectrum filter broken');}if(route==='comparar'){if(!await page.locator('.v23-comp-table').count())throw Error('Comparator table missing');}if(route==='aprender'){if((await page.locator('.v23-learn-reading p').count())<3)throw Error('Learning reviews incomplete');}if(route==='clinica'){if(!await page.locator('.v23-clinical-art img').count())throw Error('Disease illustration missing');}if(route==='micro'&&!await page.locator('.v20-micro-hero h1').count())throw Error('Micro card unavailable');if(route==='atb'&&!await page.locator('.v23-mechanism').count())throw Error('V23 molecular mechanism missing');}
+for(const route of ['micro','atb','clinica','comparar','aprender','laboratorio','fuentes']){await page.locator('[data-act="nav:'+route+'"]').first().click({timeout:10000});await audit(route);if(route==='atb'){if(!await page.locator('.v23-cov').count())throw Error('In-page spectrum missing');await page.locator('[data-act^="v23-spectrum:"]').first().click({timeout:10000});if(!await page.locator('.v23-organisms').count())throw Error('Spectrum filter broken');}if(route==='comparar'){if(!await page.locator('.v23-comp-table,.v24-compare-scroll table').count())throw Error('Comparator table missing');}if(route==='aprender'){if((await page.locator('.v23-learn-reading p').count())<3)throw Error('Learning reviews incomplete');}if(route==='clinica'){if(!await page.locator('.v23-clinical-art img').count())throw Error('Disease illustration missing');}if(route==='micro'&&!await page.locator('.v20-micro-hero h1').count())throw Error('Micro card unavailable');if(route==='atb'&&!await page.locator('.v23-mechanism').count())throw Error('V23 molecular mechanism missing');}
 if(vp.width===1600){
  const integrity=await page.evaluate(()=>{
   const issues=[];for(const a of D.antibiotics){const h=drugPageSections(a);if(!h.includes('v23-mechanism')||!h.includes('v23-spectra')||!h.includes('drug-spectrum'))issues.push('drug '+a.id)}
@@ -28,10 +28,11 @@ if(vp.width===1600){
  all.push({viewport:vp,integrity});
  if(integrity.issues.length)throw Error('Incomplete catalog pages: '+integrity.issues.slice(0,15).join(', '));
  await page.locator('[data-act="nav:atb"]').first().click();
- await page.locator('[data-act="v23-spec-status:all"]').first().click();
+ await page.locator('[data-act^="v23-spectrum:"]').first().click();
  const routeAfter=await page.evaluate(()=>state.route);
  if(routeAfter!=='atb')throw Error('Drug spectrum unexpectedly navigates away');
  await page.locator('[data-act="nav:comparar"]').first().click();
+ await page.evaluate(()=>act('v24-mode:compare:classic'));
  await page.evaluate(()=>{state.compare=[];render()});
  const ids=await page.evaluate(()=>D.antibiotics.slice(0,11).map(a=>a.id));
  for(const id of ids)await page.locator('[data-act="v23-toggle-compare:'+id+'"]').first().click({timeout:10000});
