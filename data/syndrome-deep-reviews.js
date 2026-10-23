@@ -175,5 +175,180 @@ window.ATLAS25.deepReviews={
   {t:"van de Beek D et al. ESCMID guideline: diagnosis and treatment of acute bacterial meningitis. Clin Microbiol Infect 2016;22(Suppl 3):S37–S62",u:"https://doi.org/10.1016/j.cmi.2016.01.007"},
   {t:"de Gans J, van de Beek D. Dexamethasone in adults with bacterial meningitis. N Engl J Med 2002;347:1549–1556",u:"https://doi.org/10.1056/NEJMoa021334"}
  ]
+},
+"who-34":{
+ title:"Pielonefritis / ITU alta",
+ reviewed:"2026-10-23",
+ summary:"Infección parenquimatosa renal con fiebre, dolor lumbar y síntomas urinarios o sistémicos. Se obtiene urocultivo siempre antes del antibiótico; la elección depende de gravedad, resistencia local y vía oral posible. Si no hay mejoría a las 48–72 h, o hay sepsis, obstrucción, diabetes o inmunodepresión, se busca complicación con imagen.",
+ criteria:{
+  label:"Cuándo sospechar ITU complicada o necesidad de imagen",
+  major:["Sepsis o inestabilidad hemodinámica","Sospecha de obstrucción o litiasis (dolor cólico, hematuria, anuria)","Falta de respuesta clínica a las 48–72 h de tratamiento adecuado"],
+  minor:["Diabetes, inmunodepresión o trasplante renal","Instrumentación o anomalía urológica previa, sonda o derivación","Embarazo","Varón (considerar prostatitis)","Aislamiento previo de microorganismo multirresistente"],
+  rule:"Con cualquier criterio principal: hemocultivos, valoración de gravedad, ecografía o TC y consulta urológica urgente si hay obstrucción infectada, que exige drenaje además del antibiótico."
+ },
+ algorithm:[
+  {t:"Confirmar el síndrome",x:"Fiebre, dolor en flanco o puñopercusión positiva, con o sin disuria; sedimento con piuria. Descartar apendicitis, diverticulitis, enfermedad pélvica inflamatoria, litiasis y neumonía basal."},
+  {t:"Urocultivo y, si ingresa, hemocultivos",x:"El urocultivo previo al antibiótico es obligado para ajustar el tratamiento; los hemocultivos se piden en pacientes hospitalizados o con sepsis."},
+  {t:"Estratificar gravedad y vía",x:"Tratamiento ambulatorio oral si es estable, tolera la vía oral y hay seguimiento. Ingreso si hay sepsis, vómitos, embarazo, dolor intenso, sospecha de obstrucción o imposibilidad de seguimiento."},
+  {t:"Iniciar antibiótico empírico según resistencia local",x:"Ver la tabla de decisiones. En ambulatorio sin certeza de sensibilidad se puede dar una dosis inicial parenteral de acción prolongada."},
+  {t:"Imagen selectiva",x:"Ecografía o TC en falta de respuesta, sepsis, litiasis conocida, diabetes mal controlada, trasplante o sospecha de absceso o gas."},
+  {t:"Ajustar con el antibiograma y fijar duración",x:"Pasar a vía oral cuando haya mejoría y sensibilidad; la duración depende del antibiótico y de la respuesta (ver tabla)."}
+ ],
+ decisions:[
+  {c:"Mujer ambulatoria con resistencia local a fluoroquinolonas baja",p:"Fluoroquinolona oral durante 5–7 días.",n:"IDSA/ESCMID 2010. Mantener solo si la resistencia local es baja; considerar riesgos de eventos adversos de las quinolonas."},
+  {c:"Ambulatorio, aislado sensible a TMP-SMX",p:"Trimetoprima-sulfametoxazol oral durante 14 días.",n:"Si la sensibilidad es desconocida, dar antes una dosis parenteral de ceftriaxona o un aminoglucósido."},
+  {c:"β-lactámico oral como alternativa",p:"Menos eficaz que fluoroquinolonas o TMP-SMX; tratar 10–14 días con dosis inicial parenteral.",n:"Reservar para cuando las demás opciones no son posibles."},
+  {c:"Hospitalizado",p:"Terapia intravenosa: fluoroquinolona, aminoglucósido con o sin ampicilina, cefalosporina o penicilina de espectro extendido con o sin aminoglucósido, o carbapenémico según riesgo.",n:"Carbapenémico si colonización o riesgo de enterobacterias productoras de BLEE. Seguir la guía IDSA de ITU complicada y el antibiograma local."},
+  {c:"Evolución rápida y sensibilidad conocida",p:"Una duración total de 7 días puede bastar con buena respuesta, también en bacteriemia por gramnegativos con control del foco.",n:"Ensayos de Sandberg 2012 (ciprofloxacino 7 frente a 14 días) y Yahav 2019 (7 frente a 14 días en bacteriemia por gramnegativos)."},
+  {c:"Embarazo",p:"Ingreso y β-lactámico parenteral; evitar quinolonas y ajustar según urocultivo.",n:"Seguimiento con urocultivos tras el tratamiento."}
+ ],
+ steroid:{
+  title:"Bacteriuria asintomática y varones",
+  x:"No se debe tratar la bacteriuria asintomática salvo embarazo y antes de procedimientos urológicos con trauma de mucosa (IDSA 2019). En varones con fiebre, considerar prostatitis aguda y tratar con antibiótico de buena penetración prostática y una duración mayor que en mujeres."
+ },
+ complications:[
+  {n:"Sepsis urinaria y bacteriemia",x:"Aplicar el manejo de sepsis y controlar el foco urinario."},
+  {n:"Obstrucción infectada (pionefrosis)",x:"Urgencia urológica: descompresión con nefrostomía o catéter doble J."},
+  {n:"Pielonefritis enfisematosa",x:"Gas en parénquima, sobre todo en diabéticos; TC, antibiótico y valorar nefrectomía o drenaje."},
+  {n:"Absceso renal o perinéfrico",x:"Sospechar si persiste la fiebre tras 72 h; drenaje percutáneo según tamaño."},
+  {n:"Necrosis papilar y daño renal crónico",x:"Más frecuente con diabetes, obstrucción o AINE; vigilar la creatinina."}
+ ],
+ failure:"Sin mejoría a las 48–72 h: confirmar cobertura con el antibiograma, buscar obstrucción, absceso, litiasis o cuerpo extraño con imagen, valorar resistencia (BLEE, carbapenemasas), cambiar o retirar sonda y plantear diagnósticos alternativos (prostatitis, apendicitis, enfermedad pélvica inflamatoria, causas no infecciosas).",
+ followup:[
+  "No se requiere urocultivo de control rutinario en mujeres asintomáticas no embarazadas; sí en embarazo.",
+  "Estudiar anomalías urológicas tras episodios recurrentes, en varones o con mala respuesta.",
+  "Medidas preventivas en recurrencias según el cuadro clínico y la guía local.",
+  "Ajustar dosis a la función renal y revisar fármacos nefrotóxicos."
+ ],
+ pitfalls:[
+  "Tratar con una quinolona sin conocer la resistencia local ni haber tomado urocultivo.",
+  "Tratar la bacteriuria asintomática o el cultivo de sonda sin síntomas.",
+  "Omitir la imagen en un paciente séptico o con litiasis conocida.",
+  "Retirar el drenaje urológico demasiado pronto o no drenar una obstrucción infectada.",
+  "Dar un β-lactámico oral durante pocos días como en una cistitis."
+ ],
+ references:[
+  {t:"Gupta K et al. IDSA/ESCMID guideline for acute uncomplicated cystitis and pyelonephritis in women. Clin Infect Dis 2011;52:e103–e120",u:"https://doi.org/10.1093/cid/ciq257"},
+  {t:"Sandberg T et al. Ciprofloxacin for 7 days versus 14 days in women with acute pyelonephritis. Lancet 2012;380:484–490",u:"https://doi.org/10.1016/S0140-6736(12)60608-4"},
+  {t:"Yahav D et al. Seven versus 14 days of antibiotic therapy for uncomplicated gram-negative bacteremia. Clin Infect Dis 2019;69:1091–1098",u:"https://doi.org/10.1093/cid/ciy1054"},
+  {t:"Nicolle LE et al. IDSA guideline on asymptomatic bacteriuria. Clin Infect Dis 2019;68:e83–e110",u:"https://doi.org/10.1093/cid/ciy1121"},
+  {t:"IDSA. Complicated urinary tract infections guideline (versión vigente)",u:"https://www.idsociety.org/practice-guideline/complicated-urinary-tract-infections/"}
+ ]
+},
+"who-39":{
+ title:"Neutropenia febril",
+ reviewed:"2026-10-23",
+ summary:"Urgencia oncohematológica: el antibiótico antipseudomónico intravenoso se administra lo antes posible, sin esperar cultivos, tras una exploración dirigida. El riesgo (MASCC, duración y profundidad de la neutropenia, comorbilidad) define ingreso o manejo ambulatorio. La fiebre persistente obliga a buscar infección fúngica e infección focal.",
+ criteria:{
+  label:"Definiciones y estratificación de riesgo (IDSA)",
+  major:["Fiebre: una temperatura oral ≥ 38,3 °C o ≥ 38,0 °C mantenida durante 1 h","Neutropenia: neutrófilos < 500/µL o previstos < 500/µL en 48 h; profunda si < 100/µL"],
+  minor:["Alto riesgo: neutropenia esperada > 7 días, comorbilidad significativa, insuficiencia hepática o renal, inestabilidad, MASCC < 21","Bajo riesgo: neutropenia esperada ≤ 7 días, sin comorbilidades relevantes, MASCC ≥ 21","El índice CISNE es una alternativa validada en tumores sólidos estables"],
+  rule:"La fiebre en neutropenia se trata como infección grave hasta demostrar lo contrario: los signos inflamatorios pueden estar atenuados, y los corticosteroides pueden enmascarar la fiebre."
+ },
+ algorithm:[
+  {t:"Reconocer y valorar la estabilidad",x:"Constantes, estado mental y lactato. Si hay sepsis o shock, seguir el manejo de sepsis con antibiótico inmediato."},
+  {t:"Exploración dirigida",x:"Piel, mucosas, periné (inspección, sin tacto rectal), catéteres, senos paranasales, pulmón y abdomen. Los hallazgos son escasos en neutropenia profunda."},
+  {t:"Cultivos sin retrasar el tratamiento",x:"Al menos dos hemocultivos (uno por cada luz de catéter y otro periférico), urocultivo, cultivos de focos y radiografía de tórax si hay síntomas respiratorios."},
+  {t:"Antibiótico empírico lo antes posible",x:"Habitualmente en la primera hora del triaje: monoterapia con β-lactámico antipseudomónico (ver tabla)."},
+  {t:"Estratificar y decidir el lugar",x:"Alto riesgo: ingreso y tratamiento intravenoso. Bajo riesgo seleccionado: manejo oral u hospital de día con evaluación estrecha."},
+  {t:"Revaluar a las 48–72 h y a los 4–7 días",x:"Ajustar con cultivos; si persiste la fiebre a los 4–7 días con espectro amplio, buscar infección fúngica."}
+ ],
+ decisions:[
+  {c:"Alto riesgo, sin complicaciones",p:"Monoterapia IV con cefepima, piperacilina-tazobactam o carbapenémico (meropenem o imipenem).",n:"IDSA 2010. Elegir según resistencia local, alergias y colonización previa."},
+  {c:"Inestabilidad hemodinámica, neumonía, infección de catéter o piel y partes blandas",p:"Añadir vancomicina u otro anti-SARM; valorar ampliar cobertura gramnegativa con aminoglucósido o fluoroquinolona.",n:"No añadir vancomicina de rutina; retirarla a las 48–72 h si no hay Gram positivo resistente."},
+  {c:"Colonización o riesgo de BLEE o carbapenemasa",p:"Cobertura adaptada (carbapenémico u opciones activas según el aislado previo).",n:"Basarse en la microbiología previa y la epidemiología del centro."},
+  {c:"Bajo riesgo, estable, con tolerancia oral y seguimiento",p:"Ciprofloxacino más amoxicilina-clavulanato por vía oral tras observación inicial.",n:"Recomendación ASCO/IDSA 2018; excluir pacientes con quinolona profiláctica o intolerancia oral."},
+  {c:"Fiebre persistente a 4–7 días con neutropenia prevista > 7 días",p:"Estrategia antifúngica empírica (equinocandina o anfotericina liposomal) o dirigida por TC torácica y galactomanano o β-D-glucano.",n:"Elegir según profilaxis previa y riesgo de mohos; la TC de tórax es clave."},
+  {c:"Duración",p:"Con foco documentado: según el foco. Sin foco: hasta recuperación de neutrófilos (≥ 500/µL y ascenso) y ausencia de fiebre, o suspensión precoz tras 72 h de tratamiento y 48 h afebril según ECIL-4 en pacientes seleccionados.",n:"Individualizar con el hematólogo; no es una regla para todos los pacientes."}
+ ],
+ steroid:{
+  title:"Factores de crecimiento y puntos prácticos",
+  x:"Los factores estimulantes de colonias no se usan de rutina una vez establecida la neutropenia febril; se valoran en alto riesgo de complicaciones. No realizar tacto rectal ni usar supositorios. Evitar el cambio de antibiótico solo por fiebre persistente en las primeras 72 h si el paciente está estable."
+ },
+ complications:[
+  {n:"Bacteriemia y sepsis por gramnegativos o estreptococos viridans",x:"Reanimación y control del foco; vigilancia en UCI si hay shock."},
+  {n:"Infecciones relacionadas con catéter",x:"Cultivos pareados; retirar en Staphylococcus aureus, Pseudomonas, micobacterias, hongos o infección del túnel."},
+  {n:"Enterocolitis neutropénica (tiflitis)",x:"Dolor en fosa ilíaca derecha, diarrea y fiebre; TC; cobertura anaerobia; cirugía si perforación."},
+  {n:"Infecciones fúngicas invasivas",x:"Aspergilosis pulmonar, candidemia y mucormicosis; ver fichas específicas."},
+  {n:"Mucositis y puerta de entrada oral o perianal",x:"Control del dolor, cuidado bucal y cobertura anaerobia si hay absceso perianal."}
+ ],
+ failure:"Persistencia de la fiebre: reexaminar piel, catéter, periné y senos; repetir hemocultivos; TC de tórax, senos y abdomen; marcadores fúngicos; considerar virus (herpes, CMV, respiratorios), reacciones a fármacos, enfermedad tromboembólica, fiebre tumoral y colecciones no drenadas.",
+ followup:[
+  "Reevaluar a diario fiebre, neutrófilos, función renal y hepática, y niveles de fármacos si aplica.",
+  "Documentar el microorganismo y la sensibilidad; desescalar con el antibiograma.",
+  "Continuar profilaxis y apoyo hematológico según el protocolo del servicio.",
+  "En manejo ambulatorio, contacto telefónico o presencial en 24 h y regreso inmediato ante empeoramiento."
+ ],
+ pitfalls:[
+  "Esperar los neutrófilos o los cultivos para empezar el antibiótico.",
+  "Usar tratamiento oral en un paciente de alto riesgo o inestable.",
+  "Añadir vancomicina de rutina o mantenerla sin indicación.",
+  "Olvidar la TC de tórax cuando la fiebre persiste.",
+  "Suspender el antibiótico únicamente por el descenso de la fiebre en neutropenia profunda."
+ ],
+ references:[
+  {t:"Freifeld AG et al. Clinical practice guideline for the use of antimicrobial agents in neutropenic patients with cancer. IDSA. Clin Infect Dis 2011;52:e56–e93",u:"https://doi.org/10.1093/cid/cir073"},
+  {t:"Taplitz RA et al. Outpatient management of fever and neutropenia in adults treated for malignancy: ASCO/IDSA guideline update. J Clin Oncol 2018;36:1443–1453",u:"https://doi.org/10.1200/JCO.2017.77.6211"},
+  {t:"Klastersky J et al. The MASCC risk-index score. J Clin Oncol 2000;18:3038–3051",u:"https://doi.org/10.1200/JCO.2000.18.16.3038"},
+  {t:"Averbuch D et al. ECIL-4 guidelines on antibacterial therapy for febrile neutropenia. Haematologica 2013;98:1826–1835",u:"https://doi.org/10.3324/haematol.2013.091025"}
+ ]
+},
+"who-16":{
+ title:"Celulitis y erisipela",
+ reviewed:"2026-10-23",
+ summary:"Infección aguda de dermis y tejido subcutáneo, casi siempre no purulenta y causada por estreptococos β-hemolíticos. Lo esencial es separar la forma no purulenta de la purulenta (absceso), reconocer la fascitis necrosante y los simuladores, y tratar de forma corta cuando mejora. El drenaje es el tratamiento principal del absceso.",
+ criteria:{
+  label:"Clasificación práctica (IDSA 2014)",
+  major:["No purulenta: eritema, calor, dolor y edema sin colección ni drenaje purulento","Purulenta: absceso, forúnculo o carbunco con drenaje; incisión y drenaje como base"],
+  minor:["Gravedad sistémica: fiebre, taquicardia, hipotensión, deterioro mental","Factores para SARM: trauma penetrante, uso de drogas inyectadas, colonización o infección previa, drenaje purulento","Señales de alarma de infección necrotizante: dolor desproporcionado, progresión rápida, ampollas hemorrágicas, crepitación, anestesia cutánea, toxicidad"],
+  rule:"Ante dolor desproporcionado o toxicidad, pensar en fascitis necrosante: la prioridad es la exploración quirúrgica urgente, no el antibiótico oral."
+ },
+ algorithm:[
+  {t:"Distinguir purulenta de no purulenta",x:"Buscar fluctuación; ecografía de partes blandas si hay duda. Un absceso se drena aunque también se use antibiótico."},
+  {t:"Buscar gravedad y necrosis",x:"Constantes, lactato y signos de infección necrotizante. Si existen, derivar a cirugía y manejar como fascitis necrosante."},
+  {t:"Descartar simuladores",x:"Dermatitis de estasis, trombosis venosa profunda, dermatitis de contacto, gota, lipodermatoesclerosis, reacción a fármacos y eritema migratorio; la bilateralidad y la ausencia de fiebre orientan a simuladores."},
+  {t:"Elegir antibiótico según el tipo",x:"Ver la tabla. En no purulenta, cobertura de estreptococos; ampliar a SARM solo con factores de riesgo."},
+  {t:"Marcar el borde y reevaluar a las 24–48 h",x:"Si progresa o aparece toxicidad, ingresar, ampliar espectro y buscar necrosis o absceso."},
+  {t:"Tratar factores predisponentes",x:"Edema, insuficiencia venosa, tinea pedis, solución de continuidad y linfedema."}
+ ],
+ decisions:[
+  {c:"No purulenta leve, sin factores de riesgo para SARM",p:"β-lactámico oral con actividad antiestreptocócica (penicilina, cefalexina, dicloxacilina) o clindamicina; 5 días si hay mejoría.",n:"IDSA 2014; prolongar solo si la mejoría es insuficiente a los 5 días."},
+  {c:"No purulenta con toxicidad sistémica o fallo oral",p:"Tratamiento intravenoso con β-lactámico; añadir vancomicina u otro anti-SARM si hay factores de riesgo o gravedad.",n:"Pasar a vía oral con mejoría."},
+  {c:"Absceso purulento",p:"Incisión y drenaje; antibiótico (TMP-SMX o doxiciclina, o clindamicina) si fiebre, múltiples lesiones, inmunodepresión, celulitis extensa, edades extremas o respuesta insuficiente.",n:"El drenaje es la medida central."},
+  {c:"Celulitis tras mordedura o inmersión",p:"Cobertura específica (flora oral del animal o Aeromonas/Vibrio según el ambiente).",n:"Ver la ficha de heridas y mordeduras."},
+  {c:"Inmunodepresión, neutropenia o diabetes con úlcera",p:"Ampliar espectro y buscar hueso o fascia afectados.",n:"Consultar infectología o cirugía; la neutropenia obliga a seguir el manejo de neutropenia febril."},
+  {c:"Recurrencias frecuentes (3–4 episodios al año)",p:"Penicilina oral profiláctica a largo plazo, con corrección de factores locales.",n:"El ensayo PATCH I mostró reducción de recurrencias solo mientras se mantuvo la profilaxis."}
+ ],
+ steroid:{
+  title:"Medidas locales y hemocultivos",
+  x:"Elevar la extremidad, tratar el edema y la tinea pedis y emplear compresión cuando el cuadro agudo cede reduce la recurrencia. Los hemocultivos no son rutinarios en celulitis típica; se piden con toxicidad, inmunodepresión, mordeduras, inmersión o sospecha de endocarditis."
+ },
+ complications:[
+  {n:"Absceso",x:"Ecografía y drenaje."},
+  {n:"Bacteriemia y sepsis",x:"Hemocultivos y manejo como sepsis si hay hipoperfusión."},
+  {n:"Fascitis necrosante y mionecrosis",x:"Urgencia quirúrgica, antibióticos de amplio espectro con clindamicina."},
+  {n:"Linfangitis y linfedema crónico",x:"Predispone a recurrencias; compresión y cuidado de la piel."},
+  {n:"Osteomielitis y artritis séptica contiguas",x:"Imagen cuando hay dolor óseo o articular o úlcera profunda."}
+ ],
+ failure:"Sin mejoría a las 48–72 h: reconsiderar el diagnóstico (simulador), buscar absceso, necrosis, cuerpo extraño u osteomielitis, valorar SARM o patógenos inusuales según exposición, revisar adherencia y absorción, y revisar si es una trombosis venosa o reacción farmacológica.",
+ followup:[
+  "Revaluar a las 24–48 h con el borde marcado.",
+  "Corregir edema, insuficiencia venosa, tinea pedis y fisuras.",
+  "Vacunación antitetánica según estado.",
+  "Considerar profilaxis en recurrencias frecuentes y reevaluar su indicación periódicamente."
+ ],
+ pitfalls:[
+  "Tratar una celulitis bilateral simétrica sin fiebre sin considerar dermatitis de estasis.",
+  "Dar antibiótico en un absceso sin drenarlo.",
+  "Cubrir SARM de rutina en una celulitis no purulenta sin factores de riesgo.",
+  "No pensar en infección necrotizante ante dolor desproporcionado.",
+  "Prolongar innecesariamente el tratamiento por persistencia del edema y el eritema residual."
+ ],
+ references:[
+  {t:"Stevens DL et al. Practice guidelines for the diagnosis and management of skin and soft tissue infections: 2014 update by the IDSA. Clin Infect Dis 2014;59:e10–e52",u:"https://doi.org/10.1093/cid/ciu296"},
+  {t:"Thomas KS et al. Penicillin to prevent recurrent leg cellulitis (PATCH I). N Engl J Med 2013;368:1695–1703",u:"https://doi.org/10.1056/NEJMoa1206300"},
+  {t:"IDSA. Skin and soft tissue infections guideline (versión vigente)",u:"https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/"}
+ ]
 }
 };
+

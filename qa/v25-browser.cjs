@@ -30,7 +30,7 @@ for(const view of [{width:1600,height:900},{width:1280,height:820},{width:768,he
   await nav('mapa');
  }
  await nav('clinica');assert(await page.locator('.v25-clinic-list button').count()>35,'Syndrome library missing WHO');
- await click('v25-clinical:who-34');assert(await page.locator('.v25-syndrome-section').count()===7,'Pyelonephritis review sections incomplete');assert((await page.locator('.v25-syndrome').innerText()).length>2000,'Pyelo review short');
+ await click('v25-clinical:who-34');assert(await page.locator('.v25-syndrome-section').count()===8,'Pyelonephritis review sections incomplete');assert((await page.locator('.v25-syndrome').innerText()).length>2000,'Pyelo review short');
  await screenshot('syndrome-pyelonephritis');
  await click('v25-clinical:crypto-cns-v25');assert((await page.locator('.v25-syndrome h1').innerText()).includes('criptoc'),'Fungal syndrome inaccessible');
  await screenshot('syndrome-fungal');
