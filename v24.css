@@ -27,7 +27,9 @@
 .v24-entity-hero h1,.v24-drug-hero h1{font:770 clamp(27px,3vw,43px)/1.12 'DM Sans',sans-serif;margin:13px 0;overflow-wrap:anywhere;letter-spacing:-.03em}
 .v24-entity-hero h1 i{font-style:italic}.v24-entity-hero p{font-size:16px;line-height:1.6;color:#53657f}
 .v24-photo{margin:0;border:1px solid #d6e2ee;border-radius:12px;background:#eef4fb;min-width:0;overflow:hidden}
-.v24-document-visual{height:160px;display:grid;place-items:center}
+.v24-document-visual{min-height:96px;display:grid;place-items:center;text-align:center;padding:14px;font-size:13px;font-weight:600;line-height:1.4;color:#44536b}
+.v24-document-visual small{display:block;margin-top:4px;font-weight:400;font-style:italic;color:#637089}
+.v24-photo img[hidden]{display:none}
 .v24-photo img{height:100%;width:100%;object-fit:contain;max-height:190px;padding:12px}
 .v24-photo figcaption{font-size:11px;line-height:1.48;padding:8px 10px;background:white;color:#637089}
 .v24-photo figcaption a{color:#175ead}
@@ -102,8 +104,10 @@
 .v24-compare-layout{display:grid;grid-template-columns:minmax(240px,290px) minmax(0,1fr);gap:13px;align-items:start}
 .v24-compare-sidebar,.v24-compare-content{border:1px solid #dce4ee;background:white;border-radius:13px;min-width:0;padding:15px}
 .v24-compare-sidebar{display:flex;flex-direction:column;position:sticky;top:80px;max-height:calc(100vh - 95px)}
+.v24-compare-sidebar>*{flex:none}
+.v24-compare-sidebar>.v24-comp-druglist{flex:1 1 auto;min-height:120px}
 .v24-compare-sidebar h2{font-size:19px;margin:0 0 10px}
-.v24-domainbar{display:flex;gap:5px;overflow-x:auto;padding:8px 0;scrollbar-width:thin}
+.v24-domainbar{display:flex;flex:none;flex-wrap:wrap;gap:6px;padding:8px 0}
 .v24-domainbar button{font-size:12px;flex:none;border:1px solid #d8e2ed;border-radius:8px;background:#fff;padding:7px}
 .v24-domainbar button.on{background:#eaf2ff;border-color:#82addd;color:#145baa}
 .v24-compare-sidebar label{margin-bottom:9px}

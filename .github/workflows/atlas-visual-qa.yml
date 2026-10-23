@@ -39,6 +39,9 @@ jobs:
       - name: Validate INFEORA V26 visual and functional experience
         if: always()
         run: node qa/infeora-v26-browser.cjs
+      - name: Validate INFEORA V27 audit fixes and deep syndrome reviews
+        if: always()
+        run: node qa/v27-browser.cjs
       - name: Upload viewport captures and diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -49,4 +52,5 @@ jobs:
             qa/results24/
             qa/results25/
             qa/results26/
+            qa/results27/
           retention-days: 7
