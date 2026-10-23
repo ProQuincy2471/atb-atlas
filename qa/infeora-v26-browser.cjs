@@ -41,7 +41,7 @@ async function main(){
   try{
    const open=width===1280?'http://127.0.0.1:9176/infeora/':'http://127.0.0.1:9176/';
    await page.goto(open,{waitUntil:'domcontentloaded',timeout:28000});
-   await page.waitForFunction(()=>window.INFEORA_ID&&document.querySelector('.nx-home-domains')&&window.D===undefined?!!window.INFEORA_ID&&document.querySelector('.nx-home-domains'):!!window.INFEORA_ID&&document.querySelector('.nx-home-domains'),null,{timeout:25000});
+   await page.waitForFunction(()=>!!window.INFEORA_APP&&!!document.querySelector('.nx-home-domains'),null,{timeout:18000});
    assert((await page.title()).includes('INFEORA'),'Page title missing');
    assert(await page.locator('.nx-rail-link').count()>=9,'Nine nav destinations missing');
    if(width===1280){
