@@ -92,3 +92,25 @@ No se muestran pautas de dosis improvisadas; su selección requiere síndrome, g
 ### Alcance clínico
 
 La expansión es una biblioteca académica en desarrollo, no un sistema validado de apoyo a decisiones ni un vademécum de prescripción. Requiere curación y revisión clínica individual antes de cualquier uso asistencial.
+
+
+## V25 · Rework editorial del mapa y de las revisiones clínicas
+
+V25 sustituye la cartografía clínica principal por un mapa taxonómico legible:
+**dominio (4) → territorio (25 grupos no bacterianos + 12 bacterianos) → especie (208) → relaciones farmacológicas**.
+Los colores corresponden a dominios/grupos y no significan actividad; la actividad se describe por separado mediante «registrada/habitual», «variable», «no fiable/no indicada» y «no evaluada». La matriz anterior sigue accesible en la opción **Mapa anterior / matriz**. Las relaciones siguen sin ser susceptibilidad individual ni porcentajes de eficacia.
+
+La biblioteca Microorganismos añade un dossier de razonamiento clínico para **las 79 especies bacterianas anteriores** y para **los 129 virus, hongos y parásitos**. Incluye identificación, patogenia, epidemiología, manifestaciones, selección/interpretación de pruebas, farmacología, preguntas de diferenciación y fuentes. Para el dominio no bacteriano hay **25 grupos clínico-taxonomicos**, con recuentos auditados y cobertura exacta de 129 IDs sin duplicados ni omisiones. Hay **73 notas suplementarias explícitamente individuales**; las demás mantienen su nota clínica por taxón de V24. No se generan micrografías artificiales.
+
+La biblioteca Síndromes ahora contiene **54 entradas**: 37 capítulos WHO AWaRe ya catalogados con seis ejes de síntesis clínica específicos, más **17 capítulos nuevos** de virología, micología y parasitología. Todos usan una estructura común:
+definición y reconocimiento, etiología, diagnóstico diferencial, confirmación, tratamiento/control de foco, complicaciones/evolución y síntesis para guardia. Las fuentes enlazadas se ajustan al tema cuando se conoce una guía pertinente.
+
+### Bases y trazabilidad
+
+La obra aportada *Infectious Diseases* (Saif ul Islam, Academic Press/Elsevier 2023) se consultó como referencia de **estructura temática**: capítulos de virus (6), hongos (7), parásitos (8) e infecciones sindrómicas (9). No se transcriben ni distribuyen capítulos protegidos. Para las decisiones contemporáneas se utilizaron recursos oficiales de IDSA, CDC, NIH y OMS; consultar su fecha vigente antes de decisiones asistenciales. La taxonomía y la farmacología por especie aún requieren revisión clínica formal individual antes de tratar este repositorio como una referencia de prescripción.
+
+**Advertencia importante:** el archivo histórico de 37 condiciones WHO contiene **índices**, no dosis WHO individuales validadas para todas las enfermedades. Las síntesis V25 son editoriales originales y no se presentan como extracción literal del manual ni una revisión sistemática exhaustiva. Las relaciones incompletas permanecen señaladas, no se inventan para rellenar tablas.
+
+### Verificación
+
+`qa/v25-browser.cjs` prueba integridad de los grupos/IDs, 54 capítulos clínicos, navegación bacterias/virus/hongos/parásitos, reseñas y filtros a 1600, 1280, 768 y 390 px, además de 2 suites anteriores. [QA V25 run #47](https://github.com/ProQuincy2471/atb-atlas/actions/runs/39991205942): suites V23 (**0 incidencias**), V24 (**37 registros, 0 fallos**) y V25 (**40 capturas verificadas, 0 fallos**). La prueba observa desbordamiento horizontal/colisión de hijos; no sustituye revisión humana de todas las páginas ni validación clínica.
