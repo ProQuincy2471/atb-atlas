@@ -10,7 +10,7 @@ const server=http.createServer((req,res)=>{
  fs.readFile(fp,(e,d)=>{if(e)return res.writeHead(404).end();res.setHeader('Content-Type',types[path.extname(fp)]||'application/octet-stream');res.end(d)});
 });
 const assert=(x,m)=>{if(!x)throw Error(m)};
-const DEEP=['who-16','who-24','who-26','who-27','who-34','who-39'];
+const DEEP=['infective-endocarditis','who-16','who-24','who-26','who-27','who-34','who-39'];
 async function main(){
  await new Promise(ok=>server.listen(9177,'127.0.0.1',ok));
  const browser=await chromium.launch({headless:true,args:['--no-sandbox'],...(process.env.CHROME_BIN?{executablePath:process.env.CHROME_BIN}:{})});

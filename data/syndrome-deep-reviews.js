@@ -349,6 +349,70 @@ window.ATLAS25.deepReviews={
   {t:"Thomas KS et al. Penicillin to prevent recurrent leg cellulitis (PATCH I). N Engl J Med 2013;368:1695–1703",u:"https://doi.org/10.1056/NEJMoa1206300"},
   {t:"IDSA. Skin and soft tissue infections guideline (versión vigente)",u:"https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/"}
  ]
+},
+"infective-endocarditis":{
+ title:"Endocarditis infecciosa",
+ reviewed:"2026-10-23",
+ summary:"El diagnóstico integra hemocultivos y ecocardiografía con los criterios de Duke-ISCVID 2023. Tres series de hemocultivos preceden al antibiótico; el tratamiento es bactericida, prolongado y dirigido por el microorganismo. La decisión quirúrgica temprana (insuficiencia cardiaca, infección no controlada, prevención de embolias) cambia la mortalidad y se toma en un equipo de endocarditis.",
+ criteria:{
+  label:"Criterios de Duke-ISCVID 2023 (esquema)",
+  major:["Microbiológico: microorganismos típicos en hemocultivos repetidos, bacteriemia persistente, o identificación por PCR o secuenciación en válvula; serología o PCR para Coxiella burnetii","Imagen: vegetación, absceso, pseudoaneurisma o dehiscencia protésica nueva en ecocardiografía, TC cardiaca o PET/TC con 18F-FDG en válvula protésica","Quirúrgico: evidencia directa de endocarditis en la inspección operatoria"],
+  minor:["Predisposición: cardiopatía de riesgo, dispositivo intracardiaco, uso de drogas inyectadas","Fiebre ≥ 38 °C","Fenómenos vasculares (embolias arteriales, infartos sépticos, aneurismas micóticos, hemorragias intracraneales, lesiones de Janeway)","Fenómenos inmunológicos (glomerulonefritis, nódulos de Osler, manchas de Roth, factor reumatoide)","Hemocultivos positivos que no cumplen criterio mayor"],
+  rule:"Definitiva con 2 criterios mayores, o 1 mayor y 3 menores, o 5 menores. Un diagnóstico «posible» no descarta la enfermedad: se repite la imagen y se mantiene la sospecha si persisten los hallazgos."
+ },
+ algorithm:[
+  {t:"Sospechar",x:"Fiebre con soplo nuevo, embolias, bacteriemia por S. aureus, estreptococos orales, enterococo o HACEK, o fiebre en portadores de prótesis, dispositivos o usuarios de drogas inyectadas."},
+  {t:"Hemocultivos antes del antibiótico",x:"Al menos tres series de puntos de punción distintos; en paciente estable se pueden espaciar. Si el paciente está inestable, no se retrasa el tratamiento más de unas pocas horas."},
+  {t:"Ecocardiografía",x:"Transtorácica inicial y transesofágica ante sospecha moderada o alta, prótesis, estudio no diagnóstico o sospecha de absceso. Repetir a los 5–7 días si el primer estudio es negativo y persiste la sospecha."},
+  {t:"Imagen avanzada y búsqueda de émbolos",x:"TC cardiaca y PET/TC con 18F-FDG en prótesis; RM o TC cerebral, TC toracoabdominal según clínica; detectar aneurismas micóticos y focos esplénicos o vertebrales."},
+  {t:"Iniciar tratamiento y convocar al equipo de endocarditis",x:"Empírico inmediato en pacientes agudos o inestables; en estables y subagudos puede esperarse a los cultivos. Valorar de inmediato indicación quirúrgica."},
+  {t:"Ajustar y seguir",x:"Dirigir según microorganismo y CIM, vigilar hemocultivos de control, ritmo (bloqueo AV sugiere absceso), función renal y niveles de fármacos."}
+ ],
+ decisions:[
+  {c:"Empírico: comunitaria sobre válvula nativa o prótesis tardía (≥ 12 meses)",p:"Ampicilina con cloxacilina u oxacilina y gentamicina; vancomicina con gentamicina si hay alergia a penicilina.",n:"Esquema de la guía ESC; adaptar a la epidemiología y a la sospecha de SARM."},
+  {c:"Empírico: prótesis precoz o asociada a atención sanitaria",p:"Vancomicina con gentamicina y rifampicina.",n:"Cubre SARM y estafilococos coagulasa negativos; la rifampicina solo en infección protésica."},
+  {c:"S. aureus sensible a meticilina, válvula nativa",p:"Cloxacilina u oxacilina, o cefazolina, durante 4–6 semanas en lado izquierdo; 2 semanas en endocarditis derecha no complicada seleccionada.",n:"Evitar añadir gentamicina de rutina por toxicidad renal."},
+  {c:"S. aureus resistente a meticilina",p:"Vancomicina o daptomicina durante 4–6 semanas.",n:"Daptomicina es opción en bacteriemia o endocarditis derecha; ajustar a la CIM y a la función renal."},
+  {c:"Estreptococo viridans o S. gallolyticus sensible a penicilina",p:"Penicilina G o ceftriaxona 4 semanas en válvula nativa y 6 semanas en prótesis.",n:"Con S. gallolyticus, buscar neoplasia colorrectal."},
+  {c:"Enterococcus faecalis",p:"Ampicilina con ceftriaxona durante 6 semanas, o ampicilina con gentamicina según función renal.",n:"La combinación con ceftriaxona evita nefrotoxicidad; comprobar sensibilidad."},
+  {c:"HACEK",p:"Ceftriaxona 4 semanas en válvula nativa y 6 en prótesis.",n:"Confirmar la sensibilidad a β-lactámicos."},
+  {c:"Hemocultivo negativo",p:"Dirigido por serología o PCR: Coxiella burnetii requiere doxiciclina con hidroxicloroquina durante un periodo prolongado; Bartonella y Brucella tienen pautas específicas.",n:"Consultar infectología; revisar la exposición a animales, leche no pasteurizada y vivienda sin higiene."},
+  {c:"Paciente estable, endocarditis izquierda por estreptococo, enterococo o S. aureus y tras fase intravenosa inicial",p:"Cambio a tratamiento oral parcial en centros con seguimiento.",n:"El ensayo POET lo mostró no inferior en pacientes seleccionados; verificar los criterios de inclusión antes de aplicarlo."}
+ ],
+ steroid:{
+  title:"Cirugía y anticoagulación",
+  x:"Las indicaciones de cirugía temprana son insuficiencia cardiaca por disfunción valvular grave, infección no controlada (absceso, fístula, vegetación creciente, hemocultivos persistentes, hongos u organismos muy resistentes) y prevención de embolias con vegetaciones grandes. El ensayo de Kang mostró menos muerte y embolias con cirugía temprana en endocarditis izquierda con vegetaciones grandes y valvulopatía grave. No se inicia anticoagulación por la endocarditis; con prótesis mecánica se mantiene con cautela. Tras hemorragia intracraneal se retrasa la cirugía; el ictus isquémico no es contraindicación absoluta cuando la indicación es urgente."
+ },
+ complications:[
+  {n:"Insuficiencia cardiaca valvular",x:"Primera causa de indicación quirúrgica; ecocardiografía seriada."},
+  {n:"Absceso perivalvular y bloqueo auriculoventricular",x:"Un PR prolongado nuevo obliga a descartar absceso con ETE o TC."},
+  {n:"Embolias cerebrales y aneurismas micóticos",x:"Neuroimagen; riesgo hemorrágico que condiciona anticoagulación y cirugía."},
+  {n:"Embolias esplénicas, renales y pulmonares",x:"En endocarditis derecha predominan los émbolos sépticos pulmonares."},
+  {n:"Glomerulonefritis inmunocomplejos y lesión renal por fármacos",x:"Vigilar creatinina y niveles de aminoglucósidos y vancomicina."},
+  {n:"Osteomielitis vertebral y espondilodiscitis",x:"Sospechar ante dolor de espalda persistente; RM."},
+  {n:"Sepsis y falla multiorgánica",x:"Manejo de sepsis con control de foco quirúrgico."}
+ ],
+ failure:"Fiebre persistente o hemocultivos positivos tras 7–10 días: buscar absceso intracardiaco, colecciones metastásicas (bazo, columna, riñón), flebitis o infección del catéter, resistencia o tolerancia al antibiótico, fiebre medicamentosa y necesidad de cirugía; revisar la dosis y los niveles.",
+ followup:[
+  "Hemocultivos de control hasta negativizar y, de nuevo, tras terminar el tratamiento si hubo bacteriemia persistente.",
+  "Ecocardiografía al final del tratamiento como referencia basal y seguimiento clínico durante al menos 2 meses por recaída.",
+  "Evaluación dental, profilaxis en pacientes de alto riesgo y búsqueda de la puerta de entrada (colonoscopia con S. gallolyticus).",
+  "En usuarios de drogas inyectadas: tratamiento de la adicción, terapia de sustitución y plan de alta con seguimiento."
+ ],
+ pitfalls:[
+  "Dar antibiótico antes de tomar los hemocultivos.",
+  "Descartar el diagnóstico por una sola ecocardiografía transtorácica normal.",
+  "Tratar una bacteriemia por S. aureus sin ecocardiografía ni duración adecuada.",
+  "No consultar a cirugía cardiaca en insuficiencia cardiaca, absceso o émbolos recurrentes.",
+  "Iniciar anticoagulación sin una indicación independiente."
+ ],
+ references:[
+  {t:"Delgado V et al. 2023 ESC Guidelines for the management of endocarditis. Eur Heart J 2023;44:3948–4042",u:"https://doi.org/10.1093/eurheartj/ehad193"},
+  {t:"Fowler VG et al. The 2023 Duke-ISCVID criteria for infective endocarditis. Clin Infect Dis 2023;77:518–526",u:"https://doi.org/10.1093/cid/ciad271"},
+  {t:"Baddour LM et al. Infective endocarditis in adults: AHA scientific statement. Circulation 2015;132:1435–1486",u:"https://doi.org/10.1161/CIR.0000000000000296"},
+  {t:"Iversen K et al. Partial oral versus intravenous antibiotic treatment of endocarditis (POET). N Engl J Med 2019;380:415–424",u:"https://doi.org/10.1056/NEJMoa1808312"},
+  {t:"Kang DH et al. Early surgery versus conventional treatment for infective endocarditis. N Engl J Med 2012;366:2466–2473",u:"https://doi.org/10.1056/NEJMoa1112843"},
+  {t:"Wilson WR et al. Prevention of viridans group streptococcal infective endocarditis: AHA scientific statement. Circulation 2021;143:e963–e978",u:"https://doi.org/10.1161/CIR.0000000000000969"}
+ ]
 }
 };
-
