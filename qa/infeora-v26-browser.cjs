@@ -41,7 +41,18 @@ async function main(){
   try{
    const open=width===1280?'http://127.0.0.1:9176/infeora/':'http://127.0.0.1:9176/';
    await page.goto(open,{waitUntil:'domcontentloaded',timeout:28000});
-   await page.waitForFunction(()=>!!window.INFEORA_APP&&!!document.querySelector('.nx-home-domains'),null,{timeout:40000});
+   let ready=false;
+   for(let attempt=0;attempt<3;attempt++){
+    try{
+     await page.waitForFunction(()=>!!window.INFEORA_APP&&!!document.querySelector('.nx-home-domains'),null,{timeout:18000});
+     ready=true;break;
+    }catch(error){
+     if(attempt===2)throw new Error('INFEORA app boot failed after 3 attempts: '+String(error)+'; page errors: '+errors.join(' | ')+'; missing assets: '+missing.join(' | '));
+     errors.length=0;missing.length=0;
+     await page.reload({waitUntil:'domcontentloaded',timeout:30000});
+    }
+   }
+   assert(ready,'INFEORA failed to initialize');
    assert((await page.title()).includes('INFEORA'),'Page title missing');
    assert(await page.locator('.nx-rail-link').count()>=9,'Nine nav destinations missing');
    if(width===1280){
