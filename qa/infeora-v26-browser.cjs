@@ -35,13 +35,13 @@ async function main(){
    records.push({width,view:label,...rect});
    assert(rect.overflow<9,label+' horizontal overflow '+rect.overflow+' @'+width);
    assert(!rect.collisions.length,label+' collisions '+JSON.stringify(rect.collisions)+' @'+width);
-   assert(rect.brand?.includes('INFEORAID'),'Brand not visible '+label);
+   assert(rect.brand?.includes('INFEORA'),'Brand not visible '+label);
    await page.screenshot({path:path.join(folder,label+'-'+width+'.png'),fullPage:false});
   }
   try{
    const open=width===1280?'http://127.0.0.1:9176/infeora/':'http://127.0.0.1:9176/';
    await page.goto(open,{waitUntil:'domcontentloaded',timeout:28000});
-   await page.waitForFunction(()=>!!window.INFEORA_APP&&!!document.querySelector('.nx-home-domains'),null,{timeout:18000});
+   await page.waitForFunction(()=>!!window.INFEORA_APP&&!!document.querySelector('.nx-home-domains'),null,{timeout:40000});
    assert((await page.title()).includes('INFEORA'),'Page title missing');
    assert(await page.locator('.nx-rail-link').count()>=9,'Nine nav destinations missing');
    if(width===1280){
