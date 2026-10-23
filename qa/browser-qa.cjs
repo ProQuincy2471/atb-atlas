@@ -3,7 +3,7 @@ const {chromium}=require('playwright');
 const root=path.resolve(__dirname,'..'),dir=path.join(root,'qa/results');fs.mkdirSync(dir,{recursive:true});
 const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml','.jpg':'image/jpeg','.png':'image/png'};
 const server=http.createServer((req,res)=>{const u=decodeURIComponent(new URL(req.url,'http://127.0.0.1').pathname),f=path.resolve(root,'.'+(u==='/'?'/index.html':u));if(!f.startsWith(root+path.sep)){res.writeHead(403).end();return;}fs.readFile(f,(err,data)=>{if(err){res.writeHead(404).end(u);return;}res.setHeader('Content-Type',mime[path.extname(f)]||'application/octet-stream');res.end(data)})});
-async function main(){await new Promise(r=>server.listen(9172,'127.0.0.1',r));const browser=await chromium.launch({headless:true,args:['--no-sandbox']}),all=[];
+async function main(){await new Promise(r=>server.listen(9172,'127.0.0.1',r));const browser=await chromium.launch({headless:true,args:['--no-sandbox'],...(process.env.CHROME_BIN?{executablePath:process.env.CHROME_BIN}:{})}),all=[];
 for(const vp of [{width:1600,height:900},{width:1280,height:800},{width:1024,height:768},{width:768,height:900},{width:390,height:844}]){
 const ctx=await browser.newContext({viewport:vp}),page=await ctx.newPage(),jsErrors=[],missingAssets=[];
 page.on('pageerror',e=>jsErrors.push(String(e)));page.on('response',r=>{if(r.status()>=400&&new URL(r.url()).hostname==='127.0.0.1')missingAssets.push(r.url()+':'+r.status())});
