@@ -81,7 +81,7 @@ function fillMicro25(){
  const nav=art.querySelector('.v24-anchor');nav?.insertAdjacentHTML('beforeend','<a href="#v25-biology">Revisión avanzada</a><a href="#v25-differential">Diagnóstico crítico</a><a href="#v25-rounds">Ronda clínica</a>');
 }
 function clinical25(){
- const who=(window.WHO?.conditions||[]),extras=e.extraConditions||[],all=[...who,...extras],sys=[...new Set(all.map(c=>c.system))];
+ const who=(typeof WHO!=='undefined'?WHO.conditions:[]),extras=e.extraConditions||[],all=[...who,...extras],sys=[...new Set(all.map(c=>c.system))];
  const candidates=all.filter(c=>(cl.system==='all'||c.system===cl.system)&&(!cl.query||search(c.title).includes(search(cl.query))));
  const c=candidates.find(c=>c.id===cl.selected)||candidates[0],record=c&&e.conditions?.[c.id],isWho=c?.id.startsWith('who-'),r=c&&isWho?window.ATLAS_CLINICAL23?.get(c):null,dat=record||c?.details;
  if(c)cl.selected=c.id;
