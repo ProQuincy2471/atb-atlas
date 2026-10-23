@@ -381,3 +381,14 @@ body{background:var(--nx-background)!important}
 .nx-section-page .v24-head span,.nx-section-page .v25-clinic-head span{color:var(--v24-accent,#c8642a)}
 .nx-selected-organism h2,.nx-selected-organism h1,.nx-explore-workspace h2{font-family:'Fraunces',Georgia,serif;font-weight:560;letter-spacing:-.02em}
 @media(max-width:560px){.nx-hero h1{font-size:clamp(34px,10.5vw,44px);max-width:none;overflow-wrap:anywhere}.nx-hero-copy{padding:28px 22px}}
+/* Polish pass: one paper surface, tone carried by a top rule instead of pastel gradients */
+.nx-section-page :where(.v23-learn-hero,.a18-labhero,.a18-browserhead,.v25-syndrome-hero){background:#fffdf8!important;background-image:none!important}
+.nx-section-page .v23-learn-hero{border-top:5px solid #5b9a55}
+.nx-section-page .a18-labhero{border-top:5px solid #3a7fd0}
+.nx-section-page .a18-browserhead{border-bottom:1px solid #e4ded2;border-top:5px solid #b9486f}
+.nx-section-page .v25-syndrome-hero{border-top:5px solid var(--syndrome,#1f4f93)}
+.nx-section-page .a19-pageintro{box-shadow:var(--nx-shadow);border-radius:20px}
+.nx-section-page .v25-clinic-head h1 em{color:#c8642a;font-style:italic;font-weight:500}
+.nx-section-page :where(.v23-learn-hero h1,.v23-learn-hero h2,.a18-labhero h1,.a18-labhero h2,.v25-syndrome-section>header h2,.v23-learn-article h2,.a18-sheet h2,.a18-browserhead h2){font-family:'Fraunces',Georgia,serif!important;font-weight:580!important;letter-spacing:-.018em!important}
+.nx-section-page .a18-systemchips{max-height:none;overflow:visible}
+.nx-section-page :where(.a19-lab-path,.a19-compare-intro,.a19-learning-circuit){background:#fffdf8;background-image:none;border-color:#e4ded2;box-shadow:var(--nx-shadow)}
