@@ -40,3 +40,7 @@ Workflow automático `.github/workflows/atlas-visual-qa.yml`, ejecutado en pull 
 `node qa/browser-qa.cjs` con Chromium/Playwright: cinco viewports (1600, 1280, 1024, 768, 390), navegación por todas las secciones, filtros de cobertura, panel farmacológico, comparador, lecciones y verificación geométrica de desbordamientos. Capturas y diagnóstico se conservan temporalmente como artifact del workflow.
 
 `qa/results/report.json` es la salida detallada generada por CI.
+
+### V23.1 · Actividad orientativa separada de registros
+
+El módulo `v23-spectrum.js` añade un explorador dentro de las fichas de antibióticos, con comparación por organismo y territorio. Distingue **actividad individual registrada (preliminar)**, **actividad farmacológica habitual descrita** para pares seleccionados, **actividad condicionada**, **ausencia de cobertura clínica habitual** y **pares sin revisión**. Estos estados **no** son porcentajes de eficacia, antibiogramas, ni sustituyen interpretación de MIC/PK-PD, foco o guías. La selección no abandona la ficha ni redirige al mapa.
