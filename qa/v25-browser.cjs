@@ -15,7 +15,7 @@ for(const view of [{width:1600,height:900},{width:1280,height:820},{width:768,he
  return {overflow:document.documentElement.scrollWidth-innerWidth,collisions,sectionCount:document.querySelectorAll('.v25-syndrome-section,.v25-org-review section').length};
  });all.push({width:view.width,view:name,...status});assert(status.overflow<9,name+' document overflow '+status.overflow);assert(status.collisions.length===0,name+' collisions '+JSON.stringify(status.collisions));await page.screenshot({path:path.join(dir,name+'-'+view.width+'.png'),fullPage:false});}
  try{
- await page.goto('http://127.0.0.1:9175/',{waitUntil:'domcontentloaded',timeout:25000});await page.waitForFunction(()=>window.ATLAS25?.reviewUI&&window.ATLAS24?.debug&&document.querySelector('.v25-mapgrid'),null,{timeout:20000});
+ await page.goto('http://127.0.0.1:9175/?legacy=1',{waitUntil:'domcontentloaded',timeout:25000});await page.waitForFunction(()=>window.ATLAS25?.reviewUI&&window.ATLAS24?.debug&&document.querySelector('.v25-mapgrid'),null,{timeout:20000});
  if(view.width===1600){const audit=await page.evaluate(()=>{
  const gs=ATLAS25.microGroups,all=ATLAS24.debug.orgs,c=new Map(),unknown=[];for(const g of gs)for(const id of g.ids){c.set(id,(c.get(id)||0)+1);if(!all.find(x=>x.id===id))unknown.push(id)}
  return {groups:gs.length,organisms:all.length,missing:all.filter(p=>c.get(p.id)!==1).map(p=>p.id),unknown,who:WHO.conditions.length,syndromes:ATLAS25.extraConditions.length,specific:Object.keys(ATLAS25.speciesInsight).length,reviewFields:Object.entries(ATLAS25.conditions).filter(([k,a])=>a.length!==6).map(([k])=>k)};
