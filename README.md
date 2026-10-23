@@ -114,3 +114,29 @@ La obra aportada *Infectious Diseases* (Saif ul Islam, Academic Press/Elsevier 2
 ### Verificación
 
 `qa/v25-browser.cjs` prueba integridad de los grupos/IDs, 54 capítulos clínicos, navegación bacterias/virus/hongos/parásitos, reseñas y filtros a 1600, 1280, 768 y 390 px, además de 2 suites anteriores. [QA V25 run #47](https://github.com/ProQuincy2471/atb-atlas/actions/runs/39991205942): suites V23 (**0 incidencias**), V24 (**37 registros, 0 fallos**) y V25 (**40 capturas verificadas, 0 fallos**). La prueba observa desbordamiento horizontal/colisión de hijos; no sustituye revisión humana de todas las páginas ni validación clínica.
+
+
+## V26 · INFEORA / Atlas de Infectología Clínica
+
+**Nueva identidad de producto:** **INFEORA**, *Del microorganismo a la decisión clínica*. Se conserva el catálogo clínico V25, con una nueva portada de producto, navegación editorial de nueve secciones, acceso por teclado (`⌘K`/`Ctrl+K`), filtros por dominio, buscador transversal, tipografía redimensionada y un sistema visual coherente para microbiología, terapéutica y síndromes. El diseño utiliza CSS, los iconos existentes y un favicon SVG propio escrito manualmente; no utiliza imágenes generadas por IA.
+
+**Nuevo enlace dentro de GitHub Pages**: `https://proquincy2471.github.io/atb-atlas/infeora/`. Esta ruta tiene un `index.html` propio que carga todos los catálogos y recursos desde la raíz mediante `<base href="../">`; conserva la ruta antigua como respaldo. La URL del subdominio/repo GitHub Pages **no cambia por renombrar el título HTML**. Para obtener `https://proquincy2471.github.io/infeora/` hay que renombrar el repositorio `atb-atlas` a `infeora` desde GitHub Settings → General → Repository name (requiere permisos administrativos), y comprobar el despliegue y las referencias. Esta operación administrativa no está disponible en el conector de GitHub actual, por lo que no se afirma que ya haya ocurrido. Si se desea dominio propio, también hace falta configurar DNS y Pages.
+
+### Reorganización UX
+
+- **Inicio:** portada editorial, cuatro dominios, recorrido reconocer→interpretar→seleccionar y accesos directos a farmacología, síndromes y biblioteca.
+- **Explorar:** sustituye la antigua metáfora de mapa por una consulta real de relación especie–farmacología: filtro taxonómico, ficha del patógeno, estado de cobertura contextual y enlaces a review y mecanismo.
+- **Microorganismos / Antimicrobianos:** conservan la selección por dominios, estudios monográficos, mecanismos, resistencia y cobertura de V24–V25; sus superficies reciben nuevos estilos en la misma línea editorial.
+- **Síndromes:** conserva 54 reviews y ofrece navegación por sistemas y artículos con índices propios.
+- **Comparador:** mantiene la matriz integrativa de antimicrobianos.
+- **Biblioteca, Laboratorio y Fuentes:** accesibles desde una navegación coherente; el contenido no se reemplaza por resúmenes automáticos.
+- **Buscador global:** especies, fármacos y síndromes desde todas las pantallas; navegación a ficha individual.
+- **Accesibilidad:** navegación móvil, menú plegable, foco visible, reducción de movimiento, ajuste de densidad y diseño responsive.
+
+Los estados **actividad habitual**, **actividad condicionada**, **no fiable** y **sin evaluación** describen evidencia de catálogo; no sustituyen AST, tratamiento individual ni guías actuales.
+
+### Control de regresiones
+
+`qa/infeora-v26-browser.cjs` recorre portada, dominios, búsqueda global, fichas, mecanismos, síndromes, comparación, biblioteca, laboratorio y fuentes en cinco anchuras (1600, 1280, 1024, 768 y 390 px). Se prueban también URL de alias, menú móvil y ausencia de desbordamientos/colisiones. Las tres baterías históricas V23–V25 continúan a través de `?legacy=1`, que mantiene su antigua arquitectura de pantalla para comparación, sin alterar datos. Las capturas/JSON de QA se adjuntan como artefacto de GitHub Actions.
+
+**Aviso de marca:** una búsqueda web básica para INFEORA no mostró un servicio médico digital homónimo claramente identificable; eso no equivale a búsqueda exhaustiva de marcas ni disponibilidad de dominio. Antes de un registro o campaña pública, verificar en IMPI/MARCia.
