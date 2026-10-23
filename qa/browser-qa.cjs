@@ -32,6 +32,7 @@ if(vp.width===1600){
  const routeAfter=await page.evaluate(()=>state.route);
  if(routeAfter!=='atb')throw Error('Drug spectrum unexpectedly navigates away');
  await page.locator('[data-act="nav:comparar"]').first().click();
+ await page.evaluate(()=>act('v24-mode:compare:classic'));
  await page.evaluate(()=>{state.compare=[];render()});
  const ids=await page.evaluate(()=>D.antibiotics.slice(0,11).map(a=>a.id));
  for(const id of ids)await page.locator('[data-act="v23-toggle-compare:'+id+'"]').first().click({timeout:10000});
