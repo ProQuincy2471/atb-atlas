@@ -97,7 +97,7 @@ const chapters=[
 "Chagas puede producir trastornos de conducción, cardiomiopatía dilatada, aneurisma apical y megaesófago/megacolon. Identificar etapa aguda o crónica cambia elección/beneficio de benznidazol o nifurtimox. Leishmaniasis visceral con pancitopenia debe distinguirse de neoplasias hematológicas y otras infecciones reticuloendoteliales."],
 "Paciente VIH con lesiones encefálicas en anillo y IgG Toxoplasma positiva: integrar neuroimagen, respuesta a terapia y descarte de linfoma primario del SNC, sin atribuir diagnóstico exclusivamente a serología.",
 "¿Por qué una respuesta clínica al tratamiento empírico no establece de manera infalible el diagnóstico?",
-"Las lesiones comparten hallazgos radiológicos, algunas mejoran con corticosteroides y se requieren criterios diagnósticos y reevaluación.")
+"Las lesiones comparten hallazgos radiológicos, algunas mejoran con corticosteroides y se requieren criterios diagnósticos y reevaluación."]
 ];
 window.ATLAS24.lessons=chapters;
 const esc=x=>H(String(x??''));
