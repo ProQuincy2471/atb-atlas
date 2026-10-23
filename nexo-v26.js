@@ -95,7 +95,7 @@ function mapExplorer(){
  const selections=results.filter(x=>NX.status==='all'||(NX.status==='relevant'?['expected','variable'].includes(x.r.status):x.r.status===NX.status));
  const drugFamilies=[...new Set(domainDrug(NX.domain).map(d=>d.family))].sort();
  const domainTabs=['bacteria','virus','fungi','parasites'].map(k=>'<button data-act="nx-map-domain:'+k+'" class="'+(NX.domain===k?'active':'')+'" style="--domain:'+shades[k]+'"><span class="nx-domain-pin"></span><b>'+names[k]+'</b><small>'+domainMicro(k).length+'</small></button>').join('');
- const microorganismPage=(p.kingdom==='bacteria'?'nx-find:micro:bacteria:':'nx-find:micro:'+p.kingdom+':')+p.id;
+ const microorganismPage=p?'nx-find:micro:'+p.kingdom+':'+p.id:'';
  const selectedIntro=p?.biology||p?.identity||p?.clinical||'';
  return '<div class="nx-explore"><div class="nx-explore-heading"><span class="nx-overline">01 / ATLAS DE RELACIONES</span><div class="nx-explore-hline"><div><h1>Explorar conexiones.</h1><p>Elige un dominio, reconoce la especie y analiza el espectro farmacológico. Una lectura clínica, sin redes arbitrarias ni diagramas confusos.</p></div><div class="nx-explore-metric"><b>'+allMicro().length+'</b><span>especies en el atlas</span></div></div></div>'+
  '<nav class="nx-explore-tabs" aria-label="Dominios">'+domainTabs+'</nav>'+
@@ -136,7 +136,7 @@ act=function(command){
  case 'nx-search-open':NX.searchOpen=true;render();document.getElementById('nx-command-input')?.focus();return;
  case 'nx-search-close':NX.searchOpen=false;return render();
  case 'nx-find':{
-  const type=a[1],kingdom=a[2],id=a.slice(3).join(':');NX.searchOpen=false;NX.drawer=false;
+  const type=a[1],kingdom=a[2],id=type==='syndrome'?a.slice(2).join(':'):a.slice(3).join(':');NX.searchOpen=false;NX.drawer=false;
   if(type==='micro'){
    if(kingdom==='bacteria'){state.micro=id;return goto('micro')}
    window.ATLAS24.debug.ui.micro=kingdom;window.ATLAS24.debug.ui.selectedMicro=id;window.ATLAS24.debug.ui.query='';return goto('micro');
@@ -168,7 +168,7 @@ NAV.unshift(['inicio','home','Inicio']);
 NAV.find(x=>x[0]==='mapa')[2]='Explorar';
 NAV.find(x=>x[0]==='atb')[2]='Antimicrobianos';
 NAV.find(x=>x[0]==='aprender')[2]='Biblioteca';
-if(!location.hash||location.hash==='#/mapa'){
+if(!location.hash){
  state.route='inicio';history.replaceState(null,'',location.pathname+location.search+'#/inicio');
 }
 const originalRender=render;
