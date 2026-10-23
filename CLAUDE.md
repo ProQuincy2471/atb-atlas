@@ -44,6 +44,7 @@
 - Diferenciar texto sustentado por libros aportados, síntesis editorial anterior y evidencias externas actuales. No inventar páginas, citas, eficacia, niveles de evidencia ni resistencia. Actualizar con CDC, IDSA, NIH, OMS y guías relevantes según organismo/síndrome, con fecha cuando sea necesaria.
 - Contenido clínico para educación: no sustituye juicio clínico, AST, evaluación del huésped, función renal, embarazo, foco, guías ni validación editorial por especialista.
 - **No afirmar que las 208 fichas son revisiones exhaustivas**. La profundidad individual del catálogo es heterogénea y debe auditarse antes de declarar completitud.
+- **Contexto no transferido automáticamente:** Claude no tiene acceso al historial de este chat, las capturas ni los PDF privados originalmente compartidos con ChatGPT. Solicitar los archivos necesarios en Claude/Drive o rutas autorizadas; nunca presumir que un libro está en GitHub ni subir PDFs protegidos al repositorio público.
 
 ## Flujo técnico de trabajo
 1. Leer este documento y `README.md`; inventariar arquitectura, dependencias, rutas y estado de `main`.
