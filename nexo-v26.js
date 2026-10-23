@@ -7,7 +7,7 @@ const NX={domain:'bacteria',group:'all',micro:'',query:'',rxQuery:'',rxFamily:'a
 window.NEXO_ID=NX;
 const names={bacteria:'Bacterias',virus:'Virus',fungi:'Hongos',parasites:'Parásitos'};
 const shades={bacteria:'#2b66b1',virus:'#7355b9',fungi:'#b46d43',parasites:'#178772'};
-const icons={inicio:'home',mapa:'map',micro:'micro',atb:'drugs',clinica:'clinic',comparar:'compare',aprender:'learn',laboratorio:'lab',fuentes:'sources'};
+const icons={inicio:'book',mapa:'map',micro:'micro',atb:'drugs',clinica:'clinic',comparar:'compare',aprender:'learn',laboratorio:'lab',fuentes:'sources'};
 const sections=[
  ['inicio','Inicio','Visión general'],['mapa','Explorar','Conexiones micro–fármaco'],
  ['micro','Microorganismos','Biología y clínica'],['atb','Antimicrobianos','Farmacología'],
