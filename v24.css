@@ -1,0 +1,127 @@
+/* ATB / ATLAS V24 — editorial multidomain medical UI, responsive, no faux illustrations. */
+.v24-switch,.v24-barmap{display:flex;flex-wrap:wrap;gap:9px;align-items:stretch;padding:10px 7px 17px;min-width:0}
+.v24-switch button{display:flex;align-items:baseline;gap:9px;flex:1 1 160px;min-width:0;justify-content:space-between;text-align:left;border:1px solid #d6e1ee;background:#fff;padding:12px 15px;border-radius:11px;color:#3e5175;transition:border-color .14s}
+.v24-switch button b{font-size:15px;line-height:1.35}.v24-switch button small{font-size:12px;color:#7584a1;white-space:nowrap}
+.v24-switch button.current{border-color:#3570b7;box-shadow:inset 0 3px #2469ba;background:#ebf4ff;color:#144f9a}
+.v24-barmap{border-bottom:1px solid #e4eaf2;margin:0 0 14px}
+.v24-barmap button{font-size:15px;font-weight:750;border-radius:9px;padding:11px 16px;border:1px solid #d1deed;background:#fff;color:#38557e}
+.v24-barmap button.on{border-color:#155baa;background:#eaf3ff;color:#11529e}
+.v24-head{--v24-accent:#326fa8;position:relative;padding:23px clamp(17px,2.4vw,32px);border-radius:15px;border:1px solid #dde5ee;border-left:5px solid var(--v24-accent);margin-bottom:17px;background:linear-gradient(110deg,color-mix(in srgb,var(--v24-accent) 8%,white),#fff);color:#172b4c}
+.v24-head span{font:750 12px 'IBM Plex Mono',monospace;color:var(--v24-accent);letter-spacing:.05em}
+.v24-head h1{font:750 clamp(27px,3vw,42px)/1.12 'DM Sans',sans-serif;letter-spacing:-.035em;margin:9px 0 10px;color:#172a4d}
+.v24-head p{margin:0;color:#54647e;font-size:16px;line-height:1.65;max-width:90ch}
+.v24-library{min-width:0;overflow:hidden}.v24-columns{display:grid;grid-template-columns:minmax(230px,255px) minmax(0,1fr);gap:14px;align-items:start}
+.v24-sidebar{position:sticky;top:83px;max-height:calc(100vh - 99px);border:1px solid #dce4ed;border-radius:13px;background:#fff;padding:15px;min-width:0;display:flex;flex-direction:column}
+.v24-search label,.v24-map-filters label,.v24-compare-sidebar label{font-size:13px;font-weight:750;color:#58708d;display:grid;gap:6px}
+.v24-search input,.v24-map-filters input,.v24-map-filters select,.v24-compare-sidebar input,.v24-compare-sidebar select,.v24-compare-target select{width:100%;min-width:0;border:1px solid #cddae9;border-radius:10px;background:#fff;padding:10px 12px;font-size:15px;color:#213c61;min-height:42px}
+.v24-counter{font:750 12px 'IBM Plex Mono',monospace;color:#7a86a0;margin:13px 0 10px}
+.v24-items{overflow:auto;min-height:0;scrollbar-width:thin;display:grid;gap:5px}
+.v24-items button{display:flex;align-items:center;gap:9px;width:100%;text-align:left;padding:11px 8px;border:1px solid transparent;border-radius:9px;min-width:0}
+.v24-items button:hover,.v24-items button.chosen{background:#f0f5ff;border-color:#dae7f8}
+.v24-items button>span:nth-child(2){min-width:0;flex:1}.v24-items b{font-size:14px;line-height:1.33;display:block;overflow-wrap:anywhere}.v24-items small{font-size:12px;display:block;color:#718199;line-height:1.4;margin-top:4px}.v24-items button>span:last-child{font-size:23px;color:#557ab0}
+.v24-small-dot{width:8px;height:8px;background:#4880c3;border-radius:50%;flex:none}
+.v24-article{min-width:0;border:1px solid #dfe5ef;background:white;border-radius:15px;overflow:hidden}
+.v24-detail{--v24-accent:#2764a9;color:#1d3051}
+.v24-entity-hero{padding:22px 25px;background:linear-gradient(120deg,color-mix(in srgb,var(--v24-accent) 12%,white),#fff);border-bottom:1px solid #dce6f0;display:grid;grid-template-columns:minmax(0,1fr) minmax(175px,28%);gap:22px;align-items:center}
+.v24-eyebrow{display:block;font:750 12px 'IBM Plex Mono',monospace;color:var(--v24-accent);letter-spacing:.035em}
+.v24-entity-hero h1,.v24-drug-hero h1{font:770 clamp(27px,3vw,43px)/1.12 'DM Sans',sans-serif;margin:13px 0;overflow-wrap:anywhere;letter-spacing:-.03em}
+.v24-entity-hero h1 i{font-style:italic}.v24-entity-hero p{font-size:16px;line-height:1.6;color:#53657f}
+.v24-photo{margin:0;border:1px solid #d6e2ee;border-radius:12px;background:#eef4fb;min-width:0;overflow:hidden}
+.v24-document-visual{height:160px;display:grid;place-items:center}
+.v24-photo img{height:100%;width:100%;object-fit:contain;max-height:190px;padding:12px}
+.v24-photo figcaption{font-size:11px;line-height:1.48;padding:8px 10px;background:white;color:#637089}
+.v24-photo figcaption a{color:#175ead}
+.v24-anchor{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;border-bottom:1px solid #dce4ee;padding:10px 17px;scrollbar-width:thin}
+.v24-anchor a{white-space:nowrap;font-size:13px;color:var(--v24-accent);font-weight:750;background:#f2f6fc;border:1px solid #e2e8f2;border-radius:8px;text-decoration:none;padding:7px 10px}
+.v24-detail section{scroll-margin-top:90px;padding:24px clamp(15px,2vw,27px);border-bottom:1px solid #e4eaf1}
+.v24-detail section:nth-of-type(even){background:#fbfcfe}
+.v24-section-eyebrow{font:750 12px 'IBM Plex Mono',monospace;color:var(--v24-accent);letter-spacing:.035em}
+.v24-detail section h2{font:760 clamp(23px,2.15vw,30px)/1.22 'DM Sans',sans-serif;color:#1e3158;margin:7px 0 14px}
+.v24-detail section>p{font-size:16px;line-height:1.78;max-width:87ch}
+.v24-highlight,.v24-alert,.v24-drug-spec{padding:15px 18px;border-left:5px solid #3678c2;background:#eef5fd;border-radius:9px;margin-top:14px}
+.v24-highlight b,.v24-alert b,.v24-drug-spec b{font:750 12px 'IBM Plex Mono',monospace;color:#2264b0}
+.v24-alert{border-left-color:#cb7b41;background:#fff8ed}.v24-alert b{color:#a9642b}
+.v24-highlight p,.v24-alert p,.v24-drug-spec p{font-size:15px;line-height:1.67;margin:7px 0 0}
+.v24-target-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.v24-target-list button{padding:13px;border:1px solid #dce4ed;background:#fff;border-radius:9px;text-align:left;min-width:0;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 8px}
+.v24-target-list button>span{font-size:15px;font-weight:750;overflow-wrap:anywhere}.v24-target-list small{font-size:12px;color:#5c748a;grid-column:1}.v24-target-list button b{font-size:13px;color:var(--v24-accent);grid-column:2;grid-row:1/span 2}
+.v24-blank{padding:14px;border:1px dashed #d8c39c;border-radius:9px;background:#fffaf1;font-size:14px;color:#6a5f52}
+.v24-sources,.v24-riskcards{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}
+.v24-sources a{padding:9px;border:1px solid #d5e3f3;background:#eff5fc;color:#145da7;font-size:13px;font-weight:700;border-radius:8px;text-decoration:none}
+.v24-drug-hero{padding:27px;background:linear-gradient(115deg,color-mix(in srgb,var(--v24-accent) 12%,white),#fff);border-bottom:1px solid #dce4ed}
+.v24-drug-hero>p{font-size:16px;line-height:1.7;max-width:78ch;color:#4d627a}
+.v24-drug-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}
+.v24-drug-tags>span{font-size:11px;padding:7px 10px;border-radius:8px;border:1px solid #d1deec;background:white;color:#285d92;font-weight:750;max-width:100%}
+.v24-mechanism{display:grid;grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr) 22px minmax(0,1fr);gap:9px;align-items:stretch;margin:19px 0}
+.v24-mechanism>div{background:#f7faff;border:1px solid #d6e3f4;border-top:5px solid var(--v24-accent);border-radius:11px;padding:16px;min-width:0}
+.v24-mechanism>div:nth-of-type(2){border-top-color:#ac63c8}.v24-mechanism>div:nth-of-type(3){border-top-color:#25806b}
+.v24-mechanism>div span{display:block;font:750 11px 'IBM Plex Mono',monospace;color:var(--v24-accent);margin-bottom:10px}
+.v24-mechanism>div b{font-size:15px;line-height:1.6;font-weight:650;overflow-wrap:anywhere}
+.v24-mechanism>i{align-self:center;justify-self:center;font:800 22px 'DM Sans';color:var(--v24-accent);font-style:normal}
+.v24-stat-row{display:flex;flex-wrap:wrap;gap:7px;margin:15px 0}
+.v24-stat-row span{font-size:12px;font-weight:750;border:1px solid #dbe2eb;border-radius:99px;padding:8px 10px;background:#fff}
+.v24-stat-row b{font-size:16px}.v24-stat-row .expected{color:#168361;background:#eaf8f0}.v24-stat-row .variable{color:#a7751e;background:#fff5dd}.v24-stat-row .excluded{color:#b53854;background:#fff0f3}.v24-stat-row .unknown{color:#68778b;background:#f1f3f7}
+.v24-spectra-filters label{font-size:13px;font-weight:750;display:flex;align-items:center;gap:9px;margin:12px 0}
+.v24-spectra-filters select{font-size:14px;background:#fff;border:1px solid #cbd9ed;border-radius:8px;padding:8px;max-width:100%;min-width:0}
+.v24-spectrum-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:660px;overflow:auto;align-content:start}
+.v24-spectrum-list button{border:1px solid #dbe4ec;background:#fff;border-radius:10px;text-align:left;padding:12px;display:flex;gap:9px;min-width:0;align-items:flex-start}
+.v24-spectrum-list button[hidden]{display:none}
+.v24-spectrum-list button>span:nth-child(2){min-width:0;flex:1}
+.v24-spectrum-list b{display:block;font-size:14px;line-height:1.34}
+.v24-spectrum-list small{font-size:12px;line-height:1.5;color:#6c7b92;display:block;margin-top:5px}
+.v24-spectrum-list em{font-style:normal;font-size:10px;color:#556784;max-width:90px;text-align:right}
+.v24-status-dot{width:8px;height:8px;border-radius:50%;background:#9ba8b9;flex:none;margin-top:5px}
+.v24-spectrum-list button.expected .v24-status-dot{background:#17a478}.v24-spectrum-list button.variable .v24-status-dot{background:#d9a03d}.v24-spectrum-list button.excluded .v24-status-dot{background:#d25877}
+.v24-safety-note{padding:14px;border-left:4px solid #d59c45;background:#fffaf2;border-radius:8px;color:#756449;font-size:14px!important}
+.v24-riskcards>div{flex:1 1 250px;background:#fff;border:1px solid #dce4ed;padding:17px;border-radius:10px;min-width:0}
+.v24-riskcards b{font:750 12px 'IBM Plex Mono',monospace;color:#276aaa}
+.v24-riskcards p{font-size:15px;line-height:1.64;margin:9px 0 0}
+.v24-map-filters{display:grid;grid-template-columns:auto minmax(170px,300px) minmax(170px,1fr);gap:12px;align-items:end;margin:15px 0}
+.v24-map-filters>div{display:flex;flex-wrap:wrap;gap:5px}
+.v24-map-filters>div button{font-size:14px;padding:11px 13px;border:1px solid #d5dfec;border-radius:9px;background:#fff}
+.v24-map-filters>div button.on{color:#195a9a;background:#ebf4ff;border-color:#5393d0;font-weight:800}
+.v24-matrixwrap{overflow:auto;max-width:100%;max-height:65vh;border:1px solid #d8e2ee;border-radius:12px;overscroll-behavior:contain;background:#fff}
+.v24-matrix{border-collapse:separate;border-spacing:0;table-layout:fixed;min-width:100%;width:max-content}
+.v24-matrix th,.v24-matrix td{border-right:1px solid #e3e9f1;border-bottom:1px solid #e6eaf1}
+.v24-matrix thead th{position:sticky;top:0;z-index:3;background:#edf3fa;width:140px;min-width:140px;max-width:140px;font-size:12px;line-height:1.34;padding:12px;overflow-wrap:anywhere}
+.v24-matrix thead th:first-child{left:0;z-index:5;width:210px;min-width:210px;max-width:210px}
+.v24-matrix tbody th{position:sticky;left:0;z-index:2;background:#f8fbff;text-align:left;width:210px;max-width:210px;min-width:210px;padding:10px}
+.v24-matrix tbody th button{font-size:13px;text-align:left;color:#245f9f;font-weight:800;overflow-wrap:anywhere}
+.v24-matrix tbody th small{font-size:11px;color:#748099;display:block;line-height:1.4;margin-top:5px}
+.v24-matrix td button{width:100%;min-height:45px;display:grid;place-items:center;font-size:20px;font-weight:850;color:#82909d}
+.v24-matrix td button.expected{color:#168360;background:#ebf8f2}.v24-matrix td button.variable{color:#c18c2d;background:#fff9ed}.v24-matrix td button.excluded{color:#ca3d61;background:#fff1f3}
+.v24-map-foot{display:flex;flex-wrap:wrap;gap:11px;align-items:center;margin-top:12px}
+.v24-map-foot>div{display:flex;flex-wrap:wrap;gap:9px;flex:1}
+.v24-map-foot span{font-size:12px}.v24-map-foot button{border:1px solid #d2dfed;background:#fff;border-radius:8px;padding:7px 12px;font-size:13px}
+.v24-pair-detail{margin:12px 0;padding:15px;border:1px solid #d6e4ef;background:#f5faff;border-radius:9px;font-size:14px}
+.v24-pair-detail b{font-size:16px}.v24-pair-detail p{font-size:15px;line-height:1.6}
+.v24-pair-detail button{font-size:13px;color:#185caa;background:#fff;border:1px solid #d6e0ee;border-radius:7px;padding:8px 10px;margin-right:8px}
+.v24-compare-target{display:flex;flex-wrap:wrap;gap:13px;align-items:end;justify-content:space-between;padding:14px;margin:12px 0;background:#fff;border:1px solid #dbe3ec;border-radius:12px}
+.v24-compare-target label{min-width:220px;flex:1;display:grid;gap:5px;font-size:13px;font-weight:750;color:#607393}
+.v24-compare-target strong{font-size:17px}.v24-compare-target button{background:#eff5fc;padding:9px;border-radius:9px;font-size:13px;font-weight:750}
+.v24-compare-layout{display:grid;grid-template-columns:minmax(240px,290px) minmax(0,1fr);gap:13px;align-items:start}
+.v24-compare-sidebar,.v24-compare-content{border:1px solid #dce4ee;background:white;border-radius:13px;min-width:0;padding:15px}
+.v24-compare-sidebar{display:flex;flex-direction:column;position:sticky;top:80px;max-height:calc(100vh - 95px)}
+.v24-compare-sidebar h2{font-size:19px;margin:0 0 10px}
+.v24-domainbar{display:flex;gap:5px;overflow-x:auto;padding:8px 0;scrollbar-width:thin}
+.v24-domainbar button{font-size:12px;flex:none;border:1px solid #d8e2ed;border-radius:8px;background:#fff;padding:7px}
+.v24-domainbar button.on{background:#eaf2ff;border-color:#82addd;color:#145baa}
+.v24-compare-sidebar label{margin-bottom:9px}
+.v24-comp-druglist{overflow:auto;display:grid;gap:4px;min-height:0;scrollbar-width:thin}
+.v24-comp-druglist button{padding:9px 11px;text-align:left;border:1px solid #e2e8f0;border-radius:9px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 8px;background:white}
+.v24-comp-druglist button.picked{background:#eef5ff;border-color:#7aaadf}
+.v24-comp-druglist b{display:block;font-size:14px;line-height:1.35;overflow-wrap:anywhere}
+.v24-comp-druglist small{font-size:11px;color:#667993;grid-column:1}.v24-comp-druglist button span{font-size:18px;color:#3771b0;grid-column:2;grid-row:1/span 2}
+.v24-picked{display:flex;flex-wrap:wrap;gap:6px;padding-bottom:15px}
+.v24-picked button{font-size:12px;padding:7px 9px;background:#e9f2ff;color:#1559a4;border:1px solid #d0e3f8;border-radius:99px}
+.v24-compare-scroll{overflow:auto;max-width:100%;border:1px solid #dae4ee;border-radius:11px;overscroll-behavior-x:contain}
+.v24-compare-scroll table{border-spacing:0;border-collapse:separate;table-layout:fixed;min-width:100%;width:max-content}
+.v24-compare-scroll th,.v24-compare-scroll td{min-width:220px;width:220px;max-width:220px;padding:15px;text-align:left;vertical-align:top;border-right:1px solid #e1e8f1;border-bottom:1px solid #e5ebf2;overflow-wrap:anywhere;font-size:14px;line-height:1.58}
+.v24-compare-scroll th:first-child{position:sticky;left:0;background:#edf4fc;z-index:3;width:175px;min-width:175px;max-width:175px;font-weight:800}
+.v24-compare-scroll thead th{position:sticky;top:0;background:#eaf2fd;z-index:4;font-weight:800;font-size:16px}.v24-compare-scroll thead th:first-child{z-index:6}
+.v24-compare-status{font-size:12px;padding:6px 8px;border-radius:7px;display:inline-block}
+.v24-compare-status.expected{color:#168364;background:#e7f7f0}.v24-compare-status.excluded{color:#c14962;background:#fff0f2}.v24-compare-status.variable{color:#a87c29;background:#fff7e7}.v24-compare-status.unknown{color:#75819b;background:#f0f3f7}
+.v24-compare-scroll td p{font-size:13px;line-height:1.55;color:#69758d}
+@media(max-width:1200px){.v24-columns,.v24-compare-layout{grid-template-columns:1fr}.v24-sidebar,.v24-compare-sidebar{position:static;max-height:280px}.v24-items,.v24-comp-druglist{grid-template-columns:repeat(2,minmax(0,1fr))}.v24-map-filters{grid-template-columns:1fr 1fr}.v24-map-filters>div{grid-column:1/-1}}
+@media(max-width:900px){.v24-mechanism{grid-template-columns:1fr;gap:7px}.v24-mechanism>i{transform:rotate(90deg);font-size:17px}.v24-target-list,.v24-spectrum-list{grid-template-columns:1fr}.v24-entity-hero{grid-template-columns:1fr}.v24-photo{max-width:520px;width:100%}}
+@media(max-width:570px){.v24-switch{gap:5px;padding:8px 0}.v24-switch button{flex:1 1 46%;padding:9px;display:block}.v24-switch button b{font-size:13px;display:block}.v24-switch button small{font-size:11px}.v24-items,.v24-comp-druglist{grid-template-columns:1fr}.v24-entity-hero,.v24-detail section,.v24-drug-hero{padding:17px}.v24-head{padding:16px}.v24-map-filters{grid-template-columns:1fr}.v24-map-filters>div{grid-column:auto}.v24-matrix thead th:first-child,.v24-matrix tbody th{min-width:165px;width:165px;max-width:165px}.v24-matrix thead th{min-width:112px;width:112px;max-width:112px}.v24-compare-scroll th,.v24-compare-scroll td{width:200px;min-width:200px;max-width:200px}.v24-compare-scroll th:first-child{width:145px;min-width:145px;max-width:145px}}
