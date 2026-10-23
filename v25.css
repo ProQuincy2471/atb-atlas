@@ -1,0 +1,143 @@
+/* ATB / ATLAS V25 — Clinical cartography, colored domains, postgraduate reviews.
+   Grid-first and typographic; avoids fabricated organisms and arbitrary connectors. */
+.v25-mapview,.v25-clinic{--atlas-navy:#233652;--atlas-muted:#60718e;--atlas-border:#dce5ef;--atlas-bg:#f7faff;color:var(--atlas-navy);min-width:0}
+.v25-mapview button,.v25-clinic button{font:inherit;cursor:pointer}
+.v25-switch{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.v25-switch button{padding:10px 15px;background:#fff;border:1px solid #d2deed;color:#3d648f;font-size:14px;font-weight:750;border-radius:10px}
+.v25-switch button.on{background:#eaf2ff;border-color:#7aa5d7;color:#1c5ca1}
+.v25-map{--map-color:#2765ad;min-width:0}
+.v25-maphead{padding:29px 29px 25px;border-radius:17px;background:linear-gradient(115deg,#edf4ff,#fff 65%);border:1px solid #d9e5f3;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.v25-maphead>div:first-child{flex:1;min-width:0}
+.v25-maphead span,.v25-clinic-head>span{font:750 12px 'IBM Plex Mono',monospace;color:#2e6bb1;letter-spacing:.065em}
+.v25-maphead h1,.v25-clinic-head h1{font:760 clamp(29px,3vw,46px)/1.16 'DM Sans',sans-serif;max-width:25ch;letter-spacing:-.032em;margin:12px 0}
+.v25-maphead h1 em,.v25-clinic-head h1 em{color:#1f6eb9;font-style:normal}
+.v25-maphead p,.v25-clinic-head p{font-size:16px;line-height:1.7;color:#526680;max-width:86ch;margin:0}
+.v25-map-key{flex:0 0 170px;display:flex;flex-direction:column;gap:4px;align-items:flex-start;padding:17px;border-left:3px solid var(--map-color);background:#fff;border-radius:10px}
+.v25-map-key b{font:800 35px 'DM Sans',sans-serif;color:#195d9c;line-height:1}.v25-map-key span{font-size:13px;font-weight:800;color:#263955}.v25-map-key small{font-size:12px;color:#687b96}
+.v25-domainbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:14px 0}
+.v25-domainbar button{--tab:#2765a5;border:1px solid #d8e3f0;border-radius:13px;display:flex;flex-wrap:wrap;gap:7px 9px;align-items:center;min-height:65px;padding:13px 16px;text-align:left;background:#fff;position:relative}
+.v25-domainbar button.selected{background:color-mix(in srgb,var(--tab) 9%,white);border-color:var(--tab);box-shadow:inset 0 4px 0 var(--tab)}
+.v25-domainmark{width:11px;height:11px;border-radius:50%;background:var(--tab);flex:none}
+.v25-domainbar b{font-size:16px;color:#29405e;line-height:1.35}.v25-domainbar button.selected b{color:var(--tab)}
+.v25-domainbar small{flex:1 0 100%;font-size:12px;color:#6c7e97;padding-left:20px}
+.v25-mapgrid{display:grid;grid-template-columns:minmax(205px,23%) minmax(210px,26%) minmax(0,1fr);gap:12px;align-items:start;min-width:0}
+.v25-mapgrid>aside,.v25-mapgrid>section{min-width:0;border:1px solid #dce5ee;border-radius:14px;background:#fff;overflow:hidden}
+.v25-panel-heading{background:#f7faff;border-bottom:1px solid #e1e8f1;padding:18px}
+.v25-panel-heading>small,.v25-current>small{font:750 11px 'IBM Plex Mono',monospace;color:var(--map-color);letter-spacing:.045em}
+.v25-panel-heading h2{font:770 20px/1.28 'DM Sans',sans-serif;color:#253b5d;margin:7px 0}
+.v25-panel-heading p{font-size:13px!important;line-height:1.63;color:#65748c;margin:6px 0 0}
+.v25-group-list,.v25-species-list{display:grid;align-content:start;gap:5px;padding:10px;overflow:auto;scrollbar-width:thin}
+.v25-group-list{max-height:min(71vh,840px)}.v25-species-list{max-height:min(68vh,810px)}
+.v25-group-list button{display:flex;align-items:center;gap:10px;width:100%;min-width:0;border:1px solid transparent;border-radius:10px;padding:10px 9px;text-align:left;background:transparent}
+.v25-group-list button:hover,.v25-group-list button.on{background:#f1f6fd;border-color:#cadcf2}
+.v25-group-list button.on{box-shadow:inset 3px 0 0 var(--item,var(--map-color))}
+.v25-group-list button span:nth-child(2){flex:1;min-width:0}
+.v25-group-list b{display:block;font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+.v25-group-list small{display:block;font-size:11px;color:#79849b;margin-top:5px}
+.v25-circle{height:11px;width:11px;border-radius:50%;flex:0 0 11px}
+.v25-search{display:grid;gap:7px;font-size:12px;color:#687b98;padding:12px 13px 3px;font-weight:800}
+.v25-search input,.v25-clinic-sidebar input,.v25-activity-controls select{height:42px;border:1px solid #cbd8e9;border-radius:9px;background:#fff;color:#263c60;padding:10px 11px;width:100%;min-width:0;font-size:14px}
+.v25-species-count{padding:9px 13px;font:730 11px 'IBM Plex Mono',monospace;color:#6f819a}
+.v25-species-list button{display:flex;gap:10px;align-items:center;width:100%;min-width:0;padding:11px 8px;border:1px solid transparent;border-radius:9px;text-align:left;background:#fff}
+.v25-species-list button:hover,.v25-species-list button.on{background:#f2f7ff;border-color:#d9e5f2}.v25-species-list button.on{box-shadow:inset 3px 0 0 var(--item)}
+.v25-organ-dot{background:var(--item);height:9px;width:9px;flex:0 0 9px;border-radius:50%}
+.v25-species-list button>span:nth-child(2){flex:1;min-width:0}
+.v25-species-list b{font-size:14px;line-height:1.34;overflow-wrap:anywhere;display:block}
+.v25-species-list small{font-size:11px;line-height:1.4;color:#6f7d95;margin-top:4px;display:block}
+.v25-right{color:#7090b2;font-size:18px}
+.v25-current{padding:19px 21px 18px;background:linear-gradient(120deg,color-mix(in srgb,var(--map-color) 10%,white),#fff);border-bottom:1px solid #dce4ed}
+.v25-current h2{font:760 clamp(23px,2.5vw,32px)/1.22 'DM Sans',sans-serif;overflow-wrap:anywhere;margin:8px 0;color:#203957}
+.v25-current p{font-size:15px;line-height:1.65;color:#556981;margin:8px 0 11px}
+.v25-profile-actions button{background:var(--map-color);border:1px solid var(--map-color);color:#fff;border-radius:8px;padding:9px 12px;font-size:13px;font-weight:800}
+.v25-activity{padding:18px;border-bottom:1px solid #e4eaf2}.v25-activity h3{font:760 19px 'DM Sans',sans-serif;margin:0 0 7px}.v25-activity>div:first-child p{font-size:13px;color:#6b7991;line-height:1.5}
+.v25-fourstats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:10px}
+.v25-fourstats button{border:1px solid #dde5ee;background:#f8faff;border-radius:9px;padding:10px;text-align:left;min-width:0}
+.v25-fourstats button b{font:820 21px 'DM Sans',sans-serif;display:block;line-height:1.1}
+.v25-fourstats button small{font-size:12px;line-height:1.3;display:block;margin-top:4px}
+.v25-fourstats button.on{box-shadow:inset 0 3px 0 currentColor}
+.v25-fourstats .expected{color:#177c5c;background:#f0faf5}.v25-fourstats .variable{color:#a8782c;background:#fffaec}.v25-fourstats .excluded{color:#b5485c;background:#fff4f5}.v25-fourstats .unknown{color:#68778e;background:#f3f5f9}
+.v25-activity-controls{display:flex;gap:8px;align-items:end;flex-wrap:wrap;padding:12px 17px}
+.v25-activity-controls label{flex:1;min-width:150px;display:grid;gap:6px;font-size:12px;font-weight:750;color:#5b7292}
+.v25-activity-controls>button{font-size:12px;font-weight:750;color:#35669d;border:1px solid #d3e1ef;border-radius:9px;background:#fff;padding:10px}
+.v25-activity-controls>button.on{background:#eaf3fc;color:#185ea3}
+.v25-pair-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:12px;max-height:69vh;overflow:auto;align-content:start;scrollbar-width:thin}
+.v25-pair{min-width:0;border:1px solid #dbe5ef;border-top:4px solid #b8c5d7;border-radius:10px;padding:12px;background:#fff;display:flex;flex-direction:column}
+.v25-pair.expected{border-top-color:#1e9a76}.v25-pair.variable{border-top-color:#d9a345}.v25-pair.excluded{border-top-color:#d15e73}
+.v25-pair>div{display:flex;align-items:start;gap:8px}.v25-pair>div>span:nth-child(2){min-width:0;flex:1}
+.v25-pair strong{font-size:13px;line-height:1.3;display:block;overflow-wrap:anywhere}.v25-pair small{display:block;font-size:11px;color:#7a8da1;margin-top:5px}
+.v25-pair-symbol{font-size:16px;font-weight:900;color:#67869c;line-height:1}.v25-pair.expected .v25-pair-symbol{color:#218565}.v25-pair.variable .v25-pair-symbol{color:#b78227}
+.v25-pair p{font-size:12px;line-height:1.57;color:#5d6c85;flex:1;margin:10px 0}
+.v25-pair button{font-size:12px;font-weight:750;color:#23649f;padding:7px 9px;text-align:left;background:#f3f7fc;border:1px solid #deebf8;border-radius:8px}
+.v25-map-disclaimer{background:#fffbf2;padding:17px 20px;border-top:1px solid #ead7b1}
+.v25-map-disclaimer b{font:800 13px 'IBM Plex Mono',monospace;color:#976f2b}
+.v25-map-disclaimer p{font-size:13px;line-height:1.65;color:#75654a;margin:7px 0 0}
+.v25-map-empty{padding:50px 24px;text-align:center}.v25-map-empty h2{font-size:24px}.v25-map-empty p{color:#6a7c96}.v25-map-empty button{color:#185caa;border:1px solid #d6e5f8;border-radius:9px;padding:10px}
+.v25-org-review{--review-accent:#2c6cb2;min-width:0;border-top:2px solid var(--review-accent);margin-top:9px}
+.v25-org-review>header{background:linear-gradient(110deg,color-mix(in srgb,var(--review-accent) 9%,white),#fff);padding:25px 27px;border-bottom:1px solid #d8e3ef}
+.v25-org-review header>span,.v25-org-review section>span{font:740 12px 'IBM Plex Mono',monospace;color:var(--review-accent);letter-spacing:.05em}
+.v25-org-review header h2{font:760 clamp(24px,2.5vw,34px)/1.2 'DM Sans',sans-serif;margin:10px 0}
+.v25-org-review header p{font-size:15px;line-height:1.7;color:#546681;max-width:80ch}
+.v25-org-review section{padding:26px 28px;border-bottom:1px solid #e3eaf3;background:#fff;scroll-margin-top:80px}
+.v25-org-review section:nth-of-type(even){background:#f9fbfd}
+.v25-org-review h3{font:750 clamp(21px,2.2vw,28px)/1.25 'DM Sans',sans-serif;color:#2b405f;margin:9px 0}
+.v25-org-review section>p{font-size:16px;line-height:1.79;color:#3c4b63;max-width:91ch}
+.v25-editorial-emphasis,.v25-editorial-caution{padding:17px 20px;border-left:5px solid var(--review-accent);background:color-mix(in srgb,var(--review-accent) 7%,white);border-radius:9px;margin:14px 0}
+.v25-editorial-caution{border-color:#d49b45;background:#fffaf0}
+.v25-editorial-emphasis b,.v25-editorial-caution b{font:800 12px 'IBM Plex Mono',monospace;color:#2e6391}
+.v25-editorial-emphasis p,.v25-editorial-caution p{font-size:15px;line-height:1.7;margin:8px 0 0}
+.v25-editorial-related{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.v25-editorial-related button{display:grid;grid-template-columns:minmax(0,1fr) auto;text-align:left;gap:5px 8px;padding:13px;border:1px solid #d6e1ef;border-radius:9px;background:white;min-width:0}
+.v25-editorial-related b{font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+.v25-editorial-related small{font-size:12px;color:#657b91;grid-column:1}
+.v25-editorial-related em{font-style:normal;color:#175d9d;font-weight:750;font-size:12px;grid-column:2;grid-row:1/span 2}
+.v25-rounds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.v25-rounds>div{padding:15px;border:1px solid #dfe8f1;border-top:4px solid var(--review-accent);background:#fff;border-radius:10px;min-width:0}
+.v25-rounds small{font:760 11px 'IBM Plex Mono',monospace;color:var(--review-accent)}
+.v25-rounds p{font-size:14px;line-height:1.7;margin:10px 0 0;color:#33445c}
+.v25-source-note{border-top:1px solid #e0e8f0;margin-top:20px;padding-top:15px;color:#71809a!important;font-size:13px!important}
+.v25-source-note a{color:#22639f}
+.v25-clinic-head{background:linear-gradient(110deg,#edf5ff,#fff);border:1px solid #d9e7f4;border-left:5px solid #2c71bc;border-radius:16px;padding:27px;margin-bottom:15px}
+.v25-clinic-head h1{max-width:26ch}
+.v25-clinic-layout{display:grid;grid-template-columns:minmax(245px,278px) minmax(0,1fr);gap:14px;align-items:start}
+.v25-clinic-sidebar{background:#fff;border:1px solid #d9e2ed;border-radius:12px;padding:14px;position:sticky;top:75px;max-height:calc(100vh - 90px);display:flex;flex-direction:column;min-width:0}
+.v25-clinic-sidebar>label{display:grid;gap:6px;color:#617694;font-size:12px;font-weight:800}
+.v25-clinic-systems{display:flex;overflow-x:auto;gap:6px;padding:11px 0;scrollbar-width:thin}
+.v25-clinic-systems button{white-space:nowrap;flex:none;border:1px solid #d5e2f0;background:#fff;border-radius:9px;padding:8px 10px;font-size:12px;color:#446588}
+.v25-clinic-systems button.on{border-color:#4d8ac8;background:#eaf3fd;color:#155b9d}
+.v25-clinic-count{font:750 11px 'IBM Plex Mono',monospace;color:#78879a;padding:8px 0}
+.v25-clinic-list{min-height:0;overflow:auto;display:grid;gap:5px;scrollbar-width:thin}
+.v25-clinic-list button{border:1px solid transparent;border-radius:9px;padding:11px;background:#fff;text-align:left}
+.v25-clinic-list button:hover,.v25-clinic-list button.on{background:#eef5fe;border-color:#cadff2;box-shadow:inset 3px 0 #2f6eae}
+.v25-clinic-list b{font-size:14px;line-height:1.4;display:block}.v25-clinic-list small{font-size:11px;line-height:1.4;display:block;color:#71839d;margin-top:6px}
+.v25-clinic-article{min-width:0;border:1px solid #dae4ee;border-radius:13px;overflow:hidden;background:#fff}
+.v25-syndrome{--syndrome:#326ab0;min-width:0}
+.v25-syndrome-hero{padding:31px 30px;border-bottom:1px solid #dbe4ee;background:linear-gradient(115deg,color-mix(in srgb,var(--syndrome) 12%,white),#fff)}
+.v25-syndrome-hero>span{font:750 12px 'IBM Plex Mono',monospace;color:var(--syndrome);letter-spacing:.04em}
+.v25-syndrome-hero h1{font:750 clamp(28px,3vw,42px)/1.15 'DM Sans',sans-serif;color:#29344f;letter-spacing:-.035em;margin:13px 0;max-width:25ch}
+.v25-syndrome-hero p{font-size:17px;line-height:1.72;max-width:86ch;color:#4e5970}
+.v25-review-meta{display:flex;flex-wrap:wrap;gap:7px}
+.v25-review-meta span{padding:6px 9px;color:var(--syndrome);background:#fff;border:1px solid #d9e2ec;border-radius:7px;font:750 11px 'IBM Plex Mono',monospace}
+.v25-syndrome-nav{display:flex;gap:6px;padding:11px 18px;white-space:nowrap;overflow:auto;scrollbar-width:thin;background:#fff;border-bottom:1px solid #e2e9f1}
+.v25-syndrome-nav a{text-decoration:none;color:#2b669a;background:#f0f6fd;padding:8px 10px;border-radius:8px;font-size:12px;font-weight:800}
+.v25-syndrome-section{padding:27px 29px;border-bottom:1px solid #e2e9f2;scroll-margin-top:75px}
+.v25-syndrome-section:nth-of-type(even){background:#fafcff}
+.v25-syndrome-section>header{display:flex;gap:13px;align-items:flex-start}
+.v25-syndrome-section>header>b{flex:0 0 43px;height:43px;display:grid;place-items:center;background:var(--syndrome);color:white;border-radius:10px;font:800 15px 'IBM Plex Mono',monospace}
+.v25-syndrome-section>header>div{min-width:0}.v25-syndrome-section header span{font:750 11px 'IBM Plex Mono',monospace;color:var(--syndrome)}
+.v25-syndrome-section h2{font:760 clamp(23px,2.2vw,31px)/1.25 'DM Sans',sans-serif;letter-spacing:-.02em;margin:5px 0;color:#233953}
+.v25-syndrome-section>p{font-size:17px;line-height:1.82;color:#374a64;max-width:86ch;margin:15px 0}
+.v25-syndrome-context{border-left:4px solid var(--syndrome);padding:14px 17px;background:#f0f6fe;margin-top:14px;border-radius:0 9px 9px 0}
+.v25-syndrome-context b{font:750 12px 'IBM Plex Mono',monospace;color:#356da9}.v25-syndrome-context p{font-size:15px;line-height:1.7;margin:6px 0 0}
+.v25-syndrome-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:15px 0}
+.v25-syndrome-steps>div{background:#f7faff;border:1px solid #dae5f2;border-top:4px solid var(--syndrome);border-radius:10px;padding:18px;min-width:0}
+.v25-syndrome-steps b{font:800 12px 'IBM Plex Mono',monospace;color:var(--syndrome)}
+.v25-syndrome-steps p{font-size:14px;line-height:1.7;color:#3f506a;margin:10px 0 0}
+.v25-clinical-rx{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.v25-clinical-rx>div{border:1px solid #dfe9f2;border-radius:9px;padding:14px}.v25-clinical-rx b{font-size:15px}.v25-clinical-rx p{font-size:14px;line-height:1.55}
+.v25-syndrome-foot{padding:22px 29px;background:#f6f9fd}
+.v25-syndrome-foot>b{font:800 12px 'IBM Plex Mono',monospace;color:#45709e}.v25-syndrome-foot p{font-size:13px;line-height:1.69;color:#5e7089}
+.v25-syndrome-foot a{display:inline-block;margin:5px 8px 5px 0;padding:9px;color:#155b9f;background:white;border:1px solid #d5e2ee;border-radius:8px;font-size:12px;text-decoration:none}
+@media(max-width:1350px){.v25-mapgrid{grid-template-columns:minmax(210px,27%) minmax(0,1fr)}.v25-interpret{grid-column:1/-1}.v25-pair-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:1100px){.v25-clinic-layout{grid-template-columns:1fr}.v25-clinic-sidebar{position:static;max-height:300px;overflow:auto}.v25-clinic-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:840px){.v25-mapgrid{grid-template-columns:1fr}.v25-interpret{grid-column:auto}.v25-group-list{grid-template-columns:repeat(2,minmax(0,1fr));max-height:260px}.v25-species-list{grid-template-columns:repeat(2,minmax(0,1fr));max-height:290px}.v25-pair-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.v25-domainbar{grid-template-columns:repeat(2,minmax(0,1fr))}.v25-rounds{grid-template-columns:1fr}}
+@media(max-width:560px){.v25-maphead{display:block;padding:19px}.v25-map-key{border-left:0;border-top:3px solid var(--map-color);margin-top:17px}.v25-domainbar{gap:7px}.v25-domainbar button{padding:10px;min-height:60px}.v25-domainbar b{font-size:14px}.v25-domainbar small{font-size:11px}.v25-group-list,.v25-species-list,.v25-pair-grid,.v25-fourstats,.v25-clinic-list,.v25-editorial-related,.v25-syndrome-steps,.v25-clinical-rx{grid-template-columns:1fr}.v25-group-list{max-height:320px}.v25-pair-grid{max-height:750px}.v25-activity{padding:13px}.v25-current{padding:15px}.v25-org-review>header,.v25-org-review section,.v25-syndrome-hero,.v25-syndrome-section{padding:18px}.v25-syndrome-section>p{font-size:16px;line-height:1.75}}
+@media(prefers-reduced-motion:reduce){.v25-mapview *, .v25-clinic *{scroll-behavior:auto!important}}
