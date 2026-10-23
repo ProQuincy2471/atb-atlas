@@ -33,9 +33,9 @@ jobs:
       - name: Validate clinical map and syndromic reviews V25
         if: always()
         run: node qa/v25-browser.cjs
-      - name: Validate NEXO ID V26 visual and functional experience
+      - name: Validate INFEORA V26 visual and functional experience
         if: always()
-        run: node qa/nexo-v26-browser.cjs
+        run: node qa/infeora-v26-browser.cjs
       - name: Upload viewport captures and diagnostics
         if: always()
         uses: actions/upload-artifact@v4
