@@ -1,0 +1,29 @@
+/* V23 coverage module with in-place exploration and clinical status separation */
+.v23-cov{min-width:0;color:#1c2c50}
+.v23-cov-header{border-bottom:1px solid #dae4f1;padding:6px 0 17px}
+.v23-cov-header>span{font:750 12px 'IBM Plex Mono',monospace;color:#d42c74;letter-spacing:.05em}
+.v23-cov-header h3{font:750 clamp(23px,2.1vw,31px)/1.2 'DM Sans',sans-serif;margin:10px 0}
+.v23-cov-header p{font-size:16px!important;line-height:1.66;color:#4c5974;margin:0;max-width:80ch}
+.v23-organism-nav{display:flex;gap:9px;overflow-x:auto;max-width:100%;padding:17px 0;scrollbar-width:thin}
+.v23-organism-nav button{flex:0 0 175px;min-width:0;text-align:left;padding:12px;border:1px solid #dce4ef;border-radius:11px;background:#fff;display:flex;flex-direction:column;gap:6px;min-height:84px}
+.v23-organism-nav button.on{border-color:var(--gt);background:color-mix(in srgb,var(--gt) 8%,white);box-shadow:inset 0 3px var(--gt)}
+.v23-nav-dot{height:9px;width:9px;border-radius:50%;background:var(--gt)}
+.v23-organism-nav b{font-size:14px;line-height:1.3;overflow-wrap:anywhere}
+.v23-organism-nav small{color:#63738d;font-size:11px}
+.v23-cov-hero{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 19px;background:#f0f6ff;border:1px solid #d5e4f7;border-radius:12px;margin-bottom:13px}
+.v23-cov-hero small{font:750 11px 'IBM Plex Mono',monospace;color:#4870a2}
+.v23-cov-hero h4{font-size:21px;line-height:1.24;margin:6px 0}.v23-cov-hero p{font-size:14px!important;color:#576984;margin:0}
+.v23-cov-stats{display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.v23-count{background:white;border:1px solid #cbdcef;padding:6px 8px;border-radius:9px;font-size:12px}
+.v23-count b{font-size:15px}.v23-count.active,.v23-count.expected{color:#147a5c;background:#edfaf3}.v23-count.conditional,.v23-count.variable{color:#a47222;background:#fff8ea}.v23-count.none,.v23-count.excluded{color:#bd3658;background:#fff0f4}
+.v23-organisms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.v23-pair{border-radius:11px;border:1px solid #dce4ef;border-top:4px solid #99a7bc;background:white;padding:14px;min-width:0}
+.v23-pair.active,.v23-pair.expected{border-top-color:#168c6c}.v23-pair.conditional,.v23-pair.variable{border-top-color:#d89b2e}.v23-pair.none,.v23-pair.excluded{border-top-color:#d84a6b}
+.v23-pair header{display:flex;align-items:flex-start;gap:9px}.v23-pair header>div{flex:1;min-width:0}.v23-pair strong{display:block;font-size:15px;overflow-wrap:anywhere;line-height:1.3}
+.v23-pair header small{display:block;font-size:12px;color:#62738c;margin-top:4px}.v23-pair header button{flex:none;font-size:12px;color:#1960aa;padding:7px 8px;border:1px solid #d6e4f8;border-radius:8px;background:#f1f7ff}
+.v23-pair-status{font-size:19px;font-weight:900;color:#708399}.v23-pair.active .v23-pair-status,.v23-pair.expected .v23-pair-status{color:#15826a}.v23-pair.none .v23-pair-status,.v23-pair.excluded .v23-pair-status{color:#d04463}
+.v23-pair p{font-size:14px!important;line-height:1.6;margin:10px 0}.v23-sourcekind{font:700 10px 'IBM Plex Mono',monospace;color:#77859b;letter-spacing:.035em}
+.v23-cov-foot{background:#fffaf2;border-left:4px solid #d39742;border-radius:9px;padding:15px;margin-top:17px}
+.v23-cov-foot strong{font-size:12px;color:#9b6b25}.v23-cov-foot p{font-size:14px!important;line-height:1.66;margin:5px 0 0}.v23-cov-foot a{color:#1761af}
+@media(max-width:930px){.v23-organisms{grid-template-columns:1fr}.v23-cov-hero{flex-direction:column;align-items:flex-start}}
+@media(max-width:560px){.v23-organism-nav button{flex-basis:150px}.v23-pair header button{font-size:11px}.v23-cov-header p{font-size:15px!important}}
