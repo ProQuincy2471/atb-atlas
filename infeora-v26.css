@@ -331,3 +331,64 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 
 /* INFEORA wordmark: one name, two tonal weights */
 .nx-brand-type strong span{background:transparent!important;color:#da7c46!important;padding:0!important;margin:0!important;font-size:22px!important;letter-spacing:-.07em!important;vertical-align:baseline!important;border-radius:0!important}
+
+/* ===== V27 · Design refresh: warm paper, serif display type, cobalt rail, copper accent ===== */
+:root{--nx-background:#f6f3ec;--nx-ink:#14233b;--nx-muted:#5d6b80;--nx-border:#e4ded2;--nx-brand:#1f4f93;--nx-orange:#c8642a;--nx-shadow:0 1px 0 rgba(20,35,59,.04),0 14px 34px rgba(20,35,59,.06)}
+body{background:var(--nx-background)!important}
+/* Display typography: serif, large, tight */
+.nx-home h1,.nx-explore h1,.nx-home h2,.nx-section-page :where(.a18-head h1,.v24-head h1,.v25-clinic-head h1,.v24-book-hero h1,.v25-syndrome-hero h1){font-family:'Fraunces',Georgia,serif!important;font-weight:560!important;letter-spacing:-.025em!important;color:#14233b!important;font-variation-settings:'SOFT' 40,'WONK' 0}
+.nx-hero h1{font-size:clamp(44px,4.6vw,76px);line-height:1.03;max-width:13ch}
+.nx-hero h1 em{font-style:italic;color:#c8642a;font-weight:500}
+.nx-home h2{font-size:clamp(26px,2.4vw,36px);line-height:1.12}
+.nx-overline,.nx-edition{color:#c8642a}
+/* Cobalt rail */
+.nx-rail{background:linear-gradient(180deg,#183a6b 0%,#14305a 100%);border-right:0;color:#dbe6f5}
+.nx-brand,.nx-brand-type strong{color:#fff}.nx-brand-type small{color:#9db6d6}
+.nx-mark{background:#fff;box-shadow:none}.nx-mark i{background:#183a6b}.nx-mark i:nth-child(4){background:#c8642a}
+.nx-mark:before,.nx-mark:after{background:rgba(24,58,107,.5)}
+.nx-rail-label{color:#86a2c8}
+.nx-rail-link{color:#c3d4ea}.nx-rail-link:hover{background:rgba(255,255,255,.08);color:#fff}
+.nx-rail-link.active{background:rgba(255,255,255,.14);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16)}
+.nx-rail-icon{opacity:.85}.nx-rail-icon img,.nx-rail-icon svg{filter:brightness(0) invert(1)!important}
+.nx-rail-active{background:#f0a368;width:4px}
+.nx-rail-bottom{border-top-color:rgba(255,255,255,.14);color:#dbe6f5}.nx-rail-bottom small{color:#9db6d6}
+.nx-rail-symbol{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#f0a368}
+.nx-topbar{background:rgba(246,243,236,.92)}
+/* Hero */
+.nx-hero-copy{background:#fffdf8;border:1px solid #e4ded2;border-radius:20px;box-shadow:var(--nx-shadow)}
+.nx-hero-copy:after{border-color:#eadfce;box-shadow:0 0 0 45px rgba(200,100,42,.045),0 0 0 90px rgba(200,100,42,.02)}
+.nx-hero-panel{background:linear-gradient(160deg,#1c447c,#13305b);border-radius:20px}
+.nx-hero-panel ol{margin-top:22px}.nx-hero-panel li{padding:14px 0}
+.nx-hero-stats{margin:auto 0 18px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-top:18px;border-top:1px solid rgba(255,255,255,.16)}
+.nx-hero-stats dt{font:560 34px/1 'Fraunces',Georgia,serif;color:#fff}.nx-hero-stats dd{margin:6px 0 0;font:650 10px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#a9c3e4}
+.nx-primary{background:#1f4f93!important;border-radius:11px}.nx-secondary{border-radius:11px}
+/* Cards */
+.nx-domain-card{background:#fffdf8;border-color:#e4ded2;border-radius:16px;box-shadow:var(--nx-shadow)}
+.nx-domain-card:before{left:0;right:0;height:5px;border-radius:16px 16px 0 0}
+.nx-dc-count{font:500 52px/1 'Fraunces',Georgia,serif;letter-spacing:-.03em;color:var(--tone);margin:24px 0 8px}
+.nx-domain-card h3{font:600 21px 'Fraunces',Georgia,serif;letter-spacing:-.01em;color:#14233b}
+.nx-home-bottom section{background:#fffdf8;border-color:#e4ded2;border-radius:16px;box-shadow:var(--nx-shadow)}
+.nx-home-bottom button{color:#c8642a}
+/* Section pages: paper cards, serif headers */
+.nx-section-page :where(.v24-sidebar,.v24-article,.v25-clinic-sidebar,.v25-clinic-article,.v24-compare-sidebar,.v24-compare-content,.v24-book-index,.v24-book-chapter,.a18-browser,.a18-article){background:#fffdf8!important;border-color:#e4ded2!important;box-shadow:var(--nx-shadow)}
+.nx-section-page :where(.v24-head,.a18-head,.v25-clinic-head,.v24-book-hero){background:#fffdf8!important;border-color:#e4ded2!important;border-left-width:6px!important;box-shadow:var(--nx-shadow)}
+.nx-section-page :where(.v24-head h1,.v25-clinic-head h1,.a18-head h1){font-size:clamp(34px,3.4vw,52px)!important;line-height:1.08!important}
+.nx-section-page :where(.v25-syndrome-section>header h2,.v24-detail h2){font-family:'Fraunces',Georgia,serif;font-weight:580;letter-spacing:-.015em}
+.nx-section-page .v25-syndrome-hero h1{font-size:clamp(34px,3.6vw,54px)!important;line-height:1.06!important}
+.nx-explore-tabs button,.nx-domain-tab{border-radius:12px}
+@media(max-width:1000px){.nx-rail{background:#14305a}}
+.nx-section-page :where(.v24-head,.a18-head,.v25-clinic-head,.v24-book-hero){border-left-color:var(--v24-accent,#1f4f93)!important}
+.nx-section-page .v24-head span,.nx-section-page .v25-clinic-head span{color:var(--v24-accent,#c8642a)}
+.nx-selected-organism h2,.nx-selected-organism h1,.nx-explore-workspace h2{font-family:'Fraunces',Georgia,serif;font-weight:560;letter-spacing:-.02em}
+@media(max-width:560px){.nx-hero h1{font-size:clamp(34px,10.5vw,44px);max-width:none;overflow-wrap:anywhere}.nx-hero-copy{padding:28px 22px}}
+/* Polish pass: one paper surface, tone carried by a top rule instead of pastel gradients */
+.nx-section-page :where(.v23-learn-hero,.a18-labhero,.a18-browserhead,.v25-syndrome-hero){background:#fffdf8!important;background-image:none!important}
+.nx-section-page .v23-learn-hero{border-top:5px solid #5b9a55}
+.nx-section-page .a18-labhero{border-top:5px solid #3a7fd0}
+.nx-section-page .a18-browserhead{border-bottom:1px solid #e4ded2;border-top:5px solid #b9486f}
+.nx-section-page .v25-syndrome-hero{border-top:5px solid var(--syndrome,#1f4f93)}
+.nx-section-page .a19-pageintro{box-shadow:var(--nx-shadow);border-radius:20px}
+.nx-section-page .v25-clinic-head h1 em{color:#c8642a;font-style:italic;font-weight:500}
+.nx-section-page :where(.v23-learn-hero h1,.v23-learn-hero h2,.a18-labhero h1,.a18-labhero h2,.v25-syndrome-section>header h2,.v23-learn-article h2,.a18-sheet h2,.a18-browserhead h2){font-family:'Fraunces',Georgia,serif!important;font-weight:580!important;letter-spacing:-.018em!important}
+.nx-section-page .a18-systemchips{max-height:none;overflow:visible}
+.nx-section-page :where(.a19-lab-path,.a19-compare-intro,.a19-learning-circuit){background:#fffdf8;background-image:none;border-color:#e4ded2;box-shadow:var(--nx-shadow)}

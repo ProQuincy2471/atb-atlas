@@ -19,7 +19,7 @@ for(const view of [{width:1600,height:900},{width:1280,height:820},{width:768,he
  if(view.width===1600){const audit=await page.evaluate(()=>{
  const gs=ATLAS25.microGroups,all=ATLAS24.debug.orgs,c=new Map(),unknown=[];for(const g of gs)for(const id of g.ids){c.set(id,(c.get(id)||0)+1);if(!all.find(x=>x.id===id))unknown.push(id)}
  return {groups:gs.length,organisms:all.length,missing:all.filter(p=>c.get(p.id)!==1).map(p=>p.id),unknown,who:WHO.conditions.length,syndromes:ATLAS25.extraConditions.length,specific:Object.keys(ATLAS25.speciesInsight).length,reviewFields:Object.entries(ATLAS25.conditions).filter(([k,a])=>a.length!==6).map(([k])=>k)};
- });assert(audit.organisms===129&&audit.groups===25&&!audit.missing.length&&!audit.unknown.length,'Hierarchy not exhaustive '+JSON.stringify(audit));assert(audit.who===37&&audit.syndromes===17&&!audit.reviewFields.length,'Syndrome coverage '+JSON.stringify(audit));all.push({dataAudit:audit})}
+ });assert(audit.organisms===129&&audit.groups===25&&!audit.missing.length&&!audit.unknown.length,'Hierarchy not exhaustive '+JSON.stringify(audit));assert(audit.who===37&&audit.syndromes===18&&!audit.reviewFields.length,'Syndrome coverage '+JSON.stringify(audit));all.push({dataAudit:audit})}
  await screenshot('territory-bacteria');
  for(const [kind,id,drug] of [['virus','influenza-a','oseltamivir'],['fungi','candida-auris','micafungina'],['parasites','plasmodium-falciparum','artesunato-iv']]){
   await click('v25-domain:'+kind);assert(await page.locator('.v25-group-list button').count()>5,kind+' groups absent');
@@ -30,7 +30,7 @@ for(const view of [{width:1600,height:900},{width:1280,height:820},{width:768,he
   await nav('mapa');
  }
  await nav('clinica');assert(await page.locator('.v25-clinic-list button').count()>35,'Syndrome library missing WHO');
- await click('v25-clinical:who-34');assert(await page.locator('.v25-syndrome-section').count()===7,'Pyelonephritis review sections incomplete');assert((await page.locator('.v25-syndrome').innerText()).length>2000,'Pyelo review short');
+ await click('v25-clinical:who-34');assert(await page.locator('.v25-syndrome-section').count()===8,'Pyelonephritis review sections incomplete');assert((await page.locator('.v25-syndrome').innerText()).length>2000,'Pyelo review short');
  await screenshot('syndrome-pyelonephritis');
  await click('v25-clinical:crypto-cns-v25');assert((await page.locator('.v25-syndrome h1').innerText()).includes('criptoc'),'Fungal syndrome inaccessible');
  await screenshot('syndrome-fungal');
