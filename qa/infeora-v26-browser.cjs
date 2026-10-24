@@ -64,6 +64,12 @@ async function main(){
    await snap('home');
    await act('nx-home-domain:virus');
    assert(await page.locator('.nx-explore-tabs button.active').count()===1,'Domain selection not retained');
+   assert(await page.locator('.rm-svg .rm-group').count()>=3,'Relationship map missing');
+   await snap('explore-map-virus');
+   await act('nx-view:matriz');
+   assert(await page.locator('.cv-table tbody .cv-row').count()>=5&&await page.locator('.cv-table .cv-cell').count()>100,'Coverage matrix missing');
+   await snap('explore-matrix-virus');
+   await act('nx-view:especie');
    assert(await page.locator('.nx-explore-species button').count()>30,'Virus species list missing');
    await snap('explore-virus');
    await act('nx-map-domain:fungi');await act('nx-map-micro:candida-auris');

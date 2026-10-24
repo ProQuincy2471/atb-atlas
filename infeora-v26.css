@@ -1,4 +1,4 @@
-:root{--nx-background:#f3f6fa;--nx-panel:#fff;--nx-ink:#213653;--nx-muted:#647791;--nx-border:#dfe6ef;--nx-brand:#285ea8;--nx-orange:#d87941;--nx-violet:#7354b5;--nx-green:#12836c;--nx-shadow:0 9px 30px rgba(28,62,104,.045);--sans:var(--body);--serif:var(--disp);--mono:'IBM Plex Mono',monospace}
+:root{--nx-background:#f3f6fa;--nx-panel:#fff;--nx-ink:#213653;--nx-muted:#647791;--nx-border:#dfe6ef;--nx-brand:#285ea8;--nx-orange:#5496c5;--nx-violet:#7354b5;--nx-green:#12836c;--nx-shadow:0 9px 30px rgba(28,62,104,.045);--sans:var(--body);--serif:var(--disp);--mono:'IBM Plex Mono',monospace}
 html{scroll-padding-top:95px}
 body{background:var(--nx-background)!important;color:var(--nx-ink);font:15px/1.65 var(--body)}
 button,input,select,textarea{font-family:var(--body)}
@@ -67,11 +67,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .nx-spectrum-stats button b{font:760 22px/1.1 var(--body);color:#4e6f97}
 .nx-spectrum-stats button span{font-size:11px;line-height:1.4;color:#687e96;font-weight:700}
 .nx-spectrum-stats button.expected.active{border-color:#75bba6;background:#eaf8f2}
-.nx-spectrum-stats button.variable.active{border-color:#d4b97a;background:#fff8e9}
-.nx-spectrum-stats button.excluded.active{border-color:#e8abb1;background:#fff1f3}
+.nx-spectrum-stats button.variable.active{border-color:#7ea4d0;background:#f4f8ff}
+.nx-spectrum-stats button.excluded.active{border-color:#e8abb1;background:#f4f8ff}
 .nx-spectrum-stats button.unknown.active{border-color:#a5b4c7;background:#f0f4f9}
 .nx-spectrum-stats button.expected b{color:#18836a}
-.nx-spectrum-stats button.variable b{color:#ad7a25}
+.nx-spectrum-stats button.variable b{color:#35729d}
 .nx-spectrum-stats button.excluded b{color:#c45a71}
 .nx-spectrum-toolbar{display:flex;align-items:end;gap:9px;flex-wrap:wrap;padding:13px 24px;border-top:1px solid #e8edf3;border-bottom:1px solid #e8edf3;background:#fcfdff}
 .nx-spectrum-toolbar label{flex:1 1 165px;font:750 10px 'IBM Plex Mono',monospace;color:#7789a1;display:grid;gap:6px}
@@ -82,20 +82,20 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .nx-spectrum-row:hover{background:#fcfdff}
 .nx-spectrum-symbol{width:27px;height:27px;display:grid;place-items:center;border-radius:8px;background:#f0f3f8;color:#8290a3;font-weight:800;font-size:16px}
 .nx-spectrum-row.expected .nx-spectrum-symbol{background:#e8f7f0;color:#178266}
-.nx-spectrum-row.variable .nx-spectrum-symbol{background:#fff5e0;color:#af7b22}
-.nx-spectrum-row.excluded .nx-spectrum-symbol{background:#fff0f3;color:#c3556d}
+.nx-spectrum-row.variable .nx-spectrum-symbol{background:#e8eff7;color:#35719c}
+.nx-spectrum-row.excluded .nx-spectrum-symbol{background:#f4f8ff;color:#c3556d}
 .nx-spectrum-drug{min-width:0}
 .nx-spectrum-drug b{font-size:14px;font-weight:750;line-height:1.3;color:#344a66;display:block;overflow-wrap:anywhere}
 .nx-spectrum-drug small{font-size:11px;color:#899ab0;margin-top:3px;display:block;overflow-wrap:anywhere}
 .nx-spectrum-evidence{min-width:0}
 .nx-spectrum-evidence>span{font-size:11px;font-weight:800;color:#59738f}
 .nx-spectrum-row.expected .nx-spectrum-evidence>span{color:#218368}
-.nx-spectrum-row.variable .nx-spectrum-evidence>span{color:#aa792b}
+.nx-spectrum-row.variable .nx-spectrum-evidence>span{color:#36739f}
 .nx-spectrum-row.excluded .nx-spectrum-evidence>span{color:#b95871}
 .nx-spectrum-evidence p{font-size:12px;line-height:1.52;color:#76869c;margin:4px 0 0;overflow-wrap:anywhere}
 .nx-spectrum-row>button{border:1px solid #d8e5f1;padding:8px 10px;white-space:nowrap;border-radius:7px;color:#32659d;background:#fff;font-size:11px;font-weight:800}
-.nx-evidence-note{background:#fffaf0;padding:16px 23px;color:#746445;font-size:12px;line-height:1.72;border-top:1px solid #f1e5ca}
-.nx-evidence-note b{color:#9b7233}
+.nx-evidence-note{background:#f4f8ff;padding:16px 23px;color:#476072;font-size:12px;line-height:1.72;border-top:1px solid #cddcee}
+.nx-evidence-note b{color:#386f96}
 .nx-spectrum-empty,.nx-not-found{padding:26px;text-align:center}
 .nx-spectrum-empty b,.nx-not-found b{font-size:15px}
 .nx-spectrum-empty p{font-size:13px;color:#74849b;line-height:1.65}
@@ -164,27 +164,27 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 @media(max-width:760px){.nx-app{display:block}.nx-main{padding:24px 18px 52px}.nx-explore-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.nx-explore-metric{display:none}.nx-spectrum-row{grid-template-columns:26px minmax(0,1fr) auto;gap:9px}.nx-spectrum-evidence{grid-column:2;grid-row:2}.nx-spectrum-row>button{grid-column:3;grid-row:1;align-self:center}.nx-selected-organism{grid-template-columns:1fr}.nx-selected-note{display:none}.nx-section-page .a18-library{grid-template-columns:1fr}.nx-section-page .a18-browser{position:static;max-height:320px}.nx-section-page .v24-columns,.nx-section-page .v25-clinic-layout,.nx-section-page .v24-compare-layout{grid-template-columns:1fr}.nx-section-page :where(.v24-sidebar,.v25-clinic-sidebar,.v24-book-index){position:static!important;max-height:300px}}
 @media(max-width:500px){.nx-main{padding:20px 12px 42px}.nx-explore-hline h1{font-size:33px}.nx-explore-tabs{gap:7px}.nx-explore-tabs button{padding:11px;gap:7px}.nx-explore-tabs b{font-size:13px}.nx-explore-species{grid-template-columns:1fr}.nx-selected-organism{padding:20px}.nx-spectrum-heading{padding:21px 18px 10px}.nx-spectrum-stats{padding:6px 13px 14px;gap:5px}.nx-spectrum-stats button{padding:8px}.nx-spectrum-stats button b{font-size:20px}.nx-spectrum-stats button span{font-size:10px}.nx-spectrum-toolbar{padding:12px}.nx-spectrum-row{padding:12px}.nx-spectrum-drug b{font-size:13px}.nx-command-backdrop{padding:8vh 10px 10px}.nx-section-page .v24-switch{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.nx-section-page .v24-switch button{flex:none}}
 @media(prefers-reduced-motion:reduce){.nx-app *,.nx-command *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-:root{--nx-background:#f6f3ec;--nx-ink:#14233b;--nx-muted:#5d6b80;--nx-border:#e4ded2;--nx-brand:#1f4f93;--nx-orange:#c8642a;--nx-shadow:0 1px 0 rgba(20,35,59,.04),0 14px 34px rgba(20,35,59,.06)}
+:root{--nx-background:#f4f8ff;--nx-ink:#14233b;--nx-muted:#5d6b80;--nx-border:#d3dae3;--nx-brand:#1f4f93;--nx-orange:#3d83b5;--nx-shadow:0 1px 0 rgba(20,35,59,.04),0 14px 34px rgba(20,35,59,.06)}
 body{background:var(--nx-background)!important}
 .nx-home h1,.nx-explore h1,.nx-home h2,.nx-section-page :where(.a18-head h1,.v24-head h1,.v25-clinic-head h1,.v24-book-hero h1,.v25-syndrome-hero h1){font-family:var(--disp)!important;font-weight:560!important;letter-spacing:-.025em!important;color:#14233b!important;font-variation-settings:'SOFT' 40,'WONK' 0}
-.nx-overline,.nx-edition{color:#c8642a}
-.nx-section-page :where(.v24-sidebar,.v24-article,.v25-clinic-sidebar,.v25-clinic-article,.v24-compare-sidebar,.v24-compare-content,.v24-book-index,.v24-book-chapter,.a18-browser,.a18-article){background:#fffdf8!important;border-color:#e4ded2!important;box-shadow:var(--nx-shadow)}
-.nx-section-page :where(.v24-head,.a18-head,.v25-clinic-head,.v24-book-hero){background:#fffdf8!important;border-color:#e4ded2!important;border-left-width:6px!important;box-shadow:var(--nx-shadow)}
+.nx-overline,.nx-edition{color:#3d83b5}
+.nx-section-page :where(.v24-sidebar,.v24-article,.v25-clinic-sidebar,.v25-clinic-article,.v24-compare-sidebar,.v24-compare-content,.v24-book-index,.v24-book-chapter,.a18-browser,.a18-article){background:#f4f8ff!important;border-color:#d3dae3!important;box-shadow:var(--nx-shadow)}
+.nx-section-page :where(.v24-head,.a18-head,.v25-clinic-head,.v24-book-hero){background:#f4f8ff!important;border-color:#d3dae3!important;border-left-width:6px!important;box-shadow:var(--nx-shadow)}
 .nx-section-page :where(.v24-head h1,.v25-clinic-head h1,.a18-head h1){font-size:clamp(34px,3.4vw,52px)!important;line-height:1.08!important}
 .nx-section-page :where(.v25-syndrome-section>header h2,.v24-detail h2){font-family:var(--disp);font-weight:580;letter-spacing:-.015em}
 .nx-section-page .v25-syndrome-hero h1{font-size:clamp(34px,3.6vw,54px)!important;line-height:1.06!important}
 .nx-explore-tabs button,.nx-domain-tab{border-radius:12px}
 .nx-section-page :where(.v24-head,.a18-head,.v25-clinic-head,.v24-book-hero){border-left-color:var(--v24-accent,#1f4f93)!important}
-.nx-section-page .v24-head span,.nx-section-page .v25-clinic-head span{color:var(--v24-accent,#c8642a)}
+.nx-section-page .v24-head span,.nx-section-page .v25-clinic-head span{color:var(--v24-accent,#3d83b5)}
 .nx-selected-organism h2,.nx-selected-organism h1,.nx-explore-workspace h2{font-family:var(--disp);font-weight:560;letter-spacing:-.02em}
-.nx-section-page :where(.v23-learn-hero,.a18-labhero,.a18-browserhead,.v25-syndrome-hero){background:#fffdf8!important;background-image:none!important}
+.nx-section-page :where(.v23-learn-hero,.a18-labhero,.a18-browserhead,.v25-syndrome-hero){background:#f4f8ff!important;background-image:none!important}
 .nx-section-page .v23-learn-hero{border-top:5px solid #5b9a55}
 .nx-section-page .a18-labhero{border-top:5px solid #3a7fd0}
-.nx-section-page .a18-browserhead{border-bottom:1px solid #e4ded2;border-top:5px solid #b9486f}
+.nx-section-page .a18-browserhead{border-bottom:1px solid #d3dae3;border-top:5px solid #b9486f}
 .nx-section-page .v25-syndrome-hero{border-top:5px solid var(--syndrome,#1f4f93)}
 .nx-section-page .a19-pageintro{box-shadow:var(--nx-shadow);border-radius:20px}
-.nx-section-page .v25-clinic-head h1 em{color:#c8642a;font-style:italic;font-weight:500}
+.nx-section-page .v25-clinic-head h1 em{color:#3d83b5;font-style:italic;font-weight:500}
 .nx-section-page :where(.v23-learn-hero h1,.v23-learn-hero h2,.a18-labhero h1,.a18-labhero h2,.v25-syndrome-section>header h2,.v23-learn-article h2,.a18-sheet h2,.a18-browserhead h2){font-family:var(--disp)!important;font-weight:580!important;letter-spacing:-.018em!important}
 .nx-section-page .a18-systemchips{max-height:none;overflow:visible}
-.nx-section-page :where(.a19-lab-path,.a19-compare-intro,.a19-learning-circuit){background:#fffdf8;background-image:none;border-color:#e4ded2;box-shadow:var(--nx-shadow)}
+.nx-section-page :where(.a19-lab-path,.a19-compare-intro,.a19-learning-circuit){background:#f4f8ff;background-image:none;border-color:#d3dae3;box-shadow:var(--nx-shadow)}
 

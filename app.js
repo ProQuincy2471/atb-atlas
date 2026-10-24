@@ -7,12 +7,12 @@ const storage={get(k,fallback){try{return JSON.parse(localStorage.getItem(k))??f
 const ICONS={map:'table-2',micro:'microscope',drugs:'pill',clinic:'stethoscope',compare:'columns-3',learn:'graduation-cap',lab:'flask-conical',sources:'book-open',search:'search',palette:'palette',filter:'sliders-horizontal',reset:'rotate-ccw',next:'arrow-right',external:'external-link',note:'lightbulb',star:'shield-check',info:'info',help:'circle-help',more:'chevron-down',chevron:'chevron-right',grid:'grid-3x3',layers:'layers',swap:'arrow-left-right',alert:'shield-alert',close:'x',dna:'dna',menu:'list-filter',book:'book-open'};
 const ic=(name,size=18)=>`<img class="ico" width="${size}" height="${size}" alt="" src="assets/icons/${ICONS[name]||name}.svg">`;
 const NAV=[['mapa','map','Mapa'],['micro','micro','Microorganismos'],['atb','drugs','Antibióticos'],['clinica','clinic','Síndromes'],['comparar','compare','Comparador'],['aprender','learn','Aprender'],['laboratorio','lab','Laboratorio'],['fuentes','sources','Fuentes']];
-const GROUP_PALETTE=['#E33E70','#F07739','#8654D5','#6BAA33','#2D86D6','#00A48C','#6977DA','#E0A82F','#1EA585','#C65FA8','#B46C42','#5469C8'];
+const GROUP_PALETTE=['#3b6df0','#5a54e8','#8b4fe6','#a24be0','#2f8fe8','#11a7c9','#1fb5a4','#5b7fd6','#2faa6a','#7a5cf0','#c04fd8','#4a6a8c'];
 const PRESETS={
-  'Resonancia':['#E33E70','#F07739','#8654D5','#6BAA33','#2D86D6','#00A48C','#6977DA','#E0A82F','#1EA585','#C65FA8','#B46C42','#5469C8'],
-  'Tropical Lab':['#EE5B77','#E98B32','#AE53D0','#3EAC63','#247AC1','#00A6B0','#7663D6','#E6B637','#68A649','#CD568A','#E17752','#6681CC'],
-  'Nocturno':['#FF5E97','#FF974F','#AA80F8','#8DD54B','#5CB1FA','#30CEB5','#91A0FF','#F9CE52','#47D0A0','#F092D3','#F5A272','#8FA1FF'],
-  'Museo Médico':['#C8426C','#D97238','#7852A8','#648A3F','#3C75AC','#158B7D','#6779B5','#B88A36','#418C72','#A35891','#A56A46','#4F639D']
+  'Resonancia':['#E33E70','#609dc9','#8654D5','#3977a4','#2D86D6','#00A48C','#6977DA','#4c91c3','#1EA585','#C65FA8','#4884ae','#5469C8'],
+  'Tropical Lab':['#EE5B77','#5597c6','#AE53D0','#3EAC63','#247AC1','#00A6B0','#7663D6','#5798c6','#4e7ea1','#CD568A','#6796cc','#6681CC'],
+  'Nocturno':['#FF5E97','#7ba4d3','#AA80F8','#5999c7','#5CB1FA','#30CEB5','#91A0FF','#79a3d2','#47D0A0','#F092D3','#8eb1d9','#8FA1FF'],
+  'Museo Médico':['#C8426C','#4e92c3','#7852A8','#436a86','#3C75AC','#158B7D','#6779B5','#3d81b2','#418C72','#A35891','#4b7da0','#4F639D']
 };
 const ST={active:{name:'Actividad habitual',short:'Actividad',mark:'✓',help:'Relación registrada como actividad habitual; necesita interpretación clínica y susceptibilidad.'},conditional:{name:'Según contexto',short:'Variable',mark:'≈',help:'Relación condicionada por fenotipo, susceptibilidad, sitio o circunstancia clínica.'},none:{name:'Sin actividad útil',short:'No útil',mark:'×',help:'Relación registrada como actividad no útil para este microorganismo.'},unknown:{name:'Sin evaluar',short:'Sin datos',mark:'·',help:'No existe una relación registrada. NO equivale a resistencia ni inactividad.'}};
 const state={route:'mapa',group:'all',family:'all',search:'',onlyKnown:true,scope:'groups',page:0,perPage:10,sort:'evidence',favoritesOnly:false,drug:'',micro:'',syndrome:'',microGroup:'all',drugFamily:'all',browserQuery:'',profileTab:'identidad',drugTab:'resumen',clinicalTab:'panorama',compare:[],compareMicro:'',lesson:'f01',lessonAnswered:false,labSyndrome:'',labMicro:'',labDrug:'',labStep:0,modal:'',palette:storage.get('atlas_v17_palette',null),favorites:storage.get('atlas_v16_favorites',[]),completed:storage.get('atlas_v16_completed',[]),savedViews:storage.get('atlas_v16_views',[]),compact:false,showFilters:false};
@@ -23,7 +23,7 @@ const members=gid=>D.pathogens.filter(p=>p.groupId===gid);
 const relation=(a,p)=>byPair.get(`${a}|${p}`);
 const relsA=id=>byDrug.get(id)||[];const relsP=id=>byPath.get(id)||[];
 const rstatus=(r)=>r?['active','conditional','none'].includes(r.status)?r.status:'unknown':'unknown';
-const grpcolor=id=>{const n=D.groups.findIndex(g=>g.id===id);return (state.palette?.[n] || GROUP_PALETTE[n] || '#687d80');};
+const grpcolor=id=>{const n=D.groups.findIndex(g=>g.id===id);return (GROUP_PALETTE[n] || '#5b7fd6');};
 const pill=(s)=>`<span class="pill">${H(s)}</span>`;
 const tag=(s)=>`<span class="kicker">${H(s)}</span>`;
 const button=(label,act,style='quiet',ico='')=>`<button class="btn ${style}" data-act="${H(act)}">${ico?ic(ico,16):''}${H(label)}</button>`;
@@ -34,7 +34,7 @@ function statusBadge(v){return `<span class="status-badge s-${v}"><b>${ST[v].mar
 function escapeHandler(){window.addEventListener('hashchange',()=>{const x=(location.hash.replace(/^#\//,'').split('?')[0]||'mapa');if(NAV.some(y=>y[0]===x)){state.route=x;state.modal='';render()}})}
 function goto(route){state.route=route;state.modal='';if(location.hash!==`#/${route}`)history.replaceState(null,'',location.pathname+location.search+'#/'+route);render();window.scrollTo({top:0,behavior:'instant'})}
 function persist(){storage.set('atlas_v17_palette',state.palette);storage.set('atlas_v16_favorites',state.favorites);storage.set('atlas_v16_completed',state.completed);storage.set('atlas_v16_views',state.savedViews)}
-function applyColors(){const palette=state.palette||GROUP_PALETTE;D.groups.forEach((g,i)=>document.documentElement.style.setProperty(`--group-${g.id}`,palette[i]||GROUP_PALETTE[i]||'#71819a'));}
+function applyColors(){const palette=GROUP_PALETTE;D.groups.forEach((g,i)=>document.documentElement.style.setProperty(`--group-${g.id}`,palette[i]||GROUP_PALETTE[i]||'#71819a'));}
 function groupStyle(gid){return `style="--tone:${grpcolor(gid)}"`}
 function legacy_header(){return `<div class="header-wrap"><header class="masthead"><button class="brand" data-act="nav:mapa"><span class="brand-icon">${ic('dna',24)}</span><span><strong>ATB<span> / </span>ATLAS</strong><small>MICROBIOLOGÍA VISUAL · ESPECTRO · CLÍNICA</small></span></button><div class="mast-actions"><button data-act="search-global" class="search-launch">${ic('search',16)} <span>Buscar fármaco, micro o síndrome…</span><kbd>⌘ K</kbd></button>${button('Colores','palette','secondary','palette')}<button class="mobile-nav" data-act="menu">${ic('menu',20)}</button></div></header><nav id="site-nav" class="site-nav">${NAV.map(([id,ico,label],i)=>`<button class="site-tab ${state.route===id?'on':''}" data-act="nav:${id}">${ic(ico,16)}${H(label)}<span>${('0'+(i+1)).slice(-2)}</span></button>`).join('')}</nav></div>`}
 function legacy_footer(){return `<footer class="app-footer"><span>ATB / ATLAS · EDICIÓN 17</span><p>Material para estudio médico. La cobertura microbiológica, los capítulos educativos y la decisión clínica son capas diferentes. No usar para prescribir sin susceptibilidad, contexto y guía vigente.</p><a href="https://github.com/ProQuincy2471/atb-atlas" target="_blank" rel="noopener noreferrer">Repositorio ${ic('external',13)}</a></footer>`}

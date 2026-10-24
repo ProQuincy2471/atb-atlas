@@ -24,8 +24,8 @@
 .v24-book-chapter section:nth-of-type(even){background:#fbfcff}
 .v24-book-chapter section h2{font:750 clamp(24px,2.5vw,33px)/1.22 var(--body);color:#242f56;margin:11px 0 18px}
 .v24-book-chapter section>p{font-size:17px;line-height:1.89;color:#36445e;max-width:84ch}
-.v24-book-case{padding:18px;border:1px solid #ebd4cb;border-left:5px solid #c87153;border-radius:10px;background:#fff8f5}
-.v24-book-case b{font:750 12px 'IBM Plex Mono',monospace;color:#af5937}
+.v24-book-case{padding:18px;border:1px solid #cddae9;border-left:5px solid #5996c2;border-radius:10px;background:#f4f8ff}
+.v24-book-case b{font:750 12px 'IBM Plex Mono',monospace;color:#3d7ca9}
 .v24-book-case p{font-size:17px;line-height:1.73}
 .v24-book-chapter h3{font-size:19px;color:#334d77;margin:18px 0 7px}
 .v24-book-chapter details{border:1px solid #d7e4f3;background:#f1f7ff;border-radius:10px;padding:14px;margin:16px 0}
