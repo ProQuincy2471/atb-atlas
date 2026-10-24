@@ -575,3 +575,34 @@ input[type=checkbox]:checked{background:var(--cobalt)!important;border-color:var
 }
 .nx-main .v25-syndrome-section>p::first-line,.nx-main .v25-syndrome-context p::first-line{font-weight:650;color:#0a1633}
 .nx-main .v25-syndrome-section>p{font-size:1.02rem}
+
+/* ───────── V32 · Movimiento con propósito ───────── */
+@media(prefers-reduced-motion:no-preference){
+ /* entrada de pantalla: solo al cambiar de sección */
+ .nx-main.mv-enter>*{animation:mvrise .55s cubic-bezier(.2,.7,.2,1) both}
+ .nx-main.mv-enter>*:nth-child(2){animation-delay:.06s}.nx-main.mv-enter>*:nth-child(3){animation-delay:.12s}.nx-main.mv-enter>*:nth-child(4){animation-delay:.18s}.nx-main.mv-enter>*:nth-child(n+5){animation-delay:.24s}
+ @keyframes mvrise{from{opacity:0;transform:translateY(18px)}}
+ /* revelado al hacer scroll */
+ html.mv-on .mv-item{opacity:0;transform:translateY(22px) scale(.985);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--mi,0)*60ms)}
+ html.mv-on .mv-item.mv-in{opacity:1;transform:none}
+ /* tarjetas y chips: respuesta al puntero */
+ .nx-main :is(.v25-syndrome-section,.who-esc,.v23-subcard,.v24-riskcards>div,.v23-dosegrid>div,.nx-home-domains>*,.cmp-card,.v25-pair,.v23-pair){transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s,border-color .25s}
+ .nx-main :is(.who-esc,.v23-subcard,.v24-riskcards>div,.v23-dosegrid>div,.nx-home-domains>*,.cmp-card):hover{transform:translateY(-4px);box-shadow:0 18px 34px -18px rgba(36,51,168,.45);border-color:#8da4ee!important}
+ .who-drug{transition:transform .2s,background .2s,border-color .2s}
+ .who-drug:hover{transform:translateX(5px);border-color:#6f86e6;background:#fff}
+ .who-tabs button{transition:background .2s,color .2s,transform .15s}
+ .who-tabs button:active{transform:scale(.94)}
+ .who-grid{animation:mvrise .4s both}
+ .nx-main button:not(.who-tabs button){transition:transform .15s,background .2s,color .2s,box-shadow .2s}
+ .nx-main button:active{transform:scale(.97)}
+ .nx-main mark.hl-dose{background-size:0 100%;background-repeat:no-repeat;background-image:linear-gradient(#bfe3ff,#bfe3ff);animation:mvmark .7s .35s ease forwards}
+ @keyframes mvmark{to{background-size:100% 100%}}
+ /* portada: elementos que respiran */
+ .nx-hero-panel svg{animation:mvfloat 9s ease-in-out infinite}
+ @keyframes mvfloat{50%{transform:translateY(-8px) rotate(.8deg)}}
+ .v25-syndrome-section>header>b{transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+ .v25-syndrome-section:hover>header>b{transform:rotate(-8deg) scale(1.12)}
+ .nx-main .v25-clinic-list button,.nx-main .a18-leaves button{transition:transform .18s,background .2s,padding-left .2s}
+ .nx-main .v25-clinic-list button:hover{transform:translateX(4px)}
+}
+@media(prefers-reduced-motion:reduce){html.mv-on .mv-item{opacity:1;transform:none}}
