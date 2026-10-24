@@ -5,7 +5,7 @@
 .v23-drug,.v23-clinical,.v23-learn,.v23-comparator{width:100%;min-width:0;color:#243451;font-size:16px;line-height:1.65}
 .v23-drug-hero{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:20px;background:linear-gradient(120deg,#eaf3ff,#fffdfc);padding:24px clamp(15px,2.5vw,32px);border-bottom:3px solid #3074c5}
 .v23-hero-symbol{background:#286abe;color:#fff;border-radius:18px;width:70px;height:70px;display:grid;place-items:center}.v23-hero-symbol .ico{filter:brightness(0) invert(1);width:38px;height:38px}
-.v23-drug-hero h1{font:750 clamp(31px,3.2vw,50px)/1.15 'DM Sans',sans-serif;letter-spacing:-.04em;margin:6px 0}.v23-drug-hero p{margin:0;color:#3e5676;font-size:17px;overflow-wrap:anywhere}
+.v23-drug-hero h1{font:750 clamp(31px,3.2vw,50px)/1.15 var(--body);letter-spacing:-.04em;margin:6px 0}.v23-drug-hero p{margin:0;color:#3e5676;font-size:17px;overflow-wrap:anywhere}
 .v23-drug-hero>button{border:1px solid #b6cbe6;background:#fff;color:#17589f;font-size:14px;font-weight:800;border-radius:11px;padding:12px 16px;max-width:200px}
 .v23-drug-grid{display:grid;grid-template-columns:minmax(0,1fr) 260px;align-items:start;min-width:0}
 .v23-drug-main{min-width:0}
@@ -17,7 +17,7 @@
 .v23-drug-warning{background:#fff6ec!important;border-color:#f1d1a8!important}.v23-drug-warning b{color:#a75d12}.v23-drug-warning p{font-size:14px}
 .v23-mechanism{background:#f6f9ff;border:1px solid #b5ccec;border-radius:16px;padding:24px;min-width:0;box-shadow:inset 0 0 0 1px #edf3ff}
 .v23-mech-title{display:flex;justify-content:space-between;align-items:start;gap:20px;padding-bottom:18px;border-bottom:1px solid #dce6f6}
-.v23-mech-title h3{font:780 clamp(24px,2.5vw,33px)/1.2 'DM Sans',sans-serif;margin:7px 0 8px;color:#173f87}.v23-mech-title p{font-size:16px;margin:0;color:#355171}
+.v23-mech-title h3{font:780 clamp(24px,2.5vw,33px)/1.2 var(--body);margin:7px 0 8px;color:#173f87}.v23-mech-title p{font-size:16px;margin:0;color:#355171}
 .v23-target-symbol{display:grid;place-items:center;width:66px;height:66px;flex:none;border-radius:18px;background:#dceaff;color:#2159ac;font-size:49px}
 .v23-mechflow{display:grid;grid-template-columns:1fr;gap:0;margin:22px 0}
 .v23-mech-step{display:grid;grid-template-columns:48px minmax(0,1fr);gap:15px;align-items:start;border:1px solid #d6e2f4;background:#fff;border-radius:13px;padding:18px 18px}
@@ -57,7 +57,7 @@
 .v23-micro-four{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:17px}
 .v23-micro-four .v23-subcard{border-left:4px solid var(--microaccent)}.v23-micro-four p{font-size:14px;line-height:1.6}
 .v23-clinical-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,30%);align-items:stretch;gap:22px;background:linear-gradient(130deg,color-mix(in srgb,var(--v23-clinical) 13%,white),#fff);padding:24px;min-height:260px}
-.v23-clinical-hero h1{font:750 clamp(29px,3vw,46px)/1.12 'DM Sans',sans-serif;letter-spacing:-.04em;margin:12px 0}
+.v23-clinical-hero h1{font:750 clamp(29px,3vw,46px)/1.12 var(--body);letter-spacing:-.04em;margin:12px 0}
 .v23-clinical-hero p{font-size:17px;max-width:68ch;color:#405473;line-height:1.62}
 .v23-clinical-art{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,color-mix(in srgb,var(--v23-clinical) 13%,#fff),#f8fbff);border:1px solid #dbe5ef;border-radius:16px;overflow:hidden;padding:22px}
 .v23-clinical-art img{width:min(100%,220px);height:175px;object-fit:contain}.v23-clinical-art .v23-clinical-photo{width:100%;height:210px;object-fit:contain;background:#f3f6fb}.v23-clinical-art span{font-size:16px;font-weight:800;text-align:center;color:#294971}
@@ -105,7 +105,7 @@
 .v23-learn-group button>span:first-child{font:750 12px 'IBM Plex Mono',monospace;color:#588b45}.v23-learn-group button>b{flex:1}
 .v23-learn-main{overflow:hidden}
 .v23-learn-hero{padding:26px;background:linear-gradient(140deg,#eaf5e8,#fff);border-bottom:3px solid #69a45b}
-.v23-learn-hero .v23-overline{color:#4a863d}.v23-learn-hero h1{font:770 clamp(29px,3vw,45px)/1.17 'DM Sans',sans-serif;margin:10px 0;color:#274734}
+.v23-learn-hero .v23-overline{color:#4a863d}.v23-learn-hero h1{font:770 clamp(29px,3vw,45px)/1.17 var(--body);margin:10px 0;color:#274734}
 .v23-learn-hero p{font-size:17px;line-height:1.65;color:#465f50}
 .v23-learn-reading{padding:0 clamp(15px,3vw,35px)}
 .v23-learn-reading article{display:grid;grid-template-columns:47px minmax(0,1fr);gap:17px;border-bottom:1px solid #e2ebdf;padding:26px 0}

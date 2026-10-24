@@ -2,7 +2,7 @@
 .v24-book{min-width:0;margin-top:20px;color:#192f52}
 .v24-book-hero{border:1px solid #dce7f2;border-top:5px solid #5f56bc;border-radius:13px;background:linear-gradient(115deg,#edf0ff,#fff);padding:27px}
 .v24-book-hero small{font:750 12px 'IBM Plex Mono',monospace;color:#6756b3}
-.v24-book-hero h1{font:740 clamp(28px,3vw,43px)/1.15 'DM Sans',sans-serif;margin:11px 0}
+.v24-book-hero h1{font:740 clamp(28px,3vw,43px)/1.15 var(--body);margin:11px 0}
 .v24-book-hero p{font-size:16px;line-height:1.7;max-width:89ch;color:#536281}
 .v24-book-nav{display:flex;flex-wrap:wrap;gap:7px;padding:13px 0}
 .v24-book-nav button{background:#fff;border:1px solid #d4deed;border-radius:9px;padding:10px 14px;font-size:14px;font-weight:750}
@@ -16,13 +16,13 @@
 .v24-book-index button span{font:750 12px 'IBM Plex Mono',monospace;color:#6458a8;grid-row:1/span 2}.v24-book-index button b{font-size:14px;line-height:1.38}.v24-book-index button small{font-size:11px;color:#667590}
 .v24-book-chapter>header{padding:30px;background:linear-gradient(125deg,#f0efff,#fff);border-bottom:1px solid #dce4ef}
 .v24-book-chapter>header small,.v24-book-chapter section>span{font:750 12px 'IBM Plex Mono',monospace;letter-spacing:.04em;color:#6653b4}
-.v24-book-chapter>header h1{font:750 clamp(29px,3vw,43px)/1.2 'DM Sans',sans-serif;margin:11px 0;max-width:27ch}
+.v24-book-chapter>header h1{font:750 clamp(29px,3vw,43px)/1.2 var(--body);margin:11px 0;max-width:27ch}
 .v24-book-chapter>header p{font-size:16px;line-height:1.66;color:#576783;max-width:79ch}
 .v24-book-anchors{display:flex;gap:7px;overflow-x:auto;padding:12px 18px;scrollbar-width:thin;white-space:nowrap}
 .v24-book-anchors a{font-size:12px;text-decoration:none;font-weight:750;color:#345a95;border:1px solid #d9e4f5;background:#f5f8fd;padding:8px 10px;border-radius:8px}
 .v24-book-chapter section{padding:29px clamp(20px,3vw,38px);border-bottom:1px solid #e5e9f2;scroll-margin-top:80px}
 .v24-book-chapter section:nth-of-type(even){background:#fbfcff}
-.v24-book-chapter section h2{font:750 clamp(24px,2.5vw,33px)/1.22 'DM Sans',sans-serif;color:#242f56;margin:11px 0 18px}
+.v24-book-chapter section h2{font:750 clamp(24px,2.5vw,33px)/1.22 var(--body);color:#242f56;margin:11px 0 18px}
 .v24-book-chapter section>p{font-size:17px;line-height:1.89;color:#36445e;max-width:84ch}
 .v24-book-case{padding:18px;border:1px solid #ebd4cb;border-left:5px solid #c87153;border-radius:10px;background:#fff8f5}
 .v24-book-case b{font:750 12px 'IBM Plex Mono',monospace;color:#af5937}
