@@ -89,9 +89,9 @@ async function main(){
    assert(await page.locator('.v24-mechanism>div').count()===3,'Detailed molecular mechanism missing');
    await snap('drug-detail');
    await act('nx-go:clinica');assert(await page.locator('.v25-clinic-article').count()===1,'Syndrome library missing');await snap('syndromes');
-   await act('nx-go:comparar');assert(await page.locator('.v24-compare-scroll').count()===1,'Integrated comparator missing');await snap('comparator');
+   await act('nx-go:comparar');assert(await page.locator('.cmp-layout').count()===1,'Comparator missing');await act('nx-cmp-toggle:ceftriaxona');await act('nx-cmp-toggle:meropenem');assert(await page.locator('.cmp-table.cov tr').count()>=4,'Comparator coverage table missing');await snap('comparator');
    await act('nx-go:aprender');assert(await page.locator('.v24-book,.v23-learn').count()>0,'Lesson library missing');await snap('learning');
-   await act('nx-go:laboratorio');assert(await page.locator('.nx-section-laboratorio').count()===1,'Laboratory page missing');await snap('lab');
+   await act('nx-go:laboratorio');assert(await page.locator('.lab-layout').count()===1,'Laboratory page missing');await act('nx-lab-syn:nac');assert(await page.locator('.lab-table tr').count()>=4,'Laboratory result table missing');await snap('lab');
    await act('nx-go:fuentes');assert(await page.locator('.nx-section-fuentes').count()===1,'Sources page missing');await snap('sources');
    if(width<=768){await act('nx-drawer');assert(await page.locator('.nx-rail.drawer-open').count()===1,'Mobile nav drawer broken');await snap('mobile-menu');await act('nx-drawer')}
    assert(!errors.length,'Runtime page errors: '+errors.join('; '));assert(!missing.length,'404 local assets: '+missing.join('; '));

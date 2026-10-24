@@ -47,13 +47,19 @@ async function main(){
    const m=await page.evaluate(()=>({blocks:document.querySelectorAll('#drug-profundo .v25-md-block').length,over:document.documentElement.scrollWidth-innerWidth,leak:/\$\{|undefined|NaN/.test(document.querySelector('#drug-profundo')?.innerText||'')}));
    checks++;assert(m.blocks>=6&&!m.leak&&m.over<9,`revisión ampliada de fármaco ${id}@${width}: ${JSON.stringify(m)}`)}
   // comparator: target follows the kingdom of the first chosen agent and sidebar tabs stay readable
-  await go('comparar');await page.evaluate(()=>[...document.querySelectorAll('button')].find(x=>/integral/.test(x.textContent))?.click());await page.waitForTimeout(250);
-  await page.evaluate(()=>window.act('v24-compare-clear'));await page.waitForTimeout(100);
-  await page.evaluate(()=>window.act('v24-compare-tab:bacteria'));await page.waitForTimeout(100);
-  const first=await page.evaluate(()=>document.querySelector('.v24-comp-druglist button')?.dataset.act);
-  await page.evaluate(a=>window.act(a),first);await page.waitForTimeout(250);
-  const tgt=await page.evaluate(()=>document.querySelector('#v24-compare-micro')?.selectedOptions[0]?.parentElement?.label);
-  checks++;assert(tgt==='Bacterias','el objetivo del comparador no sigue el dominio del fármaco elegido: '+tgt);
+  await go('comparar');
+  await page.evaluate(()=>{window.act('nx-cmp-toggle:ceftriaxona');window.act('nx-cmp-toggle:meropenem');window.act('nx-cmp-toggle:piptazo')});await page.waitForTimeout(250);
+  checks++;assert(await page.locator('.cmp-tag').count()===3,'el comparador no muestra los agentes elegidos');
+  await page.selectOption('#nx-cmp-target','e-coli');await page.waitForTimeout(250);
+  checks++;assert(await page.locator('.cmp-tcard').count()===3,'el comparador no muestra el nivel frente a la especie objetivo');
+  // cobertura: pocos agentes sin ningún dato y niveles graduados presentes
+  await go('mapa');await page.evaluate(()=>window.act('nx-view:matriz'));await page.waitForTimeout(500);
+  const cov=await page.evaluate(()=>({rows:document.querySelectorAll('.cv-row').length,lv:['lY','lM','lS','lR','lN'].map(c=>document.querySelectorAll('.cv-cell.'+c).length)}));
+  checks++;assert(cov.rows>=95&&cov.lv.every(n=>n>0),'matriz de cobertura incompleta '+JSON.stringify(cov));
+  await page.evaluate(()=>window.act('nx-view:especie'));await page.waitForTimeout(250);
+  checks++;assert(await page.locator('.nx-viewtabs button.active').count()===1&&await page.locator('.nx-viewtabs button').count()===3,'las pestañas de vista desaparecen en la vista por especie');
+  await go('laboratorio');await page.evaluate(()=>window.act('nx-lab-syn:nac'));await page.waitForTimeout(250);
+  checks++;assert(await page.locator('.lab-table tr').count()>=4,'el laboratorio no calcula la cobertura del síndrome');
   await page.screenshot({path:path.join(folder,`comparator-${width}.png`)});
   await go('laboratorio');await page.screenshot({path:path.join(folder,`lab-${width}.png`)});
   assert(!errors.length,'errores de página: '+errors.join('|'));
