@@ -1,7 +1,7 @@
 /* ATB Atlas V19 — Living Fieldguide. Additive educational layer, NEVER derive susceptibility from family-level information. */
 'use strict';
 let E19={groups:{},classes:{},organisms:{},drugs:{},systems:{},sourceLinks:[]};
-const EC19={micro:['#C94A6D','#F5E6EB'],atb:['#7B56B8','#EFE7FF'],clinica:['#CA7D3C','#FBEBD8'],mapa:['#1A877F','#E2F5F0'],comparar:['#BA5B76','#FCE9F0'],aprender:['#68964C','#EAF4E1'],laboratorio:['#397EBF','#E4F2FF'],fuentes:['#907641','#F6F0DC']};
+const EC19={micro:['#C94A6D','#f4f8ff'],atb:['#7B56B8','#EFE7FF'],clinica:['#468dc0','#dfe9f4'],mapa:['#1A877F','#E2F5F0'],comparar:['#BA5B76','#f4f8ff'],aprender:['#507792','#e2eaf3'],laboratorio:['#397EBF','#E4F2FF'],fuentes:['#456e8c','#dee8f4']};
 const N19=()=>NAV.findIndex(x=>x[0]===state.route)+1;
 const ee19=(s)=>H(s||'');
 const note19=(h,desc,kind='blue')=>`<div class="a19-note a19-note-${kind}"><span>${ic('info',17)}</span><div><b>${ee19(h)}</b><p>${ee19(desc)}</p></div></div>`;

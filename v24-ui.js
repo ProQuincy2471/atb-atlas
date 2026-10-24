@@ -14,7 +14,7 @@ db.antiparasiticFamilies["Macrólidos antitoxoplasma"]={target:"Ribosoma procari
 db.antiparasitics.find(d=>d.id==="espiramicina").family="Macrólidos antitoxoplasma";
 db.antiparasiticFamilies["Cestocidas luminales"]={target:"Fosforilación oxidativa / función energética de cestodos",entry:"Niclosamida actúa en luz intestinal con mínima absorción sistémica.",mechanism:"Desacopla fosforilación oxidativa y daña cestodos adultos intraluminales.",pk:"No sirve para cisticercosis tisular/neurológica.",resistance:"Susceptibilidad depende especie."};
 db.antiparasitics.find(d=>d.id==="niclosamida").family="Cestocidas luminales";
-const key={virus:{short:"Virus",micro:"Virología",drug:"Antivirales",color:"#6651b6",icon:"dna"},fungi:{short:"Hongos",micro:"Micología",drug:"Antifúngicos",color:"#b36838",icon:"microscope"},parasites:{short:"Parásitos",micro:"Parasitología",drug:"Antiparasitarios",color:"#258268",icon:"bug"}};
+const key={virus:{short:"Virus",micro:"Virología",drug:"Antivirales",color:"#6651b6",icon:"dna"},fungi:{short:"Hongos",micro:"Micología",drug:"Antifúngicos",color:"#3e7fad",icon:"microscope"},parasites:{short:"Parásitos",micro:"Parasitología",drug:"Antiparasitarios",color:"#258268",icon:"bug"}};
 const base=["virus","fungi","parasites"];
 const orgs=base.flatMap(k=>(db[k==="virus"?"viruses":k]||[]));
 const drugs=base.flatMap(k=>(db[k==="virus"?"antivirals":k==="fungi"?"antifungals":"antiparasitics"]||[]));

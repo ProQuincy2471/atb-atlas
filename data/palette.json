@@ -1,17 +1,17 @@
 {
-  "version": "4.0.0",
+  "version": "5.0.0",
   "groups": {
-    "staph": "#C94662",
-    "strep": "#DA754D",
-    "entero": "#8B5C9F",
-    "gp-rods": "#9E6192",
-    "enterobacterales": "#CF8D24",
-    "nonfermenters": "#237C83",
-    "gn-respiratory": "#3D83B8",
-    "gn-zoonotic": "#6686B2",
-    "anaerobes": "#688341",
-    "atypicals": "#7561C7",
-    "spirochetes": "#B96778",
-    "mycobacteria": "#647E87"
+    "staph": "#3b6df0",
+    "strep": "#5a54e8",
+    "entero": "#8b4fe6",
+    "gp-rods": "#a24be0",
+    "enterobacterales": "#2f8fe8",
+    "nonfermenters": "#11a7c9",
+    "gn-respiratory": "#1fb5a4",
+    "gn-zoonotic": "#5b7fd6",
+    "anaerobes": "#2faa6a",
+    "atypicals": "#7a5cf0",
+    "spirochetes": "#c04fd8",
+    "mycobacteria": "#4a6a8c"
   }
 }

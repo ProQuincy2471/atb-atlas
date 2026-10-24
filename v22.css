@@ -161,8 +161,8 @@ body{font-size:16px!important;line-height:1.58!important;overflow-x:clip}
 .v22-summarycounts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0}
 .v22-summarycounts>span{padding:9px 8px;border-radius:9px;background:#f3f6fb;font-size:13px;font-weight:750;text-align:center}
 .v22-summarycounts>.active{color:#0b7058;background:#e6f6ee}
-.v22-summarycounts>.conditional{color:#996012;background:#fff2d9}
-.v22-summarycounts>.none{color:#bb3453;background:#fff0f3}
+.v22-summarycounts>.conditional{color:#2b5d80;background:#e3ebf5}
+.v22-summarycounts>.none{color:#bb3453;background:#f4f8ff}
 .v22-summarycounts>.unknown{color:#596779;background:#eff2f7}
 .v22-summarynote{font-size:14px;line-height:1.55;color:#526179}
 .v22-druglist{max-height:360px;overflow:auto;display:grid;gap:6px}

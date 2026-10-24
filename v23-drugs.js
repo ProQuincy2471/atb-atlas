@@ -36,7 +36,7 @@ drugPageSections=function(a){
 const oldMicro=microPageSections;
 microPageSections=function(p){
  const html=oldMicro(p),g=G(p.groupId),e=MICRO_EDU[p.id]||{},deep=E19.organisms[p.id]||{};
- const accent=({Grampositivos:'#cf3674',Gramnegativos:'#2363b8',Anaerobios:'#df7520',Atípicos:'#8750b4',Especiales:'#6253ba'})[dp20(p)]||'#4c7a90';
+ const accent=({Grampositivos:'#cf3674',Gramnegativos:'#2363b8',Anaerobios:'#408abf',Atípicos:'#8750b4',Especiales:'#6253ba'})[dp20(p)]||'#4c7a90';
  const text=`<div class="v23-micro-highlight" style="--microaccent:${accent}"><div class="v23-micro-head">${ic('micro',30)}<div><span class="v23-overline">IDENTIDAD TAXONÓMICA · ${esc(g?.name)}</span><h2>${esc(p.name)}</h2><p>${esc(p.morphology)} · ${esc(p.domain)}</p></div></div><div class="v23-micro-four">
  ${subcard('Biología / reservorio',`<p>${esc(deep.reservoir||e.definition||p.identity)}</p>`)}
  ${subcard('Patogenia y virulencia',`<p>${esc(e.pathophys||deep.pathophysiology||p.identity)}</p>`)}

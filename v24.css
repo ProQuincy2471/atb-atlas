@@ -42,12 +42,12 @@
 .v24-detail section>p{font-size:16px;line-height:1.78;max-width:87ch}
 .v24-highlight,.v24-alert,.v24-drug-spec{padding:15px 18px;border-left:5px solid #3678c2;background:#eef5fd;border-radius:9px;margin-top:14px}
 .v24-highlight b,.v24-alert b,.v24-drug-spec b{font:750 12px 'IBM Plex Mono',monospace;color:#2264b0}
-.v24-alert{border-left-color:#cb7b41;background:#fff8ed}.v24-alert b{color:#a9642b}
+.v24-alert{border-left-color:#4a90c2;background:#f4f8ff}.v24-alert b{color:#36739e}
 .v24-highlight p,.v24-alert p,.v24-drug-spec p{font-size:15px;line-height:1.67;margin:7px 0 0}
 .v24-target-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
 .v24-target-list button{padding:13px;border:1px solid #dce4ed;background:#fff;border-radius:9px;text-align:left;min-width:0;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 8px}
 .v24-target-list button>span{font-size:15px;font-weight:750;overflow-wrap:anywhere}.v24-target-list small{font-size:12px;color:#5c748a;grid-column:1}.v24-target-list button b{font-size:13px;color:var(--v24-accent);grid-column:2;grid-row:1/span 2}
-.v24-blank{padding:14px;border:1px dashed #d8c39c;border-radius:9px;background:#fffaf1;font-size:14px;color:#6a5f52}
+.v24-blank{padding:14px;border:1px dashed #9fb8d5;border-radius:9px;background:#f4f8ff;font-size:14px;color:#536069}
 .v24-sources,.v24-riskcards{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}
 .v24-sources a{padding:9px;border:1px solid #d5e3f3;background:#eff5fc;color:#145da7;font-size:13px;font-weight:700;border-radius:8px;text-decoration:none}
 .v24-drug-hero{padding:27px;background:linear-gradient(115deg,color-mix(in srgb,var(--v24-accent) 12%,white),#fff);border-bottom:1px solid #dce4ed}
@@ -62,7 +62,7 @@
 .v24-mechanism>i{align-self:center;justify-self:center;font:800 22px 'DM Sans';color:var(--v24-accent);font-style:normal}
 .v24-stat-row{display:flex;flex-wrap:wrap;gap:7px;margin:15px 0}
 .v24-stat-row span{font-size:12px;font-weight:750;border:1px solid #dbe2eb;border-radius:99px;padding:8px 10px;background:#fff}
-.v24-stat-row b{font-size:16px}.v24-stat-row .expected{color:#168361;background:#eaf8f0}.v24-stat-row .variable{color:#a7751e;background:#fff5dd}.v24-stat-row .excluded{color:#b53854;background:#fff0f3}.v24-stat-row .unknown{color:#68778b;background:#f1f3f7}
+.v24-stat-row b{font-size:16px}.v24-stat-row .expected{color:#168361;background:#eaf8f0}.v24-stat-row .variable{color:#326b93;background:#e6edf6}.v24-stat-row .excluded{color:#b53854;background:#f4f8ff}.v24-stat-row .unknown{color:#68778b;background:#f1f3f7}
 .v24-spectra-filters label{font-size:13px;font-weight:750;display:flex;align-items:center;gap:9px;margin:12px 0}
 .v24-spectra-filters select{font-size:14px;background:#fff;border:1px solid #cbd9ed;border-radius:8px;padding:8px;max-width:100%;min-width:0}
 .v24-spectrum-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:660px;overflow:auto;align-content:start}
@@ -73,8 +73,8 @@
 .v24-spectrum-list small{font-size:12px;line-height:1.5;color:#6c7b92;display:block;margin-top:5px}
 .v24-spectrum-list em{font-style:normal;font-size:10px;color:#556784;max-width:90px;text-align:right}
 .v24-status-dot{width:8px;height:8px;border-radius:50%;background:#9ba8b9;flex:none;margin-top:5px}
-.v24-spectrum-list button.expected .v24-status-dot{background:#17a478}.v24-spectrum-list button.variable .v24-status-dot{background:#d9a03d}.v24-spectrum-list button.excluded .v24-status-dot{background:#d25877}
-.v24-safety-note{padding:14px;border-left:4px solid #d59c45;background:#fffaf2;border-radius:8px;color:#756449;font-size:14px!important}
+.v24-spectrum-list button.expected .v24-status-dot{background:#17a478}.v24-spectrum-list button.variable .v24-status-dot{background:#5295c4}.v24-spectrum-list button.excluded .v24-status-dot{background:#d25877}
+.v24-safety-note{padding:14px;border-left:4px solid #5596c5;background:#f4f8ff;border-radius:8px;color:#4b6273;font-size:14px!important}
 .v24-riskcards>div{flex:1 1 250px;background:#fff;border:1px solid #dce4ed;padding:17px;border-radius:10px;min-width:0}
 .v24-riskcards b{font:750 12px 'IBM Plex Mono',monospace;color:#276aaa}
 .v24-riskcards p{font-size:15px;line-height:1.64;margin:9px 0 0}
@@ -91,7 +91,7 @@
 .v24-matrix tbody th button{font-size:13px;text-align:left;color:#245f9f;font-weight:800;overflow-wrap:anywhere}
 .v24-matrix tbody th small{font-size:11px;color:#748099;display:block;line-height:1.4;margin-top:5px}
 .v24-matrix td button{width:100%;min-height:45px;display:grid;place-items:center;font-size:20px;font-weight:850;color:#82909d}
-.v24-matrix td button.expected{color:#168360;background:#ebf8f2}.v24-matrix td button.variable{color:#c18c2d;background:#fff9ed}.v24-matrix td button.excluded{color:#ca3d61;background:#fff1f3}
+.v24-matrix td button.expected{color:#168360;background:#ebf8f2}.v24-matrix td button.variable{color:#3c81b2;background:#f4f8ff}.v24-matrix td button.excluded{color:#ca3d61;background:#f4f8ff}
 .v24-map-foot{display:flex;flex-wrap:wrap;gap:11px;align-items:center;margin-top:12px}
 .v24-map-foot>div{display:flex;flex-wrap:wrap;gap:9px;flex:1}
 .v24-map-foot span{font-size:12px}.v24-map-foot button{border:1px solid #d2dfed;background:#fff;border-radius:8px;padding:7px 12px;font-size:13px}
@@ -124,7 +124,7 @@
 .v24-compare-scroll th:first-child{position:sticky;left:0;background:#edf4fc;z-index:3;width:175px;min-width:175px;max-width:175px;font-weight:800}
 .v24-compare-scroll thead th{position:sticky;top:0;background:#eaf2fd;z-index:4;font-weight:800;font-size:16px}.v24-compare-scroll thead th:first-child{z-index:6}
 .v24-compare-status{font-size:12px;padding:6px 8px;border-radius:7px;display:inline-block}
-.v24-compare-status.expected{color:#168364;background:#e7f7f0}.v24-compare-status.excluded{color:#c14962;background:#fff0f2}.v24-compare-status.variable{color:#a87c29;background:#fff7e7}.v24-compare-status.unknown{color:#75819b;background:#f0f3f7}
+.v24-compare-status.expected{color:#168364;background:#e7f7f0}.v24-compare-status.excluded{color:#c14962;background:#f4f8ff}.v24-compare-status.variable{color:#35719c;background:#f4f8ff}.v24-compare-status.unknown{color:#75819b;background:#f0f3f7}
 .v24-compare-scroll td p{font-size:13px;line-height:1.55;color:#69758d}
 @media(max-width:1200px){.v24-columns,.v24-compare-layout{grid-template-columns:1fr}.v24-sidebar,.v24-compare-sidebar{position:static;max-height:280px}.v24-items,.v24-comp-druglist{grid-template-columns:repeat(2,minmax(0,1fr))}.v24-map-filters{grid-template-columns:1fr 1fr}.v24-map-filters>div{grid-column:1/-1}}
 @media(max-width:900px){.v24-mechanism{grid-template-columns:1fr;gap:7px}.v24-mechanism>i{transform:rotate(90deg);font-size:17px}.v24-target-list,.v24-spectrum-list{grid-template-columns:1fr}.v24-entity-hero{grid-template-columns:1fr}.v24-photo{max-width:520px;width:100%}}
