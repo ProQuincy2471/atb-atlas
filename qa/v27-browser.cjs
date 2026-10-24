@@ -38,6 +38,19 @@ async function main(){
    await page.evaluate(()=>document.querySelector('#v25-syn-deep').scrollIntoView());await page.waitForTimeout(100);
    await page.screenshot({path:path.join(folder,`deep-${id}-body-${width}.png`)});
   }
+  // WHO AWaRe: cada condición WHO trae su panel con dosis, primera elección y duración
+  await go('clinica');
+  const WHO_IDS=await page.evaluate(()=>Object.keys(window.ATLAS25.whoTreat||{}));
+  checks++;assert(WHO_IDS.length===37,`whoTreat debe cubrir 37 condiciones, hay ${WHO_IDS.length}`);
+  for(const id of WHO_IDS){
+   await page.evaluate(i=>window.act('v25-clinical:'+i),id);await page.waitForTimeout(120);
+   const w=await page.evaluate(()=>{const p=document.querySelector('.who-panel');if(!p)return null;return {esc:p.querySelectorAll('.who-esc').length,txt:p.innerText,over:document.documentElement.scrollWidth-innerWidth,inner:p.scrollWidth-p.clientWidth,tabs:p.querySelectorAll('.who-tabs button').length,first:p.querySelectorAll('.who-line:not(.who-second) .who-drug').length,dur:p.querySelectorAll('.who-dur').length}});
+   checks++;assert(w&&w.esc>=1,`panel WHO ausente en ${id}@${width}`);
+   assert(!/\$\{|undefined|NaN|\[object Object\]/.test(w.txt),`texto sin renderizar en WHO ${id}@${width}`);
+   assert(w.over<9&&w.inner<2,`desborde WHO ${id}@${width}`);
+   assert(/Fuente: WHO AWaRe antibiotic book 2022/.test(w.txt),`fuente WHO ausente en ${id}`);
+   if(!['who-04'].includes(id)){assert(w.first>=1&&w.dur>=1,`WHO ${id} sin primera elección o duración`)}
+  }
   await go('micro');
   for(const id of MICRO_DEEP){await page.evaluate(i=>window.act('v24-open-micro:'+i),id);await page.waitForTimeout(250);
    const m=await page.evaluate(()=>({blocks:document.querySelectorAll('.v25-md-block').length,over:document.documentElement.scrollWidth-innerWidth,leak:/\$\{|undefined|NaN/.test(document.querySelector('#micro-profundo')?.innerText||'')}));
