@@ -533,3 +533,45 @@ input[type=checkbox]:checked{background:var(--cobalt)!important;border-color:var
 .who-legend b{display:inline-block;margin:0 3px 0 8px;padding:0 5px;border-radius:4px;background:#2a7fb8;color:#fff}
 .who-legend b:nth-of-type(2){background:#5a56b8}.who-legend b:nth-of-type(3){background:#a03a78}
 @media(max-width:600px){.who-panel>header,.who-grid,.who-pat{padding-left:14px;padding-right:14px}.who-tabs{padding-left:14px}.who-alerts{padding-right:14px}}
+
+/* ───────── V31 · Texto con identidad ───────── */
+.nx-main mark.hl-dose{background:linear-gradient(transparent 12%,#bfe3ff 12%,#bfe3ff 92%,transparent 92%);color:#0a2a5c;font-weight:700;padding:0 3px;border-radius:3px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.nx-main b.hl-drug{color:#2433a8;font-weight:700;background:linear-gradient(transparent 62%,#d9d4ff 62%);padding:0 1px}
+.nx-main i.hl-org{color:#5b2fb5;font-style:italic;font-weight:600}
+.nx-main strong.hl-alert{color:#4a1f9e;font-weight:800;background:linear-gradient(transparent 58%,#e5d6ff 58%);padding:0 2px}
+.nx-main p,.nx-main li{color:#1b2a4a}
+.nx-main p>strong,.nx-main li>strong{color:#0a1633}
+.who-drug span{font-weight:600;color:#0d2447}
+.who-drug b{font-style:normal}
+
+/* ───────── V31 · Superficies con color (menos blanco) ───────── */
+:root{--tint-1:linear-gradient(165deg,#f5f8ff 0%,#e7eeff 100%);--tint-2:linear-gradient(165deg,#f6f3ff 0%,#e9e4ff 100%);--tint-3:linear-gradient(165deg,#f1f9ff 0%,#dff0fc 100%);--tint-4:linear-gradient(165deg,#f2f7fd 0%,#e0e9f7 100%)}
+.nx-main :is(.v25-clinic-article,.v25-clinic-sidebar,.v25-syndrome-section,.v24-article,.v23-article,.v20-article,.a18-article,.v23-learn-main,.v23-learn-rail,.v24-sidebar,.v21-sidebar,.v23-comp-main,.v23-comp-sidebar,.v24-compare-content,.v24-compare-sidebar,.v25-deep-box,.v25-map-key,.v23-subcard,.v23-spechead,.v24-book-chapter,.v24-book-index,.v25-syndrome-foot,.a18-sheet,.a18-browser,.v20-map-main,.v20-map-side,.v20-library,.nx-explore-browser,.nx-explore-content,.nx-section-page){background:var(--tint-1)!important;border-color:#c5d3ee!important}
+.nx-main :is(.v25-syndrome-section:nth-of-type(3n+2),.v23-subcard:nth-child(3n+2),.v25-deep-box:nth-of-type(2n)){background:var(--tint-2)!important}
+.nx-main :is(.v25-syndrome-section:nth-of-type(3n),.v23-subcard:nth-child(3n),.v24-book-chapter:nth-child(2n)){background:var(--tint-3)!important}
+.nx-main :is(.v25-syndrome-context){background:linear-gradient(90deg,#dfe8ff,#eef2ff)!important}
+.nx-main :is(.v23-dosegrid>div,.v24-riskcards>div,.v23-mech-step,.v23-pair,.v25-pair,.v25-rounds>div,.v20-keyfacts>div,.a18-metric,.v21-coverstat){background:var(--tint-4)!important;border-color:#c5d3ee!important}
+.who-panel{background:var(--tint-1)}
+.who-esc{background:linear-gradient(165deg,#fbfcff,#eef3ff)!important}
+.who-esc:nth-child(2n){background:linear-gradient(165deg,#faf8ff,#eeeaff)!important}
+.who-drug{background:#f7faff}
+.who-second .who-drug{background:#ecebff}
+
+/* ───────── V31 · Scroll: nada atrapa la rueda ───────── */
+.nx-main :is(.a18-browser,.v23-learn-rail,.v25-clinic-sidebar,.v25-clinic-list,.cmp-list,.v20-map-side,.a18-maprail,.a18-candidates,.a18-lessonrail){overscroll-behavior:auto;scrollbar-gutter:stable}
+@media(min-width:1101px){
+ .nx-main .v25-clinic-sidebar{top:78px;max-height:calc(100vh - 96px);overflow:hidden}
+ .nx-main .v25-clinic-sidebar>.v25-clinic-systems{max-height:132px;overflow:auto;flex:none}
+ .nx-main .v25-clinic-sidebar>.v25-clinic-list{min-height:200px;overflow:auto}
+ .nx-main .a18-browser{top:78px;max-height:calc(100vh - 96px);overflow:auto!important}
+ .nx-main .v23-learn-rail{top:78px;max-height:calc(100vh - 96px)}
+}
+@media(max-width:1100px){
+ /* en pantallas medianas y móviles los paneles laterales fluyen con la página, sin cajas con scroll propio */
+ .nx-main :is(.v25-clinic-sidebar,.a18-browser,.v23-learn-rail,.v20-map-side,.a18-maprail,.a18-candidates,.a18-lessonrail,.v20-library>.a18-browser,.v21-sidebar,.v24-sidebar,.v23-comp-sidebar,.v24-compare-sidebar){position:static!important;max-height:none!important;overflow:visible!important}
+ .nx-main .v25-clinic-list{max-height:none;overflow:visible}
+ .nx-main .v25-clinic-systems{max-height:none;overflow:visible}
+ .nx-main .cmp-list{max-height:min(46vh,360px)}
+}
+.nx-main .v25-syndrome-section>p::first-line,.nx-main .v25-syndrome-context p::first-line{font-weight:650;color:#0a1633}
+.nx-main .v25-syndrome-section>p{font-size:1.02rem}

@@ -475,5 +475,43 @@ function enhanceWho(){
  }catch(e){console.warn('who panel',e)}
 }
 const renderWho=render;render=function(){renderWho();enhanceWho()};
+/* Texto con identidad: dosis, duraciones, fármacos, microorganismos y alertas se marcan en el cuerpo de lectura */
+let HLRE=null;
+function hlBuild(){
+ const esc=t=>t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+ const nm=(list)=>[...new Set(list.map(x=>String(x.name||x.title||'').replace(/\s*\(.*\)$/,'').trim()).filter(n=>n.length>=6))].sort((a,b)=>b.length-a.length).map(esc);
+ const drugs=nm(allDrug()),orgs=nm(allMicro());
+ const dose='\\d+(?:[.,–\\-]\\d+)?\\s?(?:mg|g|µg|mcg|UI|mL|mEq)(?:\\/kg)?(?:\\/(?:día|dosis|h))?(?:\\s?c\\/\\d+(?:–\\d+)?\\s?h)?|c\\/\\d+(?:–\\d+)?\\s?h|\\d+(?:[–\\-]\\d+)?\\s?(?:días|semanas|meses|horas|h|min)|dosis única|single dose';
+ const alert='contraindicad[oa]s?|urgente|emergencia|amenaza (?:de )?vía aérea|sepsis|choque séptico|no (?:se )?(?:recomienda|debe)\\w*|nunca|evitar|sin antibiótico|resistencia|multirresistente';
+ const parts=[];
+ HLRE={re:new RegExp('(?<![\\wÁ-ú])(?:('+dose+')|('+alert+')'+(drugs.length?'|('+drugs.join('|')+')':'')+(orgs.length?'|('+orgs.join('|')+')':'')+')(?![\\wÁ-ú])','gi'),dg:drugs.length?3:0,og:orgs.length?(drugs.length?4:3):0};
+}
+function enhanceText(){
+ const root=document.querySelector('.nx-main');if(!root)return;
+ try{
+  if(!HLRE)hlBuild();
+  const skip='button,a,input,select,textarea,svg,mark,b,i,em,strong,h1,h2,h3,h4,th,.cv-grid,.rm-wrap,.nx-spec,.who-drug,.who-tabs,script,style,[data-nohl]';
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{if(n.nodeValue.length<12)return NodeFilter.FILTER_REJECT;const el=n.parentElement;if(!el||!el.closest('p,li,td,.v25-syndrome-context')||el.closest(skip))return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT}});
+  const nodes=[];let n;while((n=walker.nextNode())&&nodes.length<4000)nodes.push(n);
+  for(const node of nodes){
+   const t=node.nodeValue;HLRE.re.lastIndex=0;if(!HLRE.re.test(t))continue;HLRE.re.lastIndex=0;
+   const frag=document.createDocumentFragment();let last=0,m;
+   while((m=HLRE.re.exec(t))){
+    if(m.index>last)frag.appendChild(document.createTextNode(t.slice(last,m.index)));
+    let el;
+    if(m[1]){el=document.createElement('mark');el.className='hl-dose'}
+    else if(m[2]){el=document.createElement('strong');el.className='hl-alert'}
+    else if(HLRE.dg&&m[HLRE.dg]){el=document.createElement('b');el.className='hl-drug'}
+    else{el=document.createElement('i');el.className='hl-org'}
+    el.textContent=m[0];frag.appendChild(el);last=m.index+m[0].length;
+    if(m[0].length===0)HLRE.re.lastIndex++;
+   }
+   if(last<t.length)frag.appendChild(document.createTextNode(t.slice(last)));
+   node.parentNode.replaceChild(frag,node);
+  }
+ }catch(e){console.warn('hl',e)}
+}
+const renderHl=render;render=function(){renderHl();enhanceText()};
+
 
 })();
