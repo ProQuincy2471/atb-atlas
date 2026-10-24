@@ -338,7 +338,8 @@ act=function(command){
  case 'nx-drawer':NX.drawer=!NX.drawer;return render();
  case 'nx-density':NX.compact=!NX.compact;try{localStorage.setItem('infeora-v26-compact',NX.compact?'1':'0')}catch{}return render();
  case 'nx-map-domain':NX.mapGroup='all';NX.domain=value;NX.group='all';NX.micro='';NX.query='';NX.rxQuery='';NX.rxFamily='all';NX.status='relevant';return render();
- case 'nx-view':NX.view=value;if(state.route!=='mapa')return goto('mapa');return render();
+ case 'who-age':WHOUI.age=+value||0;return render();
+  case 'nx-view':NX.view=value;if(state.route!=='mapa')return goto('mapa');return render();
  case 'nx-cmp-dom':NX.cmp.dom=value;NX.cmp.ids=[];NX.cmp.cls='all';NX.cmp.q='';NX.cmp.target='';return render();
  case 'nx-cmp-toggle':{const i=NX.cmp.ids.indexOf(value);if(i<0){if(NX.cmp.ids.length<6)NX.cmp.ids.push(value)}else NX.cmp.ids.splice(i,1);return render()}
  case 'nx-cmp-del':NX.cmp.ids=NX.cmp.ids.filter(x=>x!==value);return render();
@@ -450,4 +451,29 @@ function enhanceInterior(){
  }catch(e){console.warn('spec panel',e)}
 }
 const renderV28=render;render=function(){renderV28();enhanceInterior()};
+/* Tratamiento WHO AWaRe por condición (data/who-aware-treatments.js) */
+const WHOUI={age:0,sc:{}};
+const whoEsc=x=>String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const AWR={A:['Access','Primera línea de uso amplio'],W:['Watch','Mayor riesgo de resistencia: usar con indicación'],R:['Reserve','Último recurso']};
+function whoChips(list){return list.length?list.map(d=>'<li class="who-drug who-'+(d.c||'x')+'">'+(d.c?'<b title="'+whoEsc(AWR[d.c][0]+' — '+AWR[d.c][1])+'">'+d.c+'</b>':'')+'<span>'+whoEsc(d.t)+'</span></li>').join(''):''}
+function whoPanel(id){
+ const T=window.ATLAS25?.whoTreat?.[id];if(!T)return '';
+ const gi=Math.min(WHOUI.age,T.grupos.length-1),g=T.grupos[gi];
+ const abx={no:['Sin antibiótico','who-abx-no'],cond:['Antibiótico solo si hay indicación','who-abx-cond'],si:['Antibiótico indicado','who-abx-si']}[T.abx]||['',''];
+ const tabs=T.grupos.length>1?'<div class="who-tabs" role="tablist">'+T.grupos.map((x,i)=>'<button role="tab" aria-selected="'+(i===gi)+'" class="'+(i===gi?'on':'')+'" data-act="who-age:'+i+'">'+whoEsc(x.p)+'</button>').join('')+'</div>':'<div class="who-tabs"><span class="on">'+whoEsc(g.p)+'</span></div>';
+ const cards=g.esc.map(e=>'<article class="who-esc"><h3>'+whoEsc(e.t)+'</h3>'+(e.first.length?'<div class="who-line"><h4>Primera elección</h4><ul>'+whoChips(e.first)+'</ul></div>':'')+(e.second.length?'<div class="who-line who-second"><h4>Segunda elección</h4><ul>'+whoChips(e.second)+'</ul></div>':'')+(e.dur?'<p class="who-dur"><b>Duración</b> '+whoEsc(e.dur)+'</p>':'')+(e.nota?'<p class="who-note">'+whoEsc(e.nota)+'</p>':'')+'</article>').join('');
+ return '<section class="who-panel" id="who-panel"><header><div><span class="who-abx '+abx[1]+'">'+abx[0]+'</span><h2>Tratamiento según el manual OMS AWaRe</h2></div><p>'+whoEsc(T.res)+'</p></header>'+tabs+'<div class="who-grid">'+cards+'</div>'+(T.pat&&T.pat.length?'<p class="who-pat"><b>Patógenos probables</b> '+T.pat.map(whoEsc).join(' · ')+'</p>':'')+(T.alertas&&T.alertas.length?'<ul class="who-alerts">'+T.alertas.map(a=>'<li>'+whoEsc(a)+'</li>').join('')+'</ul>':'')+'<footer><span class="who-legend"><b>A</b> Access <b>W</b> Watch <b>R</b> Reserve</span><span>Dosis para función renal normal. Fuente: '+whoEsc(T.src)+' ('+whoEsc(T.pag)+'); adaptación no oficial, la OMS no la avala. Contrastar con la edición vigente, el antibiograma local, la función renal, el embarazo y las alergias.</span></footer></section>';
+}
+function enhanceWho(){
+ document.querySelectorAll('.who-panel').forEach(x=>x.remove());
+ if(state.route!=='clinica')return;
+ try{
+  const hero=document.querySelector('.v25-syndrome-hero');if(!hero)return;
+  const on=document.querySelector('.v25-clinic-list button.on');
+  const id=window.ATLAS25?.reviewUI?.cl?.selected&&window.ATLAS25.whoTreat?.[window.ATLAS25.reviewUI.cl.selected]?window.ATLAS25.reviewUI.cl.selected:(on?(on.getAttribute('data-act')||'').split(':')[1]:'');
+  if(id)hero.insertAdjacentHTML('afterend',whoPanel(id));
+ }catch(e){console.warn('who panel',e)}
+}
+const renderWho=render;render=function(){renderWho();enhanceWho()};
+
 })();

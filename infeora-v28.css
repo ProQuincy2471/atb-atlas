@@ -504,3 +504,32 @@ input[type=checkbox]:checked{background:var(--cobalt)!important;border-color:var
 .a18-controlpair button,.v25-clinic-systems button,.v25-clinic-systems a,.a19-browserquick button{border-radius:999px!important;border:1.5px solid var(--line)!important;background:#fff!important;font:600 13px var(--body)!important;padding:7px 14px!important;transition:all .15s}
 .a18-controlpair button:hover,.v25-clinic-systems button:hover{border-color:var(--rt)!important;color:var(--rt)!important}
 .a18-controlpair button.selected,.v25-clinic-systems button.on,.v25-clinic-systems button.active,.v25-clinic-systems .selected{background:var(--rt)!important;border-color:var(--rt)!important;color:#fff!important}
+
+/* WHO AWaRe — tratamiento por condición */
+.who-panel{margin:20px 0 28px;border:1px solid #c9d8ea;border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 1px 0 #dfe8f3}
+.who-panel>header{padding:18px 22px 14px;background:linear-gradient(120deg,#eaf2fb,#f4f8fd);border-bottom:1px solid #d6e2f0}
+.who-panel h2{margin:6px 0 4px;font:700 1.35rem/1.2 'Bricolage Grotesque',sans-serif;color:#17395f}
+.who-panel>header p{margin:0;max-width:80ch;color:#33506f;font-size:.95rem;line-height:1.5}
+.who-abx{display:inline-block;padding:3px 10px;border-radius:999px;font:600 .78rem 'Hanken Grotesk',sans-serif}
+.who-abx-no{background:#e3e9f1;color:#34495e}.who-abx-cond{background:#dbe7fb;color:#1f4a8f}.who-abx-si{background:#d5ecf6;color:#0d5d7e}
+.who-tabs{display:flex;gap:6px;padding:12px 22px 0;flex-wrap:wrap}
+.who-tabs button,.who-tabs span{border:1px solid #bfd0e4;background:#fff;color:#27476b;padding:7px 16px;border-radius:999px;font:600 .9rem 'Hanken Grotesk',sans-serif;cursor:pointer}
+.who-tabs .on{background:#1f5fa8;border-color:#1f5fa8;color:#fff}
+.who-tabs button:focus-visible{outline:3px solid #7fb0e8;outline-offset:2px}
+.who-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:14px;padding:16px 22px}
+.who-esc{border:1px solid #d3e0ef;border-radius:12px;padding:14px 16px;background:#fbfdff;min-width:0}
+.who-esc h3{margin:0 0 10px;font:700 1.02rem/1.3 'Bricolage Grotesque',sans-serif;color:#17395f}
+.who-line h4{margin:10px 0 6px;font:700 .8rem 'Hanken Grotesk',sans-serif;color:#4a6585}
+.who-line ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.who-drug{display:flex;gap:9px;align-items:flex-start;padding:8px 10px;border-radius:9px;border:1px solid #cfdcec;background:#fff;font-size:.9rem;line-height:1.4;color:#1c2f45;overflow-wrap:anywhere}
+.who-drug b{flex:none;width:22px;height:22px;border-radius:6px;display:grid;place-items:center;color:#fff;font:700 .78rem 'JetBrains Mono',monospace}
+.who-A b{background:#2a7fb8}.who-W b{background:#5a56b8}.who-R b{background:#a03a78}
+.who-second .who-drug{background:#f3f7fc}
+.who-dur{margin:12px 0 0;padding:7px 10px;border-radius:9px;background:#e4eefb;color:#1b4478;font-size:.9rem}
+.who-note{margin:8px 0 0;font-size:.85rem;color:#40566f;line-height:1.5}
+.who-pat{margin:0;padding:0 22px 12px;font-size:.9rem;color:#2a425d}
+.who-alerts{margin:0;padding:0 22px 14px 40px;font-size:.88rem;color:#2a425d;line-height:1.5}
+.who-panel>footer{display:flex;gap:14px;flex-wrap:wrap;align-items:baseline;padding:11px 22px;background:#f1f6fb;border-top:1px solid #d6e2f0;font-size:.78rem;color:#4a6585;line-height:1.45}
+.who-legend b{display:inline-block;margin:0 3px 0 8px;padding:0 5px;border-radius:4px;background:#2a7fb8;color:#fff}
+.who-legend b:nth-of-type(2){background:#5a56b8}.who-legend b:nth-of-type(3){background:#a03a78}
+@media(max-width:600px){.who-panel>header,.who-grid,.who-pat{padding-left:14px;padding-right:14px}.who-tabs{padding-left:14px}.who-alerts{padding-right:14px}}
