@@ -1,5 +1,5 @@
 /* ATB ATLAS 18 / THE CLINICAL FIELD GUIDE — editorial structured design */
-:root{--bg:#F1ECE7;--paper:#FFFEFB;--ink:#252235;--rose:#CA4067;--line:#E3D8CE;--deep:#211A33;--sans:'DM Sans',sans-serif;--mono:'IBM Plex Mono',monospace;--serif:'Fraunces',Georgia,serif}
+:root{--bg:#F1ECE7;--paper:#FFFEFB;--ink:#252235;--rose:#CA4067;--line:#E3D8CE;--deep:#211A33;--sans:var(--body);--mono:'IBM Plex Mono',monospace;--serif:var(--disp)}
 body{background:#F2EEE9;color:#262238}
 .layout{max-width:1710px;padding:13px 17px 0}
 .main{padding:29px 0 55px}

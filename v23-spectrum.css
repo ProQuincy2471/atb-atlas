@@ -2,7 +2,7 @@
 .v23-cov{min-width:0;color:#1c2c50}
 .v23-cov-header{border-bottom:1px solid #dae4f1;padding:6px 0 17px}
 .v23-cov-header>span{font:750 12px 'IBM Plex Mono',monospace;color:#d42c74;letter-spacing:.05em}
-.v23-cov-header h3{font:750 clamp(23px,2.1vw,31px)/1.2 'DM Sans',sans-serif;margin:10px 0}
+.v23-cov-header h3{font:750 clamp(23px,2.1vw,31px)/1.2 var(--body);margin:10px 0}
 .v23-cov-header p{font-size:16px!important;line-height:1.66;color:#4c5974;margin:0;max-width:80ch}
 .v23-organism-nav{display:flex;gap:9px;overflow-x:auto;max-width:100%;padding:17px 0;scrollbar-width:thin}
 .v23-organism-nav button{flex:0 0 175px;min-width:0;text-align:left;padding:12px;border:1px solid #dce4ef;border-radius:11px;background:#fff;display:flex;flex-direction:column;gap:6px;min-height:84px}
