@@ -512,6 +512,24 @@ function enhanceText(){
  }catch(e){console.warn('hl',e)}
 }
 const renderHl=render;render=function(){renderHl();enhanceText()};
+/* Movimiento: entrada por sección y revelado al hacer scroll */
+let mvRoute=null,mvIO=null;
+function enhanceMotion(){
+ try{
+  const root=document.querySelector('.nx-main');if(!root)return;
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(state.route!==mvRoute){mvRoute=state.route;if(!reduce){root.classList.remove('mv-enter');void root.offsetWidth;root.classList.add('mv-enter');setTimeout(()=>root.classList.remove('mv-enter'),1100)}}
+  if(reduce||!('IntersectionObserver' in window))return;
+  document.documentElement.classList.add('mv-on');
+  mvIO&&mvIO.disconnect();
+  mvIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('mv-in');mvIO.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.06});
+  const items=root.querySelectorAll('.v25-syndrome-section,.who-esc,.v23-subcard,.cmp-card,.v24-riskcards>div,.v23-dosegrid>div,.v25-deep-box,.nx-home-domains>*,.v24-book-chapter');
+  let i=0;items.forEach(el=>{el.classList.add('mv-item');el.style.setProperty('--mi',String(i++%4));const r=el.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)el.classList.add('mv-in');else mvIO.observe(el)});
+  setTimeout(()=>items.forEach(el=>el.classList.add('mv-in')),4000);
+ }catch(e){console.warn('motion',e)}
+}
+const renderMv=render;render=function(){renderMv();enhanceMotion()};
+
 
 
 })();
