@@ -42,6 +42,10 @@ async function main(){
   for(const id of MICRO_DEEP){await page.evaluate(i=>window.act('v24-open-micro:'+i),id);await page.waitForTimeout(250);
    const m=await page.evaluate(()=>({blocks:document.querySelectorAll('.v25-md-block').length,over:document.documentElement.scrollWidth-innerWidth,leak:/\$\{|undefined|NaN/.test(document.querySelector('#micro-profundo')?.innerText||'')}));
    checks++;assert(m.blocks>=5&&!m.leak&&m.over<9,`revisión ampliada de microorganismo ${id}@${width}: ${JSON.stringify(m)}`)}
+  const DRUG_IDS=await page.evaluate(()=>Object.keys(window.ATLAS25.drugDeep||{}));
+  for(const id of DRUG_IDS){await page.evaluate(i=>window.act('v24-open-drug:'+i),id);await page.waitForTimeout(150);
+   const m=await page.evaluate(()=>({blocks:document.querySelectorAll('#drug-profundo .v25-md-block').length,over:document.documentElement.scrollWidth-innerWidth,leak:/\$\{|undefined|NaN/.test(document.querySelector('#drug-profundo')?.innerText||'')}));
+   checks++;assert(m.blocks>=6&&!m.leak&&m.over<9,`revisión ampliada de fármaco ${id}@${width}: ${JSON.stringify(m)}`)}
   // comparator: target follows the kingdom of the first chosen agent and sidebar tabs stay readable
   await go('comparar');await page.evaluate(()=>[...document.querySelectorAll('button')].find(x=>/integral/.test(x.textContent))?.click());await page.waitForTimeout(250);
   await page.evaluate(()=>window.act('v24-compare-clear'));await page.waitForTimeout(100);

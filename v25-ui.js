@@ -127,6 +127,16 @@ function clinicalReferences(c){
  return refs;
 }
 window.ATLAS25=window.ATLAS25||{};
+
+window.ATLAS25.drugDeep=window.ATLAS25.drugDeep||{};
+window.ATLAS25.drugDeepHTML=function(id){
+ const d=window.ATLAS25.drugDeep[id];if(!d)return '';
+ const blocks=[['mecanismo','Mecanismo de acción'],['espectro','Espectro de actividad'],['farmacocinetica','Farmacocinética y distribución'],['indicaciones','Usos clínicos'],['seguridad','Efectos adversos, interacciones y precauciones'],['resistencia','Mecanismos de resistencia'],['notas','Notas de vigencia y límites de la fuente']];
+ const body=blocks.filter(([k])=>d[k]&&d[k].length).map(([k,t],i)=>'<article class="v25-md-block"><span>'+String(i+1).padStart(2,'0')+'</span><h3>'+Hx(t)+'</h3>'+d[k].map(x=>'<p>'+Hx(x)+'</p>').join('')+'</article>').join('');
+ return '<section class="v20-section v25-microdeep" id="drug-profundo"><div class="v20-section-title"><span class="v20-sectionnum">+</span><div><small>REVISIÓN AMPLIADA · '+Hx(d.reviewed||'')+'</small><h2>Farmacología en profundidad</h2></div></div><div class="v20-section-body">'+body+'<p class="v25-md-src"><b>Trazabilidad:</b> '+(d.src||[]).map(Hx).join(' · ')+'. Síntesis editorial original sin dosis no citadas; contrastar con ficha técnica y guías vigentes.</p></div></section>';
+};
+const dps=window.drugPageSections;
+if(typeof dps==='function')window.drugPageSections=function(a){return dps(a)+window.ATLAS25.drugDeepHTML(a.id)};
 window.ATLAS25.microDeepHTML=function(id){
  const d=window.ATLAS25.microDeep?.[id];if(!d)return '';
  const blocks=[['biologia','Biología y estructura'],['patogenia','Patogenia y factores de virulencia'],['epidemiologia','Epidemiología y transmisión'],['clinica','Manifestaciones clínicas'],['diagnostico','Diagnóstico de laboratorio'],['diferencial','Diagnóstico diferencial y confusiones frecuentes'],['tratamiento','Tratamiento'],['resistencia','Resistencia'],['complicaciones','Complicaciones y seguimiento']];
