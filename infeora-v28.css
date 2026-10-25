@@ -696,3 +696,27 @@ input[type=checkbox]:checked{background:var(--cobalt)!important;border-color:var
 .nx-main .sx-side .sx-seg span{overflow:visible;text-overflow:clip}
 .nx-main .sx-side .sx-segs{display:flex!important;flex-wrap:wrap}
 .nx-main .sx-side .sx-seg{flex:1 1 auto}
+
+/* ───────── V34 · Facetas en Microorganismos y Antimicrobianos ───────── */
+.fx-panel{display:flex;flex-direction:column;gap:12px;margin:14px 0 4px}
+.fx-block h4{margin:0 0 6px;font:700 12.5px var(--body);color:#33415f;text-transform:none;letter-spacing:0}
+.fx-chips{display:flex;flex-wrap:wrap;gap:5px}
+.nx-main .fx-chip,.nx-main .fx-toggle{display:inline-flex;align-items:center;gap:6px;border:1px solid color-mix(in srgb,var(--t,#3246d8) 30%,#fff)!important;background:color-mix(in srgb,var(--t,#3246d8) 9%,#fff)!important;color:color-mix(in srgb,var(--t,#3246d8) 82%,#0a1633)!important;border-radius:9px!important;padding:5px 9px!important;font:600 12px var(--body)!important;cursor:pointer;white-space:nowrap;min-height:0!important;width:auto!important}
+.nx-main .fx-chip .inf-ic,.nx-main .fx-toggle .inf-ic{width:15px;height:15px}
+.nx-main .fx-chip em,.nx-main .fx-toggle em{font:600 10px var(--mono);font-style:normal;opacity:.75}
+.nx-main .fx-chip:hover,.nx-main .fx-toggle:hover{border-color:var(--t,#3246d8)!important}
+.nx-main .fx-chip.on,.nx-main .fx-toggle.on{background:var(--t,#3246d8)!important;border-color:var(--t,#3246d8)!important;color:#fff!important;box-shadow:0 6px 14px -8px var(--t,#3246d8)}
+.nx-main .fx-chip.empty{opacity:.42}
+.nx-main .fx-toggle{--t:#5146d6}
+.fx-status{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:12.5px;color:#56658a;padding:7px 10px;border-radius:10px;background:#e7edfb}
+.fx-status b{font:800 15px var(--disp);color:#2433a8}
+.fx-status button{display:inline-flex;align-items:center;gap:4px;border:0;background:#fff;color:#2433a8;border-radius:7px;padding:4px 8px;font:600 12px var(--body);cursor:pointer;margin-left:auto}
+.fx-leaf{display:inline-grid;place-items:center;flex:none;width:26px;height:26px;border-radius:8px;background:color-mix(in srgb,var(--t,#3246d8) 13%,#fff);color:var(--t,#3246d8);font-style:normal}
+.fx-leaf .inf-ic{width:16px;height:16px}
+.a18-leaves button{display:flex!important;align-items:center;gap:8px}
+.a18-leaves button.selected .fx-leaf,.v24-items button.chosen .fx-leaf{background:var(--t,#3246d8);color:#fff}
+.nx-main .a18-browserhead .fx-panel{margin-top:12px}
+.nx-main .v24-items button{display:grid!important;grid-template-columns:26px minmax(0,1fr) auto;align-items:center;gap:9px}
+.nx-main .v24-items button.chosen{box-shadow:inset 3px 0 0 var(--t,#3246d8)}
+.nx-main .v24-items button small{color:color-mix(in srgb,var(--t,#3246d8) 70%,#56658a)!important}
+.v24-fx{margin:10px 0}
