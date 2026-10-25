@@ -278,6 +278,18 @@ function mapToolbar(dom,gl,gsel,s){
 }
 document.addEventListener('change',e=>{if(e.target.id!=='rm-jump'||!e.target.value)return;const [g,id]=e.target.value.split('|');NX.mapGroup=g;NX.micro=id;NX.status='relevant';render()});
 document.addEventListener('mouseover',e=>{const t=e.target.closest&&e.target.closest('.rm-drug[data-i]');const svg=document.querySelector('.rm-svg');if(!svg)return;svg.querySelectorAll('.hl').forEach(x=>x.classList.remove('hl'));if(t){svg.classList.add('hovering');svg.querySelectorAll('[data-i="'+t.dataset.i+'"]').forEach(x=>x.classList.add('hl'))}else svg.classList.remove('hovering')});
+
+/* Laboratorio: relaciona el cuadro con su entrada del manual OMS y asigna 1ª/2ª línea a cada fármaco */
+const LAB_WHO={'neumonia adquirida en la comunidad':'who-12','neumonia hospitalaria':'who-28','cistitis localizada en vejiga':'who-23','pielonefritis':'who-34','infeccion urinaria complicada':'who-34','celulitis no purulenta':'who-16','absceso e infeccion purulenta':'who-16','infeccion intraabdominal complicada':'who-31','meningitis bacteriana':'who-26','osteomielitis':'who-35','artritis septica':'who-36','infeccion por clostridioides difficile':'who-33','sepsis de posible origen bacteriano':'who-24','faringoamigdalitis bacteriana':'who-06','gastroenteritis bacteriana':'who-14','infeccion gonococica':'who-20'};
+function labWhoId(cur){const n=normalized(cur.name).trim();const id=LAB_WHO[n];return id&&window.ATLAS25?.whoTreat?.[id]?id:''}
+function whoTier(id,a){const T=window.ATLAS25.whoTreat[id];if(!T)return 0;const g=T.grupos.find(x=>/adult/i.test(x.p))||T.grupos[0];
+ const words=normalized(a.name).replace(/\b(iv|vo|im|oral)\b/g,'').split(/[^a-z]+/).filter(w=>w.length>=5);if(!words.length)return 0;
+ const EQ={oxacilina:'cloxacilina',nafcilina:'cloxacilina',dicloxacilina:'cloxacilina'};
+ const re=w=>new RegExp('(^|[^a-z])'+w+'([^a-z]|$)');
+ const has=(list,ws)=>list.some(d=>{const t=normalized(d.t);return ws.every(w=>re(w).test(t))});
+ const eq=words.length===1&&EQ[words[0]]?[EQ[words[0]]]:null;
+ if(g.esc.some(e=>has(e.first,words)))return 1;if(g.esc.some(e=>has(e.second,words)))return 2;
+ if(eq){if(g.esc.some(e=>has(e.first,eq)))return 1.5;if(g.esc.some(e=>has(e.second,eq)))return 2.5}return 0}
 /* ───────── V30: comparador y laboratorio guiados ───────── */
 Object.assign(NX,{cmp:{dom:'bacteria',ids:[],q:'',cls:'all',target:'',grp:'all'},lab:{sid:'',sp:[],q:'',dom:'bacteria'}});
 const deepTxt=(a,k)=>{const d=window.ATLAS25&&window.ATLAS25.drugDeep&&window.ATLAS25.drugDeep[a.id];const t=d&&d[k]&&d[k][0];return t?String(t).replace(/\s+/g,' ').slice(0,230)+(String(t).length>230?'…':''):''};
@@ -320,11 +332,12 @@ function labView(){
  let res='';
  if(picks.length){
   const dom=picks[0].kingdom,drugs=domainDrug(dom);
-  const rows=drugs.map(a=>{const cs=picks.map(p=>covLevel(a,p));const known=cs.filter(c=>c.lvl).length;const score=cs.reduce((s,c)=>s+(c.lvl?LV[c.lvl].n:0),0)/(4*picks.length);const full=cs.filter(c=>c.lvl==='Y'||c.lvl==='M').length;return {a,cs,known,score,full,fc:familyColor(a.kingdom,a.family)}}).filter(r=>r.known>0).sort((x,y)=>y.full-x.full||y.score-x.score).slice(0,25);
+  const wid=cur?labWhoId(cur):'',tierOf=a=>wid?whoTier(wid,a):0;
+  const rows=drugs.map(a=>{const cs=picks.map(p=>covLevel(a,p));const known=cs.filter(c=>c.lvl).length;const score=cs.reduce((s,c)=>s+(c.lvl?LV[c.lvl].n:0),0)/(4*picks.length);const full=cs.filter(c=>c.lvl==='Y'||c.lvl==='M').length;return {a,cs,known,score,full,tier:tierOf(a),fc:familyColor(a.kingdom,a.family)}}).filter(r=>r.known>0||r.tier).sort((x,y)=>(x.tier||9)-(y.tier||9)||y.full-x.full||y.score-x.score).slice(0,25);
   const who=(cur&&cur.id&&allDiseases().find(c=>normalized(c.title).includes(normalized(cur.name).slice(0,12))))||null;
-  const head='<tr><th>Agente</th>'+picks.map(p=>'<th class="sp"><span>'+safe(shortName(p.name))+'</span></th>').join('')+'<th>Cubre</th></tr>';
-  const body=rows.map(r=>'<tr style="--fc:'+r.fc+'"><th><i></i><button data-act="nx-find:drug:'+r.a.kingdom+':'+r.a.id+'">'+safe(r.a.name)+'</button><small>'+safe(r.a.family)+'</small></th>'+r.cs.map(c=>'<td>'+gaugeCell(c,r.fc)+(c.lvl==='N'?'<b class="x">×</b>':'')+'</td>').join('')+'<td><div class="lab-score"><div style="width:'+(r.score*100).toFixed(0)+'%;background:'+r.fc+'"></div></div><b>'+r.full+'/'+picks.length+'</b></td></tr>').join('');
-  res='<section class="lab-card result"><header><b>3 · Agentes que cubren esos microorganismos</b><span>Ordenados por cuántas de las especies elegidas cubren con actividad habitual o casi siempre. No es una pauta: falta el antibiograma, el foco, el huésped y la guía vigente.</span></header>'+(rows.length?'<div class="cmp-scroll"><table class="lab-table">'+head+body+'</table></div>':'<p class="cmp-hint">Ninguno de los agentes tiene datos para estas especies.</p>')+'</section>';
+  const head='<tr><th>Agente</th><th class="tier-h">Línea OMS</th>'+picks.map(p=>'<th class="sp"><span>'+safe(shortName(p.name))+'</span></th>').join('')+'<th>Cubre</th></tr>';
+  const body=rows.map(r=>'<tr class="'+(r.tier?'tier'+Math.floor(r.tier):'')+'" style="--fc:'+r.fc+'"><th><i></i><button data-act="nx-find:drug:'+r.a.kingdom+':'+r.a.id+'">'+safe(r.a.name)+'</button><small>'+safe(r.a.family)+'</small></th><td class="tier-c">'+(r.tier===1?'<span class="tier-b t1">1ª línea</span>':r.tier===1.5?'<span class="tier-b t1" title="La OMS indica cloxacilina; este agente es su equivalente de la misma clase">1ª línea · equivalente</span>':r.tier===2?'<span class="tier-b t2">2ª línea</span>':r.tier===2.5?'<span class="tier-b t2" title="Equivalente de la misma clase">2ª línea · equivalente</span>':'<span class="tier-b t0">Cubre, sin rango OMS</span>')+'</td>'+r.cs.map(c=>'<td>'+gaugeCell(c,r.fc)+(c.lvl==='N'?'<b class="x">×</b>':'')+'</td>').join('')+'<td><div class="lab-score"><div style="width:'+(r.score*100).toFixed(0)+'%;background:'+r.fc+'"></div></div><b>'+r.full+'/'+picks.length+'</b></td></tr>').join('');
+  const wc=wid&&typeof WHO!=='undefined'?WHO.conditions.find(c=>c.id===wid):null;res='<section class="lab-card result"><header><b>3 · Agentes ordenados por línea de tratamiento</b><span>'+(wid?'Primero la <b>1ª línea</b> y luego la <b>2ª línea</b> que el manual OMS AWaRe 2022 indica para «'+safe(wc?.title||cur.name)+'» en adultos; después, otros agentes que cubren por espectro. <button class="lab-whobtn" data-act="nx-find:syndrome:'+wid+'">Ver dosis y duración</button>':'Este cuadro no tiene pauta en el manual OMS AWaRe: el orden es solo por cobertura, no por preferencia clínica.')+' No sustituye el antibiograma, el foco, el huésped ni la guía vigente.</span></header>'+(rows.length?'<div class="cmp-scroll"><table class="lab-table">'+head+body+'</table></div>':'<p class="cmp-hint">Ninguno de los agentes tiene datos para estas especies.</p>')+'</section>';
  }
  const side=sites.map(s=>'<div class="lab-site" style="--c:'+siteColor(s)+'"><b><i></i>'+safe(s)+'</b>'+syns.filter(x=>x.site===s).map(x=>'<button class="'+(L.sid===x.id?'on':'')+'" data-act="nx-lab-syn:'+x.id+'">'+safe(x.name)+'</button>').join('')+'</div>').join('');
  return '<div class="nx-section-page nx-section-laboratorio lab"><div class="cmp-top"><div><h1>Laboratorio de decisiones</h1><p>Del cuadro clínico a los agentes que cubren a sus microorganismos probables, en tres pasos.</p></div><ol class="lab-steps">'+step(1,'Elige el cuadro',!cur,!!cur)+step(2,'Ajusta las especies',!!cur&&!picks.length,picks.length>0)+step(3,'Compara agentes',picks.length>0,false)+'</ol></div>'+
@@ -510,6 +523,48 @@ window.INF_FACETS=micro=>{
  const n=items.filter(x=>INF_FX(micro,x)).length;
  return '<div class="fx-panel">'+html+(INF_FXON(micro)?'<div class="fx-status"><b>'+n+'</b> de '+items.length+' fichas <button data-act="fx:reset=1">'+INF_ICON('clear')+'Quitar filtros</button></div>':'')+'</div>';
 };
+
+/* Ficha de microorganismo: «Antibióticos: por qué sí o por qué no» con la cobertura graduada completa,
+   en tres columnas que responden una pregunta clara cada una. */
+function whyBlock(p){
+ const drugs=domainDrug(p.kingdom).map(a=>({a,c:covLevel(a,p)}));
+ const col=(key,title,q,color,ic,levels)=>{const it=drugs.filter(x=>x.c.lvl&&levels.includes(x.c.lvl)).sort((x,y)=>LV[y.c.lvl].n-LV[x.c.lvl].n||x.a.name.localeCompare(y.a.name));
+  return '<div class="why-col why-'+key+'" style="--w:'+color+'"><header><i>'+(window.INF_ICON?INF_ICON(ic):'')+'</i><div><h4>'+title+'</h4><p>'+q+'</p></div><b>'+it.length+'</b></header><div class="why-list">'+(it.length?it.slice(0,18).map(({a,c})=>'<button data-act="nx-find:drug:'+a.kingdom+':'+a.id+'" title="'+safe(c.note||'')+'"><span class="why-lv l'+c.lvl+'">'+LV[c.lvl].short+'</span><span class="why-name"><b>'+safe(a.name)+'</b><small>'+safe(a.family||'')+(c.tier==='clase'?' · dato de clase':c.tier==='individual'?' · dato de la especie':'')+'</small></span></button>').join('')+(it.length>18?'<p class="why-more">+'+(it.length-18)+' más en Explorar → Matriz</p>':''):'<p class="why-empty">Ningún agente documentado en esta categoría.</p>')+'</div></div>'};
+ const unknown=drugs.filter(x=>!x.c.lvl).length;
+ return '<div class="why">'+col('yes','Funciona','Actividad casi siempre o habitual frente a esta especie.','#1f7a55','pill',['Y','M'])+col('maybe','Depende','Solo algunas cepas: necesita antibiograma.','#5a4bb0','maybe',['S','R'])+col('no','No funciona','Sin actividad útil: no usar como cobertura.','#b23a3a','nopill',['N'])+'</div><p class="why-foot"><b>'+unknown+'</b> agentes sin dato para esta especie. «Sin dato» no significa resistencia. Que un fármaco funcione no lo convierte en primera elección: eso depende del foco, del huésped y de la guía.</p>';
+}
+function enhanceWhy(){
+ try{if(state.route!=='micro')return;const box=document.querySelector('#micro-espectro .v20-coveragecats');if(!box)return;
+  const ui=window.ATLAS24?.debug?.ui;if(ui&&ui.micro&&ui.micro!=='bacteria')return;
+  const m=P(state.micro)||D.pathogens[0],p=allMicro().find(x=>x.id===m.id&&x.kingdom==='bacteria');if(!p)return;
+  box.outerHTML=whyBlock(p);
+ }catch(e){console.warn('why',e)}
+}
+const renderWhy=render;render=function(){renderWhy();enhanceWhy()};
+
+/* Mapa premium: cada nodo anima su contenido interno (no su posición), brillo y halo por nodo,
+   etiquetas de grupo en cápsulas con su color y núcleo con anillos concéntricos. */
+function enhanceMap(){
+ try{
+  const svg=document.querySelector('.rm-svg');if(!svg||svg.dataset.fx)return;svg.dataset.fx='1';
+  const NS='http://www.w3.org/2000/svg',mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e};
+  const defs=svg.querySelector('defs')||svg.insertBefore(mk('defs',{}),svg.firstChild);
+  defs.insertAdjacentHTML('beforeend','<radialGradient id="rmgloss" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".45" stop-color="#fff" stop-opacity=".08"/><stop offset="1" stop-color="#000" stop-opacity=".18"/></radialGradient>');
+  svg.querySelectorAll('.rm-group,.rm-org,.rm-drug,.rm-core').forEach((g,i)=>{
+   const inner=mk('g',{class:'rm-in'});inner.style.setProperty('--d',(g.style.getPropertyValue('--d')||((i%40)*14+'ms')));
+   while(g.firstChild)inner.appendChild(g.firstChild);g.appendChild(inner);
+   const c=inner.querySelector('circle');if(!c)return;const r=+c.getAttribute('r')||8;
+   inner.insertBefore(mk('circle',{r:r,fill:'url(#rmgloss)',class:'rm-gloss','pointer-events':'none'}),c.nextSibling);
+   if(g.classList.contains('rm-group')||g.classList.contains('rm-core')){inner.insertBefore(mk('circle',{r:r+9,fill:'none',stroke:c.getAttribute('fill'),class:'rm-halo'}),inner.firstChild)}
+  });
+  const gl=grps(NX.domain);
+  svg.querySelectorAll('.rm-glabel').forEach((t,i)=>{try{const b=t.getBBox(),g=gl[i],col=g?g.color:'#3b4fa6';const pad=10;
+   const rect=mk('rect',{x:b.x-pad-14,y:b.y-6,width:b.width+pad*2+14,height:b.height+12,rx:(b.height+12)/2,class:'rm-pill',style:'--c:'+col});
+   const dot=mk('circle',{cx:b.x-10,cy:b.y+b.height/2,r:5,fill:col,class:'rm-pilldot'});
+   t.parentNode.insertBefore(rect,t);t.parentNode.insertBefore(dot,t);t.style.setProperty('--d',(i*45)+'ms');rect.style.setProperty('--d',(i*45)+'ms');dot.style.setProperty('--d',(i*45)+'ms')}catch(e){}});
+ }catch(e){console.warn('map fx',e)}
+}
+const renderMap=render;render=function(){renderMap();enhanceMap()};
 /* Tratamiento WHO AWaRe por condición (data/who-aware-treatments.js) */
 const WHOUI={age:0,sc:{}};
 const whoEsc=x=>String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -642,7 +697,7 @@ const renderGuide=render;render=function(){renderGuide();enhanceGuide()};
    Se omiten con movimiento reducido, en navegadores sin soporte y en pruebas automatizadas. */
 const vtOK=()=>!!document.startViewTransition&&!navigator.webdriver&&!matchMedia('(prefers-reduced-motion:reduce)').matches;
 const gotoVT=goto;goto=function(route){if(!vtOK()||route===state.route)return gotoVT(route);document.documentElement.dataset.vt='route';const t=document.startViewTransition(()=>gotoVT(route));t.finished.finally(()=>delete document.documentElement.dataset.vt)};
-const actVT=act;act=function(command){const op=String(command).split(':')[0];if(vtOK()&&/^(micro-pick|drug-pick|v24-open-micro|v24-open-drug|v25-clinical|v24-mode|nx-view|nx-mapgroup|nx-map-micro|nx-map-domain|who-age|hm-mode)$/.test(op)){document.documentElement.dataset.vt='swap';let r;const t=document.startViewTransition(()=>{r=actVT(command)});t.finished.finally(()=>delete document.documentElement.dataset.vt);return r}return actVT(command)};
+const actVT=act;act=function(command){const op=String(command).split(':')[0];if(vtOK()&&/^(micro-pick|drug-pick|v24-open-micro|v24-open-drug|v25-clinical|v24-mode|who-age|hm-mode)$/.test(op)){document.documentElement.dataset.vt='swap';let r;const t=document.startViewTransition(()=>{r=actVT(command)});t.finished.finally(()=>delete document.documentElement.dataset.vt);return r}return actVT(command)};
 const renderScroll=render;render=function(){const snap=scrollKeep||snapScroll();scrollKeep=null;renderScroll();restoreScroll(snap);keepChosenVisible()};
 const actScroll=act;act=function(command){const op=String(command).split(':')[0];const r=actScroll(command);if(ARTICLE_OPS.test(op))requestAnimationFrame(showArticleStart);return r};
 

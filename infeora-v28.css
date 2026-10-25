@@ -1037,3 +1037,132 @@ body{font-size:16.5px;line-height:1.65}
 .nx-main h3{letter-spacing:-.01em}
 /* barras de desplazamiento con el color de contexto */
 .nx-main *{scrollbar-color:color-mix(in srgb,var(--dom,#3b4fa6) 45%,#fff) transparent}
+
+/* ───────── V39 · Sin letra monoespaciada en el atlas: todo en Hanken Grotesk, sin mayúsculas forzadas ───────── */
+:root{--mono:'Hanken Grotesk','Helvetica Neue',sans-serif!important}
+.nx-app :is(small,code,kbd,.a18-eyebrow,.a18-branchname small,.v20-section-title small,.v20-studybox>span,.v20-highlight>b,.v24-head>span,.v25-syndrome-hero>span,.v25-review-meta span,.cv-band,.why-lv,.tier-b,[class*="eyebrow"],[class*="kicker"],[class*="overline"]){font-family:var(--body)!important;text-transform:none!important;letter-spacing:0!important}
+.nx-app *{font-family:inherit}
+.nx-app{font-family:var(--body)}
+.nx-app :is(h1,h2,h3,.rm-core text,.ms h1){font-family:var(--disp)}
+
+/* ───────── V39 · (1,2) Mapa premium y animado ───────── */
+.rm-group,.rm-org,.rm-drug,.rm-core{animation:none!important}
+.rm-in{transform-box:fill-box;transform-origin:center}
+.rm-gloss{pointer-events:none}
+.rm-halo{stroke-width:2;stroke-opacity:.35;stroke-dasharray:4 6;transform-box:fill-box;transform-origin:center}
+.rm-group circle:not(.rm-gloss):not(.rm-halo){stroke:#fff;stroke-width:4}
+.rm-org circle:not(.rm-gloss):not(.ping){stroke:#fff;stroke-width:2.2;filter:drop-shadow(0 3px 4px rgba(15,26,70,.3))}
+.rm-pill{fill:#fff;stroke:color-mix(in srgb,var(--c) 45%,#fff);stroke-width:1.5;filter:drop-shadow(0 6px 10px rgba(15,26,70,.12))}
+.rm-glabel{stroke:none!important;font-size:18px!important;font-weight:700!important;fill:#0a1633!important}
+.rm-svg{background:radial-gradient(60% 60% at 50% 51%,color-mix(in srgb,var(--dom,#6b2fc4) 10%,#fff),#fff 70%);border-radius:24px}
+.rm-tree{stroke-linecap:round}
+.rm-group:hover .rm-in{transform:scale(1.12)}
+.rm-org:hover .rm-in{transform:scale(1.35)}
+.rm-in{transition:transform .25s cubic-bezier(.3,1.5,.5,1)}
+/* animación: fundido siempre (también con movimiento reducido); escala y giro solo si se permite */
+.rm-in,.rm-pill,.rm-pilldot,.rm-glabel{animation:rmfadein .5s var(--d,0ms) both}
+@keyframes rmfadein{from{opacity:0}}
+@media(prefers-reduced-motion:no-preference){
+ .rm-group .rm-in{animation:rmpopin .7s var(--d,0ms) cubic-bezier(.2,1.5,.4,1) both}
+ .rm-org .rm-in{animation:rmpopin .5s calc(var(--d,0ms) + 250ms) cubic-bezier(.2,1.5,.4,1) both}
+ .rm-drug .rm-in{animation:rmslide .5s var(--d,0ms) cubic-bezier(.2,.8,.2,1) both}
+ .rm-core .rm-in{animation:rmcore .8s cubic-bezier(.2,1.4,.4,1) both}
+ .rm-halo{animation:rmspin 18s linear infinite}
+ .rm-pill,.rm-pilldot,.rm-glabel{animation:rmlabel .6s calc(var(--d,0ms) + 300ms) cubic-bezier(.2,.8,.2,1) both}
+ @keyframes rmpopin{from{opacity:0;transform:scale(.15)}60%{opacity:1}}
+ @keyframes rmslide{from{opacity:0;transform:translateX(-26px)}}
+ @keyframes rmcore{from{opacity:0;transform:scale(.4) rotate(-20deg)}}
+ @keyframes rmlabel{from{opacity:0;transform:translateY(8px)}}
+}
+
+/* ───────── V39 · (3) Lista lateral legible ───────── */
+.nx-main .a18-leaves button{font-size:15px!important;min-height:46px!important;padding:9px 10px!important;line-height:1.3}
+.nx-main .a18-leaves button span{font-size:15px!important;font-weight:600}
+.nx-main .a18-branchname b{font-size:16px!important}
+.nx-main .a18-branchname small{font-size:13px!important;color:#5a6a8a!important}
+.nx-main .a18-leaves button i{font-size:12.5px!important;font-style:normal}
+.nx-main .v24-items b{font-size:15px!important}.nx-main .v24-items small{font-size:13px!important}
+.nx-main .sx-side .v25-clinic-list b{font-size:15px!important}
+.nx-main .fx-block h4,.nx-main .sx-row h4{font-size:14px!important}
+.nx-main .fx-chip,.nx-main .sx-chip,.nx-main .fx-toggle{font-size:13.5px!important}
+
+/* ───────── V39 · (4) Datos clave del microorganismo ───────── */
+.nx-main .v20-keyfacts.kf{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:16px}
+.kf-i{display:flex!important;align-items:center;gap:12px;padding:14px 16px!important;border-radius:16px!important;border:1px solid color-mix(in srgb,var(--t) 28%,#fff)!important;background:linear-gradient(135deg,color-mix(in srgb,var(--t) 12%,#fff),#fff 75%)!important;text-align:left}
+.kf-ic{flex:none;display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:var(--t);color:#fff;font-style:normal;box-shadow:0 10px 18px -10px var(--t)}
+.kf-ic .inf-ic{width:28px;height:28px}
+.kf-i span{display:flex;flex-direction:column;gap:2px;min-width:0}
+.kf-i small{font-size:13px!important;color:color-mix(in srgb,var(--t) 70%,#33415f)!important;font-weight:700}
+.kf-i b{font:800 17px/1.25 var(--disp)!important;color:#0a1633}
+
+/* ───────── V39 · (5) ¿Dónde se ve más? ───────── */
+.nx-main .v20-conditions{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))!important;gap:8px!important}
+.nx-main .cl-card{display:grid!important;grid-template-columns:42px minmax(0,1fr) auto;align-items:center;gap:12px;min-height:0!important;padding:10px 12px!important;border-radius:14px!important;border:1px solid color-mix(in srgb,var(--t) 25%,#fff)!important;background:linear-gradient(135deg,color-mix(in srgb,var(--t) 9%,#fff),#fff 70%)!important;text-align:left}
+.cl-ic{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--t)!important;color:#fff}
+.cl-ic .inf-ic{width:24px;height:24px}
+.cl-txt{display:flex;flex-direction:column;min-width:0}
+.cl-txt b{font:700 15px/1.25 var(--body)!important;color:#0a1633}
+.cl-txt small{font-size:13px!important;color:color-mix(in srgb,var(--t) 75%,#33415f)!important;font-weight:600}
+.cl-go{color:var(--t);font-style:normal}
+.cl-card:hover{border-color:var(--t)!important;transform:translateY(-2px)}
+
+/* ───────── V39 · (6) Antibióticos: por qué sí o por qué no ───────── */
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.why-col{border-radius:18px;border:1.5px solid color-mix(in srgb,var(--w) 35%,#fff);background:#fff;overflow:hidden;display:flex;flex-direction:column}
+.why-col>header{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:14px 16px;background:var(--w);color:#fff}
+.why-col>header i{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.18);font-style:normal}
+.why-col>header i .inf-ic{width:26px;height:26px}
+.why-col h4{margin:0;font:800 19px/1.1 var(--disp);color:#fff}
+.why-col>header p{margin:3px 0 0;font-size:13.5px;line-height:1.35;color:rgba(255,255,255,.92)}
+.why-col>header b{font:800 30px/1 var(--disp)}
+.why-list{display:flex;flex-direction:column;gap:4px;padding:10px;max-height:460px;overflow:auto;background:linear-gradient(180deg,color-mix(in srgb,var(--w) 7%,#fff),#fff 120px)}
+.why-list button{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:center;text-align:left;border:1px solid transparent;background:#fff;border-radius:11px;padding:8px 10px;cursor:pointer}
+.why-list button:hover{border-color:var(--w)}
+.why-lv{font:700 12px var(--body);color:#fff;background:var(--w);border-radius:7px;padding:3px 8px;white-space:nowrap}
+.why-lv.lM,.why-lv.lR{background:color-mix(in srgb,var(--w) 70%,#fff);color:#0a1633}
+.why-name b{display:block;font:700 15px/1.25 var(--body);color:#0a1633}
+.why-name small{display:block;font-size:12.5px;color:#5a6a8a}
+.why-empty,.why-more{margin:6px;font-size:13.5px;color:#5a6a8a}
+.why-foot{margin:12px 0 0;padding:10px 14px;border-radius:12px;background:#eef2fa;font-size:14px;color:#33415f}
+@media(max-width:900px){.why{grid-template-columns:1fr}}
+
+/* ───────── V39 · (7) Revisión ampliada con jerarquía y color por componente ───────── */
+.nx-main .v25-md-block.md-k{position:relative;border:1px solid color-mix(in srgb,var(--mk) 25%,#fff)!important;border-radius:18px!important;padding:0!important;overflow:hidden;background:#fff!important;margin:0 0 14px!important}
+.nx-main .v25-md-block.md-k::before{display:none!important}
+.md-head{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:14px 18px;background:linear-gradient(100deg,color-mix(in srgb,var(--mk) 16%,#fff),#fff 80%);border-bottom:1px solid color-mix(in srgb,var(--mk) 18%,#fff)}
+.md-ic{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--mk);color:#fff;font-style:normal;box-shadow:0 10px 18px -10px var(--mk)}
+.md-ic .inf-ic{width:26px;height:26px}
+.md-kind{display:inline-block;font:800 12.5px var(--body);color:var(--mk);background:color-mix(in srgb,var(--mk) 12%,#fff);border-radius:999px;padding:2px 10px}
+.md-head h3{margin:4px 0 0!important;font:800 22px/1.15 var(--disp)!important;color:color-mix(in srgb,var(--mk) 55%,#0a1633)!important}
+.md-n{font:800 28px/1 var(--disp);color:color-mix(in srgb,var(--mk) 35%,#fff)}
+.md-body{padding:14px 20px 16px;border-left:5px solid var(--mk)}
+.md-p{margin:0 0 12px!important;font-size:16px!important;line-height:1.7!important;color:#1b2a4a}
+.md-lead{display:block;margin-bottom:2px;font-weight:800;color:color-mix(in srgb,var(--mk) 60%,#0a1633);font-size:16.5px}
+.md-list{margin:4px 0 14px;padding:0;list-style:none;display:grid;gap:6px}
+.md-list li{position:relative;padding:8px 12px 8px 30px;border-radius:10px;background:color-mix(in srgb,var(--mk) 6%,#fff);font-size:15.5px;line-height:1.55}
+.md-list li::before{content:'';position:absolute;left:12px;top:15px;width:8px;height:8px;border-radius:2px;background:var(--mk);transform:rotate(45deg)}
+.md-num{background:color-mix(in srgb,var(--mk) 18%,#fff)!important;color:color-mix(in srgb,var(--mk) 70%,#0a1633)!important;font-weight:800;padding:0 4px;border-radius:4px;animation:none!important;background-size:auto!important}
+
+/* ───────── V39 · (8) Laboratorio: línea de tratamiento OMS ───────── */
+.tier-h{text-align:left}
+.tier-c{white-space:nowrap}
+.tier-b{display:inline-flex;align-items:center;gap:6px;border-radius:9px;padding:5px 10px;font:800 13px var(--body)}
+.tier-b.t1{background:#1f7a55;color:#fff;box-shadow:0 6px 14px -8px #1f7a55}
+.tier-b.t2{background:#5a4bb0;color:#fff}
+.tier-b.t0{background:#eef1f7;color:#5a6a8a;font-weight:600}
+.lab-table tr.tier1>th{box-shadow:inset 5px 0 0 #1f7a55}
+.lab-table tr.tier1{background:linear-gradient(90deg,#e6f4ee,#fff 60%)}
+.lab-table tr.tier2{background:linear-gradient(90deg,#efedfb,#fff 60%)}
+.lab-whobtn{margin-left:6px;border:0;background:#1f5f73;color:#fff;border-radius:8px;padding:4px 10px;font:700 12.5px var(--body);cursor:pointer}
+.lab-table small{font-size:12.5px!important}
+.nx-main .cl-card>.cl-txt{width:auto!important;height:auto!important;background:none!important;display:flex!important;place-items:initial!important;border-radius:0!important;color:inherit!important}
+.nx-main .cl-card>.cl-ic{width:42px!important;height:42px!important}
+.nx-main .kf>.kf-i{display:flex!important;grid-template-columns:none!important}
+.nx-main .kf>.kf-i>span{width:auto!important;height:auto!important;background:none!important;display:flex!important}
+.nx-main .kf>.kf-i>i{width:48px!important;height:48px!important}
+.nx-main .v20-keyfacts.kf{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))!important}
+.nx-main .v25-md-block.md-k{display:block!important;grid-template-columns:none!important;padding:0!important;border-left:1px solid color-mix(in srgb,var(--mk) 25%,#fff)!important}
+.nx-main .v25-md-block.md-k h3::before{display:none!important}
+.nx-main .v25-md-block.md-k .md-head h3{display:block!important;writing-mode:horizontal-tb!important;width:auto!important}
+.nx-main .v25-md-block.md-k>*{grid-column:auto!important}
+.nx-main .v25-md-block.md-k .md-head>div{min-width:0}
