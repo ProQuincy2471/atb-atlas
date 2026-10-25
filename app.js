@@ -7,7 +7,7 @@ const storage={get(k,fallback){try{return JSON.parse(localStorage.getItem(k))??f
 const ICONS={map:'table-2',micro:'microscope',drugs:'pill',clinic:'stethoscope',compare:'columns-3',learn:'graduation-cap',lab:'flask-conical',sources:'book-open',search:'search',palette:'palette',filter:'sliders-horizontal',reset:'rotate-ccw',next:'arrow-right',external:'external-link',note:'lightbulb',star:'shield-check',info:'info',help:'circle-help',more:'chevron-down',chevron:'chevron-right',grid:'grid-3x3',layers:'layers',swap:'arrow-left-right',alert:'shield-alert',close:'x',dna:'dna',menu:'list-filter',book:'book-open'};
 const ic=(name,size=18)=>`<img class="ico" width="${size}" height="${size}" alt="" src="assets/icons/${ICONS[name]||name}.svg">`;
 const NAV=[['mapa','map','Mapa'],['micro','micro','Microorganismos'],['atb','drugs','Antibióticos'],['clinica','clinic','Síndromes'],['comparar','compare','Comparador'],['aprender','learn','Aprender'],['laboratorio','lab','Laboratorio'],['fuentes','sources','Fuentes']];
-const GROUP_PALETTE=['#3b6df0','#5a54e8','#8b4fe6','#a24be0','#2f8fe8','#11a7c9','#1fb5a4','#5b7fd6','#2faa6a','#7a5cf0','#c04fd8','#4a6a8c'];
+const GROUP_PALETTE=['#6b2fc4','#8a3fb8','#4f2a9a','#a24ba8','#5e3fd0','#7a2f8e','#9a5ad8','#47278a','#b0479a','#6a4bb4','#8e2f70','#5b4a8c'];
 const PRESETS={
   'Resonancia':['#E33E70','#609dc9','#8654D5','#3977a4','#2D86D6','#00A48C','#6977DA','#4c91c3','#1EA585','#C65FA8','#4884ae','#5469C8'],
   'Tropical Lab':['#EE5B77','#5597c6','#AE53D0','#3EAC63','#247AC1','#00A6B0','#7663D6','#5798c6','#4e7ea1','#CD568A','#6796cc','#6681CC'],

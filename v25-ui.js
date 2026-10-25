@@ -6,7 +6,7 @@ const e=window.ATLAS25||{},d=window.ATLAS24?.debug;if(!d)return;
 const Hx=x=>H(String(x??'')),search=x=>String(x??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(),groupList=e.microGroups||[];
 let allMicro=[],allDrug=[];
 function ensureData(){if(!D||allMicro.length)return;allMicro=[...D.pathogens.map(x=>({...x,kingdom:'bacteria'})),...d.orgs];allDrug=[...D.antibiotics.map(x=>({...x,kingdom:'bacteria'})),...d.drugs];}
-const palette={bacteria:'#256bc0',virus:'#6555ba',fungi:'#4e88b1',parasites:'#27876e'},labels={bacteria:'Bacterias',virus:'Virus',fungi:'Hongos',parasites:'Parásitos'},domainOrder=['bacteria','virus','fungi','parasites'];
+const palette={bacteria:'#6b2fc4',virus:'#66751c',fungi:'#0a86b8',parasites:'#d2386c'},labels={bacteria:'Bacterias',virus:'Virus',fungi:'Hongos',parasites:'Parásitos'},domainOrder=['bacteria','virus','fungi','parasites'];
 let map={domain:'bacteria',group:'all',micro:'',query:'',family:'all',status:'all',view:'territories'},cl={query:'',system:'all',selected:'who-12'};
 const cGroups=()=>[...D.groups.map(g=>({id:g.id,label:g.name,color:grpcolor(g.id),ids:D.pathogens.filter(x=>x.groupId===g.id).map(x=>x.id),concept:'Agrupa especies bacterianas relacionadas por morfología, fisiología y epidemiología; la susceptibilidad debe verificarse por fenotipo y sitio clínico.',diagnosis:'Gram, cultivo, prueba molecular, fenotipo de resistencia y calidad de la muestra.'}))];
 const groups=kind=>kind==='bacteria'?cGroups():groupList.filter(g=>g.kingdom===kind);

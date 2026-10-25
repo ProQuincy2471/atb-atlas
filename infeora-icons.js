@@ -66,21 +66,22 @@ Object.assign(P,{
 });
 window.INF_SHAPE=m=>{m=String(m||'').toLowerCase();if(/sin pared|intracel|pleom/.test(m))return ['nowall','Sin pared / intracelular'];if(/helic|curvo|espir/.test(m))return ['spiral','Curvos y espirales'];if(/cocobac/.test(m))return ['coccobacillus','Cocobacilos'];if(/^coco|diplococo|cocos/.test(m))return ['coccus','Cocos'];if(/bacil/.test(m))return ['rod','Bacilos'];return ['nowall','Otras formas']};
 const TG={'Penicilinas':'wall','Cefalosporinas':'wall','Carbapenémicos':'wall','Monobactámicos':'wall','Sideróforos betalactámicos':'wall','Sulbactam avanzado':'wall','Glicopéptidos / lipoglicopéptidos':'wall','Fosfonatos':'wall','Polimixinas':'membrane','Lipopéptidos':'membrane','Aminoglucósidos':'ribo30','Tetraciclinas / derivados':'ribo30','Macrólidos / ketólidos':'ribo50','Oxazolidinonas':'ribo50','Lincosamidas':'ribo50','Estreptograminas':'ribo50','Pleuromutilinas':'ribo50','Ácido fusídico':'ribo50','Fluoroquinolonas':'dna','Nitroimidazoles':'dna','Nitrofuranos':'dna','Sulfonamidas / antifolatos':'folate','Rifamicinas':'rnap','Mupirocina / tópicos':'topical','Antimicobacterianos':'multi','Inhibidores especializados':'wall'};
-const TL={wall:['Pared celular','#2f6fe0'],membrane:['Membrana','#0f8f86'],ribo30:['Ribosoma 30S','#5146d6'],ribo50:['Ribosoma 50S','#7a3fd0'],dna:['ADN / topoisomerasas','#a8327f'],folate:['Vía del folato','#13819f'],rnap:['ARN polimerasa','#3a4fb8'],topical:['Tópicos','#4a5f86'],multi:['Antimicobacterianos (varias dianas)','#1d6f9a']};
+const TL={wall:['Pared celular','#5a34b8'],membrane:['Membrana','#2b7d6a'],ribo30:['Ribosoma 30S','#a03f8e'],ribo50:['Ribosoma 50S','#7a46c8'],dna:['ADN / topoisomerasas','#b23a55'],folate:['Vía del folato','#2f6f9f'],rnap:['ARN polimerasa','#46508e'],topical:['Tópicos','#5f6b85'],multi:['Antimicobacterianos (varias dianas)','#6a5a2a']};
 window.INF_TARGET=f=>{const k=TG[f]||'multi';return {key:k,icon:k==='multi'?'micro':k,label:TL[k][0],color:TL[k][1]}};
 window.INF_TARGETS=TL;
-window.INF_DOMAIN_COLOR={Grampositivos:'#5146d6',Gramnegativos:'#a8327f',Anaerobios:'#3a4fb8',Atípicos:'#0f8f86',Especiales:'#13819f'};
-window.INF_HASH=s=>{let h=0;for(const ch of String(s))h=(h*31+ch.charCodeAt(0))>>>0;const hues=[214,258,190,160,232,284,174,200,246,300,222,178];return 'hsl('+hues[h%hues.length]+' 62% 42%)'};
+window.INF_DOMAIN_COLOR={Grampositivos:'#6b2fc4',Gramnegativos:'#a23fb0',Anaerobios:'#47278a',Atípicos:'#8a5bd6',Especiales:'#5b3e9e'};
+const KR={bacteria:[262,300],virus:[58,98],fungi:[184,212],parasites:[328,358]};
+window.INF_HASH=(s,kind)=>{let h=0;for(const ch of String(s))h=(h*31+ch.charCodeAt(0))>>>0;const r=KR[kind];if(r){const hue=r[0]+(h%(r[1]-r[0]+1)),l=[34,40,46][h%3],sat=kind==='virus'?58:66;return 'hsl('+hue+' '+sat+'% '+l+'%)'}const hues=[214,258,190,160,232,284,174,200,246,300,222,178];return 'hsl('+hues[h%hues.length]+' 55% 42%)'};
 window.INF_ICON=(n,cls)=>P[n]?'<svg class="inf-ic'+(cls?' '+cls:'')+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+P[n]+'</svg>':'';
 /* Territorios: agrupan los sistemas del índice WHO + revisiones complementarias. Colores fríos distinguibles entre sí. */
 const T=[
- ['cabeza','Vía aérea y cabeza','#2f6fe0',[['Respiratorio','resp'],['Otorrinolaringología','ent'],['Odontología','tooth'],['Oftalmología','eye']]],
- ['abdomen','Abdomen','#0f8f86',[['Gastrointestinal','gut'],['Hepatobiliar','liver']]],
- ['gu','Genitourinario','#5146d6',[['Urinario','kidney'],['ITS','sti']]],
- ['tejidos','Piel, hueso y músculo','#7a3fd0',[['Piel y tejidos blandos','skin'],['Osteoarticular','bone']]],
- ['sistemico','Sangre y sistémico','#a8327f',[['Sistémico','sepsis'],['Hematología','blood'],['Cardiovascular','heart']]],
- ['snc','Sistema nervioso','#3a4fb8',[['Sistema nervioso','brain'],['Neurología','brain']]],
- ['huesped','Huésped y contexto','#13819f',[['Pediatría','child'],['Quirúrgico','scalpel'],['Inmunodeficiencia','shield'],['Medicina tropical','globe']]]
+ ['cabeza','Vía aérea y cabeza','#2f6f9f',[['Respiratorio','resp'],['Otorrinolaringología','ent'],['Odontología','tooth'],['Oftalmología','eye']]],
+ ['abdomen','Abdomen','#2b7d6a',[['Gastrointestinal','gut'],['Hepatobiliar','liver']]],
+ ['gu','Genitourinario','#5a4bb0',[['Urinario','kidney'],['ITS','sti']]],
+ ['tejidos','Piel, hueso y músculo','#9a4a86',[['Piel y tejidos blandos','skin'],['Osteoarticular','bone']]],
+ ['sistemico','Sangre y sistémico','#b23a55',[['Sistémico','sepsis'],['Hematología','blood'],['Cardiovascular','heart']]],
+ ['snc','Sistema nervioso','#46508e',[['Sistema nervioso','brain'],['Neurología','brain']]],
+ ['huesped','Huésped y contexto','#5d7a2e',[['Pediatría','child'],['Quirúrgico','scalpel'],['Inmunodeficiencia','shield'],['Medicina tropical','globe']]]
 ];
 const SYS={};T.forEach(([k,l,c,items])=>items.forEach(([s,ic],i)=>{SYS[s]={territory:k,territoryLabel:l,color:c,icon:ic,shade:i}}));
 window.INF_TERRITORIES=T;
