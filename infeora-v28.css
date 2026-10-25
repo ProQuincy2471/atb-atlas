@@ -1166,3 +1166,5 @@ body{font-size:16.5px;line-height:1.65}
 .nx-main .v25-md-block.md-k .md-head h3{display:block!important;writing-mode:horizontal-tb!important;width:auto!important}
 .nx-main .v25-md-block.md-k>*{grid-column:auto!important}
 .nx-main .v25-md-block.md-k .md-head>div{min-width:0}
+/* V40 · los pasos del mapa ya no flotan encima de la barra de ruta */
+.nx-main .rm-steps{position:static!important;padding:0 0 10px!important}
