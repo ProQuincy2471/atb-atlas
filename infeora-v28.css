@@ -606,3 +606,93 @@ input[type=checkbox]:checked{background:var(--cobalt)!important;border-color:var
  .nx-main .v25-clinic-list button:hover{transform:translateX(4px)}
 }
 @media(prefers-reduced-motion:reduce){html.mv-on .mv-item{opacity:1;transform:none}}
+
+/* ───────── V33 · Íconos, filtros y territorios ───────── */
+.inf-ic{width:1.15em;height:1.15em;flex:none;display:inline-block;vertical-align:-.18em}
+.sr-only{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* navegación superior: ícono en lugar de numeración */
+.nx-rail-link::before{content:none!important}
+.nx-rail-link{flex-direction:row!important;align-items:center!important;gap:7px!important;min-height:58px!important}
+.nx-rail-icon{display:inline-grid!important;place-items:center;width:28px;height:28px;border-radius:9px;background:#e6edfc;color:#3246d8;transition:background .2s,color .2s,transform .2s}
+.nx-rail-icon .inf-ic{width:17px;height:17px}
+.nx-rail-link:hover .nx-rail-icon{transform:translateY(-2px) rotate(-4deg)}
+.nx-rail-link.active .nx-rail-icon{background:#3246d8;color:#fff;box-shadow:0 6px 14px -6px rgba(50,70,216,.7)}
+@media(max-width:1280px){.nx-rail-link{padding:10px 8px!important}.nx-rail-txt b{font-size:13px}}
+/* pestañas de dominio con identidad propia */
+.v24-switch button{display:inline-flex!important;align-items:center;gap:9px}
+.v24-switch button .dom-ic{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:color-mix(in srgb,var(--d,#3246d8) 14%,#fff);color:var(--d,#3246d8);font-style:normal}
+.v24-switch .dom-bacteria{--d:var(--bacteria)}.v24-switch .dom-virus{--d:var(--virus)}.v24-switch .dom-fungi{--d:var(--fungi)}.v24-switch .dom-parasites{--d:var(--parasites)}
+.v24-switch button.current{background:var(--d,#3246d8)!important;border-color:var(--d,#3246d8)!important}
+.v24-switch button.current .dom-ic{background:rgba(255,255,255,.2);color:#fff}
+
+/* síndromes: panel de filtros */
+.sx-side{display:flex!important;flex-direction:column;gap:14px;padding:16px!important}
+.sx-search{display:flex;align-items:center;gap:8px;border:1.5px solid #c3d1ee;background:#fff;border-radius:12px;padding:0 12px;color:#56658a;transition:border-color .2s,box-shadow .2s}
+.sx-search:focus-within{border-color:#3246d8;box-shadow:0 0 0 4px rgba(50,70,216,.14)}
+.sx-search input{border:0!important;background:transparent!important;height:42px!important;padding:0!important;outline:0;box-shadow:none!important;font-size:14.5px!important;flex:1}
+.sx-row h4,.sx-terrs summary,.sx-terr h4{margin:0 0 7px;font:700 12.5px var(--body);color:#33415f;letter-spacing:0;text-transform:none}
+.sx-row h4 small{font-weight:500;color:#6a7aa0;margin-left:4px}
+.sx-segs{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;background:#e3eafa;border-radius:11px;padding:3px;gap:3px}
+.sx-seg{display:flex;align-items:center;justify-content:center;gap:5px;border:0;background:transparent;border-radius:8px;padding:7px 6px;font:600 12.5px var(--body);color:#33415f;cursor:pointer;min-width:0}
+.sx-seg span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sx-seg em{font:600 10.5px var(--mono);font-style:normal;color:#6a7aa0;background:rgba(255,255,255,.7);border-radius:6px;padding:1px 5px}
+.sx-seg.on{background:#fff;color:#2433a8;box-shadow:0 2px 8px -3px rgba(36,51,168,.35)}
+.sx-seg.on em{background:#3246d8;color:#fff}
+.sx-abx .sx-seg:nth-child(2).on{color:#33508a}.sx-abx .sx-seg:nth-child(3).on{color:#5146d6}.sx-abx .sx-seg:nth-child(4).on{color:#0f6f9a}
+.sx-terrs summary{display:flex;align-items:center;gap:7px;cursor:pointer;list-style:none;padding:4px 0}
+.sx-terrs summary::-webkit-details-marker{display:none}
+.sx-terrs summary::after{content:'';margin-left:auto;width:8px;height:8px;border-right:2px solid #56658a;border-bottom:2px solid #56658a;transform:rotate(45deg);transition:transform .2s}
+.sx-terrs:not([open]) summary::after{transform:rotate(-45deg)}
+.nx-main .sx-side .v25-clinic-systems{display:flex!important;flex-direction:column;gap:10px;padding:6px 0 0!important;max-height:none!important;overflow:visible!important}
+.sx-terr{border-left:3px solid var(--t);padding-left:9px}
+.sx-terr h4{color:var(--t);margin-bottom:5px}
+.sx-chips{display:flex;flex-wrap:wrap;gap:5px}
+.sx-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid color-mix(in srgb,var(--t,#3246d8) 28%,#fff);background:color-mix(in srgb,var(--t,#3246d8) 7%,#fff);color:color-mix(in srgb,var(--t,#3246d8) 80%,#0a1633);border-radius:9px;padding:5px 8px;font:600 12px var(--body);cursor:pointer;white-space:nowrap}
+.sx-chip .inf-ic{width:15px;height:15px}
+.sx-chip em{font:600 10px var(--mono);font-style:normal;opacity:.75}
+.sx-chip:hover{border-color:var(--t,#3246d8)}
+.sx-chip.on{background:var(--t,#3246d8);border-color:var(--t,#3246d8);color:#fff}
+.sx-chip.on em{opacity:1}
+.sx-chip.empty{opacity:.45}
+.sx-allchip{--t:#3246d8;align-self:flex-start}
+.sx-status{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:12.5px;color:#56658a;padding:8px 10px;border-radius:10px;background:#e7edfb}
+.sx-status b{font:800 15px var(--disp);color:#2433a8}
+.sx-status span{flex:1 1 100%;color:#2433a8;font-weight:600}
+.sx-status button,.sx-empty button{display:inline-flex;align-items:center;gap:4px;border:0;background:#fff;color:#2433a8;border-radius:7px;padding:4px 8px;font:600 12px var(--body);cursor:pointer}
+/* lista de síndromes con tile por sistema */
+.nx-main .sx-side .v25-clinic-list{display:flex!important;flex-direction:column;gap:5px}
+.nx-main .sx-side .v25-clinic-list>button{display:grid!important;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:10px;text-align:left;border:1px solid transparent!important;background:rgba(255,255,255,.72)!important;border-radius:11px!important;padding:8px 9px!important;min-height:0!important}
+.nx-main .sx-side .v25-clinic-list>button:hover{border-color:color-mix(in srgb,var(--t) 40%,#fff)!important;background:#fff!important}
+.nx-main .sx-side .v25-clinic-list>button.on{background:color-mix(in srgb,var(--t) 12%,#fff)!important;border-color:var(--t)!important;box-shadow:inset 3px 0 0 var(--t)}
+.sx-tile{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:color-mix(in srgb,var(--t) 13%,#fff);color:var(--t);font-style:normal}
+.sx-tile .inf-ic{width:19px;height:19px}
+.on>.sx-tile{background:var(--t);color:#fff}
+.nx-main .sx-side .v25-clinic-list b{font-size:13.5px!important;line-height:1.3!important;color:#0a1633}
+.nx-main .sx-side .v25-clinic-list small{margin-top:2px!important;font-size:11px!important;color:color-mix(in srgb,var(--t) 70%,#56658a)!important}
+.sx-tags{display:flex;gap:4px;align-items:center}
+.sx-tags em{font:700 9.5px var(--mono);font-style:normal;border-radius:5px;padding:2px 5px;letter-spacing:.04em}
+.sx-who{background:#3246d8;color:#fff}.sx-rev{background:#e2e7f3;color:#4a5a7e}
+.sx-ab{display:grid;place-items:center;width:20px;height:20px;padding:0!important}
+.sx-ab .inf-ic{width:15px;height:15px}
+.sx-ab-no{background:#e8ecf4;color:#5a6a8a}.sx-ab-cond{background:#e3e0ff;color:#5146d6}.sx-ab-si{background:#d6effa;color:#0f6f9a}
+.sx-empty{font-size:13px;color:#56658a}
+/* encabezado de síndrome con el ícono de su sistema */
+.v25-syndrome-hero{position:relative}
+.v25-syndrome-hero .sx-heroic{position:absolute;right:26px;top:22px;width:74px;height:74px;color:var(--syndrome);opacity:.9;stroke-width:1.3;padding:12px;border-radius:22px;background:color-mix(in srgb,var(--syndrome) 12%,#fff)}
+@media(max-width:700px){.v25-syndrome-hero .sx-heroic{width:48px;height:48px;padding:8px;right:14px;top:14px}}
+@media(max-width:1100px){.nx-main .sx-side .v25-clinic-list{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}}
+.nx-main .sx-side label.sx-search{display:flex!important;flex-direction:row!important;align-items:center!important;gap:8px!important;margin:0!important;font-size:0}
+.nx-main .sx-side label.sx-search input{width:auto!important;min-width:0;margin:0!important}
+.nx-main .sx-side label.sx-search .inf-ic{width:18px;height:18px}
+.nx-main .sx-side .sx-chip{border:1px solid color-mix(in srgb,var(--t,#3246d8) 30%,#fff)!important;background:color-mix(in srgb,var(--t,#3246d8) 9%,#fff)!important;color:color-mix(in srgb,var(--t,#3246d8) 82%,#0a1633)!important;border-radius:9px!important;padding:5px 9px!important;font:600 12px var(--body)!important}
+.nx-main .sx-side .sx-chip:hover{border-color:var(--t,#3246d8)!important}
+.nx-main .sx-side .sx-chip.on{background:var(--t,#3246d8)!important;border-color:var(--t,#3246d8)!important;color:#fff!important;box-shadow:0 6px 14px -8px var(--t)}
+.nx-main .sx-side .sx-chip.empty{opacity:.42}
+@media(min-width:1101px){
+ .nx-main .v25-clinic-sidebar.sx-side{overflow-y:auto!important;overscroll-behavior:auto;scrollbar-width:thin}
+ .nx-main .sx-side>.v25-clinic-list{overflow:visible!important;min-height:0!important;flex:none!important}
+}
+.nx-main .sx-side .sx-segs{grid-auto-flow:row;grid-template-columns:repeat(auto-fit,minmax(86px,1fr))}
+.nx-main .sx-side .sx-seg span{overflow:visible;text-overflow:clip}
+.nx-main .sx-side .sx-segs{display:flex!important;flex-wrap:wrap}
+.nx-main .sx-side .sx-seg{flex:1 1 auto}

@@ -42,7 +42,7 @@ function shellBrand(){
 function rail(){
  const entries=sections.map(([route,label,desc],i)=>{
  const active=state.route===route;const number=String(i+1).padStart(2,'0');
- return '<button class="nx-rail-link '+(active?'active':'')+'" data-act="nx-go:'+route+'" title="'+safe(desc)+'"><span class="nx-rail-icon">'+ic(icons[route],18)+'</span><span class="nx-rail-txt"><b>'+safe(label)+'</b></span>'+(active?'<i class="nx-rail-active"></i>':'')+'</button>';
+ return '<button class="nx-rail-link '+(active?'active':'')+'" data-act="nx-go:'+route+'" title="'+safe(desc)+'"><span class="nx-rail-icon">'+(window.INF_ICON?window.INF_ICON(route):ic(icons[route],18))+'</span><span class="nx-rail-txt"><b>'+safe(label)+'</b></span>'+(active?'<i class="nx-rail-active"></i>':'')+'</button>';
  }).join('');
  return '<aside class="nx-rail '+(NX.drawer?'drawer-open':'')+'" id="nx-rail"><div class="nx-rail-header">'+shellBrand()+'<button class="nx-close-menu" data-act="nx-drawer" aria-label="Cerrar navegación">×</button></div>'+
  '<div class="nx-rail-label">EXPLORAR LA BIBLIOTECA</div><nav class="nx-rail-nav" aria-label="Secciones de INFEORA">'+entries+'</nav>'+
