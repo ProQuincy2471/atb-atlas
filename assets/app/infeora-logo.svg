@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="INFEORA">
+  <title>INFEORA</title>
+  <defs>
+    <radialGradient id="g1" cx="18%" cy="14%" r="70%"><stop offset="0" stop-color="#3a1f80"/><stop offset="1" stop-color="#3a1f80" stop-opacity="0"/></radialGradient>
+    <radialGradient id="g2" cx="88%" cy="12%" r="65%"><stop offset="0" stop-color="#0b5b80"/><stop offset="1" stop-color="#0b5b80" stop-opacity="0"/></radialGradient>
+    <radialGradient id="g3" cx="88%" cy="92%" r="60%"><stop offset="0" stop-color="#7a1c47"/><stop offset="1" stop-color="#7a1c47" stop-opacity="0"/></radialGradient>
+    <radialGradient id="g4" cx="10%" cy="92%" r="60%"><stop offset="0" stop-color="#44500f"/><stop offset="1" stop-color="#44500f" stop-opacity="0"/></radialGradient>
+    <radialGradient id="core" cx="40%" cy="35%" r="75%"><stop offset="0" stop-color="#26346e"/><stop offset="1" stop-color="#0e1530"/></radialGradient>
+    <linearGradient id="dot" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c9a8ff"/><stop offset=".5" stop-color="#9fe0ff"/><stop offset="1" stop-color="#ffb3cf"/></linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="#121a38"/>
+  <rect width="512" height="512" rx="116" fill="url(#g1)"/><rect width="512" height="512" rx="116" fill="url(#g2)"/>
+  <rect width="512" height="512" rx="116" fill="url(#g3)"/><rect width="512" height="512" rx="116" fill="url(#g4)"/>
+  <g fill="none" stroke="#ffffff" stroke-opacity=".07" stroke-width="2">
+    <path d="M0 128H512M0 256H512M0 384H512M128 0V512M256 0V512M384 0V512"/>
+  </g>
+  <!-- placa: borde y graduación -->
+  <circle cx="256" cy="256" r="190" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="8"/>
+  <circle cx="256" cy="256" r="174" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2" stroke-dasharray="3 9"/>
+  <!-- cuatro dominios: bacterias, virus, parásitos, hongos -->
+  <g fill="none" stroke-width="44" stroke-linecap="butt">
+    <path d="M256 108 A148 148 0 0 1 404 256" stroke="#66751c" transform="rotate(4 256 256)"/>
+    <path d="M404 256 A148 148 0 0 1 256 404" stroke="#d2386c" transform="rotate(4 256 256)"/>
+    <path d="M256 404 A148 148 0 0 1 108 256" stroke="#0a86b8" transform="rotate(4 256 256)"/>
+    <path d="M108 256 A148 148 0 0 1 256 108" stroke="#6b2fc4" transform="rotate(4 256 256)"/>
+  </g>
+  <g stroke="#121a38" stroke-width="10"><path d="M256 92V124M420 256H388M256 420V388M92 256H124" transform="rotate(4 256 256)"/></g>
+  <!-- núcleo con la i de INFEORA; el punto es un coco -->
+  <circle cx="256" cy="256" r="104" fill="url(#core)" stroke="#fff" stroke-opacity=".18" stroke-width="3"/>
+  <rect x="236" y="246" width="40" height="88" rx="20" fill="#fff"/>
+  <circle cx="256" cy="204" r="25" fill="url(#dot)"/>
+  <circle cx="256" cy="204" r="25" fill="none" stroke="#fff" stroke-width="4"/>
+</svg>
