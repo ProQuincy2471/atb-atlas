@@ -760,3 +760,91 @@ body:has(.v24-switch .dom-parasites.current) .nx-main{--dom:var(--parasites);--d
  .nx-main .v25-clinic-layout{grid-template-columns:minmax(300px,340px) minmax(0,1fr)!important}
 }
 .nx-main .a18-branchname b{white-space:normal!important;overflow:visible!important}
+
+/* ───────── V36 · Rework visual: retícula de laboratorio, cabeceras de sección, superficies ───────── */
+/* fondo: retícula milimétrica (como un portaobjetos cuadriculado / hoja de laboratorio) en lugar de puntos */
+body{background-color:#eef1f7!important;background-image:
+ linear-gradient(rgba(59,79,166,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(59,79,166,.07) 1px,transparent 1px),
+ linear-gradient(rgba(59,79,166,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(59,79,166,.035) 1px,transparent 1px)!important;
+ background-size:96px 96px,96px 96px,16px 16px,16px 16px!important;background-attachment:fixed!important}
+/* cabecera de sección */
+.ms{--ms:#3b4fa6;position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:18px 22px;margin:0 0 22px;padding:22px 26px;border-radius:18px;overflow:hidden;
+ background:linear-gradient(100deg,color-mix(in srgb,var(--ms) 13%,#fff) 0%,color-mix(in srgb,var(--ms) 5%,#fff) 60%,#fff 100%);border:1px solid color-mix(in srgb,var(--ms) 25%,#fff);box-shadow:0 18px 40px -30px color-mix(in srgb,var(--ms) 70%,transparent)}
+.ms::before{content:'';position:absolute;inset:0;background-image:linear-gradient(color-mix(in srgb,var(--ms) 14%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--ms) 14%,transparent) 1px,transparent 1px);background-size:22px 22px;mask-image:linear-gradient(90deg,transparent 35%,#000 100%);pointer-events:none}
+.ms::after{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--ms)}
+.ms>*{position:relative}
+.ms-ic{display:grid;place-items:center;width:62px;height:62px;border-radius:18px;background:var(--ms);color:#fff;font-style:normal;box-shadow:0 10px 22px -10px var(--ms)}
+.ms-ic .inf-ic{width:32px;height:32px;stroke-width:1.5}
+.ms h1{margin:0;font:800 clamp(28px,3.2vw,44px)/1.02 var(--disp);letter-spacing:-.03em;color:color-mix(in srgb,var(--ms) 70%,#0a1633)}
+.ms p{margin:6px 0 0;max-width:62ch;color:#33415f;font-size:15px;line-height:1.5}
+.ms-facts{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.ms-fact{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border-radius:12px;background:#fff;border:1px solid color-mix(in srgb,var(--f,var(--ms)) 30%,#fff);color:#33415f;font-size:12.5px;white-space:nowrap}
+.ms-fact .inf-ic{width:18px;height:18px;color:var(--f,var(--ms))}
+.ms-fact b{font:800 20px/1 var(--disp);color:var(--f,var(--ms))}
+.ms-bacteria{--f:var(--bacteria)}.ms-virus{--f:var(--virus)}.ms-fungi{--f:var(--fungi)}.ms-parasites{--f:var(--parasites)}.ms-who{--f:#1f5f73}.ms-aprender{--f:#3e6c8f}
+@media(max-width:900px){.ms{grid-template-columns:auto minmax(0,1fr);padding:18px}.ms-facts{grid-column:1/-1;justify-content:flex-start}.ms-ic{width:48px;height:48px;border-radius:14px}.ms-ic .inf-ic{width:24px;height:24px}}
+/* encabezados heredados que duplicaban la cabecera */
+.nx-main .nx-page-kicker,.nx-main .v25-clinic-head,.nx-main .v20-identitynote{display:none!important}
+.nx-main .v24-head{background:transparent!important;border:0!important;box-shadow:none!important;padding:4px 2px 12px!important;margin:0!important}
+.nx-main .v24-head>span{color:var(--dom,#3b4fa6)!important}
+.nx-main .v24-head h1{font:800 26px/1.1 var(--disp)!important;color:color-mix(in srgb,var(--dom,#3b4fa6) 75%,#0a1633)!important;margin:4px 0!important}
+.nx-main .v24-head p{max-width:70ch;color:#4a5878!important;font-size:14px!important}
+/* superficies: placas con borde de color y menos sombra genérica */
+.nx-main :is(.v24-article,.a18-article,.v23-article,.v20-article,.v25-clinic-article){box-shadow:0 1px 0 rgba(10,22,51,.04),0 24px 50px -36px rgba(30,40,90,.35)!important;border-radius:18px!important}
+.nx-main section>h2,.nx-main .v24-article h2,.nx-main .v23-article h2{position:relative}
+/* foco visible y coherente en todo el atlas */
+.nx-main :is(button,a,input,select,summary):focus-visible{outline:3px solid color-mix(in srgb,var(--dom,#3b4fa6) 60%,#fff)!important;outline-offset:2px!important;border-radius:8px}
+/* en Microorganismos y Antimicrobianos los conteos de la cabecera son el selector de dominio */
+.nx-main:has(.ms button.ms-fact) .v24-switch{display:none!important}
+.nx-main button.ms-fact{cursor:pointer;font:600 13px var(--body);min-height:48px;transition:transform .18s,box-shadow .2s,background .2s,color .2s}
+.nx-main button.ms-fact:hover{transform:translateY(-2px);border-color:var(--f)}
+.nx-main button.ms-fact.on{background:var(--f);border-color:var(--f);color:#fff;box-shadow:0 12px 24px -12px var(--f)}
+.nx-main button.ms-fact.on b,.nx-main button.ms-fact.on .inf-ic{color:#fff}
+.nx-main:has(.ms button.ms-fact.on.ms-bacteria) .ms{--ms:var(--bacteria)}
+.nx-main:has(.ms button.ms-fact.on.ms-virus) .ms{--ms:var(--virus)}
+.nx-main:has(.ms button.ms-fact.on.ms-fungi) .ms{--ms:var(--fungi)}
+.nx-main:has(.ms button.ms-fact.on.ms-parasites) .ms{--ms:var(--parasites)}
+.nx-main:has(.ms button.ms-fact.on.ms-bacteria){--dom:var(--bacteria);--dom-l:var(--bacteria-l)}
+.nx-main:has(.ms button.ms-fact.on.ms-virus){--dom:var(--virus);--dom-l:var(--virus-l)}
+.nx-main:has(.ms button.ms-fact.on.ms-fungi){--dom:var(--fungi);--dom-l:var(--fungi-l)}
+.nx-main:has(.ms button.ms-fact.on.ms-parasites){--dom:var(--parasites);--dom-l:var(--parasites-l)}
+.nx-main .v23-learn-rail h2{font:800 22px/1.15 var(--disp)!important;letter-spacing:-.02em}
+.nx-main .v23-learn-rail{border-top:5px solid #3e6c8f!important}
+.nx-main .v25-clinic-sidebar{border-top:5px solid #1f5f73!important}
+
+/* ───────── V36b · El color significa algo: superficies neutras, color solo en identidad y estado ───────── */
+:root{--surface:#ffffff;--surface-2:#f6f8fc;--rule:#d9e0ee;--ink-soft:#33415f;--sel:#0f1c3f}
+/* paneles y artículos: neutros (ya no se tiñen enteros con el dominio) */
+.nx-main:has(.v24-switch) :is(.a18-browser,.v24-sidebar){background:var(--surface)!important;border-top:4px solid var(--dom,#3b4fa6)!important}
+.nx-main:has(.v24-switch) :is(.v24-article,.a18-article,.a18-sheet,.v23-article,.v20-article),.nx-main .v25-clinic-article{background:var(--surface)!important;border-color:var(--rule)!important}
+.nx-main:has(.v24-switch) :is(.v24-article h2,.a18-article h2,.v23-article h2){color:#0a1633}
+.nx-main:has(.v24-switch) :is(.a18-eyebrow,.a18-browserhead h2){color:#0a1633!important}
+.nx-main :is(.v25-clinic-sidebar,.v23-learn-rail,.v24-sidebar,.a18-browser){background:var(--surface)!important}
+.nx-main :is(.v25-syndrome-section,.v23-subcard,.v25-deep-box,.v24-book-chapter){background:var(--surface)!important}
+.nx-main :is(.v25-syndrome-section:nth-of-type(n),.v23-subcard:nth-child(n)){background:var(--surface)!important}
+.nx-main .v25-syndrome-context{background:var(--surface-2)!important}
+/* filtros: neutros; el color aparece solo como punto que identifica la categoría y al activarse */
+.nx-main :is(.fx-chip,.sx-chip,.fx-toggle){background:#fff!important;border:1px solid var(--rule)!important;color:var(--ink-soft)!important}
+.nx-main :is(.fx-chip,.sx-chip,.fx-toggle) .inf-ic{color:var(--t,#3b4fa6)}
+.nx-main :is(.fx-chip,.sx-chip,.fx-toggle):hover{border-color:var(--t,#3b4fa6)!important;background:var(--surface-2)!important}
+.nx-main :is(.fx-chip,.sx-chip,.fx-toggle).on{background:var(--t,#3b4fa6)!important;border-color:var(--t,#3b4fa6)!important;color:#fff!important}
+.nx-main :is(.fx-chip,.sx-chip,.fx-toggle).on .inf-ic{color:#fff}
+.nx-main .sx-terr{border-left-color:var(--t)}.nx-main .sx-terr h4{color:#0a1633}
+/* selección en listas: tinta oscura, inconfundible; el ícono conserva el color de su categoría */
+.nx-main :is(.a18-leaves button.selected,.v24-items button.chosen,.sx-side .v25-clinic-list>button.on){background:var(--sel)!important;color:#fff!important;border-color:var(--sel)!important;outline:0!important;box-shadow:none!important}
+.nx-main :is(.a18-leaves button.selected,.v24-items button.chosen,.sx-side .v25-clinic-list>button.on) :is(b,small,span){color:#fff!important}
+.nx-main :is(.a18-leaves button.selected,.v24-items button.chosen) .fx-leaf,.nx-main .sx-side .v25-clinic-list>button.on .sx-tile{background:#fff!important;color:var(--t,#3b4fa6)!important}
+.nx-main :is(.a18-leaves button,.v24-items button,.sx-side .v25-clinic-list>button):not(.selected):not(.chosen):not(.on):hover{background:var(--surface-2)!important}
+/* encabezados de paso (Filtra → Elige → Lee): es una secuencia real de uso */
+.step-h{display:flex;align-items:center;gap:8px;margin:14px 0 8px;font:700 13px var(--body);color:#0a1633}
+.step-h b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#0f1c3f;color:#fff;font:700 11.5px var(--mono)}
+.step-h small{font-weight:500;color:#5a6a8a}
+/* barra de recorrido en la ficha */
+.trail{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px;padding:10px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--rule)}
+.trail-pos{font:600 12.5px var(--body);color:#5a6a8a}.trail-pos b{color:#0a1633}
+.trail-path{flex:1 1 auto;min-width:0;font:600 13px var(--body);color:#0a1633;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trail-path i{font-style:normal;color:#8a97b4;margin:0 6px}
+.trail button{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);background:#fff;color:#0a1633;border-radius:10px;padding:8px 12px;font:600 13px var(--body);cursor:pointer;min-height:40px}
+.trail button:hover:not(:disabled){background:#0f1c3f;color:#fff;border-color:#0f1c3f}
+.trail button:disabled{opacity:.4;cursor:default}
+.trail kbd{font:600 10.5px var(--mono);border:1px solid currentColor;border-radius:4px;padding:0 4px;opacity:.6}

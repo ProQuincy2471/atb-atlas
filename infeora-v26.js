@@ -327,7 +327,7 @@ mainPage=function(){
  if(state.route==='comparar')return compareView();
  if(state.route==='laboratorio')return labView();
  if(state.route==='mapa'){if(NX.view==='matriz')return exploreShell(matrixView());if(NX.view==='especie')return exploreShell(mapExplorer());return exploreShell(relMap());}
- return '<div class="nx-section-page nx-section-'+safe(state.route)+'"><div class="nx-page-kicker"><span>INFEORA</span><i>/</i><span>'+safe((sections.find(x=>x[0]===state.route)||[])[1]||'Atlas')+'</span><span class="nx-kicker-right">BASE CLÍNICA · V26</span></div>'+oldMain()+'</div>';
+ return '<div class="nx-section-page nx-section-'+safe(state.route)+'">'+masthead(state.route)+oldMain()+'</div>';
 };
 const actBefore=act;
 act=function(command){
@@ -453,6 +453,20 @@ function enhanceInterior(){
 }
 const renderV28=render;render=function(){renderV28();enhanceInterior()};
 
+
+/* Cabecera de sección: ícono, propósito y conteos reales; color propio por sección */
+const SECTION_TONE={micro:'var(--dom,#6b2fc4)',atb:'var(--dom,#6b2fc4)',clinica:'#1f5f73',aprender:'#3e6c8f',fuentes:'#5f6b85',comparar:'#46508e',laboratorio:'#2b7d6a'};
+const SECTION_LEAD={micro:'Biología, clínica y espectro de cada especie, organizada por dominio y grupo.',atb:'Mecanismo, espectro, farmacocinética y seguridad de cada agente, por clase y diana.',clinica:'Revisiones por síndrome con el tratamiento del manual OMS AWaRe cuando aplica.',aprender:'Capítulos y lecciones para estudio profundo.',fuentes:'De dónde sale cada dato y cómo interpretarlo.'};
+function masthead(route){
+ const label=(sections.find(x=>x[0]===route)||[])[1]||'Atlas',I=window.INF_ICON||(()=>'');
+ let facts=[];
+ if(route==='micro'){facts=[['bacteria',D.pathogens.length,'bacterias'],['virus',domainMicro('virus').length,'virus'],['fungi',domainMicro('fungi').length,'hongos'],['parasites',domainMicro('parasites').length,'parásitos']]}
+ else if(route==='atb'){facts=[['bacteria',D.antibiotics.length,'antibióticos'],['virus',domainDrug('virus').length,'antivirales'],['fungi',domainDrug('fungi').length,'antifúngicos'],['parasites',domainDrug('parasites').length,'antiparasitarios']]}
+ else if(route==='clinica'){const w=window.ATLAS25?.whoTreat?Object.keys(window.ATLAS25.whoTreat).length:0;facts=[['who',w,'con tratamiento OMS'],['aprender',(window.ATLAS25?.extraConditions||[]).length,'revisiones complementarias']]}
+ const ui=window.ATLAS24?.debug?.ui||{},sel=route==='micro'||route==='atb',cur=route==='micro'?(ui.micro||'bacteria'):(ui.drugs||'bacteria');
+ const f=facts.map(([ic,n,t])=>sel?'<button class="ms-fact ms-'+ic+(cur===ic?' on':'')+'" data-act="v24-mode:'+(route==='micro'?'micro':'drugs')+':'+ic+'" aria-pressed="'+(cur===ic)+'">'+I(ic)+'<b>'+n+'</b>'+safe(t)+'</button>':'<span class="ms-fact ms-'+ic+'">'+I(ic)+'<b>'+n+'</b>'+safe(t)+'</span>').join('');
+ return '<header class="ms" style="--ms:'+(SECTION_TONE[route]||'#3b4fa6')+'"><i class="ms-ic">'+I(route)+'</i><div class="ms-txt"><h1>'+safe(label)+'</h1>'+(SECTION_LEAD[route]?'<p>'+safe(SECTION_LEAD[route])+'</p>':'')+'</div>'+(f?'<div class="ms-facts"'+(sel?' role="group" aria-label="Elegir dominio"':'')+'>'+f+'</div>':'')+'</header>';
+}
 /* Facetas del catálogo bacteriano (Microorganismos y Antibióticos) */
 const FX={dom:'all',shape:'all',target:'all',newer:false};
 window.INF_FXON=micro=>micro?(FX.dom!=='all'||FX.shape!=='all'):(FX.target!=='all'||FX.newer);
@@ -565,6 +579,45 @@ function snapScroll(){const m={};document.querySelectorAll(SCROLL_SEL).forEach((
 function restoreScroll(snap){if(!snap||snap.route!==state.route)return;document.querySelectorAll(SCROLL_SEL).forEach(el=>{const c=el.className.split(' ')[0],k=c+'#'+[...document.querySelectorAll('.'+c)].indexOf(el),v=snap.m[k];if(v){el.scrollTop=v[0];el.scrollLeft=v[1]}});window.scrollTo({top:snap.y,behavior:'instant'})}
 function keepChosenVisible(){document.querySelectorAll('.a18-browser,.v24-items,.v25-clinic-list').forEach(box=>{if(box.scrollHeight<=box.clientHeight+4)return;const on=box.querySelector('.selected,.chosen,.on[data-act^="v25-clinical:"]');if(!on)return;const b=box.getBoundingClientRect(),r=on.getBoundingClientRect();if(r.top<b.top+8)box.scrollTop-=b.top+8-r.top;else if(r.bottom>b.bottom-8)box.scrollTop+=r.bottom-(b.bottom-8)})}
 function showArticleStart(){const art=document.querySelector('.v25-clinic-article,.v24-article,.a18-article,.a18-sheet,.v23-article,.v20-article');if(!art)return;const top=art.getBoundingClientRect().top+window.scrollY-84;if(window.scrollY>top+40||innerWidth<=1100)window.scrollTo({top:Math.max(0,top),behavior:'smooth'})}
+
+/* Guía de uso: pasos visibles en las barras laterales y recorrido Anterior/Siguiente en cada ficha */
+function stepH(n,t,sub){const d=document.createElement('div');d.className='step-h';d.innerHTML='<b>'+n+'</b>'+t+(sub?' <small>'+sub+'</small>':'');return d}
+function trailList(){
+ const ui=window.ATLAS24?.debug?.ui||{},q=(state.browserQuery||'').toLowerCase();
+ const bact=(state.route==='micro'&&(!ui.micro||ui.micro==='bacteria'))||(state.route==='atb'&&(!ui.drugs||ui.drugs==='bacteria'));
+ if(bact){
+  const micro=state.route==='micro',arr=(micro?D.pathogens:D.antibiotics).filter(x=>`${x.name} ${x.family||''} ${x.subgroup||''}`.toLowerCase().includes(q)&&(!window.INF_FX||INF_FX(micro,x)));
+  const curId=micro?(state.micro||D.pathogens[0].id):(state.drug||D.antibiotics[0].id);
+  const gname=x=>micro?(D.groups.find(g=>g.id===x.groupId)?.name||''):(x.family||'');
+  return {items:arr.map(x=>({name:x.name,group:gname(x),go:()=>act((micro?'micro-pick:':'drug-pick:')+x.id)})),cur:arr.findIndex(x=>x.id===curId)};
+ }
+ const box=document.querySelector('.v24-items,.sx-side .v25-clinic-list');if(!box)return null;
+ const btns=[...box.querySelectorAll(':scope>button')];
+ return {items:btns.map(b=>({name:(b.querySelector('b')||b).innerText.split('\n')[0].trim(),group:b.querySelector('small')?.innerText||'',go:()=>b.click()})),cur:btns.findIndex(b=>b.matches('.chosen,.on'))};
+}
+function enhanceGuide(){
+ try{
+  const main=document.querySelector('.nx-main');if(!main)return;
+  const kind=state.route==='micro'?'especie':state.route==='atb'?'fármaco':state.route==='clinica'?'síndrome':'';
+  if(!kind)return;
+  const side=document.querySelector('.a18-browser,.v24-sidebar,.sx-side');
+  if(side&&!side.querySelector('.step-h')){
+   const f=side.querySelector('.fx-panel,.sx-search,.v24-search'),l=side.querySelector('.a18-tree,.v24-items,.v25-clinic-list');
+   if(f)f.parentNode.insertBefore(stepH(1,'Filtra','opcional'),f);
+   if(l)l.parentNode.insertBefore(stepH(2,'Elige un'+(kind==='especie'?'a':'')+' '+kind),l);
+  }
+  const anchor=document.querySelector('.v20-profilehero,.v23-drug-hero,.v24-detail,.v25-syndrome');
+  const T=trailList();if(!anchor||!T||T.cur<0)return;
+  const it=T.items[T.cur],name=it.name,grp=it.group;
+  const bar=document.createElement('nav');bar.className='trail';bar.setAttribute('aria-label','Recorrido de la lista');
+  bar.innerHTML='<span class="step-h" style="margin:0"><b>3</b>Lee</span><span class="trail-path">'+(grp?safe(grp)+'<i>›</i>':'')+safe(name)+'</span><span class="trail-pos"><b>'+(T.cur+1)+'</b> de '+T.items.length+' en la lista</span><button data-trail="-1"'+(T.cur===0?' disabled':'')+' title="Anterior (tecla [)">‹ Anterior <kbd>[</kbd></button><button data-trail="1"'+(T.cur===T.items.length-1?' disabled':'')+' title="Siguiente (tecla ])">Siguiente › <kbd>]</kbd></button>';
+  anchor.parentNode.insertBefore(bar,anchor);
+ }catch(e){console.warn('guide',e)}
+}
+function trailGo(d){const T=trailList();if(!T||T.cur<0)return;const it=T.items[T.cur+d];if(it){it.go();requestAnimationFrame(showArticleStart)}}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-trail]');if(t){e.preventDefault();trailGo(+t.dataset.trail)}});
+document.addEventListener('keydown',e=>{if(e.target.closest('input,textarea,select,[contenteditable]')||e.metaKey||e.ctrlKey||e.altKey)return;if(e.key===']')trailGo(1);else if(e.key==='[')trailGo(-1)});
+const renderGuide=render;render=function(){renderGuide();enhanceGuide()};
 const renderScroll=render;render=function(){const snap=scrollKeep||snapScroll();scrollKeep=null;renderScroll();restoreScroll(snap);keepChosenVisible()};
 const actScroll=act;act=function(command){const op=String(command).split(':')[0];const r=actScroll(command);if(ARTICLE_OPS.test(op))requestAnimationFrame(showArticleStart);return r};
 
