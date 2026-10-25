@@ -1168,3 +1168,66 @@ body{font-size:16.5px;line-height:1.65}
 .nx-main .v25-md-block.md-k .md-head>div{min-width:0}
 /* V40 · los pasos del mapa ya no flotan encima de la barra de ruta */
 .nx-main .rm-steps{position:static!important;padding:0 0 10px!important}
+
+/* ───────── V41 · Fármacos esenciales: pestañas de vista, catálogo y panel «Pauta y uso» ───────── */
+.atb-views{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0 0 18px}
+.atb-views button{display:flex;align-items:center;gap:12px;text-align:left;border:1.5px solid var(--rule,#d9e0ee);background:#fff;border-radius:16px;padding:12px 16px;cursor:pointer;min-height:64px}
+.atb-views button .inf-ic{width:28px;height:28px;color:#2b7d6a;flex:none}
+.atb-views button b{display:block;font:800 16px/1.2 var(--disp);color:#0a1633}
+.atb-views button small{display:block;font-size:13px;color:#5a6a8a}
+.atb-views button.on{border-color:#2b7d6a;background:linear-gradient(120deg,#e3f2ec,#fff 75%);box-shadow:0 12px 24px -18px #2b7d6a}
+.atb-views button:focus-visible{outline:3px solid #7fc2a8;outline-offset:2px}
+.ess-view{display:grid;grid-template-columns:minmax(260px,320px) minmax(0,1fr);gap:18px;align-items:start}
+.ess-top{position:sticky;top:78px;display:flex;flex-direction:column;gap:14px;background:#fff;border:1px solid var(--rule,#d9e0ee);border-top:4px solid #2b7d6a;border-radius:18px;padding:16px}
+.ess-legal{margin:0;font-size:13px;line-height:1.5;color:#4a5878;background:#eef4f1;border-radius:12px;padding:10px 12px}
+.ess-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;align-content:start}
+.ess-card{display:flex;flex-direction:column;gap:10px;background:#fff;border:1px solid #d6e6df;border-radius:18px;padding:14px 16px;transition:box-shadow .2s,border-color .2s}
+.ess-card.open{grid-column:1/-1;border-color:#2b7d6a}
+.ess-card>header{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}
+.ess-card>header i{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:#2b7d6a;color:#fff;font-style:normal}
+.ess-card>header i .inf-ic{width:22px;height:22px}
+.ess-card h3{margin:0;font:800 18px/1.15 var(--disp);color:#0a1633}
+.ess-card small{font-size:13px;color:#4a6a5e}
+.ess-via{font:700 12px var(--body);color:#1f5f4a;background:#e3f2ec;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.ess-cind{margin:0;font-size:14.5px;line-height:1.45;color:#33415f}
+.ess-cdose{display:flex;flex-direction:column;gap:2px;padding:9px 11px;border-radius:12px;background:#f3f8f6;font-size:14px;color:#1b2a4a}
+.ess-cdose b{font-weight:800;color:#1f5f4a}
+.ess-cacts{display:flex;gap:8px;flex-wrap:wrap}
+.ess-cacts button{border:1px solid #bcd9cd;background:#fff;color:#1f5f4a;border-radius:10px;padding:8px 12px;font:700 13.5px var(--body);cursor:pointer;min-height:40px}
+.ess-cacts button:first-child{background:#2b7d6a;color:#fff;border-color:#2b7d6a}
+.ess-panel{margin:16px 0;background:#fff;border:1px solid #cfe3da;border-radius:20px;overflow:hidden}
+.ess-card .ess-panel{margin:6px 0 0}
+.ess-panel>header{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:16px 20px;background:linear-gradient(110deg,#dff0e8,#fff 80%);border-bottom:1px solid #d6e6df}
+.ess-hic{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:#2b7d6a;color:#fff}
+.ess-hic .inf-ic{width:26px;height:26px}
+.ess-kick{font:800 12.5px var(--body);color:#1f5f4a;background:#cfe8dc;border-radius:999px;padding:2px 10px}
+.ess-panel h3{margin:6px 0 2px;font:800 22px/1.15 var(--disp);color:#0a1633}
+.ess-panel>header p{margin:0;font-size:14px;color:#4a5878}
+.ess-eq{margin:12px 20px 0;padding:10px 12px;border-radius:10px;background:#eef1fb;font-size:14px;color:#2a3a80}
+.ess-panel h4{margin:0 0 8px;font:800 16px var(--disp);color:#1f5f4a}
+.ess-ind,.ess-dose,.ess-dur,.ess-pops,.ess-safety,.ess-notes{padding:14px 20px 0}
+.ess-ind ul{margin:0;padding-left:20px;display:grid;gap:4px;font-size:15px;line-height:1.5}
+.ess-scroll{overflow-x:auto;border:1px solid #d6e6df;border-radius:12px}
+.ess-dose table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
+.ess-dose th,.ess-dose td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid #e6efeb;line-height:1.45}
+.ess-dose thead th{background:#2b7d6a;color:#fff;font:800 13.5px var(--body)}
+.ess-dose tbody th{font-weight:700;color:#0a1633;width:32%}
+.ess-dose tbody tr:nth-child(2n){background:#f6faf8}
+.ess-na{color:#9aa6bf}
+.ess-dur div{display:flex;flex-wrap:wrap;gap:6px}
+.ess-dur span{font-size:13.5px;font-weight:600;color:#1f5f4a;background:#e3f2ec;border-radius:9px;padding:5px 10px}
+.ess-pops{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.ess-pop{display:grid;grid-template-columns:auto 1fr;gap:10px;padding:10px 12px;border-radius:12px;background:#f2f4fb;border:1px solid #dde3f2}
+.ess-pop i{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:#3b4fa6;color:#fff;font-style:normal}
+.ess-pop i .inf-ic{width:20px;height:20px}
+.ess-pop b{font:800 14px var(--body);color:#0a1633}.ess-pop p{margin:2px 0 0;font-size:14px;line-height:1.45;color:#33415f}
+.ess-safety{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.ess-box{border-radius:14px;padding:10px 12px;border:1px solid color-mix(in srgb,var(--sc) 30%,#fff);background:color-mix(in srgb,var(--sc) 7%,#fff)}
+.ess-ci{--sc:#b23a3a}.ess-prec{--sc:#5a4bb0}.ess-ea{--sc:#c2456f}.ess-inter{--sc:#2f6f9f}
+.ess-box h5{display:flex;align-items:center;gap:6px;margin:0 0 6px;font:800 14px var(--body);color:var(--sc)}
+.ess-box h5 .inf-ic{width:18px;height:18px}
+.ess-box ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:14px;line-height:1.45;color:#1b2a4a}
+.ess-notes p{margin:0 0 6px;font-size:14px;color:#33415f;padding:8px 12px;border-radius:10px;background:#f6f8fc}
+.ess-panel>footer{margin-top:14px;padding:10px 20px;background:#f1f6f4;border-top:1px solid #d6e6df;font-size:13px;color:#4a5878}
+@media(max-width:1000px){.ess-view{grid-template-columns:1fr}.ess-top{position:static}.atb-views{grid-template-columns:1fr}}
+@media(max-width:560px){.ess-grid{grid-template-columns:1fr}.ess-panel>header{padding:14px}.ess-ind,.ess-dose,.ess-dur,.ess-pops,.ess-safety,.ess-notes{padding:12px 14px 0}}

@@ -148,6 +148,22 @@
       "limitations": "No tiene actividad útil contra MRSA."
     },
     {
+      "id": "cloxacilina",
+      "name": "Cloxacilina",
+      "family": "Penicilinas",
+      "subgroup": "Antiestafilocócicas",
+      "mechanism": "Inhibición de proteínas fijadoras de penicilina (PBPs): pared celular",
+      "pearl": "Isoxazolilpenicilina resistente a la penicilinasa estafilocócica; mismas indicaciones que oxacilina, dicloxacilina y flucloxacilina.",
+      "newer": false,
+      "evidence": "catalogo_sin_relacion",
+      "review": "pendiente_revision_clinica",
+      "referenceKeys": [
+        "MURRAY26"
+      ],
+      "context": "Infecciones graves por estafilococo sensible a meticilina y estreptococo; primera línea en el manual OMS AWaRe para osteomielitis y artritis séptica.",
+      "limitations": "No tiene actividad útil contra MRSA ni gramnegativos."
+    },
+    {
       "id": "nafcilina",
       "name": "Nafcilina",
       "family": "Penicilinas",
@@ -1425,6 +1441,22 @@
       ],
       "context": "Estudia esta subfamilia, su mecanismo y las indicaciones autorizadas en tu región.",
       "limitations": "No inferir susceptibilidad del patógeno ni idoneidad clínica sin revisión individual."
+    },
+    {
+      "id": "dapsona",
+      "name": "Dapsona",
+      "family": "Sulfonamidas / antifolatos",
+      "subgroup": "Sulfonas",
+      "mechanism": "Inhibición de la dihidropteroato sintetasa: síntesis de folato",
+      "pearl": "Sulfona usada en lepra y en profilaxis o tratamiento alternativo de neumocistosis y toxoplasmosis; vigilar hemólisis y metahemoglobinemia.",
+      "newer": false,
+      "evidence": "catalogo_sin_relacion",
+      "review": "pendiente_revision_clinica",
+      "referenceKeys": [
+        "MURRAY26"
+      ],
+      "context": "Lepra (con rifampicina y clofazimina); profilaxis de neumocistosis y toxoplasmosis.",
+      "limitations": "Hemólisis en déficit de G6PD; no sustituye al cotrimoxazol cuando este es tolerado."
     },
     {
       "id": "clindamicina",

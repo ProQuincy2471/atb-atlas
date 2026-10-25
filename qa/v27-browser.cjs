@@ -51,6 +51,20 @@ async function main(){
    assert(/Fuente: WHO AWaRe antibiotic book 2022/.test(w.txt),`fuente WHO ausente en ${id}`);
    if(!['who-04'].includes(id)){assert(w.first>=1&&w.dur>=1,`WHO ${id} sin primera elección o duración`)}
   }
+  // Fármacos esenciales: cada monografía abre su pauta completa sin fugas ni desborde; las que tienen ficha muestran el panel en ella
+  await go('atb');
+  await page.evaluate(()=>window.act('atb-view:esenciales'));await page.waitForTimeout(200);
+  const ESS_IDS=await page.evaluate(()=>Object.keys(window.ATLAS25.essential||{}));
+  checks++;assert(ESS_IDS.length>=30,`esenciales: se esperaban ≥30 monografías, hay ${ESS_IDS.length}`);
+  for(const id of ESS_IDS){
+   const r=await page.evaluate(i=>{window.act('ess-open:'+i);const c=document.querySelector('.ess-card.open .ess-panel');const t=c?c.innerText:'';window.act('ess-open:'+i);return {ok:!!c,rows:c?c.querySelectorAll('tbody tr').length:0,leak:/\$\{|undefined|NaN|\[object Object\]/.test(t),src:/MSF Essential drugs/.test(t),over:document.documentElement.scrollWidth-innerWidth}},id);
+   checks++;assert(r.ok&&r.rows>=1&&!r.leak&&r.src&&r.over<9,`esencial ${id}@${width}: ${JSON.stringify(r)}`);
+  }
+  await page.evaluate(()=>window.act('atb-view:catalogo'));
+  for(const id of ['ceftriaxona','amoxicilina','rifampicina','penicilina-g','oxacilina']){
+   const r=await page.evaluate(i=>{window.act('nx-find:drug:bacteria:'+i);return document.querySelectorAll('.ess-panel').length},id);await page.waitForTimeout(60);
+   checks++;assert(r>=1,`panel de pauta ausente en la ficha ${id}@${width}`);
+  }
   await go('micro');
   for(const id of MICRO_DEEP){await page.evaluate(i=>window.act('v24-open-micro:'+i),id);await page.waitForTimeout(250);
    const m=await page.evaluate(()=>({blocks:document.querySelectorAll('.v25-md-block').length,over:document.documentElement.scrollWidth-innerWidth,leak:/\$\{|undefined|NaN/.test(document.querySelector('#micro-profundo')?.innerText||'')}));

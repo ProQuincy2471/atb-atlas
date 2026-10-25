@@ -1,7 +1,7 @@
 /* INFEORA — service worker: el atlas funciona sin conexión después de la primera visita.
    Páginas: red primero (si no hay red, la copia guardada). Scripts, estilos, datos e imágenes:
    copia guardada al instante y actualización en segundo plano. Subir CACHE al publicar cambios grandes. */
-const CACHE='infeora-v1';
+const CACHE='infeora-v2';
 const CORE=['./','./infeora/','./manifest.webmanifest','./assets/app/icon-192.png','./assets/app/icon-512.png','./assets/app/infeora-logo.svg'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith('infeora-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
