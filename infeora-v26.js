@@ -356,13 +356,17 @@ mainPage=function(){
  if(state.route==='comparar')return compareView();
  if(state.route==='laboratorio')return labView();
  if(state.route==='mapa'){if(NX.view==='matriz')return exploreShell(matrixView());if(NX.view==='especie')return exploreShell(mapExplorer());return exploreShell(relMap());}
- return '<div class="nx-section-page nx-section-'+safe(state.route)+'">'+masthead(state.route)+oldMain()+'</div>';
+ return '<div class="nx-section-page nx-section-'+safe(state.route)+'">'+masthead(state.route)+(state.route==='atb'?atbViewTabs():'')+(state.route==='atb'&&NX.atbView==='esenciales'?essentialView():oldMain())+'</div>';
 };
 const actBefore=act;
 act=function(command){
  const a=String(command).split(':'),op=a[0],value=a.slice(1).join(':');
  switch(op){
  case 'nx-go':NX.drawer=false;return goto(value);
+ case 'atb-view':NX.atbView=value;return render();
+ case 'ess-g':NX.essG=value;return render();
+ case 'ess-via':NX.essVia=value;return render();
+ case 'ess-open':NX.essOpen=NX.essOpen===value?'':value;return render();
  case 'nx-home-domain':NX.domain=value;NX.group='all';NX.query='';NX.micro='';NX.drawer=false;return goto('mapa');
  case 'nx-drawer':NX.drawer=!NX.drawer;return render();
  case 'nx-density':NX.compact=!NX.compact;try{localStorage.setItem('infeora-v26-compact',NX.compact?'1':'0')}catch{}return render();
@@ -397,7 +401,7 @@ act=function(command){
    if(kingdom==='bacteria'){state.micro=id;return goto('micro')}
    window.ATLAS24.debug.ui.micro=kingdom;window.ATLAS24.debug.ui.selectedMicro=id;window.ATLAS24.debug.ui.query='';return goto('micro');
   }
-  if(type==='drug'){
+  if(type==='drug'){NX.atbView='catalogo';
    if(kingdom==='bacteria'){state.drug=id;return goto('atb')}
    window.ATLAS24.debug.ui.drugs=kingdom;window.ATLAS24.debug.ui.selectedDrug=id;window.ATLAS24.debug.ui.query='';return goto('atb');
   }
@@ -499,6 +503,55 @@ function masthead(route){
  const f=facts.map(([ic,n,t])=>sel?'<button class="ms-fact ms-'+ic+(cur===ic?' on':'')+'" data-act="v24-mode:'+(route==='micro'?'micro':'drugs')+':'+ic+'" aria-pressed="'+(cur===ic)+'">'+I(ic)+'<b>'+n+'</b>'+safe(t)+'</button>':'<span class="ms-fact ms-'+ic+'">'+I(ic)+'<b>'+n+'</b>'+safe(t)+'</span>').join('');
  return '<header class="ms" style="--ms:'+(SECTION_TONE[route]||'#3b4fa6')+'"><i class="ms-ic">'+I(route)+'</i><div class="ms-txt"><h1>'+safe(label)+'</h1>'+(SECTION_LEAD[route]?'<p>'+safe(SECTION_LEAD[route])+'</p>':'')+'</div>'+(f?'<div class="ms-facts"'+(sel?' role="group" aria-label="Elegir dominio"':'')+'>'+f+'</div>':'')+'</header>';
 }
+
+function atbViewTabs(){const n=Object.keys(ESS()).length,v=NX.atbView||'catalogo',I=window.INF_ICON||(()=>'');return '<nav class="atb-views" role="tablist" aria-label="Vista de antimicrobianos"><button role="tab" aria-selected="'+(v==='catalogo')+'" class="'+(v==='catalogo'?'on':'')+'" data-act="atb-view:catalogo">'+I('atb')+'<span><b>Catálogo completo</b><small>Mecanismo, espectro y revisión ampliada</small></span></button><button role="tab" aria-selected="'+(v==='esenciales')+'" class="'+(v==='esenciales'?'on':'')+'" data-act="atb-view:esenciales">'+I('book')+'<span><b>Fármacos esenciales · '+n+'</b><small>Indicaciones, dosis, duración y seguridad</small></span></button></nav>'}
+/* Fármacos esenciales (data/essential-drugs.js): panel «Pauta y uso» en la ficha y vista de catálogo propia */
+const ESS=()=>window.ATLAS25?.essential||{};
+const essFor=id=>Object.entries(ESS()).filter(([k,v])=>k===id||v.link===id||(v.equiv||[]).includes(id)).map(([k,v])=>({k,v,eq:k!==id&&v.link!==id}));
+const ESS_GROUPS=[['pen','Penicilinas',/penicil|aminopenic/i],['ceph','Cefalosporinas',/cefalosporina/i],['macro','Macrólidos y lincosamidas',/macrólido|lincosamida/i],['amino','Aminoglucósidos',/aminoglucós/i],['fq','Fluoroquinolonas',/fluoroquinol/i],['nitro','Nitroimidazoles y nitrofuranos',/nitroimidaz|nitrofur/i],['sulfa','Sulfonamidas y sulfonas',/sulfon/i],['tb','Antituberculosos',/antituberc|rifamicina/i],['tetra','Tetraciclinas',/tetraciclina|ciclina/i],['otros','Otros',/./]];
+const essGroup=v=>(ESS_GROUPS.find(g=>g[2].test(v.clase||''))||ESS_GROUPS[ESS_GROUPS.length-1]);
+function essList(t,items,cls,ic){return items&&items.length?'<div class="ess-box ess-'+cls+'"><h5>'+(window.INF_ICON?INF_ICON(ic):'')+t+'</h5><ul>'+items.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul></div>':''}
+function essPanel(k,v,eq){
+ const I=window.INF_ICON||(()=>'');
+ const rows=v.dosis.map(d=>'<tr><th>'+safe(d.t)+'</th><td>'+(d.ni?safe(d.ni):'<span class="ess-na">—</span>')+'</td><td>'+(d.ad?safe(d.ad):'<span class="ess-na">—</span>')+'</td></tr>').join('');
+ const pop=[['kidney','Función renal',v.renal],['child','Embarazo',v.emb],['blood','Lactancia',v.lact]].filter(x=>x[2]).map(([ic,t,x])=>'<div class="ess-pop"><i>'+I(ic)+'</i><div><b>'+t+'</b><p>'+safe(x)+'</p></div></div>').join('');
+ return '<section class="ess-panel" data-ess="'+safe(k)+'"><header><div class="ess-hic">'+I('pill')+'</div><div><span class="ess-kick">Pauta y uso · fármaco esencial</span><h3>'+safe(v.nombre)+'</h3><p>'+safe(v.clase)+' · '+safe(v.via)+(v.act?' · actualizado '+safe(v.act):'')+'</p></div></header>'+
+  (eq?'<p class="ess-eq">El manual de referencia describe <b>'+safe(v.nombre)+'</b>, equivalente de la misma clase y con las mismas indicaciones.</p>':'')+
+  '<div class="ess-ind"><h4>Indicaciones</h4><ul>'+v.ind.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul></div>'+
+  '<div class="ess-dose"><h4>Dosis por escenario</h4><div class="ess-scroll"><table><thead><tr><th>Escenario</th><th>Niño</th><th>Adulto</th></tr></thead><tbody>'+rows+'</tbody></table></div></div>'+
+  (v.dur&&v.dur.length?'<div class="ess-dur"><h4>Duración</h4><div>'+v.dur.map(x=>'<span>'+safe(x)+'</span>').join('')+'</div></div>':'')+
+  (pop?'<div class="ess-pops">'+pop+'</div>':'')+
+  '<div class="ess-safety">'+essList('Contraindicaciones',v.ci,'ci','nopill')+essList('Precauciones',v.prec,'prec','shield')+essList('Efectos adversos',v.ea,'ea','sepsis')+essList('Interacciones',v.inter,'inter','comparar')+'</div>'+
+  (v.notas&&v.notas.length?'<div class="ess-notes">'+v.notas.map(x=>'<p>'+safe(x)+'</p>').join('')+'</div>':'')+
+  '<footer>Fuente: '+safe(v.src)+'. Síntesis propia en español; consultar el original y la guía local. Dosis para función renal normal salvo que se indique.</footer></section>';
+}
+function enhanceEssential(){
+ try{
+  document.querySelectorAll('.ess-panel').forEach(x=>{if(!x.closest('.ess-view'))x.remove()});
+  if(state.route!=='atb'||NX.atbView==='esenciales')return;
+  const ui=window.ATLAS24?.debug?.ui;if(ui&&ui.drugs&&ui.drugs!=='bacteria')return;
+  const d=A(state.drug)||D.antibiotics[0];if(!d)return;
+  const list=essFor(d.id);if(!list.length)return;
+  const anchor=document.querySelector('.nx-spec')||document.querySelector('.v23-drug-hero');if(!anchor)return;
+  anchor.insertAdjacentHTML('afterend',list.map(x=>essPanel(x.k,x.v,x.eq)).join(''));
+ }catch(e){console.warn('essential',e)}
+}
+const renderEss=render;render=function(){renderEss();enhanceEssential()};
+function essentialView(){
+ const I=window.INF_ICON||(()=>''),all=Object.entries(ESS()),q=normalized(NX.essQ||''),g=NX.essG||'all',via=NX.essVia||'all';
+ const pass=([k,v],skip)=>(skip==='g'||g==='all'||essGroup(v)[0]===g)&&(skip==='via'||via==='all'||(via==='oral'?/oral/i.test(v.via):/inyect/i.test(v.via)))&&(!q||normalized([v.nombre,v.clase,...v.ind].join(' ')).includes(q));
+ const list=all.filter(x=>pass(x)).sort((a,b)=>a[1].nombre.localeCompare(b[1].nombre));
+ const chip=(key,val,label,n)=>'<button class="fx-chip'+((key==='g'?g:via)===val?' on':'')+(n?'':' empty')+'" style="--t:#2b7d6a" data-act="ess-'+key+':'+val+'" aria-pressed="'+((key==='g'?g:via)===val)+'"><span>'+safe(label)+'</span><em>'+n+'</em></button>';
+ const groups=ESS_GROUPS.filter(G=>all.some(([k,v])=>essGroup(v)[0]===G[0]));
+ const cards=list.map(([k,v])=>{const d0=v.dosis[0]||{},open=NX.essOpen===k,target=v.link||k,exists=!!A(target);
+  return '<article class="ess-card'+(open?' open':'')+'"><header><i>'+I('pill')+'</i><div><h3>'+safe(v.nombre)+'</h3><small>'+safe(v.clase)+'</small></div><span class="ess-via">'+safe(v.via)+'</span></header><p class="ess-cind">'+safe(v.ind.slice(0,2).join(' · '))+'</p><div class="ess-cdose"><b>'+safe(d0.t||'')+'</b><span>Adulto: '+safe(d0.ad||'—')+'</span><span>Niño: '+safe(d0.ni||'—')+'</span></div><div class="ess-cacts"><button data-act="ess-open:'+safe(k)+'" aria-expanded="'+open+'">'+(open?'Ocultar pauta':'Ver pauta completa')+'</button>'+(exists?'<button data-act="nx-find:drug:bacteria:'+safe(target)+'">Abrir ficha</button>':'')+'</div>'+(open?essPanel(k,v,false):'')+'</article>'}).join('');
+ return '<div class="ess-view"><div class="ess-top"><label class="sx-search">'+I('search')+'<span class="sr-only">Buscar fármaco esencial</span><input id="ess-q" placeholder="Buscar por fármaco, clase o indicación" value="'+safe(NX.essQ||'')+'"></label>'+
+  '<div class="fx-block"><h4>Clase</h4><div class="fx-chips">'+chip('g','all','Todas',all.filter(x=>pass(x,'g')).length)+groups.map(G=>chip('g',G[0],G[1],all.filter(x=>essGroup(x[1])[0]===G[0]&&pass(x,'g')).length)).join('')+'</div></div>'+
+  '<div class="fx-block"><h4>Vía</h4><div class="fx-chips">'+chip('via','all','Todas',all.filter(x=>pass(x,'via')).length)+chip('via','oral','Oral',all.filter(x=>/oral/i.test(x[1].via)&&pass(x,'via')).length)+chip('via','iny','Inyectable',all.filter(x=>/inyect/i.test(x[1].via)&&pass(x,'via')).length)+'</div></div>'+
+  '<p class="ess-legal">Pautas sintetizadas en español a partir del manual <b>MSF Essential drugs</b> (ed. 2026), con la página de cada dato. No es una reproducción ni una traducción del libro. Siempre contrastar con la guía local, el antibiograma y la ficha técnica.</p></div>'+
+  '<div class="ess-grid">'+(cards||'<p class="sx-empty">Ningún fármaco cumple estos filtros.</p>')+'</div></div>';
+}
+document.addEventListener('input',e=>{if(e.target.id!=='ess-q')return;NX.essQ=e.target.value;const st=e.target.selectionStart;render();const n=document.getElementById('ess-q');if(n){n.focus();try{n.setSelectionRange(st,st)}catch(_){}}});
 /* Facetas del catálogo bacteriano (Microorganismos y Antibióticos) */
 const FX={dom:'all',shape:'all',target:'all',newer:false};
 window.INF_FXON=micro=>micro?(FX.dom!=='all'||FX.shape!=='all'):(FX.target!=='all'||FX.newer);
