@@ -371,4 +371,263 @@ E['estreptomicina']={nombre:'Estreptomicina',via:'Inyectable (solo IM)',pag:'489
  inter:['No combinar con otro aminoglucósido; evitar o vigilar con furosemida, anfotericina B, vancomicina y bloqueantes neuromusculares'],
  renal:'Reducir la dosis en insuficiencia renal.',emb:'CONTRAINDICADA.',lact:'Sin contraindicación.',notas:[]};
 
+/* ── Lote 2: antivirales, antifúngicos y antiparasitarios ── */
+E['aciclovir']={nombre:'Aciclovir',via:'Oral',pag:'25–26',act:'',src:SRC('25–26'),clase:'Antiviral (análogo de nucleósido frente a VHS y VVZ)',
+ ind:['Herpes oral o esofágico recurrente o extenso en inmunodeprimidos; queratouveítis herpética','Herpes genital','Profilaxis secundaria si las recurrencias son frecuentes o graves','Zóster grave: necrótico, extenso, facial u oftálmico'],
+ dosis:[dose('Herpes oral/esofágico en inmunodeprimidos · queratouveítis','< 2 años: 200 mg 5 veces al día × 7 días','≥ 2 años y adulto: 400 mg 5 veces al día × 7 días'),
+  dose('Herpes genital','≥ 2 años: 400 mg cada 8 h × 7 días','400 mg cada 8 h × 7 días; en inmunodeprimidos, hasta la resolución clínica'),
+  dose('Profilaxis secundaria de herpes','< 2 años: 200 mg cada 12 h','400 mg cada 12 h'),
+  dose('Zóster grave','','800 mg 5 veces al día × 7 días')],
+ dur:['Herpes: iniciar lo antes posible (dentro de 96 h desde las lesiones)','Zóster: iniciar preferentemente en las primeras 72 h; no evita el dolor posherpético pero acorta su duración total'],
+ ci:['Hipersensibilidad a aciclovir'],prec:['Beber abundante líquido'],
+ ea:['Cefalea, exantema, alergia, molestias digestivas, aumento de transaminasas','Trastornos neurológicos en insuficiencia renal y en ancianos','Raro: alteraciones hematológicas'],inter:[],
+ renal:'Reducir la dosis en insuficiencia renal.',emb:'Sin contraindicación.',lact:'Sin contraindicación.',notas:[]};
+
+E['albendazol']={nombre:'Albendazol',via:'Oral',pag:'27–28',act:'',src:SRC('27–28'),clase:'Antihelmíntico (benzimidazol)',
+ ind:['Ascariasis, enterobiasis y uncinariasis (Ancylostoma, Necator)','Tricuriasis y estrongiloidiasis','Triquinelosis','También: larva migrans cutánea, cestodosis larvarias (hidatidosis, algunas neurocisticercosis) y tratamiento masivo de filariasis linfática según programa nacional'],
+ dosis:[dose('Ascariasis, enterobiasis, uncinariasis','> 6 meses: 400 mg dosis única (200 mg si pesa < 10 kg)','400 mg dosis única'),
+  dose('Tricuriasis, estrongiloidiasis','> 6 meses: 400 mg al día × 3 días (200 mg/día si < 10 kg)','400 mg al día × 3 días'),
+  dose('Triquinelosis','> 2 años: 5 mg/kg cada 12 h × 10–15 días','400 mg cada 12 h × 10–15 días')],
+ dur:['Enterobiasis: puede repetirse una dosis a las 2–4 semanas'],
+ ci:['Menores de 6 meses','Cisticercosis ocular'],
+ prec:['En estrongiloidiasis, la ivermectina es más eficaz','Masticar o triturar los comprimidos'],
+ ea:['Molestias digestivas, cefalea, mareo','Cefalea y convulsiones si hay neurocisticercosis no diagnosticada'],inter:[],
+ renal:'',emb:'Evitar en el primer trimestre.',lact:'Sin contraindicación.',notas:[]};
+
+E['fluconazol']={nombre:'Fluconazol',via:'Oral e inyectable',pag:'142–144 (oral) · 402–403 (inyectable)',act:'septiembre 2023',src:SRC('142–144, 402–403'),clase:'Antifúngico triazólico',
+ ind:['Candidiasis esofágica y orofaríngea moderada a grave; profilaxis secundaria de candidiasis recurrente en inmunodeprimidos','Meningitis criptocócica: consolidación tras anfotericina B + flucitosina, o combinado con anfotericina B o flucitosina','Profilaxis secundaria de criptococosis'],
+ dosis:[dose('Candidiasis esofágica u orofaríngea · profilaxis secundaria de candidiasis','≥ 1 mes: 3–6 mg/kg (máx. 200 mg) una vez al día','50–200 mg una vez al día (máx. 400 mg)'),
+  dose('Criptococosis meníngea tras anfotericina B + flucitosina','≥ 1 mes: 12 mg/kg/día × 1 semana, luego 6–12 mg/kg/día × 8 semanas (máx. 800 mg/día)','1 200 mg/día × 1 semana, luego 800 mg/día × 8 semanas'),
+  dose('Criptococosis meníngea combinada con anfotericina B o flucitosina','≥ 1 mes: 12 mg/kg/día × 2 semanas, luego 6–12 mg/kg/día × 8 semanas (máx. 800 mg/día)','1 200 mg/día × 2 semanas, luego 800 mg/día × 8 semanas'),
+  dose('Profilaxis secundaria de criptococosis','6 mg/kg (máx. 200 mg) una vez al día','200 mg una vez al día'),
+  dose('Histoplasmosis si no se tolera itraconazol (menos eficaz)','10–12 mg/kg (máx. 400 mg)/día × 6–12 semanas','400 mg el día 1, luego 200–400 mg/día × 6–12 semanas'),
+  dose('Candidiasis genital tras fracaso del tratamiento local','','150 mg dosis única'),
+  dose('IV · meningitis criptocócica (con anfotericina B o flucitosina) si no es posible la vía oral','≥ 1 mes: 12 mg/kg (máx. 800 mg) una vez al día, en ≥ 20 min','1 200 mg una vez al día, en ≥ 10 min'),
+  dose('IV · candidiasis esofágica grave','≥ 1 mes: 3–6 mg/kg (máx. 200 mg) una vez al día','200 mg (máx. 400 mg) una vez al día')],
+ dur:['Candidiasis esofágica: 14–21 días · orofaríngea: 7–14 días · profilaxis: mientras sea necesaria'],
+ ci:[],
+ prec:['Precaución en insuficiencia hepática o renal y en cardiopatía (bradicardia, arritmias)','Vigilar función hepática en tratamientos prolongados','Neonatos: vida media prolongada, administrar cada 72 h (< 14 días) o cada 48 h (≥ 14 días)','Si no hay anfotericina B o no se tolera, el fluconazol puede darse solo en la inducción de la criptococosis (mismas dosis)','IV: pasar a vía oral lo antes posible; no añadir otros fármacos a la bolsa'],
+ ea:['Molestias digestivas, cefalea','Reacciones cutáneas a veces graves, anafilaxia','Hepatotoxicidad grave, leucopenia, trombocitopenia, prolongación del QT: suspender ante anafilaxia, hepatopatía o reacción cutánea grave'],
+ inter:['Con rifampicina, separar 12 h (rifampicina por la mañana, fluconazol por la noche)','Evitar o vigilar con fármacos que alargan el QT','Aumenta warfarina, carbamazepina, fenitoína, rifabutina, benzodiacepinas, antagonistas del calcio y algunos antirretrovirales (nevirapina, zidovudina)'],
+ renal:'Reducir la dosis a la mitad en insuficiencia renal.',emb:'Solo en infecciones graves o potencialmente mortales, sobre todo en el primer trimestre (riesgo de malformaciones).',lact:'Solo en infecciones graves o potencialmente mortales.',notas:[]};
+
+E['flucitosina']={nombre:'Flucitosina',via:'Oral',pag:'145–146',act:'septiembre 2023',src:SRC('145–146'),clase:'Antifúngico (análogo de pirimidina)',
+ ind:['Inducción de la meningitis criptocócica, con anfotericina B o fluconazol'],
+ dosis:[dose('Meningitis criptocócica (inducción)','> 1 semana de vida: 25 mg/kg cada 6 h','25 mg/kg cada 6 h')],
+ dur:['1 semana si se combina con anfotericina B','2 semanas si se combina con fluconazol'],ci:[],
+ prec:['Precaución en > 60 años, insuficiencia renal o alteraciones hematológicas','Hemograma y función hepática y renal hasta el final del tratamiento','En niños pueden triturarse los comprimidos'],
+ ea:['Molestias digestivas','Leucopenia, trombocitopenia y, con menos frecuencia, agranulocitosis','Aumento de transaminasas, alergia a veces grave, confusión y alucinaciones'],inter:[],
+ renal:'Reducir a la mitad (25 mg/kg cada 12 h) en insuficiencia renal.',emb:'En general no recomendada (teratógena en animales); puede usarse si no hay alternativa más segura dada la gravedad.',lact:'Igual que en el embarazo.',notas:[]};
+
+E['itraconazol']={nombre:'Itraconazol',via:'Oral',pag:'181–182',act:'',src:SRC('181–182'),clase:'Antifúngico triazólico',
+ ind:['Histoplasmosis y peniciliosis (talaromicosis): tratamiento y profilaxis secundaria','Tiña de la cabeza'],
+ dosis:[dose('Histoplasmosis moderada','5 mg/kg una vez al día × 6–12 semanas','200 mg cada 8 h × 3 días, luego 200 mg 1–2 veces al día × 6–12 semanas'),
+  dose('Histoplasmosis grave o diseminada','Igual pauta durante 12 semanas, tras 1–2 semanas de anfotericina B','Igual pauta durante 12 semanas, tras 1–2 semanas de anfotericina B'),
+  dose('Talaromicosis moderada','','200 mg cada 12 h × 8 semanas'),
+  dose('Talaromicosis grave','','Igual pauta durante 10 semanas, tras 2 semanas de anfotericina B'),
+  dose('Profilaxis secundaria de histoplasmosis y talaromicosis','','200 mg una vez al día mientras sea necesaria'),
+  dose('Tiña de la cabeza','3–5 mg/kg una vez al día × 4 semanas','200 mg una vez al día × 2–4 semanas')],
+ dur:['Según indicación (ver escenarios)'],ci:[],
+ prec:['Precaución en > 60 años, insuficiencia hepática o renal e insuficiencia cardiaca','Vigilar la función hepática en tratamientos largos','No abrir las cápsulas; tomar con comida; separar 2 h de antiácidos'],
+ ea:['Molestias digestivas, cefalea, parestesias, edema','Reacciones cutáneas graves, anafilaxia, hepatotoxicidad a veces grave, insuficiencia cardiaca: suspender ante anafilaxia, hepatopatía o reacción cutánea grave'],
+ inter:['No combinar con quinidina (arritmias)','Aumenta amiodarona, antagonistas del calcio, benzodiacepinas, algunos antirretrovirales (ritonavir…), corticoides, warfarina, carbamazepina y digoxina','Su eficacia disminuye con rifampicina, rifabutina, isoniazida, efavirenz, fenitoína y fenobarbital'],
+ renal:'Precaución en insuficiencia renal.',emb:'Evitar; en histoplasmosis del embarazo, anfotericina B sola 4–6 semanas es una alternativa. No usar para tiña de la cabeza.',lact:'Evitar.',notas:[]};
+
+E['ivermectina']={nombre:'Ivermectina',via:'Oral',pag:'183–184',act:'',src:SRC('183–184'),clase:'Antihelmíntico y escabicida (avermectina)',
+ ind:['Oncocercosis','Escabiosis común y costrosa','También: estrongiloidiasis y larva migrans cutánea'],
+ dosis:[dose('Oncocercosis','> 15 kg: 150 µg/kg dosis única; segunda dosis a los 3 meses si persisten signos; repetir cada 6–12 meses','150 µg/kg dosis única, misma pauta'),
+  dose('Escabiosis común','> 15 kg: 200 µg/kg dosis única (una 2.ª dosis a la semana reduce el fracaso)','200 µg/kg dosis única'),
+  dose('Escabiosis costrosa','> 15 kg: 2 dosis de 200 µg/kg separadas 1 semana, con queratolítico y escabicida tópicos','Igual; pueden requerirse dosis adicionales'),
+  dose('Estrongiloidiasis','','200 µg/kg dosis única'),dose('Larva migrans cutánea','','200 µg/kg al día × 1–2 días')],
+ dur:['Según indicación'],ci:['Niños < 15 kg'],
+ prec:['En zonas endémicas de loiasis: valorar la microfilaremia de Loa loa (gota gruesa) antes de tratar; si no es posible, tratar solo sin antecedentes de loiasis ni reacciones graves previas, o bajo vigilancia, o usar doxiciclina','Tomar en ayunas'],
+ ea:['Aumento del prurito','En oncocercosis: irritación ocular, cefalea, artromialgias, adenopatías, fiebre, edema','Con coinfección por Loa loa: incapacidad funcional marcada (> 8 000 mf/ml) y encefalopatía (> 30 000 mf/ml)'],inter:[],
+ renal:'',emb:'Evitar (seguridad no establecida).',lact:'Sin contraindicación.',notas:[]};
+
+E['anfotericina-desoxicolato']={nombre:'Anfotericina B convencional (desoxicolato)',via:'Inyectable',pag:'348–349',act:'marzo 2024',src:SRC('348–349'),clase:'Antifúngico poliénico',
+ ind:['Inducción de la meningitis criptocócica, con flucitosina o fluconazol','Histoplasmosis o talaromicosis graves'],
+ dosis:[dose('Todas las indicaciones','0,7–1 mg/kg una vez al día en 4–6 h según tolerancia','0,7–1 mg/kg una vez al día en 4–6 h según tolerancia')],
+ dur:['Criptococosis: 1 semana con flucitosina; 2 semanas con fluconazol','Histoplasmosis: 1–2 semanas','Talaromicosis: 2 semanas'],ci:[],
+ prec:['Muchos efectos adversos potencialmente graves: vigilancia estrecha','Prehidratación con 500 ml–1 l de NaCl 0,9 % o Ringer lactato antes de cada infusión','Adulto que traga: suplementos de potasio (2 comp. de 8 mmol cada 12 h) y magnesio (500 mg cada 12 h) hasta terminar','Creatinina (y potasio si es posible) 1–2 veces por semana; si la creatinina sube > 50 %, aumentar la hidratación (1 l cada 8 h) o suspender y reanudar a la menor dosis eficaz o en días alternos','Pasar a la forma liposomal si la creatinina vuelve a subir, si el aclaramiento es < 30 ml/min o si hay insuficiencia renal grave previa','Solo en glucosa al 5 %, protegida de la luz y sin otros fármacos; ante intolerancia, parar, dar paracetamol o antihistamínico y reanudar a mitad de velocidad'],
+ ea:['Reacciones durante la infusión: fiebre, escalofríos, cefalea, náuseas, vómitos, hipotensión; flebitis local','Nefrotoxicidad (menor filtrado), hipopotasemia, hipomagnesemia','Arritmias, insuficiencia cardiaca, convulsiones, alteraciones hematológicas y hepáticas'],
+ inter:['Evitar con hipopotasemiantes (furosemida, corticoides), nefrotóxicos (amikacina, ciclosporina, tenofovir), digoxina y zidovudina'],
+ renal:'Precaución; ver ajustes por subida de creatinina.',emb:'Si se usa el último mes, comprobar la función renal del neonato.',lact:'Evitar salvo que sea vital.',notas:[]};
+
+E['anfotericina-liposomal']={nombre:'Anfotericina B liposomal',via:'Inyectable',pag:'350–352',act:'marzo 2024',src:SRC('350–352'),clase:'Antifúngico poliénico (formulación lipídica)',
+ ind:['Meningitis criptocócica cuando la forma convencional está contraindicada (insuficiencia renal grave previa o inducida por anfotericina)','Histoplasmosis grave','Leishmaniasis visceral o mucocutánea'],
+ dosis:[dose('Meningitis criptocócica, histoplasmosis grave','> 1 mes: 3 mg/kg una vez al día en 30–60 min × 2 semanas','3 mg/kg una vez al día en 30–60 min × 2 semanas'),
+  dose('Leishmaniasis visceral o mucocutánea','> 1 mes: según el protocolo regional; dosis total orientativa 15–30 mg/kg','Según el protocolo regional; dosis total orientativa 15–30 mg/kg')],
+ dur:['Criptococosis e histoplasmosis: 2 semanas','Leishmaniasis: según protocolo'],ci:[],
+ prec:['Mejor tolerada y menos nefrotóxica que la convencional','Reconstituir en 12 ml de agua (4 mg/ml), filtrar y diluir en glucosa al 5 % a 0,2–2 mg/ml; lavar el catéter con glucosa antes de cada infusión','Puede pasarse en 2 h para reducir efectos adversos','Creatinina y potasio 1–2 veces por semana; si empeora la función renal, reducir la dosis a la mitad unos días'],
+ ea:['Reacciones durante la infusión, flebitis, alergia','Molestias digestivas, alteración renal, hipopotasemia, hipomagnesemia, aumento de enzimas hepáticas','Raro: trombocitopenia, anemia'],
+ inter:['Evitar con hipopotasemiantes, nefrotóxicos (amikacina, ciclosporina, tenofovir), digoxina y zidovudina'],
+ renal:'Reducir a la mitad unos días si empeora la función renal.',emb:'Si se usa el último mes, comprobar la función renal del neonato.',lact:'Evitar salvo que sea vital.',notas:[]};
+
+E['griseofulvina']={nombre:'Griseofulvina',via:'Oral',pag:'159–160',act:'',src:SRC('159–160'),clase:'Antifúngico (dermatofitos)',
+ ind:['Tiña de la cabeza','Dermatofitosis de piel y pliegues si las lesiones son extensas o falla el tratamiento tópico'],
+ dosis:[dose('Dermatofitosis','1–12 años: 10–20 mg/kg una vez al día (máx. 500 mg/día)','500 mg una vez al día; 1 g al día si es grave')],
+ dur:['Cuero cabelludo: al menos 6 semanas','Piel y pliegues: 4–6 semanas'],
+ ci:['Insuficiencia hepática','Lupus eritematoso','Porfiria (puede desencadenar crisis)','Embarazo y lactancia'],
+ prec:['Anticoncepción no hormonal o medroxiprogesterona inyectable durante el tratamiento y un mes después','Evitar el alcohol (efecto antabús)','Tomar con comida; en niños pequeños, triturar y mezclar con líquido'],
+ ea:['Molestias digestivas, cefalea','Exantema, urticaria, fotosensibilidad'],inter:['Reduce el efecto de la warfarina'],
+ renal:'',emb:'CONTRAINDICADA: usar tratamiento tópico (miconazol 2 % o pomada de Whitfield) hasta poder usarla.',lact:'CONTRAINDICADA.',notas:[]};
+
+E['nistatina']={nombre:'Nistatina',via:'Oral (suspensión)',pag:'237',act:'',src:SRC('237'),clase:'Antifúngico poliénico de acción local',
+ ind:['Candidiasis orofaríngea leve'],
+ dosis:[dose('Candidiasis orofaríngea leve','100 000 UI (1 ml) 4 veces al día × 7 días, aplicada en lengua y mejillas','100 000 UI (1 ml) 4 veces al día × 7 días, retenida en la boca antes de tragar')],
+ dur:['7 días'],ci:[],prec:['Agitar la suspensión; tomar entre comidas (≥ 30 min antes de comer)','En candidiasis orofaríngea moderada a grave o esofágica, el fluconazol oral es la primera línea'],
+ ea:[],inter:[],renal:'',emb:'Sin contraindicación.',lact:'Sin contraindicación.',notas:[]};
+
+E['mebendazol']={nombre:'Mebendazol',via:'Oral',pag:'205–206',act:'',src:SRC('205–206'),clase:'Antihelmíntico (benzimidazol)',
+ ind:['Ascariasis, tricuriasis, uncinariasis, enterobiasis, triquinelosis'],
+ dosis:[dose('Ascariasis, tricuriasis, uncinariasis','> 6 meses: 100 mg cada 12 h × 3 días (50 mg si pesa < 10 kg)','100 mg cada 12 h × 3 días'),
+  dose('Enterobiasis','> 6 meses: 100 mg dosis única (50 mg si < 10 kg); repetir a las 2–4 semanas','100 mg dosis única'),
+  dose('Triquinelosis','> 2 años: 2,5 mg/kg cada 12 h × 10–15 días','200 mg cada 12 h × 10–15 días')],
+ dur:['Según indicación'],ci:['Menores de 6 meses'],
+ prec:['Se prefiere albendazol: más sencillo y de mayor espectro en infecciones mixtas','Masticar o triturar; tomar entre comidas'],
+ ea:['Molestias digestivas, cefalea, mareo'],inter:[],renal:'',emb:'Evitar en el primer trimestre.',lact:'Sin contraindicación.',notas:[]};
+
+E['praziquantel']={nombre:'Praziquantel',via:'Oral',pag:'261–262',act:'',src:SRC('261–262'),clase:'Antihelmíntico (cestodos y trematodos)',
+ ind:['Esquistosomiasis urinaria (S. haematobium) e intestinal (S. mansoni, S. japonicum, S. mekongi, S. intercalatum)','Teniasis (T. saginata, T. solium, Diphyllobothrium latum, Hymenolepis nana)','Duelas pulmonares (Paragonimus), hepatobiliares (Opisthorchis, Clonorchis) e intestinales (Fasciolopsis, Heterophyes, Metagonimus)'],
+ dosis:[dose('S. haematobium, S. mansoni, S. intercalatum','≥ 4 años: 40 mg/kg dosis única o 2 dosis de 20 mg/kg separadas 4 h','Igual que el niño'),
+  dose('S. japonicum, S. mekongi','≥ 4 años: 2 dosis de 30 mg/kg o 3 de 20 mg/kg separadas 4 h','Igual que el niño'),
+  dose('T. saginata, T. solium, D. latum','≥ 4 años: 5–10 mg/kg dosis única','Igual que el niño'),
+  dose('H. nana','≥ 4 años: 15–25 mg/kg dosis única','Igual que el niño'),
+  dose('Duelas pulmonares y hepatobiliares','≥ 4 años: 25 mg/kg cada 8 h × 2 días','Igual que el niño'),
+  dose('Duelas intestinales','≥ 4 años: 25 mg/kg cada 8 h × 1 día','Igual que el niño')],
+ dur:['Según indicación'],ci:['Cisticercosis ocular'],
+ prec:['No activo frente a Fasciola hepatica ni F. gigantica: usar triclabendazol','No masticar (sabor amargo); tomar con comida'],
+ ea:['Somnolencia, cefalea, molestias digestivas, mareo; raro: alergia','Cefalea y convulsiones si hay neurocisticercosis no diagnosticada'],inter:[],
+ renal:'',emb:'Sin contraindicación en esquistosomiasis y teniasis; en duelas, diferir hasta el parto si el tratamiento no es urgente.',lact:'Sin contraindicación.',notas:[]};
+
+E['artemeter-lumefantrina']={nombre:'Arteméter / lumefantrina (AL)',via:'Oral',pag:'43–44',act:'',src:SRC('43–44'),clase:'Antipalúdico: combinación con artemisinina (TCA)',
+ ind:['Malaria por P. falciparum no complicada','Malaria no complicada por otras especies cuando no puede usarse cloroquina','Completar el tratamiento tras artesunato parenteral en malaria grave'],
+ dosis:[dose('Pauta de 3 días, 2 tomas al día (día 1: 0 h y 8–12 h; días 2 y 3: mañana y noche), comprimidos de 20/120 mg','5–< 15 kg: 1 comp. por toma · 15–< 25 kg: 2 · 25–< 35 kg: 3','≥ 35 kg: 4 comp. de 20/120 mg (o 1 de 80/480 mg) por toma')],
+ dur:['3 días (6 tomas)'],ci:[],
+ prec:['Tomar con comida o con una bebida grasa (leche)','Si vomita en los primeros 30 min, repetir la dosis completa; entre 30 y 60 min, media dosis','Sacar el comprimido del blíster justo antes de tomarlo'],
+ ea:['Cefalea, mareo, molestias digestivas'],
+ inter:['Precaución con otros fármacos que alargan el QT (amiodarona, otros antipalúdicos, antipsicóticos, fluconazol, fluoroquinolonas, hidroxizina, macrólidos, ondansetrón)'],
+ renal:'',emb:'Sin contraindicación.',lact:'Sin contraindicación.',notas:['Se presenta en blísteres por categoría de peso con el tratamiento completo de una persona.']};
+
+E['artesunato-amodiaquina']={nombre:'Artesunato / amodiaquina (AS/AQ)',via:'Oral',pag:'45–46',act:'',src:SRC('45–46'),clase:'Antipalúdico: combinación con artemisinina (TCA)',
+ ind:['Malaria por P. falciparum no complicada','Malaria no complicada por otras especies cuando no puede usarse cloroquina','Completar el tratamiento tras artesunato parenteral'],
+ dosis:[dose('Una toma al día durante 3 días, por peso','4,5–< 9 kg: 25/67,5 mg · 9–< 18 kg: 50/135 mg · 18–< 36 kg: 100/270 mg (1 comp.)','≥ 36 kg: 2 comp. de 100/270 mg al día')],
+ dur:['3 días'],ci:['Reacción grave previa a la amodiaquina (hipersensibilidad, hepatitis, leucopenia, agranulocitosis)','Tratamiento con efavirenz'],
+ prec:['Si vomita en los primeros 30 min, repetir la dosis completa; entre 30 y 60 min, media dosis','En niños pequeños puede dispersarse en un poco de agua; dar algo dulce después (sabor amargo)'],
+ ea:['Molestias digestivas, prurito, somnolencia o insomnio, tos'],inter:['Evitar con fármacos que alargan el QT'],
+ renal:'',emb:'Sin contraindicación.',lact:'Sin contraindicación.',notas:[]};
+
+E['dihidroartemisinina-piperaquina']={nombre:'Dihidroartemisinina / piperaquina (DHA/PPQ)',via:'Oral',pag:'120–122',act:'',src:SRC('120–122'),clase:'Antipalúdico: combinación con artemisinina (TCA)',
+ ind:['Malaria por P. falciparum no complicada','Malaria no complicada por otras especies cuando no puede usarse cloroquina','Completar el tratamiento tras artesunato parenteral'],
+ dosis:[dose('Una toma al día durante 3 días','5–< 25 kg: DHA 2,5–10 mg/kg/día + PPQ 20–32 mg/kg/día (½–1½ comp. según peso)','DHA 2–10 mg/kg/día + PPQ 16–27 mg/kg/día: 25–< 36 kg 2 comp. de 40/320 mg · 36–< 60 kg 3 · 60–< 80 kg 4 · ≥ 80 kg 5')],
+ dur:['3 días'],ci:['Cardiopatía: bradicardia, arritmias, insuficiencia cardiaca'],
+ prec:['Precaución en > 60 años e insuficiencia renal o hepática','Tomar 3 h antes o después de comer, con agua; pueden triturarse','Si vomita en los primeros 30 min, repetir la dosis completa; entre 30 y 60 min, media dosis'],
+ ea:['Prolongación del QT, taquicardia','Raro: molestias digestivas, prurito, alteración hepática, artromialgias'],
+ inter:['No combinar con fármacos que alargan el QT','Aumenta los niveles de antirretrovirales; los inductores (rifampicina, carbamazepina, fenitoína, fenobarbital) reducen los de DHA/PPQ'],
+ renal:'Precaución en insuficiencia renal.',emb:'Sin contraindicación.',lact:'Sin contraindicación.',notas:[]};
+
+E['cloroquina']={nombre:'Cloroquina',via:'Oral',pag:'82–83',act:'diciembre 2023',src:SRC('82–83'),clase:'Antipalúdico (4-aminoquinolina)',
+ ind:['Malaria por P. vivax sensible a cloroquina','Malaria por P. ovale, P. malariae y P. knowlesi','No usar en malaria por P. falciparum: la resistencia está extendida'],
+ dosis:[dose('Malaria (dosis en cloroquina base)','Día 1: 10 mg/kg · día 2: 10 mg/kg · día 3: 5 mg/kg','Igual que el niño')],dur:['3 días'],
+ ci:['Retinopatía'],
+ prec:['Margen terapéutico estrecho: 20 mg base/kg en niños y 2 g base en adultos son tóxicos','Prescribir siempre en cloroquina base (155 mg base ≈ 200 mg sulfato ≈ 250 mg fosfato)','Separar 2 h de antiácidos o carbonato cálcico','Si vomita en los primeros 30 min, repetir la dosis completa; entre 30 y 60 min, media dosis'],
+ ea:['Molestias digestivas, cefalea, prurito transitorio (72 h), urticaria, angioedema, alteraciones visuales'],inter:['Evitar con fármacos que alargan el QT'],
+ renal:'',emb:'Sin contraindicación.',lact:'Sin contraindicación.',notas:[]};
+
+E['quinina']={nombre:'Quinina',via:'Oral',pag:'273–274',act:'',src:SRC('273–274'),clase:'Antipalúdico (alcaloide de la quina)',
+ ind:['Malaria por P. falciparum no complicada cuando no pueden usarse TCA','Completar el tratamiento tras quinina parenteral en malaria grave si no hay TCA'],
+ dosis:[dose('Malaria (dosis en sal; misma dosis para sulfato, clorhidrato y diclorhidrato)','< 50 kg: 10 mg/kg cada 8 h × 7 días','≥ 50 kg: 600 mg cada 8 h × 7 días')],dur:['7 días'],ci:[],
+ prec:['No superar la dosis indicada (toxicidad)','Si vomita en los primeros 30 min, repetir la dosis completa; entre 30 y 60 min, media dosis'],
+ ea:['Cefalea, exantema, alteraciones visuales, auditivas y digestivas'],inter:['Evitar con fármacos que alargan el QT'],
+ renal:'',emb:'Sin contraindicación; asociar clindamicina si es posible.',lact:'Sin contraindicación.',notas:['10 mg de sulfato, clorhidrato o diclorhidrato = 8 mg de quinina base.']};
+
+E['artesunato-iv']={nombre:'Artesunato inyectable',via:'Inyectable (IV o IM)',pag:'355–359',act:'junio 2025',src:SRC('355–359'),clase:'Antipalúdico (artemisinina)',
+ ind:['Malaria grave','Inicio del tratamiento de malaria no complicada cuando los vómitos persistentes impiden la vía oral'],
+ dosis:[dose('Dosis a la llegada (H0), a las 12 h y a las 24 h; luego una vez al día','< 6 kg: consultar con especialista · 6–< 20 kg: 3 mg/kg por dosis','≥ 20 kg: 2,4 mg/kg por dosis')],
+ dur:['Al menos 24 h (3 dosis); en cuanto tolere la vía oral, un ciclo completo de 3 días de TCA, empezando 8–12 h después de la última inyección','Si no tolera la vía oral, seguir una dosis diaria sin superar 7 días de tratamiento parenteral'],ci:[],
+ prec:['Presentación en dos pasos: reconstituir con bicarbonato al 5 % y diluir con NaCl 0,9 % (10 mg/ml para IV lenta en 3–5 min; 20 mg/ml para IM)','Nunca en infusión IV; usar de inmediato; no usar si está turbia','Las formulaciones de uno y dos pasos son bioequivalentes; usar una sola por paciente'],
+ ea:['Molestias digestivas, mareo, cefalea, fiebre, artromialgias, prurito','Raro: exantema; anemia hemolítica tardía (2–3 semanas después), sobre todo con hiperparasitemia y en niños pequeños'],inter:[],
+ renal:'',emb:'Sin contraindicación.',lact:'Sin contraindicación.',notas:[]};
+
+E['pirimetamina']={link:'pirimetamina-sulfadiazina',nombre:'Pirimetamina',via:'Oral',pag:'271–272',act:'',src:SRC('271–272'),clase:'Antiprotozoario (antifolato)',
+ ind:['Tratamiento y profilaxis secundaria de toxoplasmosis en inmunodeprimidos, con sulfadiazina o clindamicina','Profilaxis primaria de toxoplasmosis con dapsona, solo si no puede usarse cotrimoxazol','Segunda línea de isosporiasis en inmunodeprimidos si no puede usarse cotrimoxazol'],
+ dosis:[dose('Toxoplasmosis (tratamiento)','','100 mg dos veces el día 1, luego 75–100 mg una vez al día durante al menos 6 semanas'),
+  dose('Profilaxis secundaria de toxoplasmosis','','25–50 mg una vez al día mientras sea necesaria'),
+  dose('Profilaxis primaria de toxoplasmosis (con dapsona)','','50–75 mg una vez por semana'),
+  dose('Isosporiasis (segunda línea)','','50–75 mg una vez al día × 10 días')],
+ dur:['Según indicación'],ci:['Insuficiencia renal o hepática grave','Primer trimestre del embarazo'],
+ prec:['Ácido folínico (folinato cálcico) para prevenir el déficit de folato','Evitar otros antifolatos (cotrimoxazol, metotrexato)'],
+ ea:['Molestias digestivas, convulsiones','Leucopenia, trombocitopenia, anemia megaloblástica'],inter:['Más hematotoxicidad con zidovudina'],
+ renal:'Contraindicada en insuficiencia renal grave.',emb:'CONTRAINDICADA en el primer trimestre.',lact:'Sin contraindicación; evitar otros antifolatos simultáneos.',notas:['La combinación sulfadoxina-pirimetamina se usa en malaria falciparum no complicada.']};
+
+E['triclabendazol']={nombre:'Triclabendazol',via:'Oral',pag:'317',act:'',src:SRC('317'),clase:'Antihelmíntico (benzimidazol fasciolicida)',
+ ind:['Fascioliasis (Fasciola hepatica y F. gigantica): fármaco de elección','Paragonimiasis'],
+ dosis:[dose('Fascioliasis','10 mg/kg dosis única','10 mg/kg dosis única'),dose('Paragonimiasis','10 mg/kg dos veces al día','10 mg/kg dos veces al día')],
+ dur:['Según indicación'],ci:['Hipersensibilidad a triclabendazol u otros benzimidazoles'],
+ prec:['Tomar después de comer','La fascioliasis no responde al praziquantel'],
+ ea:['Dolor abdominal, febrícula, cefalea, mareo'],inter:[],renal:'',emb:'Sin contraindicación.',lact:'Sin contraindicación.',
+ notas:['Alternativa en fascioliasis: bitionol 30 mg/kg/día × 5 días.']};
+
+E['dietilcarbamazina']={nombre:'Dietilcarbamazina (DEC)',via:'Oral',pag:'116–117',act:'noviembre 2023',src:SRC('116–117'),clase:'Antifilárico',
+ ind:['Filariasis linfática'],
+ dosis:[dose('Filariasis linfática (escalada progresiva en 3 días)','< 10 años: 0,5 mg/kg el día 1, subir hasta 1 mg/kg cada 8 h','> 10 años y adulto: 1 mg/kg el día 1, subir hasta 2 mg/kg cada 8 h')],
+ dur:['W. bancrofti: 12 días','B. malayi, B. timori: 6–12 días'],
+ ci:['Oncocercosis o microfilaremia alta por Loa loa','Lactantes, ancianos, cardiopatía o nefropatía','Durante crisis agudas','Embarazo'],
+ prec:['Muchos efectos adversos potencialmente graves: vigilancia estrecha','Precaución si hay antecedentes de convulsiones'],
+ ea:['Náuseas, vómitos, cefalea, mareo, somnolencia, fiebre, artralgias, urticaria, hematuria transitoria, nódulos, linfangitis, edema','Con oncocercosis: lesiones oculares graves','Con loiasis y microfilaremia alta: encefalitis potencialmente mortal'],inter:[],
+ renal:'Reducir la dosis en insuficiencia renal.',emb:'CONTRAINDICADA (diferir hasta el parto).',lact:'No recomendada.',
+ notas:['En programas de eliminación se da con albendazol en dosis única anual durante 4–6 años, solo en países sin Onchocerca ni Loa loa.']};
+
+E['niclosamida']={nombre:'Niclosamida',via:'Oral',pag:'230',act:'',src:SRC('230'),clase:'Tenicida',
+ ind:['Teniasis por T. saginata, T. solium, Hymenolepis nana y Diphyllobothrium latum'],
+ dosis:[dose('T. saginata, T. solium, D. latum','< 2 años: 500 mg · 2–6 años: 1 g · > 6 años: 2 g, dosis única','2 g dosis única'),
+  dose('H. nana','< 2 años: 500 mg el día 1 y 250 mg/día × 6 días · 2–6 años: 1 g y luego 500 mg/día × 6 días','2 g el día 1, luego 1 g/día × 6 días')],
+ dur:['Según especie'],ci:[],
+ prec:['Masticar o triturar y tragar con agua; si vomita, puede repartirse la dosis en dos tomas separadas 1 h','Es tenicida, no tenífugo: no esperar la expulsión del gusano entero','No actúa sobre la larva de T. solium (cisticercosis)'],
+ ea:['Molestias digestivas'],inter:[],renal:'',emb:'Sin contraindicación.',lact:'Sin contraindicación.',notas:[]};
+
+E['pentamidina']={nombre:'Pentamidina',via:'Inyectable (IM o infusión IV)',pag:'473–474',act:'noviembre 2024',src:SRC('473–474'),clase:'Antiprotozoario (diamidina)',
+ ind:['Segunda línea de neumocistosis si el cotrimoxazol está contraindicado, no se tolera o fracasa','También en tripanosomiasis africana y leishmaniasis'],
+ dosis:[dose('Neumocistosis','4 mg/kg una vez al día IM o en infusión de ≥ 60 min × 14–21 días','4 mg/kg una vez al día × 14–21 días')],
+ dur:['14–21 días'],ci:['Insuficiencia renal grave','Embarazo y lactancia, salvo situación vital sin alternativa'],
+ prec:['Muchos efectos adversos potencialmente graves: vigilancia estrecha','Administrar en ayunas con el paciente acostado durante y 30 min después','Vigilar presión arterial, glucemia, creatinina y hemograma'],
+ ea:['Absceso estéril (IM), trombosis venosa (IV)','Hipotensión y malestar si se infunde rápido','Alteración renal, hepática y hematológica, pancreatitis','Arritmias, torsade de pointes, hipoglucemia seguida de hiperglucemia'],
+ inter:['No combinar con fármacos que inducen torsade de pointes (antiarrítmicos, neurolépticos, tricíclicos, eritromicina IV)','Evitar con mefloquina, digitálicos, azoles e hipopotasemiantes'],
+ renal:'Reducir la dosis en insuficiencia renal; contraindicada si es grave.',emb:'CONTRAINDICADA salvo situación vital.',lact:'CONTRAINDICADA salvo situación vital.',notas:['En profilaxis de neumocistosis puede usarse nebulizada con el equipo adecuado.']};
+
+E['dolutegravir']={nombre:'Dolutegravir (DTG)',via:'Oral',pag:'123–124',act:'octubre 2024',src:SRC('123–124'),clase:'Antirretroviral: inhibidor de la integrasa',
+ ind:['Infección por VIH, combinado con otros antirretrovirales','Profilaxis posexposición al VIH, combinado'],
+ dosis:[dose('VIH (una toma al día, ≥ 1 mes)','3–< 6 kg: 5 mg · 6–< 10 kg: 15 mg · 10–< 14 kg: 20 mg · 14–< 20 kg: 25 mg (comprimidos dispersables de 10 mg)','≥ 20 kg: 30 mg dispersable o 50 mg en comprimido'),
+  dose('Con inductores enzimáticos (rifampicina, carbamazepina, fenitoína, fenobarbital, efavirenz, nevirapina)','Duplicar la dosis diaria repartida en 2 tomas','50 mg cada 12 h, y mantenerlo 2 semanas tras terminar el inductor')],
+ dur:['Según eficacia y tolerancia'],ci:[],
+ prec:['Precaución en insuficiencia hepática grave o coinfección por VHB o VHC','Antiácidos, hierro, calcio y zinc: tomarlos 6 h antes o 2 h después','Ofrecer anticoncepción hormonal o DIU a adolescentes y mujeres en edad fértil','No partir ni masticar los dispersables; tres de 10 mg equivalen a uno de 50 mg'],
+ ea:['Insomnio, depresión, ansiedad, mareo, cefalea, exantema, molestias digestivas','Raro: hepatotoxicidad, hipersensibilidad'],
+ inter:['Aumenta la metformina: vigilar glucemia y función renal, no superar 1 g/día'],
+ renal:'',emb:'Pequeño aumento del riesgo de defectos del tubo neural; el beneficio supera el riesgo; el ácido fólico en el primer trimestre puede reducirlo.',lact:'',
+ notas:['Combinaciones fijas preferibles: tenofovir/lamivudina/dolutegravir 300/300/50 mg (≥ 30 kg) y abacavir/lamivudina/dolutegravir 60/30/5 mg dispersable (≥ 3 meses y 6–< 25 kg).']};
+
+E['abacavir']={nombre:'Abacavir (ABC)',via:'Oral',pag:'19–21',act:'octubre 2024',src:SRC('19–21'),clase:'Antirretroviral: inhibidor nucleósido de la transcriptasa inversa',
+ ind:['Infección por VIH, combinado con otros antirretrovirales'],
+ dosis:[dose('VIH (combinación fija ABC/3TC, dosis diaria en 1 o 2 tomas)','≥ 1 mes, por peso: 3–< 6 kg 120/60 mg · 6–< 10 kg 180/90 · 10–< 14 kg 240/120 · 14–< 20 kg 300/150 · 20–< 25 kg 360/180 mg al día','≥ 25 kg: 600/300 mg al día')],
+ dur:['Según eficacia y tolerancia'],ci:['Insuficiencia hepática grave','Hipersensibilidad previa a abacavir que obligó a suspenderlo'],
+ prec:['Precaución con hipertensión, diabetes o hiperlipidemia (posible aumento del riesgo coronario)','No partir ni masticar los comprimidos de 600/300 mg'],
+ ea:['Reacción de hipersensibilidad (fiebre, exantema, síntomas digestivos, faringitis, tos, disnea, malestar, mialgias): suspender de inmediato y para siempre','Acidosis láctica, pancreatitis, alteración hepática'],inter:[],
+ renal:'',emb:'Sin contraindicación.',lact:'',notas:['En niños se prefiere la combinación fija abacavir/lamivudina/dolutegravir 60/30/5 mg cuando está disponible.']};
+
+E['lamivudina']={nombre:'Lamivudina (3TC)',via:'Oral',pag:'189–190',act:'noviembre 2022',src:SRC('189–190'),clase:'Antirretroviral: inhibidor nucleósido de la transcriptasa inversa',
+ ind:['Infección por VIH, combinada con otros antirretrovirales','Profilaxis posexposición al VIH, combinada'],
+ dosis:[dose('VIH (dosis diaria en 1 o 2 tomas)','≥ 1 mes, por peso: 3–< 6 kg 60 mg · 6–< 10 kg 80 mg · 10–< 14 kg 120 mg · 14–< 20 kg 150 mg · 20–< 25 kg 225 mg al día','≥ 25 kg: 300 mg al día'),
+  dose('Neonato (solución de 10 mg/ml, cada 12 h)','2–< 3 kg: 0,5 ml · 3–< 4 kg: 0,8 ml · 4–< 5 kg: 1 ml','')],
+ dur:['Según eficacia y tolerancia'],ci:[],prec:['Precaución si hay antecedente de hepatopatía','Preferir combinaciones fijas'],
+ ea:['Molestias digestivas','Neutropenia, anemia, trombocitopenia (sobre todo con zidovudina), miopatía, alteración hepática o pancreática'],inter:[],
+ renal:'Reducir la dosis en insuficiencia renal.',emb:'Sin contraindicación.',lact:'',notas:[]};
+
+E['tenofovir-df']={nombre:'Tenofovir disoproxil fumarato (TDF)',via:'Oral',pag:'307–308',act:'noviembre 2022',src:SRC('307–308'),clase:'Antirretroviral: inhibidor nucleótido de la transcriptasa inversa',
+ ind:['Infección por VIH con o sin hepatitis B crónica, combinado','Hepatitis B crónica sin VIH, en monoterapia','Profilaxis pre y posexposición al VIH, combinado'],
+ dosis:[dose('VIH o hepatitis B','≥ 35 kg: 300 mg una vez al día','300 mg una vez al día')],
+ dur:['Según eficacia y tolerancia'],ci:[],
+ prec:['Vigilar en insuficiencia renal y osteoporosis; si empeora la función renal, cambiar de antirretroviral','Evitar o vigilar la función renal con nefrotóxicos (aminoglucósidos, anfotericina B, pentamidina, AINE)'],
+ ea:['Molestias digestivas, mareo, cansancio, exantema','Insuficiencia renal, pérdida ósea (osteoporosis, fracturas), pancreatitis'],inter:[],
+ renal:'Vigilar; cambiar de fármaco si empeora.',emb:'Sin contraindicación.',lact:'',notas:['Preferir las combinaciones fijas con otros antirretrovirales.']};
+
 })();

@@ -508,7 +508,7 @@ function atbViewTabs(){const n=Object.keys(ESS()).length,v=NX.atbView||'catalogo
 /* Fármacos esenciales (data/essential-drugs.js): panel «Pauta y uso» en la ficha y vista de catálogo propia */
 const ESS=()=>window.ATLAS25?.essential||{};
 const essFor=id=>Object.entries(ESS()).filter(([k,v])=>k===id||v.link===id||(v.equiv||[]).includes(id)).map(([k,v])=>({k,v,eq:k!==id&&v.link!==id}));
-const ESS_GROUPS=[['pen','Penicilinas',/penicil|aminopenic/i],['ceph','Cefalosporinas',/cefalosporina/i],['macro','Macrólidos y lincosamidas',/macrólido|lincosamida/i],['amino','Aminoglucósidos',/aminoglucós/i],['fq','Fluoroquinolonas',/fluoroquinol/i],['nitro','Nitroimidazoles y nitrofuranos',/nitroimidaz|nitrofur/i],['sulfa','Sulfonamidas y sulfonas',/sulfon/i],['tb','Antituberculosos',/antituberc|rifamicina/i],['tetra','Tetraciclinas',/tetraciclina|ciclina/i],['otros','Otros',/./]];
+const ESS_GROUPS=[['pen','Penicilinas',/penicil|aminopenic/i],['ceph','Cefalosporinas',/cefalosporina/i],['macro','Macrólidos y lincosamidas',/macrólido|lincosamida/i],['amino','Aminoglucósidos',/aminoglucós/i],['fq','Fluoroquinolonas',/fluoroquinol/i],['nitro','Nitroimidazoles y nitrofuranos',/nitroimidaz|nitrofur/i],['sulfa','Sulfonamidas y sulfonas',/sulfon/i],['tb','Antituberculosos',/antituberc|rifamicina/i],['tetra','Tetraciclinas',/tetraciclina|ciclina/i],['afung','Antifúngicos',/antifúng/i],['avir','Antivirales y antirretrovirales',/antivir|antirretrov/i],['apal','Antipalúdicos',/antipalúd/i],['ahelm','Antihelmínticos y antiprotozoarios',/antihelm|antiprot|tenicida|antifil/i],['otros','Otros',/./]];
 const essGroup=v=>(ESS_GROUPS.find(g=>g[2].test(v.clase||''))||ESS_GROUPS[ESS_GROUPS.length-1]);
 function essList(t,items,cls,ic){return items&&items.length?'<div class="ess-box ess-'+cls+'"><h5>'+(window.INF_ICON?INF_ICON(ic):'')+t+'</h5><ul>'+items.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul></div>':''}
 function essPanel(k,v,eq){
@@ -529,10 +529,10 @@ function enhanceEssential(){
  try{
   document.querySelectorAll('.ess-panel').forEach(x=>{if(!x.closest('.ess-view'))x.remove()});
   if(state.route!=='atb'||NX.atbView==='esenciales')return;
-  const ui=window.ATLAS24?.debug?.ui;if(ui&&ui.drugs&&ui.drugs!=='bacteria')return;
-  const d=A(state.drug)||D.antibiotics[0];if(!d)return;
-  const list=essFor(d.id);if(!list.length)return;
-  const anchor=document.querySelector('.nx-spec')||document.querySelector('.v23-drug-hero');if(!anchor)return;
+  const ui=window.ATLAS24?.debug?.ui,nb=ui&&ui.drugs&&ui.drugs!=='bacteria';
+  const id=nb?ui.selectedDrug:(A(state.drug)||D.antibiotics[0]||{}).id;if(!id)return;
+  const list=essFor(id);if(!list.length)return;
+  const anchor=document.querySelector('.nx-spec')||(nb?document.querySelector('.v24-detail')?.firstElementChild:document.querySelector('.v23-drug-hero'));if(!anchor)return;
   anchor.insertAdjacentHTML('afterend',list.map(x=>essPanel(x.k,x.v,x.eq)).join(''));
  }catch(e){console.warn('essential',e)}
 }
@@ -543,8 +543,8 @@ function essentialView(){
  const list=all.filter(x=>pass(x)).sort((a,b)=>a[1].nombre.localeCompare(b[1].nombre));
  const chip=(key,val,label,n)=>'<button class="fx-chip'+((key==='g'?g:via)===val?' on':'')+(n?'':' empty')+'" style="--t:#2b7d6a" data-act="ess-'+key+':'+val+'" aria-pressed="'+((key==='g'?g:via)===val)+'"><span>'+safe(label)+'</span><em>'+n+'</em></button>';
  const groups=ESS_GROUPS.filter(G=>all.some(([k,v])=>essGroup(v)[0]===G[0]));
- const cards=list.map(([k,v])=>{const d0=v.dosis[0]||{},open=NX.essOpen===k,target=v.link||k,exists=!!A(target);
-  return '<article class="ess-card'+(open?' open':'')+'"><header><i>'+I('pill')+'</i><div><h3>'+safe(v.nombre)+'</h3><small>'+safe(v.clase)+'</small></div><span class="ess-via">'+safe(v.via)+'</span></header><p class="ess-cind">'+safe(v.ind.slice(0,2).join(' · '))+'</p><div class="ess-cdose"><b>'+safe(d0.t||'')+'</b><span>Adulto: '+safe(d0.ad||'—')+'</span><span>Niño: '+safe(d0.ni||'—')+'</span></div><div class="ess-cacts"><button data-act="ess-open:'+safe(k)+'" aria-expanded="'+open+'">'+(open?'Ocultar pauta':'Ver pauta completa')+'</button>'+(exists?'<button data-act="nx-find:drug:bacteria:'+safe(target)+'">Abrir ficha</button>':'')+'</div>'+(open?essPanel(k,v,false):'')+'</article>'}).join('');
+ const cards=list.map(([k,v])=>{const d0=v.dosis[0]||{},open=NX.essOpen===k,target=v.link||k,dd=allDrug().find(x=>x.id===target),exists=!!dd;
+  return '<article class="ess-card'+(open?' open':'')+'"><header><i>'+I('pill')+'</i><div><h3>'+safe(v.nombre)+'</h3><small>'+safe(v.clase)+'</small></div><span class="ess-via">'+safe(v.via)+'</span></header><p class="ess-cind">'+safe(v.ind.slice(0,2).join(' · '))+'</p><div class="ess-cdose"><b>'+safe(d0.t||'')+'</b><span>Adulto: '+safe(d0.ad||'—')+'</span><span>Niño: '+safe(d0.ni||'—')+'</span></div><div class="ess-cacts"><button data-act="ess-open:'+safe(k)+'" aria-expanded="'+open+'">'+(open?'Ocultar pauta':'Ver pauta completa')+'</button>'+(exists?'<button data-act="nx-find:drug:'+safe(dd.kingdom)+':'+safe(target)+'">Abrir ficha</button>':'')+'</div>'+(open?essPanel(k,v,false):'')+'</article>'}).join('');
  return '<div class="ess-view"><div class="ess-top"><label class="sx-search">'+I('search')+'<span class="sr-only">Buscar fármaco esencial</span><input id="ess-q" placeholder="Buscar por fármaco, clase o indicación" value="'+safe(NX.essQ||'')+'"></label>'+
   '<div class="fx-block"><h4>Clase</h4><div class="fx-chips">'+chip('g','all','Todas',all.filter(x=>pass(x,'g')).length)+groups.map(G=>chip('g',G[0],G[1],all.filter(x=>essGroup(x[1])[0]===G[0]&&pass(x,'g')).length)).join('')+'</div></div>'+
   '<div class="fx-block"><h4>Vía</h4><div class="fx-chips">'+chip('via','all','Todas',all.filter(x=>pass(x,'via')).length)+chip('via','oral','Oral',all.filter(x=>/oral/i.test(x[1].via)&&pass(x,'via')).length)+chip('via','iny','Inyectable',all.filter(x=>/inyect/i.test(x[1].via)&&pass(x,'via')).length)+'</div></div>'+
@@ -624,12 +624,12 @@ const whoEsc=x=>String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').
 const AWR={A:['Access','Primera línea de uso amplio'],W:['Watch','Mayor riesgo de resistencia: usar con indicación'],R:['Reserve','Último recurso']};
 function whoChips(list){return list.length?list.map(d=>'<li class="who-drug who-'+(d.c||'x')+'">'+(d.c?'<b title="'+whoEsc(AWR[d.c][0]+' — '+AWR[d.c][1])+'">'+d.c+'</b>':'')+'<span>'+whoEsc(d.t)+'</span></li>').join(''):''}
 function whoPanel(id){
- const T=window.ATLAS25?.whoTreat?.[id];if(!T)return '';
+ const T=window.ATLAS25?.whoTreat?.[id]||window.ATLAS25?.oiTreat?.[id]||window.ATLAS25?.msfTreat?.[id];if(!T)return '';const isMsf=T.fuente==='msf'||T.fuente==='nih',isNih=T.fuente==='nih';
  const gi=Math.min(WHOUI.age,T.grupos.length-1),g=T.grupos[gi];
  const abx={no:['Sin antibiótico','who-abx-no'],cond:['Antibiótico solo si hay indicación','who-abx-cond'],si:['Antibiótico indicado','who-abx-si']}[T.abx]||['',''];
  const tabs=T.grupos.length>1?'<div class="who-tabs" role="tablist">'+T.grupos.map((x,i)=>'<button role="tab" aria-selected="'+(i===gi)+'" class="'+(i===gi?'on':'')+'" data-act="who-age:'+i+'">'+whoEsc(x.p)+'</button>').join('')+'</div>':'<div class="who-tabs"><span class="on">'+whoEsc(g.p)+'</span></div>';
  const cards=g.esc.map(e=>'<article class="who-esc"><h3>'+whoEsc(e.t)+'</h3>'+(e.first.length?'<div class="who-line"><h4>Primera elección</h4><ul>'+whoChips(e.first)+'</ul></div>':'')+(e.second.length?'<div class="who-line who-second"><h4>Segunda elección</h4><ul>'+whoChips(e.second)+'</ul></div>':'')+(e.dur?'<p class="who-dur"><b>Duración</b> '+whoEsc(e.dur)+'</p>':'')+(e.nota?'<p class="who-note">'+whoEsc(e.nota)+'</p>':'')+'</article>').join('');
- return '<section class="who-panel" id="who-panel"><header><div><span class="who-abx '+abx[1]+'">'+abx[0]+'</span><h2>Tratamiento según el manual OMS AWaRe</h2></div><p>'+whoEsc(T.res)+'</p></header>'+tabs+'<div class="who-grid">'+cards+'</div>'+(T.pat&&T.pat.length?'<p class="who-pat"><b>Patógenos probables</b> '+T.pat.map(whoEsc).join(' · ')+'</p>':'')+(T.alertas&&T.alertas.length?'<ul class="who-alerts">'+T.alertas.map(a=>'<li>'+whoEsc(a)+'</li>').join('')+'</ul>':'')+'<footer><span class="who-legend"><b>A</b> Access <b>W</b> Watch <b>R</b> Reserve</span><span>Dosis para función renal normal. Fuente: '+whoEsc(T.src)+' ('+whoEsc(T.pag)+'); adaptación no oficial, la OMS no la avala. Contrastar con la edición vigente, el antibiograma local, la función renal, el embarazo y las alergias.</span></footer></section>';
+ return '<section class="who-panel" id="who-panel"><header><div><span class="who-abx '+abx[1]+'">'+abx[0]+'</span><h2>'+(isNih?'Tratamiento según la guía NIH de infecciones oportunistas en VIH':isMsf?'Tratamiento según MSF Clinical guidelines':'Tratamiento según el manual OMS AWaRe')+'</h2></div><p>'+whoEsc(T.res)+'</p></header>'+tabs+'<div class="who-grid">'+cards+'</div>'+(T.pat&&T.pat.length?'<p class="who-pat"><b>Patógenos probables</b> '+T.pat.map(whoEsc).join(' · ')+'</p>':'')+(T.alertas&&T.alertas.length?'<ul class="who-alerts">'+T.alertas.map(a=>'<li>'+whoEsc(a)+'</li>').join('')+'</ul>':'')+'<footer>'+(isMsf?'':'<span class="who-legend"><b>A</b> Access <b>W</b> Watch <b>R</b> Reserve</span>')+'<span>Dosis para función renal normal. Fuente: '+whoEsc(T.src)+(isNih?'. Documento de dominio público; síntesis en español con la fuerza de la recomendación entre corchetes (A–C, I–III)':isMsf?'. Síntesis propia en español; no reproduce ni traduce el manual':' ('+whoEsc(T.pag)+'); adaptación no oficial, la OMS no la avala')+'. Contrastar con la edición vigente, el antibiograma local, la función renal, el embarazo y las alergias.</span></footer></section>';
 }
 function enhanceWho(){
  document.querySelectorAll('.who-panel').forEach(x=>x.remove());
@@ -637,7 +637,7 @@ function enhanceWho(){
  try{
   const hero=document.querySelector('.v25-syndrome-hero');if(!hero)return;
   const on=document.querySelector('.v25-clinic-list button.on');
-  const id=window.ATLAS25?.reviewUI?.cl?.selected&&window.ATLAS25.whoTreat?.[window.ATLAS25.reviewUI.cl.selected]?window.ATLAS25.reviewUI.cl.selected:(on?(on.getAttribute('data-act')||'').split(':')[1]:'');
+  const has=x=>x&&(window.ATLAS25.whoTreat?.[x]||window.ATLAS25.oiTreat?.[x]||window.ATLAS25.msfTreat?.[x]);const id=has(window.ATLAS25?.reviewUI?.cl?.selected)?window.ATLAS25.reviewUI.cl.selected:(on?(on.getAttribute('data-act')||'').split(':')[1]:'');
   if(id)hero.insertAdjacentHTML('afterend',whoPanel(id));
  }catch(e){console.warn('who panel',e)}
 }
