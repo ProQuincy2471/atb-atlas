@@ -21,7 +21,7 @@ async function main(){
   async function snap(label){
    await page.waitForTimeout(110);
    const rect=await page.evaluate(()=>{
-    const paneNames=['.nx-hero','.nx-home-domains','.nx-explore-tabs','.nx-explore-workspace','.nx-selected-organism','.nx-spectrum-row','.nx-topbar','.nx-spectrum-stats','.nx-home-bottom','.nx-rail-header','.v24-columns','.v24-mechanism','.v25-clinic-layout','.v24-compare-layout','.v24-book-layout'];
+    const paneNames=['.hm-hero','.hm-drawers','.nx-explore-tabs','.nx-explore-workspace','.nx-selected-organism','.nx-spectrum-row','.nx-topbar','.nx-spectrum-stats','.nx-home-bottom','.nx-rail-header','.v24-columns','.v24-mechanism','.v25-clinic-layout','.v24-compare-layout','.v24-book-layout'];
     const collisions=[];
     for(const selector of paneNames){
      for(const el of document.querySelectorAll(selector)){
@@ -44,7 +44,7 @@ async function main(){
    let ready=false;
    for(let attempt=0;attempt<3;attempt++){
     try{
-     await page.waitForFunction(()=>!!window.INFEORA_APP&&!!document.querySelector('.nx-home-domains'),null,{timeout:18000});
+     await page.waitForFunction(()=>!!window.INFEORA_APP&&!!document.querySelector('.hm-drawers'),null,{timeout:18000});
      ready=true;break;
     }catch(error){
      if(attempt===2)throw new Error('INFEORA app boot failed after 3 attempts: '+String(error)+'; page errors: '+errors.join(' | ')+'; missing assets: '+missing.join(' | '));
