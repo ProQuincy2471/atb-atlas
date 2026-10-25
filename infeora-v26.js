@@ -7,7 +7,7 @@ if(new URLSearchParams(location.search).get('legacy')==='1')return;
 const NX={domain:'bacteria',group:'all',micro:'',query:'',rxQuery:'',rxFamily:'all',status:'relevant',searchOpen:false,searchQuery:'',drawer:false,compact:false};
 window.INFEORA_APP=NX;
 const names={bacteria:'Bacterias',virus:'Virus',fungi:'Hongos',parasites:'Parásitos'};
-const shades={bacteria:'#2b66b1',virus:'#7355b9',fungi:'#4984ae',parasites:'#178772'};
+const shades={bacteria:'#6b2fc4',virus:'#66751c',fungi:'#0a86b8',parasites:'#d2386c'};
 const icons={inicio:'book',mapa:'map',micro:'micro',atb:'drugs',clinica:'clinic',comparar:'compare',aprender:'learn',laboratorio:'lab',fuentes:'sources'};
 const sections=[
  ['inicio','Inicio','Visión general'],['mapa','Explorar','Conexiones micro–fármaco'],
@@ -126,7 +126,7 @@ function mapExplorer(){
  '<div class="nx-not-found"><b>Sin resultados para ese filtro</b><button data-act="nx-map-clear">Restablecer búsqueda</button></div>')+'</section></div></div>';
 }
 /* ───────── V30: cobertura graduada (5 niveles), color por clase, matriz y mapa ───────── */
-const COOL={bacteria:'#1f6fe5',virus:'#7a3fe0',fungi:'#0e9f6e',parasites:'#0aa3c2'};
+const COOL={bacteria:'#6b2fc4',virus:'#66751c',fungi:'#0a86b8',parasites:'#d2386c'};
 Object.assign(shades,COOL);
 Object.assign(NX,{view:'mapa',mapGroup:'all',covAll:false,covQuery:'',covClasses:[],covGroup:'all',covSort:'clase',covPick:null});
 const SP=()=>window.ATLAS30&&window.ATLAS30.spectrum;
@@ -191,7 +191,7 @@ function matrixView(){
  });
  const chips=fams.map(f=>{const c=familyColor(dom,f);return '<button class="cv-chip '+(NX.covClasses.includes(f)?'on':'')+'" style="--fc:'+c+'" data-act="nx-cov-class:'+safe(f)+'"><i></i>'+safe(f)+'</button>'}).join('');
  const gchips='<button class="cv-gchip '+(NX.covGroup==='all'?'on':'')+'" data-act="nx-cov-group:all">Todas las especies</button>'+gl.map(g=>'<button class="cv-gchip '+(NX.covGroup===g.id?'on':'')+'" style="--g:'+g.color+'" data-act="nx-cov-group:'+g.id+'"><i></i>'+safe(g.label)+'</button>').join('');
- const legend=['Y','M','S','R','N'].map(l=>'<span class="cv-lg"><i class="g l'+l+'" style="'+gaugeStyle('#3246d8',l)+'"></i><b>'+LV[l].short+'</b><small>'+LV[l].frac+'</small></span>').join('')+'<span class="cv-lg"><i class="g unknown"></i><b>Sin dato</b><small>≠ resistencia</small></span>';
+ const legend=['Y','M','S','R','N'].map(l=>'<span class="cv-lg"><i class="g l'+l+'" style="'+gaugeStyle('#3b4fa6',l)+'"></i><b>'+LV[l].short+'</b><small>'+LV[l].frac+'</small></span>').join('')+'<span class="cv-lg"><i class="g unknown"></i><b>Sin dato</b><small>≠ resistencia</small></span>';
  const pk=NX.covPick,pa=pk&&allDrug().find(x=>x.id===pk.a),pp=pk&&allMicro().find(x=>x.id===pk.p),pc=pa&&pp?covLevel(pa,pp):null;
  const pick=pc?'<div class="cv-pick" style="--fc:'+familyColor(pa.kingdom,pa.family)+'"><div class="cv-pick-gauge"><i class="g l'+(pc.lvl||'')+'" style="'+gaugeStyle(familyColor(pa.kingdom,pa.family),pc.lvl)+'"></i></div><div><b>'+safe(pa.name)+' × '+safe(pp.name)+'</b><span class="cv-pick-l">'+(pc.lvl?LV[pc.lvl].label+' · '+LV[pc.lvl].frac:'Sin dato')+'</span><p>'+safe(pc.note)+'</p><small>'+safe((TIER[pc.tier]||'Sin fuente')+(pc.src?' · '+pc.src:''))+'</small></div><div class="cv-pick-act"><button class="nx-secondary" data-act="nx-find:drug:'+pa.kingdom+':'+pa.id+'">Ficha del fármaco</button><button class="nx-secondary" data-act="nx-find:micro:'+pp.kingdom+':'+pp.id+'">Ficha de la especie</button></div></div>':'<div class="cv-pick empty"><b>Toca una celda</b><p>Verás el nivel de actividad, de dónde sale el dato y un enlace a ambas fichas.</p></div>';
  return '<div class="cv-wrap" data-dom="'+dom+'">'+
@@ -200,7 +200,7 @@ function matrixView(){
   '<button class="cv-toggle '+(NX.covAll?'on':'')+'" data-act="nx-cov-toggle">'+(NX.covAll?'Ocultar':'Mostrar')+' '+hidden+' agentes sin datos</button></div>'+
   '<div class="cv-filterrow"><span class="cv-flabel">Clase</span><div class="cv-chips">'+'<button class="cv-chip all '+(NX.covClasses.length?'':'on')+'" data-act="nx-cov-class:all">Todas</button>'+chips+'</div></div>'+
   '<div class="cv-filterrow"><span class="cv-flabel">Especies</span><div class="cv-chips">'+gchips+'</div></div>'+
-  '<div class="cv-legend"><span class="cv-lgtitle">Cuánto cubre</span>'+legend+'<span class="cv-lg"><i class="g l'+'Y'+' tclase" style="'+gaugeStyle('#3246d8','Y')+'"></i><b>Contorno punteado</b><small>espectro de clase</small></span></div>'+
+  '<div class="cv-legend"><span class="cv-lgtitle">Cuánto cubre</span>'+legend+'<span class="cv-lg"><i class="g l'+'Y'+' tclase" style="'+gaugeStyle('#3b4fa6','Y')+'"></i><b>Contorno punteado</b><small>espectro de clase</small></span></div>'+
   pick+
   '<div class="cv-scroll"><table class="cv-table"><thead>'+head+'</thead><tbody>'+body+'</tbody></table></div>'+
   '<div class="cv-tip" id="cv-tip" hidden></div>'+
@@ -259,7 +259,7 @@ function relMap(){
   '<g class="rm-core" transform="translate('+cx+' '+cy+')"><circle r="54" fill="'+col+'"/><circle r="54" class="rm-pulse" fill="none" stroke="'+col+'"/><text text-anchor="middle" y="-3">'+safe(names[dom])+'</text><text class="sub" text-anchor="middle" y="17">'+orgs.length+' especies</text></g>'+
   (any&&!s?'<text class="rm-hintsvg" x="'+(cx+330)+'" y="'+cy+'" text-anchor="middle">Elige una especie a la izquierda</text>':'')+'</svg></div>'+
   '<aside class="rm-side">'+(s?'<span class="rm-kick">Especie</span><h3>'+safe(s.name)+'</h3><p>'+safe((s.identity||s.biology||s.clinical||'').slice(0,200))+'</p><button class="nx-primary" data-act="nx-find:micro:'+s.kingdom+':'+s.id+'">Abrir ficha</button>':'<span class="rm-kick">'+(gsel?'Grupo':'Cómo leer el mapa')+'</span><h3>'+(gsel?safe(gsel.label):'Del grupo al fármaco')+'</h3><p>'+(gsel?'Elige una especie del abanico izquierdo. Sus agentes aparecen a la derecha, agrupados por clase.':'Centro: el dominio. Alrededor, los grupos de especies. Elige un grupo para abrir sus especies; al elegir una especie verás los agentes que la cubren, más gruesos cuanto más cubren.')+'</p>')+
-  (s?'<div class="rm-lv">'+['Y','M','S'].map(l=>byL(l).length?'<div class="rm-lvgroup"><header><i class="g l'+l+'" style="'+gaugeStyle('#3246d8',l)+'"></i><b>'+LV[l].short+'</b><small>'+LV[l].frac+' · '+byL(l).length+'</small></header><div class="rm-lvchips">'+byL(l).map(({a})=>'<button style="--fc:'+familyColor(a.kingdom,a.family)+'" data-act="nx-find:drug:'+a.kingdom+':'+a.id+'"><i></i>'+safe(a.name)+'</button>').join('')+'</div></div>':'').join('')+(list2.filter(x=>x.c.lvl!=='N'&&x.c.lvl!=='R').length===0?'<p class="rm-empty">Sin agentes documentados para esta especie. «Sin dato» no es resistencia.</p>':'')+'</div>':'')+
+  (s?'<div class="rm-lv">'+['Y','M','S'].map(l=>byL(l).length?'<div class="rm-lvgroup"><header><i class="g l'+l+'" style="'+gaugeStyle('#3b4fa6',l)+'"></i><b>'+LV[l].short+'</b><small>'+LV[l].frac+' · '+byL(l).length+'</small></header><div class="rm-lvchips">'+byL(l).map(({a})=>'<button style="--fc:'+familyColor(a.kingdom,a.family)+'" data-act="nx-find:drug:'+a.kingdom+':'+a.id+'"><i></i>'+safe(a.name)+'</button>').join('')+'</div></div>':'').join('')+(list2.filter(x=>x.c.lvl!=='N'&&x.c.lvl!=='R').length===0?'<p class="rm-empty">Sin agentes documentados para esta especie. «Sin dato» no es resistencia.</p>':'')+'</div>':'')+
   '<div class="rm-groups">'+gl.map(g=>'<button class="'+(selG===g.id?'on':'')+'" style="--g:'+g.color+'" data-act="nx-mapgroup:'+g.id+'"><i></i>'+safe(g.label)+'<b>'+g.ids.length+'</b></button>').join('')+'</div></aside></div>';
 }
 /* ───────── V30: comparador y laboratorio guiados ───────── */
@@ -297,7 +297,7 @@ function compareView(){
 function matchOrgs(names){const out=[];(names||[]).forEach(nm=>{const n=normalized(nm);const m=allMicro().find(p=>normalized(p.name).includes(n)||n.includes(normalized(String(p.name).split(' — ')[0]))&&n.length>6);if(m&&!out.includes(m.id))out.push(m.id)});return out}
 function labView(){
  const L=NX.lab,syns=(D.syndromes||[]),cur=syns.find(s=>s.id===L.sid),sites=[...new Set(syns.map(s=>s.site))];
- const siteColor=s=>['#3246d8','#7a3fe0','#0aa3c2','#1f6fe5','#0e9f6e','#5a54e8','#2f8fe8','#a24be0','#11a7c9','#1fb5a4'][sites.indexOf(s)%10];
+ const siteColor=s=>['#3b4fa6','#7a3fe0','#0aa3c2','#1f6fe5','#0e9f6e','#5a54e8','#2f8fe8','#a24be0','#11a7c9','#1fb5a4'][sites.indexOf(s)%10];
  const step=(n,t,on,done)=>'<li class="'+(on?'on ':'')+(done?'done':'')+'"><b>'+(done?'✓':n)+'</b><span>'+t+'</span></li>';
  const picks=L.sp.map(id=>allMicro().find(p=>p.id===id)).filter(Boolean);
  const q=normalized(L.q);const found=q.length>1?allMicro().filter(p=>p.kingdom==='bacteria'&&!L.sp.includes(p.id)&&normalized(p.name).includes(q)).slice(0,8):[];
@@ -314,7 +314,7 @@ function labView(){
  return '<div class="nx-section-page nx-section-laboratorio lab"><div class="cmp-top"><div><h1>Laboratorio de decisiones</h1><p>Del cuadro clínico a los agentes que cubren a sus microorganismos probables, en tres pasos.</p></div><ol class="lab-steps">'+step(1,'Elige el cuadro',!cur,!!cur)+step(2,'Ajusta las especies',!!cur&&!picks.length,picks.length>0)+step(3,'Compara agentes',picks.length>0,false)+'</ol></div>'+
   '<div class="lab-layout"><aside class="lab-side"><b class="lab-sidetitle">1 · Cuadro clínico</b>'+side+'</aside><div class="lab-main">'+
   (cur?'<section class="lab-card" style="--c:'+siteColor(cur.site)+'"><header><b>'+safe(cur.name)+'</b><span>'+safe(cur.site)+'</span></header><p>'+safe(cur.summary)+'</p><div class="lab-clues">'+(cur.clues||[]).map(c=>'<span>'+safe(c)+'</span>').join('')+'</div></section>':'<div class="cmp-empty"><div class="cmp-empty-art"><i></i><i></i><i></i></div><h3>Empieza por el cuadro clínico</h3><p>Elige un síndrome a la izquierda. Se cargarán sus microorganismos habituales y podrás ver qué agentes los cubren.</p></div>')+
-  (cur?'<section class="lab-card"><header><b>2 · Microorganismos que vas a considerar</b><span>Quita o añade especies según tu contexto</span></header><div class="lab-picks">'+(picks.map(p=>'<span class="lab-pick" style="--g:'+((grps(p.kingdom).find(g=>g.ids.includes(p.id))||{}).color||'#3246d8')+'"><i></i>'+safe(shortName(p.name))+'<button data-act="nx-lab-del:'+p.id+'" aria-label="Quitar">×</button></span>').join('')||'<span class="cmp-hint">Sin especies. Añade alguna.</span>')+'</div><div class="cv-searchbox lab-add"><span>⌕</span><input id="nx-lab-q" value="'+safe(L.q)+'" placeholder="Añadir otra especie…" aria-label="Añadir especie"></div>'+(found.length?'<div class="lab-found">'+found.map(p=>'<button data-act="nx-lab-add:'+p.id+'">+ '+safe(p.name)+'</button>').join('')+'</div>':'')+'</section>':'')+res+'</div></div></div>';
+  (cur?'<section class="lab-card"><header><b>2 · Microorganismos que vas a considerar</b><span>Quita o añade especies según tu contexto</span></header><div class="lab-picks">'+(picks.map(p=>'<span class="lab-pick" style="--g:'+((grps(p.kingdom).find(g=>g.ids.includes(p.id))||{}).color||'#3b4fa6')+'"><i></i>'+safe(shortName(p.name))+'<button data-act="nx-lab-del:'+p.id+'" aria-label="Quitar">×</button></span>').join('')||'<span class="cmp-hint">Sin especies. Añade alguna.</span>')+'</div><div class="cv-searchbox lab-add"><span>⌕</span><input id="nx-lab-q" value="'+safe(L.q)+'" placeholder="Añadir otra especie…" aria-label="Añadir especie"></div>'+(found.length?'<div class="lab-found">'+found.map(p=>'<button data-act="nx-lab-add:'+p.id+'">+ '+safe(p.name)+'</button>').join('')+'</div>':'')+'</section>':'')+res+'</div></div></div>';
 }
 function exploreShell(inner){
  const tabs=[['mapa','Mapa de relaciones','Del grupo al fármaco'],['matriz','Matriz de cobertura','Muchos agentes, muchas especies'],['especie','Especie → espectro','Lista detallada por especie']].map(([k,l,d])=>'<button class="'+(NX.view===k?'active':'')+'" data-act="nx-view:'+k+'"><b>'+l+'</b><small>'+d+'</small></button>').join('');
@@ -414,7 +414,7 @@ const originalRender=render;
 render=function(){originalRender();document.title='INFEORA · '+(sections.find(x=>x[0]===state.route)?.[1]||'Atlas de infectología clínica');document.documentElement.dataset.nexoVersion='26'};
 
 /* ───────── V29: panel de perfil de cobertura dentro de fichas ATB / microorganismo ───────── */
-function specStats(items){return ['Y','M','S','R','N'].map(l=>{const n=items.filter(x=>x.c.lvl===l).length;return '<div class="sp-stat"><i class="g l'+l+'" style="'+gaugeStyle('#3246d8',l)+'"></i><b>'+n+'</b><span>'+LV[l].short+'</span></div>'}).join('')+'<div class="sp-stat u"><i class="g unknown"></i><b>'+items.filter(x=>!x.c.lvl).length+'</b><span>Sin dato</span></div>'}
+function specStats(items){return ['Y','M','S','R','N'].map(l=>{const n=items.filter(x=>x.c.lvl===l).length;return '<div class="sp-stat"><i class="g l'+l+'" style="'+gaugeStyle('#3b4fa6',l)+'"></i><b>'+n+'</b><span>'+LV[l].short+'</span></div>'}).join('')+'<div class="sp-stat u"><i class="g unknown"></i><b>'+items.filter(x=>!x.c.lvl).length+'</b><span>Sin dato</span></div>'}
 function specPanelDrug(a){
  const dom=a.kingdom,{cols,gOf,gl}=covData(dom),fc=familyColor(dom,a.family);
  const cells=cols.map(p=>({p,c:covLevel(a,p)}));
@@ -555,6 +555,19 @@ function enhanceMotion(){
  }catch(e){console.warn('motion',e)}
 }
 const renderMv=render;render=function(){renderMv();enhanceMotion()};
+/* Scroll estable: cada render conserva la posición de la página y de las barras laterales;
+   al elegir un elemento en una barra, la barra no se mueve y el artículo se muestra desde su inicio. */
+const SCROLL_SEL='.a18-browser,.a18-tree,.v24-sidebar,.v24-items,.v25-clinic-sidebar,.v25-clinic-list,.v23-learn-rail,.cmp-list,.cv-scroll,.v21-sidebar,.v23-comp-sidebar,.v24-compare-sidebar,.nx-explore-browser';
+const PICK_OPS=/^(micro-pick|drug-pick|v24-open-micro|v24-open-drug|v25-clinical|tree|fx|v24-fam|v25-clinical-system|v25-clinical-src|v25-clinical-abx|v25-clinical-reset|v24-mode)$/;
+const ARTICLE_OPS=/^(micro-pick|drug-pick|v24-open-micro|v24-open-drug|v25-clinical)$/;
+let scrollKeep=null;
+function snapScroll(){const m={};document.querySelectorAll(SCROLL_SEL).forEach((el,i)=>{const k=el.className.split(' ')[0]+'#'+[...document.querySelectorAll('.'+el.className.split(' ')[0])].indexOf(el);m[k]=[el.scrollTop,el.scrollLeft]});return {route:state.route,y:window.scrollY,m}}
+function restoreScroll(snap){if(!snap||snap.route!==state.route)return;document.querySelectorAll(SCROLL_SEL).forEach(el=>{const c=el.className.split(' ')[0],k=c+'#'+[...document.querySelectorAll('.'+c)].indexOf(el),v=snap.m[k];if(v){el.scrollTop=v[0];el.scrollLeft=v[1]}});window.scrollTo({top:snap.y,behavior:'instant'})}
+function keepChosenVisible(){document.querySelectorAll('.a18-browser,.v24-items,.v25-clinic-list').forEach(box=>{if(box.scrollHeight<=box.clientHeight+4)return;const on=box.querySelector('.selected,.chosen,.on[data-act^="v25-clinical:"]');if(!on)return;const b=box.getBoundingClientRect(),r=on.getBoundingClientRect();if(r.top<b.top+8)box.scrollTop-=b.top+8-r.top;else if(r.bottom>b.bottom-8)box.scrollTop+=r.bottom-(b.bottom-8)})}
+function showArticleStart(){const art=document.querySelector('.v25-clinic-article,.v24-article,.a18-article,.a18-sheet,.v23-article,.v20-article');if(!art)return;const top=art.getBoundingClientRect().top+window.scrollY-84;if(window.scrollY>top+40||innerWidth<=1100)window.scrollTo({top:Math.max(0,top),behavior:'smooth'})}
+const renderScroll=render;render=function(){const snap=scrollKeep||snapScroll();scrollKeep=null;renderScroll();restoreScroll(snap);keepChosenVisible()};
+const actScroll=act;act=function(command){const op=String(command).split(':')[0];const r=actScroll(command);if(ARTICLE_OPS.test(op))requestAnimationFrame(showArticleStart);return r};
+
 
 
 
