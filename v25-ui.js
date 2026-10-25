@@ -152,10 +152,35 @@ function clinicalReferences(c){
 window.ATLAS25=window.ATLAS25||{};
 
 window.ATLAS25.drugDeep=window.ATLAS25.drugDeep||{};
+/* Bloques de revisión ampliada con jerarquía: cada componente tiene color e ícono propios,
+   la primera oración de cada párrafo funciona como idea principal, las enumeraciones se vuelven listas
+   y las cifras se resaltan. El texto no cambia: solo su presentación. */
+window.ATLAS25.MD_KIND={
+ biologia:['Biología','#2f6f9f','micro'],patogenia:['Patogenia','#c2456f','sepsis'],epidemiologia:['Epidemiología','#5b7a2a','globe'],clinica:['Clínica','#7a46c8','clinica'],
+ diagnostico:['Diagnóstico','#0a86b8','laboratorio'],diferencial:['Diferencial','#a0558e','comparar'],tratamiento:['Tratamiento','#2b7d6a','pill'],resistencia:['Resistencia','#b23a3a','shield'],complicaciones:['Seguimiento','#46508e','heart'],
+ mecanismo:['Mecanismo','#2f6f9f','ribo50'],espectro:['Espectro','#0a86b8','mapa'],farmacocinetica:['Farmacocinética','#7a46c8','blood'],indicaciones:['Usos clínicos','#2b7d6a','clinica'],seguridad:['Seguridad','#b23a3a','shield'],notas:['Vigencia','#5f6b85','book']
+};
+window.ATLAS25.mdPara=function(x){
+ const t=String(x);
+ const num=h=>h.replace(/(\d+(?:[.,]\d+)?(?:\s?[–-]\s?\d+(?:[.,]\d+)?)?\s?(?:%|µm|μm|nm|°C|mg|g|días|semanas|meses|años|horas|h\b|min\b))/g,'<mark class="md-num">$1</mark>');
+ const parts=t.split(/;\s+/);
+ if(parts.length>=3){const head=parts[0].includes(':')?parts[0].split(':'):null;
+  const lead=head?'<p class="md-p"><strong class="md-lead">'+num(Hx(head[0]))+':</strong> '+num(Hx(head.slice(1).join(':')))+'</p>':'';
+  const items=(head?parts.slice(1):parts).map(z=>'<li>'+num(Hx(z.replace(/\.$/,'')))+'</li>').join('');
+  return lead+'<ul class="md-list">'+(head?'':'')+items+'</ul>'}
+ const m=t.match(/^(.{20,180}?[.:])\s+(.*)$/s);
+ if(m)return '<p class="md-p"><strong class="md-lead">'+num(Hx(m[1]))+'</strong> '+num(Hx(m[2]))+'</p>';
+ return '<p class="md-p">'+num(Hx(t))+'</p>';
+};
+window.ATLAS25.mdBlock=function(k,title,paras,i){
+ const K=window.ATLAS25.MD_KIND[k]||[title,'#3b4fa6','book'],I=window.INF_ICON||(()=>'');
+ return '<article class="v25-md-block md-k" data-k="'+k+'" style="--mk:'+K[1]+'"><header class="md-head"><i class="md-ic">'+I(K[2])+'</i><div><span class="md-kind">'+Hx(K[0])+'</span><h3>'+Hx(title)+'</h3></div><b class="md-n">'+(i+1)+'</b></header><div class="md-body">'+paras.map(window.ATLAS25.mdPara).join('')+'</div></article>';
+};
+
 window.ATLAS25.drugDeepHTML=function(id){
  const d=window.ATLAS25.drugDeep[id];if(!d)return '';
  const blocks=[['mecanismo','Mecanismo de acción'],['espectro','Espectro de actividad'],['farmacocinetica','Farmacocinética y distribución'],['indicaciones','Usos clínicos'],['seguridad','Efectos adversos, interacciones y precauciones'],['resistencia','Mecanismos de resistencia'],['notas','Notas de vigencia y límites de la fuente']];
- const body=blocks.filter(([k])=>d[k]&&d[k].length).map(([k,t],i)=>'<article class="v25-md-block"><span>'+String(i+1).padStart(2,'0')+'</span><h3>'+Hx(t)+'</h3>'+d[k].map(x=>'<p>'+Hx(x)+'</p>').join('')+'</article>').join('');
+ const body=blocks.filter(([k])=>d[k]&&d[k].length).map(([k,t],i)=>window.ATLAS25.mdBlock(k,t,d[k],i)).join('');
  return '<section class="v20-section v25-microdeep" id="drug-profundo"><div class="v20-section-title"><span class="v20-sectionnum">+</span><div><small>REVISIÓN AMPLIADA · '+Hx(d.reviewed||'')+'</small><h2>Farmacología en profundidad</h2></div></div><div class="v20-section-body">'+body+'<p class="v25-md-src"><b>Trazabilidad:</b> '+(d.src||[]).map(Hx).join(' · ')+'. Síntesis editorial original sin dosis no citadas; contrastar con ficha técnica y guías vigentes.</p></div></section>';
 };
 const dps=window.drugPageSections;
@@ -163,7 +188,7 @@ if(typeof dps==='function')window.drugPageSections=function(a){return dps(a)+win
 window.ATLAS25.microDeepHTML=function(id){
  const d=window.ATLAS25.microDeep?.[id];if(!d)return '';
  const blocks=[['biologia','Biología y estructura'],['patogenia','Patogenia y factores de virulencia'],['epidemiologia','Epidemiología y transmisión'],['clinica','Manifestaciones clínicas'],['diagnostico','Diagnóstico de laboratorio'],['diferencial','Diagnóstico diferencial y confusiones frecuentes'],['tratamiento','Tratamiento'],['resistencia','Resistencia'],['complicaciones','Complicaciones y seguimiento']];
- const body=blocks.filter(([k])=>d[k]&&d[k].length).map(([k,t],i)=>'<article class="v25-md-block"><span>'+String(i+1).padStart(2,'0')+'</span><h3>'+Hx(t)+'</h3>'+d[k].map(x=>'<p>'+Hx(x)+'</p>').join('')+'</article>').join('');
+ const body=blocks.filter(([k])=>d[k]&&d[k].length).map(([k,t],i)=>window.ATLAS25.mdBlock(k,t,d[k],i)).join('');
  return '<section class="v20-section v25-microdeep" id="micro-profundo"><div class="v20-section-title"><span class="v20-sectionnum">+</span><div><small>REVISIÓN AMPLIADA · '+Hx(d.reviewed||'')+'</small><h2>Del laboratorio a la decisión clínica</h2></div></div><div class="v20-section-body">'+body+'<p class="v25-md-src"><b>Trazabilidad:</b> '+(d.src||[]).map(Hx).join(' · ')+'. Síntesis editorial original a partir de las obras citadas; contenido educativo, no sustituye la guía local ni el antibiograma.</p></div></section>';
 };
 function deepReview(id){
