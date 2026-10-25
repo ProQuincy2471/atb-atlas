@@ -338,7 +338,8 @@ act=function(command){
  case 'nx-drawer':NX.drawer=!NX.drawer;return render();
  case 'nx-density':NX.compact=!NX.compact;try{localStorage.setItem('infeora-v26-compact',NX.compact?'1':'0')}catch{}return render();
  case 'nx-map-domain':NX.mapGroup='all';NX.domain=value;NX.group='all';NX.micro='';NX.query='';NX.rxQuery='';NX.rxFamily='all';NX.status='relevant';return render();
- case 'who-age':WHOUI.age=+value||0;return render();
+ case 'fx':{const [k,v]=String(value).split('=');if(k==='reset'){FX.dom='all';FX.shape='all';FX.target='all';FX.newer=false}else if(k==='newer')FX.newer=v==='1';else FX[k]=FX[k]===v?'all':v;return render()}
+  case 'who-age':WHOUI.age=+value||0;return render();
   case 'nx-view':NX.view=value;if(state.route!=='mapa')return goto('mapa');return render();
  case 'nx-cmp-dom':NX.cmp.dom=value;NX.cmp.ids=[];NX.cmp.cls='all';NX.cmp.q='';NX.cmp.target='';return render();
  case 'nx-cmp-toggle':{const i=NX.cmp.ids.indexOf(value);if(i<0){if(NX.cmp.ids.length<6)NX.cmp.ids.push(value)}else NX.cmp.ids.splice(i,1);return render()}
@@ -451,6 +452,31 @@ function enhanceInterior(){
  }catch(e){console.warn('spec panel',e)}
 }
 const renderV28=render;render=function(){renderV28();enhanceInterior()};
+
+/* Facetas del catálogo bacteriano (Microorganismos y Antibióticos) */
+const FX={dom:'all',shape:'all',target:'all',newer:false};
+window.INF_FXON=micro=>micro?(FX.dom!=='all'||FX.shape!=='all'):(FX.target!=='all'||FX.newer);
+window.INF_FX=(micro,x)=>micro?((FX.dom==='all'||x.domain===FX.dom)&&(FX.shape==='all'||INF_SHAPE(x.morphology)[1]===FX.shape)):((FX.target==='all'||INF_TARGET(x.family).key===FX.target)&&(!FX.newer||x.newer===true||x.newer==='True'));
+window.INF_LEAF=(micro,x)=>{if(micro){const sh=INF_SHAPE(x.morphology),c=INF_DOMAIN_COLOR[x.domain]||'#3a4fb8';return '<i class="fx-leaf" style="--t:'+c+'" title="'+safe(x.domain+' · '+(x.morphology||''))+'">'+INF_ICON(sh[0])+'</i>'}const t=INF_TARGET(x.family);return '<i class="fx-leaf" style="--t:'+t.color+'" title="'+safe(t.label)+'">'+INF_ICON(t.icon)+'</i>'};
+window.INF_FACETS=micro=>{
+ const items=micro?D.pathogens:D.antibiotics;
+ const chip=(k,v,label,icon,color,n)=>'<button class="fx-chip'+(FX[k]===v?' on':'')+(n?'':' empty')+'" style="--t:'+color+'" data-act="fx:'+k+'='+safe(v)+'" aria-pressed="'+(FX[k]===v)+'">'+(icon?INF_ICON(icon):'')+'<span>'+safe(label)+'</span><em>'+n+'</em></button>';
+ const passX=(skip)=>x=>{const s={...FX};if(skip)s[skip]=skip==='newer'?false:'all';return micro?((s.dom==='all'||x.domain===s.dom)&&(s.shape==='all'||INF_SHAPE(x.morphology)[1]===s.shape)):((s.target==='all'||INF_TARGET(x.family).key===s.target)&&(!s.newer||x.newer===true||x.newer==='True'))};
+ let html='';
+ if(micro){
+  const doms=[...new Set(items.map(x=>x.domain))];
+  const shapes=['Cocos','Bacilos','Cocobacilos','Curvos y espirales','Sin pared / intracelular','Otras formas'].filter(l=>items.some(x=>INF_SHAPE(x.morphology)[1]===l));
+  const shIcon={'Cocos':'coccus','Bacilos':'rod','Cocobacilos':'coccobacillus','Curvos y espirales':'spiral','Sin pared / intracelular':'nowall','Otras formas':'nowall'};
+  html='<div class="fx-block"><h4>Tinción y tipo</h4><div class="fx-chips">'+doms.map(d=>chip('dom',d,d,'bacteria',INF_DOMAIN_COLOR[d]||'#3a4fb8',items.filter(x=>x.domain===d&&passX('dom')(x)).length)).join('')+'</div></div>'
+   +'<div class="fx-block"><h4>Forma</h4><div class="fx-chips">'+shapes.map(l=>chip('shape',l,l,shIcon[l],'#2f6fe0',items.filter(x=>INF_SHAPE(x.morphology)[1]===l&&passX('shape')(x)).length)).join('')+'</div></div>';
+ }else{
+  const keys=Object.keys(INF_TARGETS).filter(k=>items.some(x=>INF_TARGET(x.family).key===k));
+  html='<div class="fx-block"><h4>Diana del fármaco</h4><div class="fx-chips">'+keys.map(k=>chip('target',k,INF_TARGETS[k][0],k==='multi'?'micro':k,INF_TARGETS[k][1],items.filter(x=>INF_TARGET(x.family).key===k&&passX('target')(x)).length)).join('')+'</div></div>'
+   +'<div class="fx-block"><button class="fx-toggle'+(FX.newer?' on':'')+'" data-act="fx:newer='+(FX.newer?'0':'1')+'" aria-pressed="'+FX.newer+'">'+INF_ICON('star')+'<span>Solo agentes recientes</span><em>'+items.filter(x=>(x.newer===true||x.newer==='True')&&passX('newer')(x)).length+'</em></button></div>';
+ }
+ const n=items.filter(x=>INF_FX(micro,x)).length;
+ return '<div class="fx-panel">'+html+(INF_FXON(micro)?'<div class="fx-status"><b>'+n+'</b> de '+items.length+' fichas <button data-act="fx:reset=1">'+INF_ICON('clear')+'Quitar filtros</button></div>':'')+'</div>';
+};
 /* Tratamiento WHO AWaRe por condición (data/who-aware-treatments.js) */
 const WHOUI={age:0,sc:{}};
 const whoEsc=x=>String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');

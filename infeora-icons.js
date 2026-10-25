@@ -45,6 +45,32 @@ const P={
  nopill:'<rect x="3.5" y="9" width="17" height="6.5" rx="3.25"/><path d="M4 4l16 16"/>',
  maybe:'<rect x="3.5" y="9" width="17" height="6.5" rx="3.25"/><path d="M12 9v6.5" stroke-dasharray="1.5 1.5"/>'
 };
+
+/* formas bacterianas y dianas farmacológicas (para facetas) */
+Object.assign(P,{
+ coccus:'<circle cx="8" cy="9" r="3"/><circle cx="15.5" cy="8" r="3"/><circle cx="11.5" cy="15.5" r="3"/>',
+ rod:'<rect x="3" y="9.5" width="18" height="5.5" rx="2.75" transform="rotate(-20 12 12.25)"/>',
+ coccobacillus:'<rect x="5" y="8.5" width="9" height="7" rx="3.5"/><rect x="13" y="10" width="7" height="5.5" rx="2.75"/>',
+ spiral:'<path d="M3 13c1.5-3 3-3 4.5 0s3 3 4.5 0 3-3 4.5 0 3 3 4.5 0"/>',
+ nowall:'<path d="M12 4.5c3.5 0 7 2 7 6.5s-4 8.5-7.5 8.5S5 16 5 12c0-3.5 2.5-7.5 7-7.5z" stroke-dasharray="2.2 2"/>',
+ wall:'<rect x="4" y="4" width="16" height="16" rx="4"/><path d="M4 9h16M4 15h16M9 4v16M15 4v16"/>',
+ membrane:'<path d="M3 8c3-2 6 2 9 0s6-2 9 0M3 16c3-2 6 2 9 0s6-2 9 0"/><circle cx="7" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="17" cy="12" r="1"/>',
+ ribo30:'<ellipse cx="12" cy="15" rx="7" ry="4"/><path d="M8 11.5c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5"/>',
+ ribo50:'<ellipse cx="12" cy="10" rx="7.5" ry="5"/><path d="M7.5 16.5c1 1.5 2.7 2.5 4.5 2.5s3.5-1 4.5-2.5"/>',
+ dna:'<path d="M7 3c0 6 10 6 10 12s-10 3-10 6M17 3c0 6-10 6-10 12s10 3 10 6"/><path d="M8.5 7h7M8.5 17h7"/>',
+ folate:'<path d="M12 3.5 19.5 8v8L12 20.5 4.5 16V8z"/><path d="M12 8.5v7M8.5 10.5l7 3"/>',
+ rnap:'<path d="M4 12h16"/><path d="M8 12V7.5M12 12V5.5M16 12V8"/><circle cx="12" cy="16.5" r="3"/>',
+ topical:'<path d="M8 3.5h8v4H8zM7 7.5h10l-1 13H8z"/><path d="M10 12h4"/>',
+ star:'<path d="m12 4 2.3 4.9 5.2.6-3.9 3.6 1 5.2L12 15.8l-4.6 2.5 1-5.2-3.9-3.6 5.2-.6z"/>',
+ book:'<path d="M5 4.5h11a2 2 0 0 1 2 2V20H7a2 2 0 0 1-2-2z"/><path d="M5 18a2 2 0 0 1 2-2h11"/>'
+});
+window.INF_SHAPE=m=>{m=String(m||'').toLowerCase();if(/sin pared|intracel|pleom/.test(m))return ['nowall','Sin pared / intracelular'];if(/helic|curvo|espir/.test(m))return ['spiral','Curvos y espirales'];if(/cocobac/.test(m))return ['coccobacillus','Cocobacilos'];if(/^coco|diplococo|cocos/.test(m))return ['coccus','Cocos'];if(/bacil/.test(m))return ['rod','Bacilos'];return ['nowall','Otras formas']};
+const TG={'Penicilinas':'wall','Cefalosporinas':'wall','Carbapenémicos':'wall','Monobactámicos':'wall','Sideróforos betalactámicos':'wall','Sulbactam avanzado':'wall','Glicopéptidos / lipoglicopéptidos':'wall','Fosfonatos':'wall','Polimixinas':'membrane','Lipopéptidos':'membrane','Aminoglucósidos':'ribo30','Tetraciclinas / derivados':'ribo30','Macrólidos / ketólidos':'ribo50','Oxazolidinonas':'ribo50','Lincosamidas':'ribo50','Estreptograminas':'ribo50','Pleuromutilinas':'ribo50','Ácido fusídico':'ribo50','Fluoroquinolonas':'dna','Nitroimidazoles':'dna','Nitrofuranos':'dna','Sulfonamidas / antifolatos':'folate','Rifamicinas':'rnap','Mupirocina / tópicos':'topical','Antimicobacterianos':'multi','Inhibidores especializados':'wall'};
+const TL={wall:['Pared celular','#2f6fe0'],membrane:['Membrana','#0f8f86'],ribo30:['Ribosoma 30S','#5146d6'],ribo50:['Ribosoma 50S','#7a3fd0'],dna:['ADN / topoisomerasas','#a8327f'],folate:['Vía del folato','#13819f'],rnap:['ARN polimerasa','#3a4fb8'],topical:['Tópicos','#4a5f86'],multi:['Antimicobacterianos (varias dianas)','#1d6f9a']};
+window.INF_TARGET=f=>{const k=TG[f]||'multi';return {key:k,icon:k==='multi'?'micro':k,label:TL[k][0],color:TL[k][1]}};
+window.INF_TARGETS=TL;
+window.INF_DOMAIN_COLOR={Grampositivos:'#5146d6',Gramnegativos:'#a8327f',Anaerobios:'#3a4fb8',Atípicos:'#0f8f86',Especiales:'#13819f'};
+window.INF_HASH=s=>{let h=0;for(const ch of String(s))h=(h*31+ch.charCodeAt(0))>>>0;const hues=[214,258,190,160,232,284,174,200,246,300,222,178];return 'hsl('+hues[h%hues.length]+' 62% 42%)'};
 window.INF_ICON=(n,cls)=>P[n]?'<svg class="inf-ic'+(cls?' '+cls:'')+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+P[n]+'</svg>':'';
 /* Territorios: agrupan los sistemas del índice WHO + revisiones complementarias. Colores fríos distinguibles entre sí. */
 const T=[
