@@ -1231,3 +1231,10 @@ body{font-size:16.5px;line-height:1.65}
 .ess-panel>footer{margin-top:14px;padding:10px 20px;background:#f1f6f4;border-top:1px solid #d6e6df;font-size:13px;color:#4a5878}
 @media(max-width:1000px){.ess-view{grid-template-columns:1fr}.ess-top{position:static}.atb-views{grid-template-columns:1fr}}
 @media(max-width:560px){.ess-grid{grid-template-columns:1fr}.ess-panel>header{padding:14px}.ess-ind,.ess-dose,.ess-dur,.ess-pops,.ess-safety,.ess-notes{padding:12px 14px 0}}
+/* panel de pauta dentro de fichas de virus, hongos y parásitos: neutralizar estilos heredados de tablas */
+.nx-main .ess-panel table th,.nx-main .ess-panel table td{text-transform:none!important;letter-spacing:0!important;font-family:var(--body)!important}
+.nx-main .ess-panel thead th{background:#2b7d6a!important;color:#fff!important;font-size:13.5px!important}
+.nx-main .ess-panel tbody th{background:transparent!important;color:#0a1633!important;font-size:14.5px!important;font-weight:700!important}
+.nx-main .ess-panel tbody td{font-size:14.5px!important;color:#1b2a4a!important;background:transparent!important}
+.nx-main .ess-panel tbody tr:nth-child(2n) :is(th,td){background:#f6faf8!important}
+.nx-main .ess-panel table{border:0!important;border-radius:0!important}

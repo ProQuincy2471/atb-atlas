@@ -55,15 +55,24 @@ async function main(){
   await go('atb');
   await page.evaluate(()=>window.act('atb-view:esenciales'));await page.waitForTimeout(200);
   const ESS_IDS=await page.evaluate(()=>Object.keys(window.ATLAS25.essential||{}));
-  checks++;assert(ESS_IDS.length>=30,`esenciales: se esperaban ≥30 monografías, hay ${ESS_IDS.length}`);
+  checks++;assert(ESS_IDS.length>=55,`esenciales: se esperaban ≥30 monografías, hay ${ESS_IDS.length}`);
   for(const id of ESS_IDS){
    const r=await page.evaluate(i=>{window.act('ess-open:'+i);const c=document.querySelector('.ess-card.open .ess-panel');const t=c?c.innerText:'';window.act('ess-open:'+i);return {ok:!!c,rows:c?c.querySelectorAll('tbody tr').length:0,leak:/\$\{|undefined|NaN|\[object Object\]/.test(t),src:/MSF Essential drugs/.test(t),over:document.documentElement.scrollWidth-innerWidth}},id);
    checks++;assert(r.ok&&r.rows>=1&&!r.leak&&r.src&&r.over<9,`esencial ${id}@${width}: ${JSON.stringify(r)}`);
   }
   await page.evaluate(()=>window.act('atb-view:catalogo'));
-  for(const id of ['ceftriaxona','amoxicilina','rifampicina','penicilina-g','oxacilina']){
-   const r=await page.evaluate(i=>{window.act('nx-find:drug:bacteria:'+i);return document.querySelectorAll('.ess-panel').length},id);await page.waitForTimeout(60);
+  for(const id of ['ceftriaxona','amoxicilina','rifampicina','penicilina-g','oxacilina','fluconazol','aciclovir','ivermectina','dolutegravir','artesunato-iv']){
+   const r=await page.evaluate(i=>{const d=(window.ATLAS24.debug.drugs||[]).find(x=>x.id===i);window.act('nx-find:drug:'+(d?d.kingdom:'bacteria')+':'+i);return document.querySelectorAll('.ess-panel').length},id);await page.waitForTimeout(60);
    checks++;assert(r>=1,`panel de pauta ausente en la ficha ${id}@${width}`);
+  }
+  // Tratamientos MSF para síndromes sin pauta OMS
+  await go('clinica');
+  const MSF_IDS=await page.evaluate(()=>[...Object.keys(window.ATLAS25.msfTreat||{}),...Object.keys(window.ATLAS25.oiTreat||{})]);
+  checks++;assert(MSF_IDS.length>=10,`msfTreat: se esperaban ≥5 síndromes, hay ${MSF_IDS.length}`);
+  for(const id of MSF_IDS){
+   await page.evaluate(i=>window.act('v25-clinical:'+i),id);await page.waitForTimeout(120);
+   const w=await page.evaluate(()=>{const p=document.querySelector('.who-panel');return p?{esc:p.querySelectorAll('.who-esc').length,txt:p.innerText,over:document.documentElement.scrollWidth-innerWidth}:null});
+   checks++;assert(w&&w.esc>=1&&/MSF Clinical guidelines|Guía NIH/.test(w.txt)&&!/\$\{|undefined|NaN|\[object Object\]/.test(w.txt)&&w.over<9,`panel MSF ausente o defectuoso en ${id}@${width}`);
   }
   await go('micro');
   for(const id of MICRO_DEEP){await page.evaluate(i=>window.act('v24-open-micro:'+i),id);await page.waitForTimeout(250);
