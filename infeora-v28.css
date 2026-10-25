@@ -959,3 +959,81 @@ body{background-color:#eef1f7!important;background-image:
 .hm-input input{border:0!important;background:transparent!important;box-shadow:none!important;padding:0!important;height:54px!important;width:100%}
 @media(max-width:1100px){.hm-hero{grid-template-columns:minmax(0,1fr)!important}}
 @media(max-width:640px){.hm-modes button{flex-direction:column;gap:3px;padding:8px 4px}.hm-console{padding:10px}.hm-hero h1{font-size:40px}}
+
+/* ───────── V38 · Explorar: barra de ruta, salto, filtro de niveles y resaltado ───────── */
+.rm-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0 0 12px;padding:10px 12px;border-radius:14px;background:#fff;border:1px solid var(--rule,#d9e0ee)}
+.rm-crumbs{display:flex;align-items:center;gap:6px;flex-wrap:wrap;flex:1 1 auto;min-width:0}
+.rm-crumbs>i{font-style:normal;color:#8a97b4}
+.rm-crumb{display:inline-flex;align-items:center;gap:6px;border:1px solid color-mix(in srgb,var(--c,#0f1c3f) 35%,#fff);background:color-mix(in srgb,var(--c,#0f1c3f) 10%,#fff);color:color-mix(in srgb,var(--c,#0f1c3f) 80%,#0a1633);border-radius:10px;padding:6px 10px;font:700 13.5px var(--body)}
+.rm-crumb.root{cursor:pointer}.rm-crumb .inf-ic{width:17px;height:17px}
+.rm-crumb.sp{--c:#0f1c3f;background:#0f1c3f;color:#fff}
+.rm-crumb button{display:grid;place-items:center;width:22px;height:22px;border:0;border-radius:6px;background:rgba(255,255,255,.6);color:inherit;cursor:pointer;padding:0}
+.rm-crumb button .inf-ic{width:13px;height:13px}
+.rm-jump{display:flex;align-items:center;gap:8px;border:1.5px solid var(--rule,#d9e0ee);border-radius:11px;padding:0 10px;background:#fff;min-width:min(100%,300px)}
+.rm-jump .inf-ic{width:18px;height:18px;color:#5a6a8a}
+.rm-jump select{border:0!important;background:transparent!important;height:40px;font:600 14px var(--body);color:#0a1633;flex:1;min-width:0;outline:0}
+.rm-jump:focus-within{border-color:#3b4fa6;box-shadow:0 0 0 4px rgba(59,79,166,.14)}
+.rm-lvfilter{display:flex;align-items:center;gap:6px;flex-wrap:wrap;flex-basis:100%}
+.rm-lvfilter>span{font:700 13px var(--body);color:#33415f;margin-right:2px}
+.rm-lvbtn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--rule,#d9e0ee);background:#fff;color:#5a6a8a;border-radius:10px;padding:6px 10px;font:600 13px var(--body);cursor:pointer;min-height:38px;transition:background .2s,color .2s,border-color .2s}
+.rm-lvbtn.on{background:#0f1c3f;border-color:#0f1c3f;color:#fff}
+.rm-lvbtn .g{width:16px;height:16px}
+.rm-svg .rm-edge,.rm-svg .rm-drug{transition:opacity .2s}
+.rm-svg.hovering .rm-edge:not(.hl){opacity:.12}
+.rm-svg.hovering .rm-drug:not(.hl){opacity:.35}
+.rm-svg .rm-edge.hl{stroke-width:calc(var(--w,2px) + 2.5px)!important;opacity:1}
+.rm-svg .rm-drug.hl text{font-weight:800}
+.rm-svg .rm-drug{cursor:pointer}
+.rm-svg .rm-org:hover circle{stroke:#0f1c3f;stroke-width:3}
+.rm-side{border-top:5px solid var(--dom,#3b4fa6)}
+
+/* ───────── V38 · Transiciones entre vistas ───────── */
+@media(prefers-reduced-motion:no-preference){
+ ::view-transition-old(root),::view-transition-new(root){animation-duration:.32s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}
+ html[data-vt="route"]::view-transition-old(root){animation-name:vtout}
+ html[data-vt="route"]::view-transition-new(root){animation-name:vtin}
+ html[data-vt="swap"]::view-transition-old(root){animation:vtfade .18s ease both}
+ html[data-vt="swap"]::view-transition-new(root){animation:vtfadein .26s ease both}
+ @keyframes vtout{to{opacity:0;transform:translateY(-10px) scale(.995)}}
+ @keyframes vtin{from{opacity:0;transform:translateY(14px)}}
+ @keyframes vtfade{to{opacity:0}}@keyframes vtfadein{from{opacity:0}}
+ .nx-topbar{view-transition-name:topbar}
+ ::view-transition-old(topbar),::view-transition-new(topbar){animation:none}
+ /* microinteracciones generales */
+ .nx-main :is(button,a){transition:transform .16s cubic-bezier(.2,.7,.2,1),background-color .2s,color .2s,border-color .2s,box-shadow .2s}
+ .nx-main :is(.hm-hit,.hm-who,.hm-route button,.ms-fact,.fx-chip,.sx-chip,.rm-lvbtn,.trail button):active{transform:scale(.97)}
+ .trail{animation:mvrise .4s both}
+ .ms{animation:mvrise .5s cubic-bezier(.2,.7,.2,1) both}
+ .ms-ic{animation:msic .7s .1s cubic-bezier(.3,1.5,.5,1) both}
+ @keyframes msic{from{transform:scale(.6) rotate(-12deg);opacity:0}}
+ .hm-hero h1 span{background-size:200% 100%;animation:hmshift 9s ease-in-out infinite alternate}
+ @keyframes hmshift{to{background-position:100% 0}}
+ .hm-drawer{transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s}
+ .hm-drawer:hover{transform:translateY(-5px);box-shadow:0 28px 50px -30px var(--c)}
+ .hm-drawer:hover .hm-glyph{transform:rotate(-6deg) scale(1.06)}
+ .hm-glyph{transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
+ .hm-results .hm-hit{animation:mvrise .3s both}
+ .hm-results .hm-hit:nth-child(2){animation-delay:.02s}.hm-results .hm-hit:nth-child(3){animation-delay:.04s}.hm-results .hm-hit:nth-child(4){animation-delay:.06s}.hm-results .hm-hit:nth-child(n+5){animation-delay:.08s}
+ .fx-chip.on,.sx-chip.on,.rm-lvbtn.on,.ms-fact.on{animation:pop .3s cubic-bezier(.3,1.6,.5,1)}
+ @keyframes pop{50%{transform:scale(1.06)}}
+}
+
+/* ───────── V38 · Color, degradados y tipografía en todo el atlas ───────── */
+body{font-size:16.5px;line-height:1.65}
+.nx-main p,.nx-main li{font-size:max(15px,1em)}
+.nx-main small{font-size:max(12px,.82em)}
+/* títulos de sección dentro de fichas: subrayado en degradado del color de contexto */
+.nx-main :is(.v24-article,.a18-article,.v23-article,.v20-article,.v25-clinic-article) h2{padding-bottom:8px;background:linear-gradient(90deg,var(--dom,#3b4fa6),color-mix(in srgb,var(--dom,#3b4fa6) 0%,transparent) 70%) left bottom/100% 3px no-repeat}
+.nx-main .v25-syndrome-section h2{background:none;padding-bottom:0}
+/* tarjetas y secciones: fundido suave desde el color de contexto hacia blanco */
+.nx-main :is(.v25-syndrome-section,.v23-subcard,.v25-deep-box,.v24-book-chapter,.cmp-card,.lab-card,.v24-riskcards>div,.v25-md-block){background:linear-gradient(180deg,color-mix(in srgb,var(--syndrome,var(--dom,#3b4fa6)) 7%,#fff) 0,#fff 140px)!important}
+.nx-main :is(.v24-article,.a18-article,.v23-article,.v20-article,.v25-clinic-article){background:linear-gradient(180deg,color-mix(in srgb,var(--dom,#3b4fa6) 6%,#fff) 0,#fff 260px)!important}
+.nx-main .v25-syndrome-hero{background:linear-gradient(120deg,color-mix(in srgb,var(--syndrome,#1f5f73) 16%,#fff),#fff 70%)!important}
+/* botón principal con degradado de profundidad */
+.nx-main .nx-primary,.hm-link{background:linear-gradient(135deg,#1c2a5c,#0f1c3f)!important;color:#fff!important;border:0!important;box-shadow:0 10px 24px -14px rgba(15,28,63,.8)}
+.nx-main .nx-primary:hover,.hm-link:hover{background:linear-gradient(135deg,#2a3d8f,#1c2a5c)!important}
+/* encabezados más firmes y legibles */
+.nx-main :is(.v24-article,.a18-article,.v23-article,.v20-article) h1{letter-spacing:-.03em}
+.nx-main h3{letter-spacing:-.01em}
+/* barras de desplazamiento con el color de contexto */
+.nx-main *{scrollbar-color:color-mix(in srgb,var(--dom,#3b4fa6) 45%,#fff) transparent}

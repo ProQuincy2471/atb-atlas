@@ -211,7 +211,7 @@ function matrixView(){
 }
 /* ───── mapa radial por niveles ───── */
 function relMap(){
- const dom=NX.domain,gl=grps(dom),col=shades[dom],W=1280,H=920,cx=640,cy=470;
+ const dom=NX.domain,gl=grps(dom),col=shades[dom],W=1280,cx=640,cy=470;let H=920;
  const orgs=domainMicro(dom),selG=NX.mapGroup,selSp=NX.micro&&orgs.find(o=>o.id===NX.micro)?NX.micro:'';
  const n=gl.length,ang=i=>(i/n)*Math.PI*2-Math.PI/2,any=selG!=='all';
  const pos={};let edges='',nodes='',tags='',drugsSvg='',zone='';
@@ -234,15 +234,15 @@ function relMap(){
  });
  // fármacos a la derecha, agrupados por clase
  if(selSp&&pos[selSp]){
-  const o=pos[selSp].o,list=domainDrug(dom).map(a=>({a,c:covLevel(a,o)})).filter(x=>x.c.lvl&&x.c.lvl!=='N'&&x.c.lvl!=='R');
+  const o=pos[selSp].o,list=domainDrug(dom).map(a=>({a,c:covLevel(a,o)})).filter(x=>x.c.lvl&&(NX.mapLv||'YM').includes(x.c.lvl));
   const fam=[...new Set(list.map(x=>x.a.family))];list.sort((x,y)=>fam.indexOf(x.a.family)-fam.indexOf(y.a.family)||LV[y.c.lvl].n-LV[x.c.lvl].n);
-  const m=list.length,gaps=Math.max(0,fam.length-1),avail=H-150,unit=Math.min(24,avail/Math.max(m+gaps*.7,1)),totalH=unit*(m-1+gaps*.7),y0=cy-totalH/2,X=cx+372;
+  const m=list.length,gaps=Math.max(0,fam.length-1),avail=H-150,unit=Math.max(21,Math.min(26,avail/Math.max(m+gaps*.7,1))),totalH=unit*(m-1+gaps*.7),y0=Math.max(96,cy-totalH/2),X=cx+372;H=Math.max(920,Math.ceil(y0+totalH+70));
   let t=0,prev='';
   list.forEach(({a,c},i)=>{
    if(i&&a.family!==prev)t+=.7;prev=a.family;
    const y=y0+t*unit,x=X+Math.sin((y-cy)/H*Math.PI)*0,p=pos[selSp],fc=familyColor(a.kingdom,a.family);t+=1;
-   edges+='<path class="rm-edge l'+c.lvl+'" d="M'+p.x.toFixed(1)+' '+p.y.toFixed(1)+' C'+(cx-150)+' '+p.y.toFixed(1)+' '+(cx+120)+' '+y.toFixed(1)+' '+x.toFixed(1)+' '+y.toFixed(1)+'" style="--d:'+(i*16)+'ms;--w:'+(LV[c.lvl].n*.9+.7)+'px;stroke:'+fc+'"/>';
-   drugsSvg+='<g class="rm-drug l'+c.lvl+'" style="--d:'+(i*16)+'ms" data-act="nx-find:drug:'+a.kingdom+':'+a.id+'" transform="translate('+x.toFixed(1)+' '+y.toFixed(1)+')"><circle r="'+(5+LV[c.lvl].n*1.5)+'" fill="'+fc+'"/><text x="17" y="4.5">'+safe(a.name.length>26?a.name.slice(0,25)+'…':a.name)+'</text><text class="fr" x="'+(17+Math.min(a.name.length,26)*6.6+8)+'" y="4.5">'+LV[c.lvl].frac+'</text><title>'+safe(a.name+' · '+a.family+' · '+LV[c.lvl].label+' ('+LV[c.lvl].frac+')')+'</title></g>';
+   edges+='<path data-i="'+i+'" class="rm-edge l'+c.lvl+'" d="M'+p.x.toFixed(1)+' '+p.y.toFixed(1)+' C'+(cx-150)+' '+p.y.toFixed(1)+' '+(cx+120)+' '+y.toFixed(1)+' '+x.toFixed(1)+' '+y.toFixed(1)+'" style="--d:'+(i*16)+'ms;--w:'+(LV[c.lvl].n*.9+.7)+'px;stroke:'+fc+'"/>';
+   drugsSvg+='<g data-i="'+i+'" class="rm-drug l'+c.lvl+'" style="--d:'+(i*16)+'ms" data-act="nx-find:drug:'+a.kingdom+':'+a.id+'" transform="translate('+x.toFixed(1)+' '+y.toFixed(1)+')"><circle r="'+(5+LV[c.lvl].n*1.5)+'" fill="'+fc+'"/><text x="17" y="4.5">'+safe(a.name.length>26?a.name.slice(0,25)+'…':a.name)+'</text><text class="fr" x="'+(17+Math.min(a.name.length,26)*6.6+8)+'" y="4.5">'+LV[c.lvl].frac+'</text><title>'+safe(a.name+' · '+a.family+' · '+LV[c.lvl].label+' ('+LV[c.lvl].frac+')')+'</title></g>';
   });
  }
  Object.values(pos).forEach(q=>{
@@ -255,7 +255,7 @@ function relMap(){
  const byL=l=>list2.filter(x=>x.c.lvl===l);
  const step=(k,t,ok)=>'<li class="'+(ok?'done':'')+'"><b>'+k+'</b><span>'+t+'</span></li>';
  const gsel=gl.find(g=>g.id===selG);
- return '<div class="rm-wrap"><div class="rm-stage"><ol class="rm-steps">'+step(1,'Elige un grupo',any)+step(2,'Elige una especie',!!s)+step(3,'Mira sus agentes',!!s&&list2.length>0)+'</ol>'+
+ return '<div class="rm-wrap"><div class="rm-stage"><ol class="rm-steps">'+step(1,'Elige un grupo',any)+step(2,'Elige una especie',!!s)+step(3,'Mira sus agentes',!!s&&list2.length>0)+'</ol>'+mapToolbar(dom,gl,gsel,s)+
   '<svg class="rm-svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Mapa de relaciones entre grupos, especies y fármacos"><defs><radialGradient id="rmglow"><stop offset="0" stop-color="'+col+'" stop-opacity=".2"/><stop offset="1" stop-color="'+col+'" stop-opacity="0"/></radialGradient></defs>'+
   '<circle cx="'+cx+'" cy="'+cy+'" r="440" fill="url(#rmglow)"/><circle class="rm-ring" cx="'+cx+'" cy="'+cy+'" r="150"/><circle class="rm-ring" cx="'+cx+'" cy="'+cy+'" r="'+(any?318:290)+'"/>'+(any?'<circle class="rm-ring" cx="'+cx+'" cy="'+cy+'" r="372"/>':'')+
   zone+'<g class="rm-edges">'+edges+'</g>'+nodes+'<g class="rm-tags">'+tags+'</g>'+drugsSvg+
@@ -265,6 +265,19 @@ function relMap(){
   (s?'<div class="rm-lv">'+['Y','M','S'].map(l=>byL(l).length?'<div class="rm-lvgroup"><header><i class="g l'+l+'" style="'+gaugeStyle('#3b4fa6',l)+'"></i><b>'+LV[l].short+'</b><small>'+LV[l].frac+' · '+byL(l).length+'</small></header><div class="rm-lvchips">'+byL(l).map(({a})=>'<button style="--fc:'+familyColor(a.kingdom,a.family)+'" data-act="nx-find:drug:'+a.kingdom+':'+a.id+'"><i></i>'+safe(a.name)+'</button>').join('')+'</div></div>':'').join('')+(list2.filter(x=>x.c.lvl!=='N'&&x.c.lvl!=='R').length===0?'<p class="rm-empty">Sin agentes documentados para esta especie. «Sin dato» no es resistencia.</p>':'')+'</div>':'')+
   '<div class="rm-groups">'+gl.map(g=>'<button class="'+(selG===g.id?'on':'')+'" style="--g:'+g.color+'" data-act="nx-mapgroup:'+g.id+'"><i></i>'+safe(g.label)+'<b>'+g.ids.length+'</b></button>').join('')+'</div></aside></div>';
 }
+
+/* barra del mapa: ruta actual con pasos atrás, salto directo a una especie y filtro de niveles */
+function mapToolbar(dom,gl,gsel,s){
+ const I=window.INF_ICON||(()=>''),lv=NX.mapLv||'YM';
+ const crumbs='<nav class="rm-crumbs" aria-label="Ruta en el mapa"><button data-act="nx-mapgroup:'+(gsel?gsel.id:'__none')+'" class="rm-crumb root" style="--c:'+shades[dom]+'"'+(gsel?'':' aria-current="true"')+'>'+I(dom)+safe(names[dom])+'</button>'+(gsel?'<i>›</i><span class="rm-crumb" style="--c:'+gsel.color+'">'+safe(gsel.label)+'<button data-act="nx-mapgroup:'+gsel.id+'" aria-label="Quitar grupo">'+I('clear')+'</button></span>':'')+(s?'<i>›</i><span class="rm-crumb sp">'+safe(s.name)+'<button data-act="nx-map-micro:" aria-label="Quitar especie">'+I('clear')+'</button></span>':'')+'</nav>';
+ const opts=gl.map(g=>'<optgroup label="'+safe(g.label)+'">'+g.ids.map(id=>{const o=domainMicro(dom).find(x=>x.id===id);return o?'<option value="'+safe(g.id+'|'+o.id)+'"'+(s&&s.id===o.id?' selected':'')+'>'+safe(o.name)+'</option>':''}).join('')+'</optgroup>').join('');
+ const jump='<label class="rm-jump">'+I('search')+'<span class="sr-only">Ir directo a una especie</span><select id="rm-jump"><option value="">Ir directo a una especie…</option>'+opts+'</select></label>';
+ const chip=(l,t)=>'<button class="rm-lvbtn l'+l+(lv.includes(l)?' on':'')+'" data-act="nx-maplv:'+l+'" aria-pressed="'+lv.includes(l)+'"><i class="g l'+l+'" style="'+gaugeStyle('#3b4fa6',l)+'"></i>'+t+'</button>';
+ const filt=s?'<div class="rm-lvfilter" role="group" aria-label="Niveles de cobertura visibles"><span>Mostrar</span>'+chip('Y','Casi siempre')+chip('M','Habitual')+chip('S','A veces')+chip('R','Rara vez')+'</div>':'';
+ return '<div class="rm-toolbar">'+crumbs+jump+filt+'</div>';
+}
+document.addEventListener('change',e=>{if(e.target.id!=='rm-jump'||!e.target.value)return;const [g,id]=e.target.value.split('|');NX.mapGroup=g;NX.micro=id;NX.status='relevant';render()});
+document.addEventListener('mouseover',e=>{const t=e.target.closest&&e.target.closest('.rm-drug[data-i]');const svg=document.querySelector('.rm-svg');if(!svg)return;svg.querySelectorAll('.hl').forEach(x=>x.classList.remove('hl'));if(t){svg.classList.add('hovering');svg.querySelectorAll('[data-i="'+t.dataset.i+'"]').forEach(x=>x.classList.add('hl'))}else svg.classList.remove('hovering')});
 /* ───────── V30: comparador y laboratorio guiados ───────── */
 Object.assign(NX,{cmp:{dom:'bacteria',ids:[],q:'',cls:'all',target:'',grp:'all'},lab:{sid:'',sp:[],q:'',dom:'bacteria'}});
 const deepTxt=(a,k)=>{const d=window.ATLAS25&&window.ATLAS25.drugDeep&&window.ATLAS25.drugDeep[a.id];const t=d&&d[k]&&d[k][0];return t?String(t).replace(/\s+/g,' ').slice(0,230)+(String(t).length>230?'…':''):''};
@@ -354,11 +367,12 @@ act=function(command){
  case 'nx-lab-syn':{NX.lab.sid=value;const s=D.syndromes.find(x=>x.id===value);NX.lab.sp=(s&&s.pathogenIds||[]).slice();NX.lab.q='';return render()}
  case 'nx-lab-del':NX.lab.sp=NX.lab.sp.filter(x=>x!==value);return render();
  case 'nx-lab-add':if(!NX.lab.sp.includes(value))NX.lab.sp.push(value);NX.lab.q='';return render();
- case 'nx-mapgroup':NX.mapGroup=NX.mapGroup===value?'all':value;NX.micro='';return render();
+ case 'nx-mapgroup':if(value==='__none')return render();NX.mapGroup=NX.mapGroup===value?'all':value;NX.micro='';return render();
  case 'nx-cov-toggle':NX.covAll=!NX.covAll;return render();
  case 'nx-cov-class':{if(value==='all')NX.covClasses=[];else{const i=NX.covClasses.indexOf(value);if(i<0)NX.covClasses.push(value);else NX.covClasses.splice(i,1)}return render()}
  case 'nx-cov-group':NX.covGroup=value;return render();
  case 'nx-map-group':NX.group=value;NX.micro='';NX.status='relevant';return render();
+ case 'nx-maplv':{let v=NX.mapLv||'YM';v=v.includes(value)?v.replace(value,''):v+value;NX.mapLv=v||value;return render()}
  case 'nx-map-micro':NX.micro=value;NX.status='relevant';return render();
  case 'nx-map-status':NX.status=value;return render();
  case 'nx-map-clear':NX.group='all';NX.query='';NX.rxQuery='';NX.rxFamily='all';NX.status='relevant';return render();
@@ -623,6 +637,12 @@ function trailGo(d){const T=trailList();if(!T||T.cur<0)return;const it=T.items[T
 document.addEventListener('click',e=>{const t=e.target.closest('[data-trail]');if(t){e.preventDefault();trailGo(+t.dataset.trail)}});
 document.addEventListener('keydown',e=>{if(e.target.closest('input,textarea,select,[contenteditable]')||e.metaKey||e.ctrlKey||e.altKey)return;if(e.key===']')trailGo(1);else if(e.key==='[')trailGo(-1)});
 const renderGuide=render;render=function(){renderGuide();enhanceGuide()};
+
+/* Transiciones entre vistas (View Transitions API): al cambiar de sección y al abrir otra ficha.
+   Se omiten con movimiento reducido, en navegadores sin soporte y en pruebas automatizadas. */
+const vtOK=()=>!!document.startViewTransition&&!navigator.webdriver&&!matchMedia('(prefers-reduced-motion:reduce)').matches;
+const gotoVT=goto;goto=function(route){if(!vtOK()||route===state.route)return gotoVT(route);document.documentElement.dataset.vt='route';const t=document.startViewTransition(()=>gotoVT(route));t.finished.finally(()=>delete document.documentElement.dataset.vt)};
+const actVT=act;act=function(command){const op=String(command).split(':')[0];if(vtOK()&&/^(micro-pick|drug-pick|v24-open-micro|v24-open-drug|v25-clinical|v24-mode|nx-view|nx-mapgroup|nx-map-micro|nx-map-domain|who-age|hm-mode)$/.test(op)){document.documentElement.dataset.vt='swap';let r;const t=document.startViewTransition(()=>{r=actVT(command)});t.finished.finally(()=>delete document.documentElement.dataset.vt);return r}return actVT(command)};
 const renderScroll=render;render=function(){const snap=scrollKeep||snapScroll();scrollKeep=null;renderScroll();restoreScroll(snap);keepChosenVisible()};
 const actScroll=act;act=function(command){const op=String(command).split(':')[0];const r=actScroll(command);if(ARTICLE_OPS.test(op))requestAnimationFrame(showArticleStart);return r};
 
