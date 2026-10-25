@@ -21,7 +21,7 @@ const allMicro=()=>[...D.pathogens.map(x=>({...x,kingdom:'bacteria'})),...(windo
 const allDrug=()=>[...D.antibiotics.map(x=>({...x,kingdom:'bacteria'})),...(window.ATLAS24?.debug?.drugs||[])];
 const domainMicro=k=>allMicro().filter(x=>x.kingdom===k);
 const domainDrug=k=>allDrug().filter(x=>x.kingdom===k);
-const grps=k=>k==='bacteria'?D.groups.map((g,i)=>({id:g.id,label:g.name,color:grpcolor(g.id),ids:D.pathogens.filter(p=>p.groupId===g.id).map(p=>p.id),concept:'Morfología, especie y fenotipo de resistencia: interpretación siempre individual.'})):(window.ATLAS25?.microGroups||[]).filter(g=>g.kingdom===k);
+const grps=k=>k==='bacteria'?D.groups.map((g,i)=>({id:g.id,label:g.name,color:grpcolor(g.id),ids:D.pathogens.filter(p=>p.groupId===g.id).map(p=>p.id),concept:'Morfología, especie y fenotipo de resistencia: interpretación siempre individual.'})):(window.ATLAS25?.microGroups||[]).filter(g=>g.kingdom===k).map((g,i)=>({...g,color:['#6b2fc4','#2f6f9f','#b23a55','#2b7d6a','#a0558e','#46508e','#0a86b8','#7a46c8','#c2456f','#5b7a2a','#8a4aa8','#3b4fa6'][i%12]}));
 const organismGroup=p=>grps(p.kingdom).find(g=>g.ids.includes(p.id));
 const displayStatus={
  expected:{label:'Actividad habitual',description:'Actividad o indicación documentada; requiere confirmar contexto.',icon:'✓'},
@@ -68,34 +68,37 @@ frame=function(content){
  return '<div class="nx-app '+(NX.compact?'nx-compact':'')+'">'+rail()+'<div class="nx-stage">'+topbar()+'<main class="nx-main" id="main">'+content+'</main><footer class="nx-footer"><span><b>INFEORA</b> · Atlas académico de microbiología e infectología</span><span>La cobertura es educativa; validar susceptibilidad, foco y guías antes de prescribir.</span><a href="https://github.com/ProQuincy2471/atb-atlas" target="_blank" rel="noopener noreferrer">Repositorio ↗</a></footer></div></div>'+commandPalette()+modal();
 };
 function home(){
- const countM=allMicro().length,countD=allDrug().length,who=typeof WHO==='undefined'?0:WHO.conditions.length,synd=who+(window.ATLAS25.extraConditions||[]).length;
- const tiles=[
- ['bacteria','Bacteriología','Gram, virulencia y resistencia',D.pathogens.length,'A'],
- ['virus','Virología','Replicación, latencia y antivirales',window.ATLAS24.viruses.length,'B'],
- ['fungi','Micología','Levaduras, mohos y micosis invasivas',window.ATLAS24.fungi.length,'C'],
- ['parasites','Parasitología','Ciclos vitales y enfermedades tropicales',window.ATLAS24.parasites.length,'D']
- ];
- const dish='<svg class="nx-dish" viewBox="0 0 400 400" role="img" aria-label="Los cuatro dominios: bacterias, virus, hongos y parásitos"><defs><clipPath id="nxdish"><circle cx="200" cy="200" r="168"/></clipPath></defs>'+
-  '<circle cx="200" cy="200" r="190" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="200" cy="200" r="182" fill="none" stroke="currentColor" stroke-width=".8" stroke-dasharray="2 5"/>'+
-  '<g clip-path="url(#nxdish)"><rect x="32" y="32" width="168" height="168" class="d-bacteria"/><rect x="200" y="32" width="168" height="168" class="d-virus"/><rect x="32" y="200" width="168" height="168" class="d-fungi"/><rect x="200" y="200" width="168" height="168" class="d-parasites"/>'+
-  '<g fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.4"><circle cx="200" cy="200" r="120"/><circle cx="200" cy="200" r="80"/><circle cx="200" cy="200" r="40"/></g>'+
-  '<g fill="#fff" fill-opacity=".9"><circle cx="118" cy="104" r="9"/><circle cx="150" cy="140" r="5"/><circle cx="94" cy="150" r="4"/><circle cx="268" cy="112" r="3.5"/><circle cx="300" cy="86" r="8"/><circle cx="326" cy="140" r="5"/><circle cx="104" cy="272" r="7"/><circle cx="148" cy="300" r="4"/><circle cx="80" cy="316" r="3"/><circle cx="296" cy="276" r="10"/><circle cx="262" cy="320" r="4"/><circle cx="330" cy="300" r="5"/></g></g>'+
-  '<g stroke="#0b1533" stroke-width="3"><line x1="200" y1="28" x2="200" y2="372"/><line x1="28" y1="200" x2="372" y2="200"/></g>'+
-  '<g class="d-lbl" font-family="Big Shoulders Display,sans-serif" font-weight="900" fill="#fff"><text x="112" y="132" font-size="58" text-anchor="middle">'+D.pathogens.length+'</text><text x="288" y="132" font-size="58" text-anchor="middle">'+window.ATLAS24.viruses.length+'</text><text x="112" y="300" font-size="58" text-anchor="middle">'+window.ATLAS24.fungi.length+'</text><text x="288" y="300" font-size="58" text-anchor="middle">'+window.ATLAS24.parasites.length+'</text></g>'+
-  '<circle cx="200" cy="200" r="22" fill="#8fe3ff" stroke="#0b1533" stroke-width="3"/><text x="200" y="207" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="700" font-size="16" fill="#0b1533">Rx</text></svg>';
- const tick=['BACTERIAS '+D.pathogens.length,'VIRUS '+window.ATLAS24.viruses.length,'HONGOS '+window.ATLAS24.fungi.length,'PARÁSITOS '+window.ATLAS24.parasites.length,'ANTIMICROBIANOS '+countD,'SÍNDROMES '+synd,'DEL MICROORGANISMO A LA DECISIÓN CLÍNICA'];
- const band=tick.concat(tick).map(t=>'<span>'+t+'</span><i>✱</i>').join('');
- return '<div class="nx-home"><div class="nx-hero"><div class="nx-hero-copy"><span class="nx-edition"><i></i> ATLAS DE INFECTOLOGÍA CLÍNICA · EDICIÓN 2026</span>'+
- '<h1><span class="h-a">Del microorganismo</span><span class="h-b">a la <mark>decisión</mark></span><span class="h-c"><em>clínica</em>.</span></h1><p>Un atlas para estudiar con profundidad: reconocer el agente, comprender su biología, interpretar las pruebas y relacionar su mecanismo con el tratamiento.</p>'+
- '<div class="nx-hero-actions"><button class="nx-primary" data-act="nx-go:mapa">Explorar conexiones <span>↗</span></button><button class="nx-secondary" data-act="nx-go:clinica">Abrir síndromes <span>→</span></button></div></div>'+
- '<div class="nx-hero-panel"><div class="nx-dish-wrap">'+dish+'<span class="nx-dish-tag t1">PLACA 01 · LOS CUATRO DOMINIOS</span></div></div></div>'+
- '<div class="nx-band" aria-hidden="true"><div class="nx-band-track">'+band+'</div></div>'+
- '<div class="nx-index-head"><div><span class="nx-overline">01 / EL ARCHIVO</span><h2>Cuatro dominios, <em>una</em> biblioteca clínica.</h2></div><p>Explora por biología y síndrome. La profundidad está en las fichas, no en un mapa decorativo.</p></div>'+
- '<div class="nx-home-domains">'+tiles.map(([k,label,desc,num,ltr])=>'<button class="nx-domain-card '+k+'" data-act="nx-home-domain:'+k+'"><span class="nx-dc-over">DOMINIO '+ltr+'</span><span class="nx-dc-count">'+num+'</span><h3>'+label+'</h3><p>'+desc+'</p><div class="nx-dc-bottom"><span>Explorar especies</span><b>↗</b></div></button>').join('')+'</div>'+
- '<div class="nx-home-bottom"><section><span class="nx-overline">02 / TERAPÉUTICA</span><h2>Farmacología <em>sin atajos.</em></h2><p>'+countD+' agentes antibacterianos, antivirales, antifúngicos y antiparasitarios: diana, mecanismo, exposición, espectro y resistencia.</p><button data-act="nx-go:atb">Explorar antimicrobianos →</button></section>'+
- '<section><span class="nx-overline">03 / MEDICINA INTERNA</span><h2>Revisiones <em>sindrómicas.</em></h2><p>'+synd+' síndromes enlazados a un marco de reconocimiento, diagnóstico diferencial, tratamiento y evolución.</p><button data-act="nx-go:clinica">Consultar síndromes →</button></section>'+
- '<section><span class="nx-overline">04 / APRENDER</span><h2>Biblioteca de <em>fundamentos.</em></h2><p>Capítulos de revisión, casos clínicos y explicaciones de microbiología aplicadas a la práctica de residencia.</p><button data-act="nx-go:aprender">Abrir biblioteca →</button></section></div></div>';
+ const I=window.INF_ICON||(()=>''),GL=window.INF_GLYPH||(()=>''),WT=window.ATLAS25?.whoTreat||{};
+ const conds=[...(typeof WHO!=='undefined'?WHO.conditions:[]),...(window.ATLAS25.extraConditions||[])];
+ const dom=[['bacteria','Bacterias','Gram, morfología, virulencia y resistencia',D.pathogens.length,grps('bacteria')],['virus','Virus','Replicación, latencia y antivirales',domainMicro('virus').length,grps('virus')],['fungi','Hongos','Levaduras, mohos, dimórficos e invasivas',domainMicro('fungi').length,grps('fungi')],['parasites','Parásitos','Protozoos, helmintos y ciclos vitales',domainMicro('parasites').length,grps('parasites')]];
+ const mode=NX.homeMode||'micro';
+ const modes=[['micro','Un microorganismo','micro','p. ej. Klebsiella, Candida auris, VIH'],['drug','Un fármaco','atb','p. ej. meropenem, aciclovir, ivermectina'],['syndrome','Un cuadro clínico','clinica','p. ej. neumonía, meningitis, ITU']];
+ const curMode=modes.find(m=>m[0]===mode)||modes[0];
+ const feat=Object.keys(WT).filter(id=>WT[id].abx!=='no'&&WT[id].grupos?.[0]?.esc?.[0]?.first?.length).slice(0,40);
+ const pick=['who-13','who-14','who-34','who-24','who-16','who-26','who-21','who-30'].filter(id=>feat.includes(id));const featIds=(pick.length>=6?pick:feat).slice(0,6);
+ const featCards=featIds.map(id=>{const c=conds.find(x=>x.id===id)||{title:id,system:''},T=WT[id],e=T.grupos[0].esc[0],m=window.INF_SYS?window.INF_SYS(c.system):{color:'#3b4fa6',icon:'clinica'};
+  return '<button class="hm-who" style="--t:'+m.color+'" data-act="nx-find:syndrome:'+safe(id)+'"><span class="hm-who-top"><i>'+I(m.icon)+'</i><small>'+safe(c.system)+'</small></span><b>'+safe(c.title)+'</b><span class="hm-who-rx"><em class="hm-aw hm-aw-'+(e.first[0].c||'x')+'">'+(e.first[0].c||'·')+'</em>'+safe(e.first[0].t.replace(/^Casos? (leves|graves): /,'').split(/\. Bandas|\. Vía oral|: neonatos/)[0].slice(0,70))+'</span><span class="hm-who-dur">'+safe(e.dur||'')+'</span></button>'}).join('');
+ const route=[['micro','Reconoce el agente','Tinción, morfología, epidemiología y factores de virulencia.','bacteria'],['atb','Entiende el fármaco','Diana, mecanismo molecular, espectro y resistencia.','atb'],['mapa','Cruza agente y fármaco','Mapa y matriz de cobertura graduada con su fuente.','mapa'],['clinica','Decide en el paciente','Síndrome, diferencial, primera línea y duración.','clinica']];
+ return '<div class="hm">'+
+ '<section class="hm-hero"><div class="hm-hero-txt"><span class="hm-kicker">'+I('micro')+'INFEORA · Atlas de infectología clínica</span><h1>¿Qué tienes <span>enfrente</span>?</h1><p>Empieza por lo que sabes: el microorganismo del cultivo, el fármaco que te preguntan o el cuadro del paciente. El atlas te lleva al resto.</p></div>'+
+ '<div class="hm-console" role="search"><div class="hm-modes" role="tablist">'+modes.map(([k,l,ic])=>'<button role="tab" aria-selected="'+(mode===k)+'" class="'+(mode===k?'on':'')+'" data-act="hm-mode:'+k+'">'+I(ic)+'<span>'+l+'</span></button>').join('')+'</div>'+
+ '<label class="hm-input">'+I('search')+'<span class="sr-only">Buscar '+curMode[1]+'</span><input id="hm-q" autocomplete="off" placeholder="'+safe(curMode[3])+'" value="'+safe(NX.homeQ||'')+'"></label><div class="hm-results" id="hm-results">'+homeResults(mode,NX.homeQ||'')+'</div></div></section>'+
+ '<section class="hm-drawers" aria-label="Los cuatro dominios">'+dom.map(([k,l,d,n,gs])=>'<article class="hm-drawer hm-'+k+'"><button class="hm-drawer-main" data-act="nx-home-domain:'+k+'"><span class="hm-glyph">'+GL(k)+'</span><span class="hm-drawer-n">'+n+'</span><h3>'+l+'</h3><p>'+d+'</p></button><div class="hm-groups">'+gs.slice(0,5).map(g=>'<span>'+safe(g.label)+'</span>').join('')+(gs.length>5?'<span class="more">+'+(gs.length-5)+'</span>':'')+'</div><div class="hm-drawer-acts"><button data-act="nx-home-domain:'+k+'">'+I('mapa')+'Ver en el mapa</button><button data-act="hm-lib:'+k+'">'+I('book')+'Abrir fichas</button></div></article>').join('')+'</section>'+
+ '<section class="hm-route"><header><h2>Cómo se usa el atlas</h2><p>Cuatro pasos, del laboratorio a la cama del paciente.</p></header><ol>'+route.map(([r,t,d,ic],i)=>'<li><button data-act="nx-go:'+r+'"><span class="hm-step">'+(i+1)+'</span><span class="hm-route-ic">'+(GL(ic)||I(ic))+'</span><b>'+t+'</b><small>'+d+'</small></button></li>').join('')+'</ol></section>'+
+ (featCards?'<section class="hm-whosec"><header><div><h2>Primera línea según la OMS</h2><p>Cuadros frecuentes con el tratamiento de primera elección del manual AWaRe 2022. Abre la ficha para dosis pediátricas, alternativas y duración.</p></div><button class="hm-link" data-act="nx-go:clinica">Ver los '+Object.keys(WT).length+' cuadros '+I('clinica')+'</button></header><div class="hm-who-grid">'+featCards+'</div><p class="hm-note"><b>A</b> Access · <b>W</b> Watch · <b>R</b> Reserve. Adaptación educativa no oficial: contrastar con la edición vigente y el antibiograma local.</p></section>':'')+
+ '</div>';
 }
+function homeResults(mode,q){
+ const n=normalized(q||'').trim(),I=window.INF_ICON||(()=>'');
+ let list=[];
+ if(mode==='micro')list=allMicro().map(p=>({t:p.name,s:(p.kingdom==='bacteria'?(p.domain||'Bacteria'):names[p.kingdom]||p.kingdom),k:p.kingdom,act:'nx-find:micro:'+p.kingdom+':'+p.id,txt:[p.name,p.taxonomy,p.family,p.domain].join(' ')}));
+ else if(mode==='drug')list=allDrug().map(a=>({t:a.name,s:a.family||'',k:a.kingdom,act:'nx-find:drug:'+a.kingdom+':'+a.id,txt:[a.name,a.family,a.subgroup].join(' ')}));
+ else list=[...(typeof WHO!=='undefined'?WHO.conditions:[]),...(window.ATLAS25.extraConditions||[])].map(c=>({t:c.title,s:c.system,k:'clin',act:'nx-find:syndrome:'+c.id,txt:c.title+' '+c.system,who:!!window.ATLAS25?.whoTreat?.[c.id]}));
+ const hits=n?list.filter(x=>normalized(x.txt).includes(n)).slice(0,8):list.slice(0,8);
+ if(!hits.length)return '<p class="hm-empty">Sin coincidencias para «'+safe(q)+'». Prueba con el género, la familia o el órgano.</p>';
+ return (n?'':'<span class="hm-hint">Sugerencias</span>')+hits.map(x=>'<button class="hm-hit hm-k-'+x.k+'" data-act="'+safe(x.act)+'"><i>'+I(x.k==='clin'?'clinica':mode==='drug'?'pill':x.k)+'</i><b>'+safe(x.t)+'</b><small>'+safe(x.s)+(x.who?' · OMS':'')+'</small></button>').join('');
+}
+document.addEventListener('input',e=>{if(e.target.id!=='hm-q')return;NX.homeQ=e.target.value;const r=document.getElementById('hm-results');if(r)r.innerHTML=homeResults(NX.homeMode||'micro',NX.homeQ)});
 function mapExplorer(){
  const groupList=grps(NX.domain),group=groupList.find(g=>g.id===NX.group),
  all=domainMicro(NX.domain),filtered=all.filter(p=>(NX.group==='all'||group?.ids.includes(p.id))&&(!NX.query||normalized([p.name,p.identity,p.taxonomy,p.clinical].join(' ')).includes(normalized(NX.query))));
@@ -247,7 +250,7 @@ function relMap(){
   nodes+='<g class="rm-org '+(q.mini?'':'big ')+(isSel?'sel':'')+'" data-act="nx-map-micro:'+q.o.id+'" transform="translate('+q.x.toFixed(1)+' '+q.y.toFixed(1)+')"><circle r="'+(isSel?13:q.mini?6.5:9.5)+'" fill="'+q.g.color+'"/>'+(isSel?'<circle class="ping" r="13" fill="none" stroke="'+q.g.color+'"/>':'')+(q.mini?'':'<text x="'+(left?-17:17)+'" y="4.5" text-anchor="'+(left?'end':'start')+'">'+safe(shortName(q.o.name))+'</text>')+'<title>'+safe(q.o.name)+'</title></g>';
  });
  gl.forEach((g,gi)=>{const a=ang(gi),gx=cx+Math.cos(a)*(any?118:150),gy=cy+Math.sin(a)*(any?118:150),on=selG===g.id,dim=any&&!on;
-  nodes+='<g class="rm-group '+(on?'on ':'')+(dim?'dim':'')+'" data-act="nx-mapgroup:'+g.id+'" style="--d:'+(gi*50)+'ms" transform="translate('+gx.toFixed(1)+' '+gy.toFixed(1)+')"><circle r="'+(on?34:any?24:30)+'" fill="'+g.color+'"/><text text-anchor="middle" y="6">'+g.ids.length+'</text><title>'+safe(g.label)+'</title></g>'});
+  nodes+='<g class="rm-group '+(on?'on ':'')+(dim?'dim':'')+'" data-act="nx-mapgroup:'+g.id+'" style="--d:'+(gi*50)+'ms" transform="translate('+gx.toFixed(1)+' '+gy.toFixed(1)+')"><title>'+safe(g.label)+' · '+g.ids.length+' especies. Clic para ver su espectro.</title><circle r="'+(on?34:any?24:30)+'" fill="'+g.color+'"/><text text-anchor="middle" y="6">'+g.ids.length+'</text><title>'+safe(g.label)+'</title></g>'});
  const s=selSp&&pos[selSp]?pos[selSp].o:null,list2=s?domainDrug(dom).map(a=>({a,c:covLevel(a,s)})).filter(x=>x.c.lvl):[];
  const byL=l=>list2.filter(x=>x.c.lvl===l);
  const step=(k,t,ok)=>'<li class="'+(ok?'done':'')+'"><b>'+k+'</b><span>'+t+'</span></li>';
@@ -339,6 +342,8 @@ act=function(command){
  case 'nx-density':NX.compact=!NX.compact;try{localStorage.setItem('infeora-v26-compact',NX.compact?'1':'0')}catch{}return render();
  case 'nx-map-domain':NX.mapGroup='all';NX.domain=value;NX.group='all';NX.micro='';NX.query='';NX.rxQuery='';NX.rxFamily='all';NX.status='relevant';return render();
  case 'fx':{const [k,v]=String(value).split('=');if(k==='reset'){FX.dom='all';FX.shape='all';FX.target='all';FX.newer=false}else if(k==='newer')FX.newer=v==='1';else FX[k]=FX[k]===v?'all':v;return render()}
+  case 'hm-mode':NX.homeMode=value;NX.homeQ='';render();document.getElementById('hm-q')?.focus();return;
+  case 'hm-lib':NX.drawer=false;if(value==='bacteria'){window.ATLAS24.debug.ui.micro='bacteria'}else{window.ATLAS24.debug.ui.micro=value;window.ATLAS24.debug.ui.selectedMicro=''}return goto('micro');
   case 'who-age':WHOUI.age=+value||0;return render();
   case 'nx-view':NX.view=value;if(state.route!=='mapa')return goto('mapa');return render();
  case 'nx-cmp-dom':NX.cmp.dom=value;NX.cmp.ids=[];NX.cmp.cls='all';NX.cmp.q='';NX.cmp.target='';return render();
