@@ -50,7 +50,7 @@ function rail(){
 }
 function topbar(){
  const label=sections.find(x=>x[0]===state.route)||sections[0];
- return '<div class="nx-topbar"><div class="nx-topbar-left"><button class="nx-hamb" data-act="nx-drawer" title="Abrir menú" aria-label="Abrir menú"><span></span><span></span><span></span></button><div class="nx-breadcrumb"><span>ATLAS CLÍNICO</span><i>/</i><b>'+safe(label[1])+'</b></div></div><div class="nx-topbar-actions">'+
+ return '<div class="nx-topbar"><div class="nx-topbar-left"><button class="nx-hamb" data-act="nx-drawer" title="Abrir menú" aria-label="Abrir menú"><span></span><span></span><span></span></button><div class="nx-breadcrumb"><span>ATLAS CLÍNICO</span><i>/</i><b>'+safe(label[1])+'</b></div></div><div class="nx-topbar-actions"><button class="nx-motion" data-act="nx-motion" aria-pressed="'+!document.documentElement.classList.contains('motion-off')+'" title="Activar o desactivar animaciones"><i></i><span>Animaciones</span></button>'+
  '<button data-act="nx-search-open" class="nx-global-search"><span class="nx-search-magnifier" aria-hidden="true">⌕</span><span>Buscar microorganismo, fármaco o síndrome</span><kbd>⌘ K</kbd></button>'+
  '<button data-act="nx-density" class="nx-tool" title="Alternar densidad de lectura" aria-label="Alternar densidad de lectura"><span>◫</span></button></div></div>';
 }
@@ -374,6 +374,7 @@ act=function(command){
  case 'fx':{const [k,v]=String(value).split('=');if(k==='reset'){FX.dom='all';FX.shape='all';FX.target='all';FX.newer=false}else if(k==='newer')FX.newer=v==='1';else FX[k]=FX[k]===v?'all':v;return render()}
   case 'hm-mode':NX.homeMode=value;NX.homeQ='';render();document.getElementById('hm-q')?.focus();return;
   case 'hm-lib':NX.drawer=false;if(value==='bacteria'){window.ATLAS24.debug.ui.micro='bacteria'}else{window.ATLAS24.debug.ui.micro=value;window.ATLAS24.debug.ui.selectedMicro=''}return goto('micro');
+  case 'nx-motion':{const off=!document.documentElement.classList.contains('motion-off');document.documentElement.classList.toggle('motion-off',off);try{localStorage.setItem('infeora-motion',off?'off':'on')}catch(e){}return render()}
   case 'who-age':WHOUI.age=+value||0;return render();
   case 'nx-view':NX.view=value;if(state.route!=='mapa')return goto('mapa');return render();
  case 'nx-cmp-dom':NX.cmp.dom=value;NX.cmp.ids=[];NX.cmp.cls='all';NX.cmp.q='';NX.cmp.target='';return render();
@@ -624,12 +625,12 @@ const whoEsc=x=>String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').
 const AWR={A:['Access','Primera línea de uso amplio'],W:['Watch','Mayor riesgo de resistencia: usar con indicación'],R:['Reserve','Último recurso']};
 function whoChips(list){return list.length?list.map(d=>'<li class="who-drug who-'+(d.c||'x')+'">'+(d.c?'<b title="'+whoEsc(AWR[d.c][0]+' — '+AWR[d.c][1])+'">'+d.c+'</b>':'')+'<span>'+whoEsc(d.t)+'</span></li>').join(''):''}
 function whoPanel(id){
- const T=window.ATLAS25?.whoTreat?.[id]||window.ATLAS25?.oiTreat?.[id]||window.ATLAS25?.msfTreat?.[id];if(!T)return '';const isMsf=T.fuente==='msf'||T.fuente==='nih',isNih=T.fuente==='nih';
+ const T=window.ATLAS25?.whoTreat?.[id]||window.ATLAS25?.oiTreat?.[id]||window.ATLAS25?.msfTreat?.[id];if(!T)return '';const isGuia=T.fuente==='guia',isMsf=T.fuente==='msf'||T.fuente==='nih'||isGuia,isNih=T.fuente==='nih';
  const gi=Math.min(WHOUI.age,T.grupos.length-1),g=T.grupos[gi];
  const abx={no:['Sin antibiótico','who-abx-no'],cond:['Antibiótico solo si hay indicación','who-abx-cond'],si:['Antibiótico indicado','who-abx-si']}[T.abx]||['',''];
  const tabs=T.grupos.length>1?'<div class="who-tabs" role="tablist">'+T.grupos.map((x,i)=>'<button role="tab" aria-selected="'+(i===gi)+'" class="'+(i===gi?'on':'')+'" data-act="who-age:'+i+'">'+whoEsc(x.p)+'</button>').join('')+'</div>':'<div class="who-tabs"><span class="on">'+whoEsc(g.p)+'</span></div>';
  const cards=g.esc.map(e=>'<article class="who-esc"><h3>'+whoEsc(e.t)+'</h3>'+(e.first.length?'<div class="who-line"><h4>Primera elección</h4><ul>'+whoChips(e.first)+'</ul></div>':'')+(e.second.length?'<div class="who-line who-second"><h4>Segunda elección</h4><ul>'+whoChips(e.second)+'</ul></div>':'')+(e.dur?'<p class="who-dur"><b>Duración</b> '+whoEsc(e.dur)+'</p>':'')+(e.nota?'<p class="who-note">'+whoEsc(e.nota)+'</p>':'')+'</article>').join('');
- return '<section class="who-panel" id="who-panel"><header><div><span class="who-abx '+abx[1]+'">'+abx[0]+'</span><h2>'+(isNih?'Tratamiento según la guía NIH de infecciones oportunistas en VIH':isMsf?'Tratamiento según MSF Clinical guidelines':'Tratamiento según el manual OMS AWaRe')+'</h2></div><p>'+whoEsc(T.res)+'</p></header>'+tabs+'<div class="who-grid">'+cards+'</div>'+(T.pat&&T.pat.length?'<p class="who-pat"><b>Patógenos probables</b> '+T.pat.map(whoEsc).join(' · ')+'</p>':'')+(T.alertas&&T.alertas.length?'<ul class="who-alerts">'+T.alertas.map(a=>'<li>'+whoEsc(a)+'</li>').join('')+'</ul>':'')+'<footer>'+(isMsf?'':'<span class="who-legend"><b>A</b> Access <b>W</b> Watch <b>R</b> Reserve</span>')+'<span>Dosis para función renal normal. Fuente: '+whoEsc(T.src)+(isNih?'. Documento de dominio público; síntesis en español con la fuerza de la recomendación entre corchetes (A–C, I–III)':isMsf?'. Síntesis propia en español; no reproduce ni traduce el manual':' ('+whoEsc(T.pag)+'); adaptación no oficial, la OMS no la avala')+'. Contrastar con la edición vigente, el antibiograma local, la función renal, el embarazo y las alergias.</span></footer></section>';
+ return '<section class="who-panel" id="who-panel"><header><div><span class="who-abx '+abx[1]+'">'+abx[0]+'</span><h2>'+(isNih?'Tratamiento según la guía NIH de infecciones oportunistas en VIH':isMsf?'Tratamiento según MSF Clinical guidelines':'Tratamiento según el manual OMS AWaRe')+'</h2></div><p>'+whoEsc(T.res)+'</p></header>'+tabs+'<div class="who-grid">'+cards+'</div>'+(T.pat&&T.pat.length?'<p class="who-pat"><b>Patógenos probables</b> '+T.pat.map(whoEsc).join(' · ')+'</p>':'')+(T.alertas&&T.alertas.length?'<ul class="who-alerts">'+T.alertas.map(a=>'<li>'+whoEsc(a)+'</li>').join('')+'</ul>':'')+'<footer>'+(isMsf?'':'<span class="who-legend"><b>A</b> Access <b>W</b> Watch <b>R</b> Reserve</span>')+'<span>Dosis para función renal normal. Fuente: '+whoEsc(T.src)+(isNih?'. Documento de dominio público; síntesis en español con la fuerza de la recomendación entre corchetes (A–C, I–III)':isGuia?'. Síntesis propia en español a partir de las guías citadas; no reproduce su texto':isMsf?'. Síntesis propia en español; no reproduce ni traduce el manual':' ('+whoEsc(T.pag)+'); adaptación no oficial, la OMS no la avala')+'. Contrastar con la edición vigente, el antibiograma local, la función renal, el embarazo y las alergias.</span></footer></section>';
 }
 function enhanceWho(){
  document.querySelectorAll('.who-panel').forEach(x=>x.remove());
@@ -679,12 +680,13 @@ function enhanceText(){
  }catch(e){console.warn('hl',e)}
 }
 const renderHl=render;render=function(){renderHl();enhanceText()};
+try{if(localStorage.getItem('infeora-motion')==='off')document.documentElement.classList.add('motion-off')}catch(e){}
 /* Movimiento: entrada por sección y revelado al hacer scroll */
 let mvRoute=null,mvIO=null;
 function enhanceMotion(){
  try{
   const root=document.querySelector('.nx-main');if(!root)return;
-  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const reduce=document.documentElement.classList.contains('motion-off');
   if(state.route!==mvRoute){mvRoute=state.route;if(!reduce){root.classList.remove('mv-enter');void root.offsetWidth;root.classList.add('mv-enter');setTimeout(()=>root.classList.remove('mv-enter'),1100)}}
   if(reduce||!('IntersectionObserver' in window))return;
   document.documentElement.classList.add('mv-on');
@@ -748,7 +750,7 @@ const renderGuide=render;render=function(){renderGuide();enhanceGuide()};
 
 /* Transiciones entre vistas (View Transitions API): al cambiar de sección y al abrir otra ficha.
    Se omiten con movimiento reducido, en navegadores sin soporte y en pruebas automatizadas. */
-const vtOK=()=>!!document.startViewTransition&&!navigator.webdriver&&!matchMedia('(prefers-reduced-motion:reduce)').matches;
+const vtOK=()=>!!document.startViewTransition&&!navigator.webdriver&&!document.documentElement.classList.contains('motion-off');
 const gotoVT=goto;goto=function(route){if(!vtOK()||route===state.route)return gotoVT(route);document.documentElement.dataset.vt='route';const t=document.startViewTransition(()=>gotoVT(route));t.finished.finally(()=>delete document.documentElement.dataset.vt)};
 const actVT=act;act=function(command){const op=String(command).split(':')[0];if(vtOK()&&/^(micro-pick|drug-pick|v24-open-micro|v24-open-drug|v25-clinical|v24-mode|who-age|hm-mode)$/.test(op)){document.documentElement.dataset.vt='swap';let r;const t=document.startViewTransition(()=>{r=actVT(command)});t.finished.finally(()=>delete document.documentElement.dataset.vt);return r}return actVT(command)};
 const renderScroll=render;render=function(){const snap=scrollKeep||snapScroll();scrollKeep=null;renderScroll();restoreScroll(snap);keepChosenVisible()};
