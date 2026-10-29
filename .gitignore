@@ -1,0 +1,2 @@
+# Capturas y reportes generados por las suites de QA (se publican como artifact del workflow)
+qa/results*/
