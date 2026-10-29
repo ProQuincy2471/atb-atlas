@@ -71,6 +71,12 @@ async function main(){
   const res=await page.$$eval('#cdSearchRes a',a=>a.map(x=>x.textContent));checks++;assert(res.length>=2,'búsqueda sin resultados: '+res);
   await page.click('#cdSearchRes a');await page.waitForTimeout(100);checks++;assert(await page.evaluate(()=>document.getElementById('cdSearch').hidden),'la búsqueda no se cierra');
   await page.keyboard.press('Control+k');await page.keyboard.press('Escape');checks++;assert(await page.evaluate(()=>document.getElementById('cdSearch').hidden),'Escape no cierra');
+  // widgets de la portada: pregunta rápida, perla y ritmo misterioso
+  await page.goto(BASE+'#/inicio');await page.waitForSelector('.cd-widget');
+  await page.click('[data-act="hq"]');checks++;assert(await page.$('.cd-wexpl')&&await page.$('.cd-wopt.is-right'),'pregunta rápida sin explicación');
+  const pearl1=await page.textContent('.cd-widget-pearl blockquote');await page.click('[data-act="hpearl"]');checks++;assert((await page.textContent('.cd-widget-pearl blockquote'))!==pearl1,'la perla no cambia');
+  await page.click('[data-act="hrx"]');checks++;assert(await page.$('.cd-wreveal b'),'ritmo misterioso no se revela');
+  checks++;assert((await page.$$('.cd-lvl')).length===5&&(await page.$$('.cd-mon-vitals b')).length===4,'portada incompleta');
   // latido interactivo
   await page.goto(BASE+'#/ecg');await page.waitForSelector('.ecg-anatomy');
   await page.click('.ecg-zone[data-zone="qrs"] rect',{force:true});checks++;assert(/Complejo QRS/.test(await page.textContent('#anaInfo')),'zona QRS no responde');
