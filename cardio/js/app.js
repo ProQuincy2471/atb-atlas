@@ -57,7 +57,7 @@ function home(){
    <h1>Del latido a la <em>decisión clínica</em>.</h1>
    <p class="cd-lead">Una ruta ordenada para aprender cardiología desde cero: primero cómo funciona el corazón, después cómo leer un ECG, cómo actuar en un paro y, finalmente, cómo se diagnostican y tratan las enfermedades más importantes.</p>
    <div class="cd-cta"><a class="cd-btn cd-btn-main" href="#/fundamentos/anatomia">Empezar por el nivel 1</a><a class="cd-btn" href="#/acls">Ir a ACLS</a><a class="cd-btn" href="#/ecg">Leer un ECG</a></div></div>
-  <div class="cd-hero-monitor" aria-hidden="true"><div class="cd-monitor-top"><span>II</span><span class="cd-monitor-hr">FC 75</span></div>${ECG.svg('sinus',{seconds:6,height:30,animate:true,cal:false})}<div class="cd-monitor-top"><span>Trazo esquemático didáctico</span><span>25 mm/s · 10 mm/mV</span></div></div>
+  <div class="cd-hero-monitor" id="heroMon" aria-hidden="true"><div class="cd-monitor-top"><span>II · <b id="heroName">${MON[0][1]}</b></span><span class="cd-monitor-hr" id="heroHr">FC ${MON[0][2]}</span></div><div id="heroTrace">${ECG.svg(MON[0][0],{seconds:6,height:30,animate:true,cal:false})}</div><div class="cd-monitor-top"><span>Trazo esquemático didáctico</span><span>25 mm/s · 10 mm/mV</span></div></div>
  </section>
  <section class="cd-stats" aria-label="Contenido">${[[n.l,'lecciones guiadas'],[n.r,'ritmos y patrones ECG'],[n.p,'fichas de patologías'],[n.f,'grupos de fármacos'],[n.q,'preguntas y tarjetas']].map(([v,t])=>`<div><b>${v}</b><span>${t}</span></div>`).join('')}</section>
  <section class="cd-section"><div class="cd-sechead"><p class="cd-over">Ruta de aprendizaje</p><h2>Cinco niveles, en orden</h2><p>Cada nivel se apoya en el anterior. Marca las lecciones como estudiadas para ver tu avance (se guarda solo en este navegador).</p></div>
@@ -197,6 +197,12 @@ function simOp(op){
  simPaint();
 }
 setInterval(simPaint,500);
+/* Monitor de la portada: alterna ritmos del atlas al ritmo del barrido (6 s); fijo si se pide reducir movimiento */
+const MON=[['sinus','Ritmo sinusal','75'],['af','Fibrilación auricular','≈100'],['flutter','Flutter auricular 2:1','150'],['svt','TSV paroxística','180'],['vt','TV monomórfica','170'],['avb3','Bloqueo AV completo','39'],['stemi','Elevación del ST','80']];
+let monI=0;
+setInterval(()=>{const t=document.getElementById('heroTrace');if(!t||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ monI=(monI+1)%MON.length;const [id,name,hr]=MON[monI];t.innerHTML=ECG.svg(id,{seconds:6,height:30,animate:true,cal:false,seed:monI+3});
+ document.getElementById('heroName').textContent=name;document.getElementById('heroHr').textContent='FC '+hr},6000);
 
 /* ── Patologías ── */
 let patoCat='todas',patoQ='';
