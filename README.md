@@ -2,6 +2,25 @@
 
 Aplicación web estática de microbiología, infectología y farmacología antimicrobiana, orientada a formación médica de posgrado. Publicación: https://proquincy2471.github.io/atb-atlas/.
 
+
+## CARDIORA · Cardiología 101 (`/cardio/`)
+
+Guía didáctica hermana de INFEORA, publicada en `https://proquincy2471.github.io/atb-atlas/cardio/`. Aplicación estática independiente (no carga la cadena V17–V28): `cardio/index.html`, `cardio/cardio.css`, `cardio/js/app.js` (rutas por hash) y `cardio/js/ecg-engine.js`.
+
+| Área | Contenido |
+|---|---|
+| Fundamentos (nivel 1) | 8 lecciones: anatomía y coronarias, ciclo cardiaco y ruidos, hemodinamia y choque, electrofisiología, exploración y soplos, biomarcadores e imagen, factores de riesgo, síntomas cardinales |
+| ECG (nivel 2) | 5 lecciones (papel y derivaciones, método en 8 pasos, isquemia y equivalentes, bloqueos de rama, electrolitos y QT), latido interactivo y atlas de 29 ritmos/patrones |
+| ACLS (nivel 3) | 7 lecciones según las Guías AHA 2025 (RCP de alta calidad, paro, H y T, bradicardia, taquicardia, post-paro, SCA e ictus), tablas de fármacos y energías y **simulador de código** |
+| Patologías (nivel 4) | 21 fichas: idea clave, fisiopatología, clínica, diagnóstico, tratamiento, banderas rojas y perlas, con la guía de referencia |
+| Fármacos (nivel 5) | 14 grupos con mecanismo, usos, efectos adversos, contraindicaciones y perlas |
+| Herramientas | FC, QTc (Bazett, Fridericia, Framingham), eje, PAM, CHA₂DS₂-VA, HEART y Wells |
+| Práctica | 30 preguntas con explicación, 40 tarjetas y reto «¿Qué ritmo es?» |
+
+Los trazos ECG son **esquemáticos**: se generan con un modelo de gaussianas a 25 mm/s y 10 mm/mV y no son registros de pacientes. El progreso del estudiante se guarda solo en `localStorage`. Contenido educativo que no sustituye el juicio clínico, la guía vigente ni un curso certificado de BLS/ACLS.
+
+QA: `node qa/cardio-browser.cjs` (integridad de datos, todas las rutas en 1600/1280/1024/768/390 px e interacciones; capturas en `qa/results-cardio/`).
+
 ## Nuevos módulos (V23)
 
 - **Antibióticos:** mecanismos farmacológicos detallados de 26 familias/subfamilias con notas de moléculas clave, diana, acceso, mecanismo, consecuencia, resistencia y correlación clínica. Los fármacos sin revisión molecular individual se identifican como explicaciones por familia/subgrupo.

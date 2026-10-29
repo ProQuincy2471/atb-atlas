@@ -65,7 +65,7 @@ function commandPalette(){
 }
 const oldFrame=frame;
 frame=function(content){
- return '<div class="nx-app '+(NX.compact?'nx-compact':'')+'">'+rail()+'<div class="nx-stage">'+topbar()+'<main class="nx-main" id="main">'+content+'</main><footer class="nx-footer"><span><b>INFEORA</b> · Atlas académico de microbiología e infectología</span><span>La cobertura es educativa; validar susceptibilidad, foco y guías antes de prescribir.</span><a href="https://github.com/ProQuincy2471/atb-atlas" target="_blank" rel="noopener noreferrer">Repositorio ↗</a></footer></div></div>'+commandPalette()+modal();
+ return '<div class="nx-app '+(NX.compact?'nx-compact':'')+'">'+rail()+'<div class="nx-stage">'+topbar()+'<main class="nx-main" id="main">'+content+'</main><footer class="nx-footer"><span><b>INFEORA</b> · Atlas académico de microbiología e infectología</span><span>La cobertura es educativa; validar susceptibilidad, foco y guías antes de prescribir.</span><a href="./cardio/">CARDIORA · Cardiología 101 →</a><a href="https://github.com/ProQuincy2471/atb-atlas" target="_blank" rel="noopener noreferrer">Repositorio ↗</a></footer></div></div>'+commandPalette()+modal();
 };
 function home(){
  const I=window.INF_ICON||(()=>''),GL=window.INF_GLYPH||(()=>''),WT=window.ATLAS25?.whoTreat||{};
