@@ -1,16 +1,74 @@
-/* INFEORA — service worker: el atlas funciona sin conexión después de la primera visita.
-   Páginas: red primero (si no hay red, la copia guardada). Scripts, estilos, datos e imágenes:
-   copia guardada al instante y actualización en segundo plano. Subir CACHE al publicar cambios grandes. */
-const CACHE='infeora-v2';
-const CORE=['./','./infeora/','./manifest.webmanifest','./assets/app/icon-192.png','./assets/app/icon-512.png','./assets/app/infeora-logo.svg'];
-self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith('infeora-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
-self.addEventListener('fetch',e=>{
- const r=e.request;if(r.method!=='GET')return;const u=new URL(r.url);
- if(u.origin!==location.origin){ // fuentes de Google: guardar para uso sin conexión
-  if(/fonts\.(googleapis|gstatic)\.com$/.test(u.hostname))e.respondWith(caches.open(CACHE).then(c=>c.match(r).then(hit=>hit||fetch(r).then(res=>{c.put(r,res.clone());return res}))));
-  return;
- }
- if(r.mode==='navigate'){e.respondWith(fetch(r).then(res=>{const cp=res.clone();caches.open(CACHE).then(c=>c.put(r,cp));return res}).catch(()=>caches.match(r).then(h=>h||caches.match('./infeora/'))));return}
- e.respondWith(caches.open(CACHE).then(c=>c.match(r).then(hit=>{const net=fetch(r).then(res=>{if(res.ok)c.put(r,res.clone());return res}).catch(()=>hit);return hit||net})));
+/* INFEORA offline cache v3.
+ * JS, CSS, JSON and HTML must use network-first: cached scripts from older
+ * releases cannot silently override a newer index.html.
+ * Successful responses remain available offline after a visit.
+ */
+const CACHE = 'infeora-v3';
+const OFFLINE_HOME = new URL('./infeora/', self.registration.scope).href;
+
+self.addEventListener('install', event => {
+  event.waitUntil(self.skipWaiting());
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys()
+      .then(keys => Promise.all(keys
+        .filter(key => key.startsWith('infeora-') && key !== CACHE)
+        .map(key => caches.delete(key))))
+      .then(() => self.clients.claim())
+  );
+});
+
+function remember(event, request, response) {
+  if (response.ok) {
+    const copy = response.clone();
+    event.waitUntil(caches.open(CACHE)
+      .then(cache => cache.put(request, copy))
+      .catch(() => {}));
+  }
+  return response;
+}
+
+async function networkFirst(event) {
+  const request = event.request;
+  try {
+    const response = await fetch(request, {cache: 'no-cache'});
+    if (response.status >= 500) {
+      const cached = await caches.match(request);
+      if (cached) return cached;
+    }
+    return remember(event, request, response);
+  } catch (_) {
+    return (await caches.match(request)) ||
+      (request.mode === 'navigate' ? await caches.match(OFFLINE_HOME) : null) ||
+      Response.error();
+  }
+}
+
+async function cacheFirst(event) {
+  const request = event.request;
+  const cached = await caches.match(request);
+  if (cached) return cached;
+  try {
+    return remember(event, request, await fetch(request));
+  } catch (_) {
+    return Response.error();
+  }
+}
+
+self.addEventListener('fetch', event => {
+  const request = event.request;
+  if (request.method !== 'GET') return;
+  const url = new URL(request.url);
+  if (url.origin !== self.location.origin) return;
+
+  // Pages, scripts, styles and data are always revalidated while online.
+  if (request.mode === 'navigate' || /\.(?:js|css|json|webmanifest)$/.test(url.pathname)) {
+    event.respondWith(networkFirst(event));
+    return;
+  }
+
+  // Images and other stable local assets can load immediately from cache.
+  event.respondWith(cacheFirst(event));
 });
