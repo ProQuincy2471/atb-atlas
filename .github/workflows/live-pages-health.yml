@@ -1,0 +1,98 @@
+name: Verify live INFEORA GitHub Pages
+
+on:
+  workflow_run:
+    workflows: ["Deploy ATB Atlas to GitHub Pages"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-health:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check served HTML, JS, CSS and JSON
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in "infeora/" "app.js" "data/atlas.json" "infeora-v26.js" "infeora-v28.css" "sw.js"; do
+            url="https://proquincy2471.github.io/atb-atlas/${file}"
+            echo "::group::${url}"
+            curl -fL --retry 4 --retry-all-errors --retry-delay 3 --max-time 40 \
+              -o /dev/null -w 'HTTP=%{http_code} MIME=%{content_type} BYTES=%{size_download} SECONDS=%{time_total}\n' "${url}"
+            echo "::endgroup::"
+          done
+      - name: Install headless Chromium
+        shell: bash
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          if command -v google-chrome >/dev/null; then
+            echo "CHROME_BIN=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          elif command -v chromium >/dev/null; then
+            echo "CHROME_BIN=$(command -v chromium)" >> "$GITHUB_ENV"
+          else
+            npx playwright install chromium
+          fi
+      - name: Open the published atlas in a real browser
+        shell: bash
+        run: |
+          mkdir -p qa/results-live
+          node <<'NODE'
+          const fs = require('fs');
+          const {chromium} = require('playwright');
+          (async () => {
+            const opts = {headless:true};
+            if (process.env.CHROME_BIN) opts.executablePath = process.env.CHROME_BIN;
+            const browser = await chromium.launch(opts);
+            const page = await browser.newPage({viewport:{width:1280,height:850},serviceWorkers:'block'});
+            const errors = [];
+            const failed = [];
+            page.on('pageerror', err => errors.push(err.message));
+            page.on('requestfailed', req => failed.push(req.url() + ': ' + req.failure()?.errorText));
+            page.on('response', res => {
+              if(res.status() >= 400 && res.url().includes('atb-atlas'))
+                failed.push(res.status() + ' ' + res.url());
+            });
+            const url = 'https://proquincy2471.github.io/atb-atlas/infeora/';
+            try {
+              const response = await page.goto(url,{waitUntil:'domcontentloaded',timeout:60000});
+              console.log('Document response:',response?.status(),response?.url());
+              await page.waitForFunction(() => {
+                const app=document.getElementById('app');
+                return app && !app.textContent.includes('Iniciando biblioteca clínica');
+              }, null,{timeout:60000});
+              const out = await page.evaluate(() => ({
+                title:document.title,
+                text:document.getElementById('app')?.innerText?.slice(0,400),
+                error:document.querySelector('#app .load-error')?.innerText||null
+              }));
+              console.log('App:',JSON.stringify(out));
+              console.log('Script errors:',JSON.stringify(errors));
+              console.log('Failed requests:',JSON.stringify(failed));
+              if (!response || response.status()!==200 || out.error || (out.text||'').length<100 ||
+                  !out.title.includes('INFEORA') || errors.length || failed.length) {
+                throw Error('Live app failed health check');
+              }
+              console.log('PASS: live INFEORA rendered successfully.');
+            } finally {
+              await page.screenshot({path:'qa/results-live/infeora-live.png',fullPage:false}).catch(()=>{});
+              fs.writeFileSync('qa/results-live/health.json',JSON.stringify({errors,failed},null,2));
+              await browser.close();
+            }
+          })().catch(error=>{console.error(error); process.exitCode=1;});
+          NODE
+      - name: Upload live screenshot and errors
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: infeora-live-health
+          path: qa/results-live/
+          retention-days: 7
