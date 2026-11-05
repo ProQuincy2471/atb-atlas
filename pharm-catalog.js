@@ -243,6 +243,113 @@ function section(title,label,body,kind=''){
 }
 function list(items){return items.length?'<ul class="ph-bullets">'+items.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':'';}
 function paragraphs(items){return items.length?items.map(x=>'<p>'+esc(x)+'</p>').join(''):'';}
+
+/* Editorial V47: clinical statements come from the existing reviewed dossiers.
+   Graphs are visual transcriptions of the molecular information already in V23/V24,
+   not new indications, strength-of-evidence ratings or treatment recommendations. */
+function focusText(x){
+ return esc(x).replace(/\b(BLEE|AmpC|KPC|OXA-48|NDM|MBL|MRSA|CRAB|AST|CMI|PK\/PD|G6PD|VIH|SNC|LCR|QT)\b/g,
+  '<strong class="ph-inline-key">$1</strong>')
+ .replace(/(no se recomienda|no extrapolar|contraindicado|primera línea|no equivale|evitar|no utilizar)/gi,
+  '<mark class="ph-mark">$1</mark>');
+}
+function safeParagraphs(items){
+ return items.length?items.map(x=>'<p>'+focusText(x)+'</p>').join(''):'';
+}
+function phIcon(name){
+ const shapes={
+  target:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/>',
+  molecule:'<path d="m7 3 5 3 5-3 4 8-4 8-5-3-5 3-4-8z"/><circle cx="12" cy="11" r="2"/>',
+  effect:'<path d="m4 12 5 5 11-11"/><path d="M4 4v4m0 8v4"/>',
+  compass:'<circle cx="12" cy="12" r="9"/><path d="m16.4 7.6-2.8 6-6 2.8 2.8-6z"/>',
+  alert:'<path d="m12 3 10 18H2z"/><path d="M12 9v5m0 3v.01"/>',
+  book:'<path d="M12 7c-3-2-6-2-9-1v13c3-1 6-1 9 1 3-2 6-2 9-1V6c-3-1-6-1-9 1z"/><path d="M12 7v13"/>'
+ };
+ return '<svg class="ph-line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(shapes[name]||shapes.book)+'</svg>';
+}
+function mechanismRecord(a){
+ if(a.kingdom==='bacteria'){
+  const d=window.ATLAS_PHARM23?.dossier?.(a);
+  if(!d)return null;
+  // These editorial groupings have no uniform mechanism. Show source text only.
+  if(!d.specific&&['Inhibidores especializados','Mupirocina / tópicos','Antimicobacterianos'].includes(a.family))return null;
+  return {target:d.target,entry:d.entry,interaction:d.interaction,effect:d.effect,
+   resistance:d.resistance,clinical:d.clinical,specific:d.specific,origin:'Atlas molecular V23 · síntesis por '+(d.specific?'molécula':'familia / subgrupo')};
+ }
+ const set=a.kingdom==='virus'?window.ATLAS24?.antiviralFamilies:
+  a.kingdom==='fungi'?window.ATLAS24?.antifungalFamilies:
+  a.kingdom==='parasites'?window.ATLAS24?.antiparasiticFamilies:null;
+ const d=set?.[a.family];
+ if(!d)return null;
+ return {target:d.target,entry:d.entry,interaction:d.mechanism,effect:d.pk,
+  resistance:d.resistance,clinical:'Aplicar solo al fármaco, especie e indicación registrados en la ficha.',
+  specific:false,origin:'Atlas farmacológico V24 · esquema de familia'};
+}
+function mechanismFigure(a,mechanism){
+ const m=mechanismRecord(a);
+ if(!m){
+  return '<div class="ph-mech-unmapped"><strong>Esquema molecular individual pendiente de validación</strong>'+
+   '<p>'+focusText(mechanism[0]||a.mechanism||'El banco no contiene un mecanismo individual cotejado.')+'</p>'+
+   '<small>No se atribuye a esta familia una diana única cuando los mecanismos son heterogéneos.</small></div>';
+ }
+ const nodes=[
+  ['01','Acceso / contexto',m.entry,'molecule'],
+  ['02','Diana e interacción',m.target+(m.interaction?' · '+m.interaction:''),'target'],
+  ['03','Consecuencia / PK',m.effect,'effect']
+ ];
+ return '<figure class="ph-mechanism-figure"><figcaption><span class="ph-figure-label">FIGURA 01 / MECANISMO FARMACOLÓGICO</span>'+
+  '<strong>Del acceso al efecto molecular</strong><small>'+esc(m.origin)+'</small></figcaption>'+
+  '<div class="ph-mechanism-flow" role="list">'+nodes.map(([num,title,body,ico])=>
+   '<div class="ph-mech-node" role="listitem"><span class="ph-mech-no">'+num+'</span>'+
+    '<span class="ph-mech-symbol">'+phIcon(ico)+'</span><h3>'+esc(title)+'</h3><p>'+focusText(body)+'</p></div>').join('')+'</div>'+
+  '<div class="ph-mech-context"><div><b>RESISTENCIA</b><p>'+focusText(m.resistance||'Según patógeno y mecanismo identificado.')+'</p></div>'+
+   '<div><b>IMPLICACIÓN CLÍNICA</b><p>'+focusText(m.clinical||'Requiere contextualización por síndrome y microorganismo.')+'</p></div></div>'+
+  '<p class="ph-diagram-caveat">Esquema conceptual, '+(m.specific?'específico de molécula':'basado en familia o subgrupo')+'. No representa susceptibilidad individual ni valida una pauta.</p></figure>';
+}
+function clinicalBrief(a,detail,r,mechanism,indications){
+ const safety=[...pro(r.contraindications),...pro(r.precautions),...pro(detail.resistencia),...(a.limitations?[a.limitations]:[])];
+ const uses=indications.filter(Boolean);
+ const cols=[
+  ['target','CÓMO ACTÚA','Mecanismo',mechanism[0]||a.mechanism||'No existe mecanismo individual validado en el banco.'],
+  ['compass','CUÁNDO PENSARLO','Escenario',uses[0]||'Consultar indicaciones específicas y guías para el síndrome.'],
+  ['alert','QUÉ COMPROBAR','Límite',safety[0]||'Confirmar especie, sitio de infección, función orgánica e interacciones.']
+ ];
+ return '<section class="ph-brief" aria-label="Lectura clínica guiada">'+
+  '<div class="ph-brief-title"><div><span class="ph-figure-label">LECTURA DIRIGIDA · 60 SEGUNDOS</span>'+
+  '<h3>Primero, entiende estas tres decisiones</h3></div><small>Extracto del dossier · abre cada sección para el detalle</small></div>'+
+  '<div class="ph-brief-grid">'+cols.map(([ico,label,title,body])=>
+   '<div class="ph-brief-item ph-brief-'+ico+'"><span class="ph-brief-icon">'+phIcon(ico)+'</span>'+
+   '<span class="ph-brief-overline">'+label+'</span><strong>'+title+'</strong><p>'+focusText(short(body,260))+'</p></div>').join('')+'</div></section>';
+}
+function clinicalUseCards(a,indication){
+ const all=[...new Set(indication)].filter(Boolean);
+ const dose=adultDoses(a);
+ let html='<div class="ph-application"><div class="ph-use-label"><b>ESCENARIOS DEL DOSSIER</b>'+
+  '<small>Una indicación citada no equivale a recomendación universal de primera línea.</small></div>'+
+  '<div class="ph-indication-grid">'+all.slice(0,4).map((x,i)=>
+   '<div class="ph-indication"><span>'+String(i+1).padStart(2,'0')+'</span><p>'+focusText(x)+'</p></div>').join('')+
+  (!all.length?'<p class="ph-muted">No hay indicaciones individuales cotejadas en el banco.</p>':'')+'</div>'+
+  (all.length>4?'<details class="ph-rich-details"><summary>Ver '+(all.length-4)+' indicaciones adicionales</summary>'+safeParagraphs(all.slice(4))+'</details>':'');
+ if(dose.length){
+  const d=dose[0];
+  html+='<div class="ph-use-rx"><div><span>PAUTA DOCUMENTADA PARA UN ESCENARIO</span><b>'+esc(d.t)+'</b>'+
+   '<p>'+focusText(d.ad)+'</p></div><small>'+esc(d.sourceLabel||'Fuente del dossier')+
+   ' · La pauta completa y sus restricciones están en «Dosis y duración».</small></div>';
+ } else html+='<p class="ph-use-note">Sin pauta adulta atribuida a una fuente en esta ficha. No calcularla a partir de agentes relacionados.</p>';
+ return html+'</div>';
+}
+function pearlTiles(items){
+ const unique=[...new Set(items)].slice(0,12);
+ if(!unique.length)return '<p class="ph-muted">No hay perlas adicionales cotejadas.</p>';
+ return '<div class="ph-pearls">'+unique.map((s,i)=>
+  '<div class="ph-pearl"><span>'+String(i+1).padStart(2,'0')+'</span><p>'+focusText(s)+'</p></div>').join('')+'</div>';
+}
+function lessonNav(){
+ const sections=[['01','Mecanismo'],['02','Uso clínico'],['03','Pautas'],['05','Seguridad'],['06','Resistencia'],['07','Perlas'],['09','Fuentes']];
+ return '<nav class="ph-lesson-nav" aria-label="Navegación dentro de la ficha">'+sections.map(([n,label])=>
+  '<button type="button" data-ph="jump" data-val="ph-step-'+n+'"><span>'+n+'</span>'+esc(label)+'</button>').join('')+'</nav>';
+}
+
 function intro(d){
  const g=classify(d,statePh.domain);
  return '<div class="ph-intro" style="--accent:'+tone(g.block,g.sub)+'"><span>'+esc(g.block)+'</span><p>'+esc(INTRO[g.block]||'La interpretación debe individualizarse por microorganismo, foco y pauta recomendada.')+'</p></div>';
