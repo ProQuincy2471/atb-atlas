@@ -1,0 +1,33 @@
+name: Pharmacology clinical evidence integrity
+on:
+  pull_request:
+    paths:
+      - 'data/pharm-clinical-*.js'
+      - 'pharm-catalog.js'
+      - 'qa/pharm-source-integrity.cjs'
+      - '.github/workflows/pharm-integrity.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'data/pharm-clinical-*.js'
+      - 'pharm-catalog.js'
+      - 'qa/pharm-source-integrity.cjs'
+permissions:
+  contents: read
+jobs:
+  source-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Audit source links, doses, resistance data and 261 unique agents
+        run: node qa/pharm-source-integrity.cjs
+      - name: Preserve documented coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pharm-source-audit
+          path: qa/results-pharm/source-audit.json
+          if-no-files-found: ignore

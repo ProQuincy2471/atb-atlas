@@ -28,6 +28,8 @@ jobs:
           else
             npx playwright install chromium
           fi
+      - name: Audit pharmacology sources and 261 agent catalog
+        run: node qa/pharm-source-integrity.cjs
       - name: Test routes and responsive layouts
         run: node qa/browser-qa.cjs
       - name: Validate viral, fungal and parasitic atlas V24
