@@ -72,6 +72,13 @@ async function main(){
    assert(await page.locator('.ph-drug').count()===1,'Search not constrained');
    await page.locator('.ph-drug').first().click();
    assert((await page.locator('.ph-article-hero h2').innerText()).includes('Cefiderocol'),'Selected drug not opened');
+   assert((await page.locator('.ph-brief-grid .ph-brief-item').count())===3,'Three clinical reasoning cards must be visible');
+   assert((await page.locator('.ph-mechanism-flow .ph-mech-node').count())===3,'Source-grounded molecular pathway must include three steps');
+   assert((await page.locator('.ph-cover-key [data-grade]').count())===6,'Six evidence/coverage states must remain distinct');
+   assert((await page.locator('.ph-lesson-nav button').count())>=7,'Intra-article learning navigation absent');
+   assert((await page.locator('.ph-indication-grid .ph-indication').count())>=1,'Clinical scenarios absent');
+   await page.locator('[data-ph="jump"][data-val="ph-step-05"]').click();
+   assert(await page.locator('#ph-step-05').count()===1,'Section anchor missing');
    await check('cefiderocol');
    assert((await page.locator('.ph-dose-scroll tbody tr').count())>=1,'IDSA cefiderocol dosing unavailable');
    assert((await page.locator('.ph-dose-source a').count())>=1,'Cefiderocol row missing original IDSA citation');
