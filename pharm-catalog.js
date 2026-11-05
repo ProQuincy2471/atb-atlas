@@ -239,7 +239,7 @@ function sidebar(x){
  }).join(''):'<p class="ph-empty">No hay fármacos con estos filtros.</p>')+'</div></div></aside>';
 }
 function section(title,label,body,kind=''){
- return body?'<section class="ph-section '+kind+'"><div class="ph-section-h"><span>'+esc(label)+'</span><h2>'+esc(title)+'</h2></div>'+body+'</section>':'';
+ return body?'<section id="ph-step-'+esc(label.slice(0,2))+'" class="ph-section '+kind+'"><div class="ph-section-h"><span>'+esc(label)+'</span><h2>'+esc(title)+'</h2></div>'+body+'</section>':'';
 }
 function list(items){return items.length?'<ul class="ph-bullets">'+items.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':'';}
 function paragraphs(items){return items.length?items.map(x=>'<p>'+esc(x)+'</p>').join(''):'';}
@@ -411,19 +411,19 @@ function article(a){
  '<h2>'+esc(a.name)+'</h2><div class="ph-tagline">'+tags(a,k)+'</div>'+
  '<p>'+esc(a.distinct||a.subgroup||a.family)+'</p>'+
  '<div class="ph-hero-controls"><button data-ph="compare-add" data-id="'+esc(a.id)+'">+ Añadir al comparador</button><span>'+known+' pares microbiológicos documentados · '+pc.length+' especies</span></div></header>';
- const sep=section('Cómo actúa','01 · DIANA / MECANISMO',paragraphs(mechanism)+intro(a));
- const uses=section('Cuándo tiene utilidad clínica','02 · INDICACIONES',paragraphs([...new Set(indication)].slice(0,12))+
- (spectrum.length?'<div class="ph-quote"><b>Alcance farmacológico descrito en el dossier anterior</b>'+paragraphs(spectrum)+'</div>':''));
+ const sep=section('Cómo actúa','01 · DIANA / MECANISMO',mechanismFigure(a,mechanism)+intro(a));
+ const uses=section('Cuándo tiene utilidad clínica','02 · INDICACIONES',clinicalUseCards(a,indication)+
+ (spectrum.length?'<details class="ph-rich-details"><summary>Espectro narrativo del dossier</summary>'+safeParagraphs(spectrum)+'</details>':''));
  const dose=section('Posología en adultos','03 · DOSIS / DURACIÓN',doseSection(a),'ph-dose-section');
- const exposure=section('Exposición y farmacocinética','04 · PK / DISTRIBUCIÓN',paragraphs(pk)||'<p class="ph-muted">No hay revisión farmacocinética individual cotejada; consultar ficha técnica.</p>');
+ const exposure=section('Exposición y farmacocinética','04 · PK / DISTRIBUCIÓN',safeParagraphs(pk)||'<p class="ph-muted">No hay revisión farmacocinética individual cotejada; consultar ficha técnica.</p>');
  const risks=section('Seguridad que modifica la elección','05 · CONTRAINDICACIONES / PRECAUCIONES / RAM',relevantSafety(a));
- const res=section('Resistencia y errores frecuentes','06 · RESISTENCIA / LÍMITES',paragraphs(resistance)+
+ const res=section('Resistencia y errores frecuentes','06 · RESISTENCIA / LÍMITES',safeParagraphs(resistance)+
  (a.limitations?'<div class="ph-quote ph-warn"><b>Limitaciones clínicas</b><p>'+esc(a.limitations)+'</p></div>':''));
  const notes=[...pro(r.pearls),...pro(detail.notas),...pro(v?.notas)].filter(x=>!/^La sección consultada no incluye/.test(x));
- const pearls=section('Perlas y notas clínicas','07 · INTERPRETACIÓN',paragraphs([...new Set(notes)].slice(0,12)));
+ const pearls=section('Perlas y notas clínicas','07 · INTERPRETACIÓN',pearlTiles(notes));
  const mon=pro(r.monitor).length?section('Qué monitorear','08 · MONITOREO',list(pro(r.monitor))):'';
  const cites=section('Trazabilidad','09 · FUENTES',sourceList(a));
- return '<article class="ph-article" aria-label="Ficha de '+esc(a.name)+'">'+header+sep+uses+dose+exposure+risks+res+pearls+mon+cites+'</article>';
+ return '<article class="ph-article" aria-label="Ficha de '+esc(a.name)+'">'+header+clinicalBrief(a,detail,r,mechanism,indication)+lessonNav()+sep+uses+dose+exposure+risks+res+pearls+mon+cites+'</article>';
 }
 
 function coveragePanel(a){
@@ -559,7 +559,8 @@ document.addEventListener('click',e=>{
  if(op==='select')return openDrug(id,statePh.domain);
  if(op==='clear'){statePh.block='all';statePh.sub='all';statePh.q='';statePh.onlyDose=false;statePh.id='';return draw()}
  if(op==='mode'){statePh.view=v;return draw()}
- if(op==='coverage-filter'){statePh.cover=v;statePh.coverMore=false;return draw()}
+ if(op==='jump'){const anchor=document.getElementById(v);if(anchor)anchor.scrollIntoView({behavior:'smooth',block:'start'});return}
+  if(op==='coverage-filter'){statePh.cover=v;statePh.coverMore=false;return draw()}
  if(op==='coverage-more'){statePh.coverMore=true;return draw()}
  if(op==='compare-add'){
    const prev=statePh.compare.filter(a=>a.domain===statePh.domain);
