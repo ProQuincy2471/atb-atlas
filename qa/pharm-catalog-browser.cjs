@@ -1,4 +1,4 @@
-/* INFEORA V45 pharmacology catalog: real Chromium regression (5 domains). */
+/* INFEORA V46 pharmacology catalog: real Chromium regression (5 domains). */
 'use strict';
 const http=require('node:http'),fs=require('node:fs'),path=require('node:path');
 const {chromium}=require('playwright');
@@ -51,7 +51,8 @@ async function main(){
      drugs:document.querySelector('.ph-topstat strong')?.textContent,
      count:document.querySelectorAll('.ph-drug').length}));
    assert(counts.n===5,'Expected 5 territories '+JSON.stringify(counts));
-   assert(Number(counts.drugs)>=230,'Catalog inventory incomplete '+counts.drugs);
+   assert(Number(counts.drugs)>=261,'Expected 235 original + 26 documented new agents '+counts.drugs);
+   assert(await page.evaluate(()=>window.INFEORA_PHARM_CLINICAL?.additions.length)===26,'Supplemental agents unavailable');
    await check('antibacterianos');
    for(const [domain,minCount] of [['tb',10],['virus',50],['fungi',20],['parasites',35]]){
      await page.locator('[data-ph="domain"][data-val="'+domain+'"]').click();
@@ -72,13 +73,15 @@ async function main(){
    await page.locator('.ph-drug').first().click();
    assert((await page.locator('.ph-article-hero h2').innerText()).includes('Cefiderocol'),'Selected drug not opened');
    await check('cefiderocol');
-   const noDose=await page.locator('.ph-source-gap').count();
-   assert(noDose===1,'No unverified adult dosing should be invented for cefiderocol');
+   assert((await page.locator('.ph-dose-scroll tbody tr').count())>=1,'IDSA cefiderocol dosing unavailable');
+   assert((await page.locator('.ph-dose-source a').count())>=1,'Cefiderocol row missing original IDSA citation');
+   assert((await page.locator('.ph-phenos .ph-pheno').count())>=2,'Cefiderocol resistance phenotype panel missing');
    await page.locator('[data-ph="compare-add"]').click();
    await page.locator('[data-ph="mode"][data-val="comparar"]').click();
    assert((await page.locator('.ph-compare-scroll table').count())===1,'Compare table absent');
    await page.locator('[data-ph-change="comparePick"]').selectOption('meropenem');
    assert((await page.locator('.ph-compare-scroll thead th').count())===3,'Comparator did not add second drug');
+   assert((await page.locator('.ph-compare-scroll').innerText()).includes('MBL'),'Phenotype rows missing in comparator');
    await check('comparador');
    await page.locator('[data-ph="mode"][data-val="ficha"]').click();
    await page.locator('[data-ph="domain"][data-val="bacteria"]').click();
@@ -86,6 +89,33 @@ async function main(){
    await page.locator('.ph-drug').first().click();
    assert((await page.locator('.ph-dose-scroll tbody tr').count())>=1,'Documented adult dose unavailable');
    assert((await page.locator('.ph-coverage').count())===1,'Coverage panel missing');
+   await page.locator('[data-ph-input="search"]').fill('cefaclor');
+   await page.locator('.ph-drug').first().click();
+   assert((await page.locator('.ph-source-gap').count())===1,'Cefaclor must be honestly marked without a verified dose');
+   await page.locator('[data-ph-input="search"]').fill('pivmecilinam');
+   await page.locator('.ph-drug').first().click();
+   assert((await page.locator('.ph-dose-source').count())===2,'Both cited pivmecillinam regimens should remain separate');
+   assert((await page.locator('.ph-dose-section').innerText()).includes('370 mg'),'IDSA pivmecillinam dose missing');
+   assert((await page.locator('.ph-dose-section').innerText()).includes('185 mg'),'FDA pivmecillinam dose missing');
+   await check('pivmecilinam');
+   await page.locator('[data-ph="domain"][data-val="virus"]').click();
+   await page.locator('[data-ph-input="search"]').fill('bictegravir-lenacapavir');
+   assert((await page.locator('.ph-drug').count())===1,'Bixlenvo not present');
+   await page.locator('.ph-drug').first().click();
+   assert((await page.locator('.ph-dose-section').innerText()).includes('Días 1 y 2'),'Bixlenvo oral initiation not shown');
+   assert((await page.locator('.ph-reviewed-links').innerText()).includes('BIXLENVO'),'Bixlenvo FDA citation missing');
+   await check('bictegravir-lenacapavir');
+   await page.locator('[data-ph="domain"][data-val="fungi"]').click();
+   await page.locator('[data-ph-input="search"]').fill('rezafungina');
+   await page.locator('.ph-drug').first().click();
+   assert((await page.locator('.ph-dose-section').innerText()).includes('400 mg'),'Rezafungin loading dose missing');
+   await check('rezafungina');
+   await page.locator('[data-ph="domain"][data-val="parasites"]').click();
+   await page.locator('[data-ph-input="search"]').fill('Arteméter');
+   await page.locator('.ph-drug').first().click();
+   assert((await page.locator('.ph-dose-section').innerText()).includes('días 2–5'),'CDC 2026 malaria schedule missing');
+   await check('artemeter-lumefantrina');
+
    assert(!jsErrors.length,'Runtime errors '+jsErrors.join('; '));
    assert(!missing.length,'Missing assets '+missing.join('; '));
   }catch(error){records.push({width,error:String(error),stack:error.stack,jsErrors,missing});}
