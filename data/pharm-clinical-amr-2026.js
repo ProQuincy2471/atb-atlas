@@ -12,10 +12,11 @@ R.sources.FDA_PIV={label:'DailyMed · PIVYA, ficha FDA',url:'https://dailymed.nl
 R.sources.FDA_SUL={label:'DailyMed · ORLYNVAH, ficha FDA',url:'https://dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=24c451c0-4cfb-37f3-e063-6394a90a895e&type=display',reviewed:'2026-11-04'};
 const put=(id,doses,extra={})=>{
  const r=R.drugs[id]||{};
- const list=doses.map(([t,ad,comment])=>({t,ad,comment:comment||'',sourceKey:'IDSA26'}));
- R.drugs[id]={...r,doses:[...(r.doses||[]),...list],
-  sourceKeys:[...new Set([...(r.sourceKeys||[]),'IDSA26',...(extra.sourceKeys||[])])],
-  ...extra,reviewDate:'2026-11-04'};
+ const {sourceKeys:extraSources,...fields}=extra;
+ const list=doses.map(([t,ad,comment,sourceKey])=>({t,ad,comment:comment||'',sourceKey:sourceKey||'IDSA26'}));
+ R.drugs[id]={...r,...fields,doses:[...(r.doses||[]),...list],
+  sourceKeys:[...new Set([...(r.sourceKeys||[]),'IDSA26',...(extraSources||[])])],
+  reviewDate:'2026-11-04'};
 };
 put('amikacina',[
  ['Cistitis no complicada por gramnegativo resistente','15 mg/kg IV, dosis única','Dosis puntual; no extender sin evaluación.'],
@@ -112,8 +113,8 @@ put('tmp-smx',[
  ['Infecciones resistentes distintas de cistitis en contextos IDSA (dosis componente TMP)','8–15 mg/kg/día de trimetoprim IV/VO dividido cada 8–12 h']
 ],{pearls:['Las dosis se expresan según el componente trimetoprim, no por el peso total de TMP-SMX.','Para S. maltophilia invasiva, valorar resistencia, toxicidad y combinaciones según IDSA 2026.'],monitor:['Creatinina, potasio, biometría hemática y tolerancia según dosis/duración.']});
 put('gepotidacina',[
- ['Cistitis no complicada en mujer (ficha FDA)','1,500 mg VO cada 12 h por 5 días, después de alimentos'],
- ['Gonorrea urogenital no complicada (ficha FDA actualizada)','3,000 mg VO y una segunda dosis de 3,000 mg unas 12 h después; tomar con alimentos']
+ ['Cistitis no complicada en mujer (ficha FDA)','1,500 mg VO cada 12 h por 5 días, después de alimentos','','FDA_GEP'],
+ ['Gonorrea urogenital no complicada (ficha FDA actualizada)','3,000 mg VO y una segunda dosis de 3,000 mg unas 12 h después; tomar con alimentos','','FDA_GEP']
 ],{sourceKeys:['FDA_GEP'],indications:['Cistitis no complicada por microorganismos susceptibles y gonorrea urogenital no complicada en poblaciones incluidas en su ficha estadounidense.'],
  contraindications:['Antecedente de hipersensibilidad grave a gepotidacina.'],
  precautions:['Riesgo de prolongación del QTc, especialmente con exposición aumentada, cardiopatía o interacciones.','No extrapolar a pielonefritis, infección sistémica o gonorrea faríngea.'],
@@ -123,12 +124,12 @@ put('gepotidacina',[
  pearls:['Inhibe girasa y topoisomerasa IV mediante sitios de unión distintos a las fluoroquinolonas.','Aprobación estadounidense no demuestra disponibilidad ni indicación autorizada en México.']});
 put('pivmecilinam',[
  ['Cistitis no complicada por gramnegativo susceptible, pauta sugerida IDSA 2026','370 mg de pivmecilinam VO cada 8 h'],
- ['Cistitis no complicada en mujeres adultas, dosis etiquetada FDA','185 mg VO cada 8 h por 3–7 días (según ficha estadounidense)']
+ ['Cistitis no complicada en mujeres adultas, dosis etiquetada FDA','185 mg VO cada 8 h por 3–7 días (según ficha estadounidense)','','FDA_PIV']
 ],{sourceKeys:['FDA_PIV'],indications:['Cistitis no complicada en mujeres adultas por E. coli, P. mirabilis y S. saprophyticus susceptibles.'],
  pearls:['La dosis sugerida por IDSA 2026 difiere de la ficha FDA; no fusionar ni intercambiar estos regímenes.','Profármaco de mecillinam, activo sobre PBP2; no se usa para pielonefritis.'],
  precautions:['Verificar antecedentes de hipersensibilidad a penicilinas, formulación y contexto de pauta.']});
 put('sulopenem-etzadroxilo-probenecid',[
- ['Cistitis no complicada en mujer adulta con pocas opciones orales','500 mg sulopenem etzadroxilo + 500 mg probenecid VO cada 12 h por 5 días, con alimentos']
+ ['Cistitis no complicada en mujer adulta con pocas opciones orales','500 mg sulopenem etzadroxilo + 500 mg probenecid VO cada 12 h por 5 días, con alimentos','','FDA_SUL']
 ],{sourceKeys:['FDA_SUL'],indications:['Cistitis no complicada por E. coli, K. pneumoniae o P. mirabilis susceptible cuando hay alternativas orales limitadas o inexistentes.'],
  precautions:['No indicado para tratamiento de ITU complicada ni para paso de IV a VO en infección intraabdominal complicada.','No recomendado si ClCr <15 mL/min o en hemodiálisis según ficha FDA.'],
  interactions:['Probenecid altera la eliminación renal de múltiples fármacos; revisar interacciones antes de usar.'],
