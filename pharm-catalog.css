@@ -407,3 +407,10 @@
  .ph-indication-grid,.ph-pearls,.ph-mech-context,.ph-use-rx{grid-template-columns:minmax(0,1fr)}
  .ph-brief-title>small{display:none}
 }
+
+
+/* Visual QA: the shared heading palette overrides nested side-panel titles.
+   Explicit foreground tokens ensure contrast on the deep-blue coverage header. */
+.ph-catalog .ph-cover-header h2,
+.ph-catalog .ph-cover-header p{color:#ffffff!important}
+.ph-catalog .ph-cover-header>span{color:#d9eafa!important}
