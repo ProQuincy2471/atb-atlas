@@ -180,3 +180,32 @@
 @media(max-width:1180px){.ph-layout{grid-template-columns:minmax(190px,225px) minmax(0,1fr)}.ph-coverage{grid-column:2}.ph-sidebar{grid-row:1 / span 2}.ph-cover-sticky{position:static;max-height:none}.ph-cover-list{max-height:260px}.ph-layout.ph-comparison{grid-template-columns:minmax(190px,225px) minmax(0,1fr)}.ph-domain small{min-height:36px}}
 @media(max-width:850px){.ph-domains{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:7px}.ph-domain{flex:0 0 190px;scroll-snap-align:start}.ph-layout,.ph-layout.ph-comparison{grid-template-columns:minmax(0,1fr)}.ph-sidebar{grid-row:auto}.ph-coverage{grid-column:auto}.ph-sidebar-sticky{position:static;max-height:none}.ph-drug-list{max-height:260px}.ph-tree{max-height:170px}.ph-controls{flex-wrap:wrap}.ph-topstat{min-width:70px}.ph-safety-grid{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:500px){.ph-top{padding:20px 17px}.ph-topline{align-items:start}.ph-topstat{border-left:0;padding:0;min-width:50px}.ph-topstat strong{font-size:27px}.ph-topstat span{font-size:9px;white-space:normal}.ph-top h1{font-size:29px}.ph-top p{font-size:13px}.ph-mode-tabs{width:100%;justify-content:space-between}.ph-mode-tabs button{font-size:11px;padding:7px 8px}.ph-section{padding:15px 13px}.ph-article-hero{padding:16px 13px}.ph-cover-counts span{font-size:9px}}
+
+/* V46 — source provenance, resistance phenotypes, granular completion. */
+.ph-dose-source{display:block!important;margin-top:10px;font-size:10px!important;color:#596f87!important;line-height:1.4;border-top:1.5px solid #cad8e8;padding-top:7px}
+.ph-dose-source a{color:#20558e!important;text-decoration:underline!important;text-underline-offset:2px;font-size:10px!important;font-weight:800}
+.ph-dose-source span{color:#60738a!important}
+.ph-dose-comment{font-size:11px!important;color:#6b4a28!important;margin:6px 0!important;border-left:3px solid #d29d4c;padding:5px 0 5px 8px;background:#fff5e8}
+.ph-section .ph-muted{color:#65758a!important;font-style:italic}
+.ph-phenos{border-bottom:3px solid #8ba9c8;background:#edf3fa;padding:10px;max-height:280px;overflow:auto;scrollbar-width:thin}
+.ph-phenos header{display:flex;gap:4px;flex-direction:column;border-bottom:2px solid #bed0e2;padding:3px 3px 9px;margin-bottom:8px}
+.ph-phenos header span{font-size:10px;font-weight:900;color:#476b92;letter-spacing:.1em}
+.ph-phenos header h3{font:800 16px/1.2 "Bricolage Grotesque",sans-serif;color:#284b75}
+.ph-pheno{border:1.5px solid #b6c8d9;border-left-width:5px;border-radius:6px;padding:9px;background:#fff;margin:7px 0}
+.ph-pheno.ph-no{border-left-color:#bd4f59}
+.ph-pheno.ph-variable{border-left-color:#b77f39}
+.ph-pheno.ph-strong{border-left-color:#2f8767}
+.ph-pheno>div{display:flex;flex-direction:column;gap:3px}
+.ph-pheno b{font-weight:850;font-size:11px;line-height:1.25;color:#234461}
+.ph-pheno span{font-size:9px;font-weight:850;text-transform:uppercase;letter-spacing:.05em;color:#885b21}
+.ph-pheno.ph-no span{color:#a2373d}
+.ph-pheno.ph-strong span{color:#237450}
+.ph-pheno p{font-size:10px;line-height:1.5;color:#415772;margin-top:6px}
+.ph-phenos>small{display:block;font-size:9px;color:#566b82;padding-top:5px}
+.ph-reviewed-links{display:flex;flex-direction:column;gap:7px}
+.ph-reviewed-links a{display:flex;flex-direction:column;gap:3px;text-decoration:none;border:2px solid #adc4db;border-left:5px solid #396da3;background:#f2f7fd;border-radius:6px;padding:10px}
+.ph-reviewed-links a:hover{background:#e5f0fb}
+.ph-reviewed-links b{color:#285586;font-size:12px}
+.ph-reviewed-links small{font-size:10px;color:#5a7085;font-weight:500;line-height:1.5}
+.ph-inline-notice b{font-weight:900;color:#325a86}
+@media(max-width:1200px){.ph-phenos{max-height:none}.ph-coverage{background:#f1f6fb}}
