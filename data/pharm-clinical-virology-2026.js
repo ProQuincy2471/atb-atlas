@@ -13,7 +13,7 @@ const put=(id,doses,detail={})=>{
  const prev=R.drugs[id]||{};
  const {sourceKeys:extraSources,...fields}=detail;
  R.drugs[id]={...prev,...fields,
-  doses:[...(prev.doses||[]),...doses.map(([t,ad,comment])=>({t,ad,comment:comment||'',sourceKey:'NIH_ARV26'}))],
+  doses:[...(prev.doses||[]),...doses.map(([t,ad,comment,sourceKey])=>({t,ad,comment:comment||'',sourceKey:sourceKey||'NIH_ARV26'}))],
   sourceKeys:[...new Set([...(prev.sourceKeys||[]),'NIH_ARV26',...(extraSources||[])])],
   reviewDate:'2026-11-04'};
 };
@@ -98,13 +98,13 @@ put('tenofovir-df-lamivudina',[
  ['Doble ITIAN TDF/3TC (requiere completar TAR)','TDF 300 mg + lamivudina 300 mg VO una vez al día']
 ]);
 put('doravirina-islatravir',[
- ['VIH-1 suprimido: cambio a DOR/ISL (Idvynso)','Doravirina 100 mg + islatravir 0.25 mg, una tableta VO cada día']
+ ['VIH-1 suprimido: cambio a DOR/ISL (Idvynso)','Doravirina 100 mg + islatravir 0.25 mg, una tableta VO cada día','','FDA_IDV26']
 ],{sourceKeys:['FDA_IDV26','NIH_CHANGE26'],indications:['Cambio de régimen en VIH-1 suprimido sin fallo virológico previo ni resistencia a doravirina.'],
  pearls:['La indicación estadounidense es de cambio en supresión sostenida, NO primer tratamiento indiferenciado.','Con rifabutina se requiere ajuste suplementario de doravirina según la ficha FDA.'],
  interactions:['Fármacos inductores CYP3A pueden comprometer la exposición; revisar ficha de interacción específica.']});
 put('bictegravir-lenacapavir',[
- ['VIH-1 suprimido: inicio BIC/LEN (Bixlenvo) más lenacapavir oral','Días 1 y 2: BIC 75 mg/LEN 50 mg VO (una tableta al día) + lenacapavir adicional 600 mg VO al día'],
- ['VIH-1 suprimido: mantenimiento BIC/LEN (Bixlenvo)','Desde día 3: BIC 75 mg/LEN 50 mg VO, una tableta al día']
+ ['VIH-1 suprimido: inicio BIC/LEN (Bixlenvo) más lenacapavir oral','Días 1 y 2: BIC 75 mg/LEN 50 mg VO (una tableta al día) + lenacapavir adicional 600 mg VO al día','','FDA_BIX26'],
+ ['VIH-1 suprimido: mantenimiento BIC/LEN (Bixlenvo)','Desde día 3: BIC 75 mg/LEN 50 mg VO, una tableta al día','','FDA_BIX26']
 ],{sourceKeys:['FDA_BIX26','NIH_CHANGE26'],indications:['Régimen completo de sustitución en adultos con VIH-1 suprimido y sin resistencia conocida/sospechada a los componentes.'],
  contraindications:['No coadministrar con dofetilida ni con inductores potentes de CYP3A, según ficha.'],
  interactions:['La combinación contiene lenacapavir, con interacciones CYP3A/P-gp clínicamente relevantes; no se añaden otros antirretrovirales de rutina.'],
