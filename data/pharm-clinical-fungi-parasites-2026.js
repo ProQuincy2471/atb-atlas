@@ -17,10 +17,11 @@ SRC.WHO_TB26={label:'OMS · Tuberculosis, módulo 4, segunda edición 2026',url:
 SRC.WHO_TB25={label:'OMS · Manual operativo TB, módulo 4, edición 2025',url:'https://www.who.int/publications/i/item/9789240108141',reviewed:'2026-11-04'};
 const put=(id,key,doses,extra={})=>{
  const prev=R.drugs[id]||{};
- R.drugs[id]={...prev,
+ const {sourceKeys:extraSources,...fields}=extra;
+ R.drugs[id]={...prev,...fields,
   doses:[...(prev.doses||[]),...doses.map(([t,ad,comment])=>({t,ad,comment:comment||'',sourceKey:key}))],
-  sourceKeys:[...new Set([...(prev.sourceKeys||[]),key,...(extra.sourceKeys||[])])],
-  reviewDate:'2026-11-04',...extra};
+  sourceKeys:[...new Set([...(prev.sourceKeys||[]),key,...(extraSources||[])])],
+  reviewDate:'2026-11-04'};
 };
 put('micafungina','IDSA_CANDIDA',[
  ['Candidemia / candidiasis invasiva en adultos','100 mg IV cada 24 h']
