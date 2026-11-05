@@ -392,3 +392,18 @@
  .ph-catalog button{transition:none}
  .ph-section{scroll-margin-top:0}
 }
+
+
+/* The center column can be narrow on 1280–1600px screens even when the
+   viewport itself is wide. Component queries preserve readable diagrams. */
+.ph-catalog .ph-article{container-type:inline-size}
+@container (max-width: 720px){
+ .ph-brief-grid{grid-template-columns:minmax(0,1fr)}
+ .ph-brief-item{display:grid;grid-template-columns:30px minmax(0,1fr);column-gap:10px}
+ .ph-brief-item .ph-brief-icon{grid-row:1 / span 3}
+ .ph-mechanism-flow{display:flex;flex-direction:column;gap:22px;padding:15px}
+ .ph-mech-node{padding:14px 15px}
+ .ph-mech-node:not(:last-child):after{content:"↓";top:auto;bottom:-23px;right:calc(50% - 7px);font-size:20px}
+ .ph-indication-grid,.ph-pearls,.ph-mech-context,.ph-use-rx{grid-template-columns:minmax(0,1fr)}
+ .ph-brief-title>small{display:none}
+}
