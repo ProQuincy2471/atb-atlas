@@ -223,16 +223,16 @@ function sidebar(x){
   const members=all.filter(a=>classify(a,k).block===g),
   subs=[...new Set(members.map(a=>classify(a,k).sub))];
   const c=tone(g,g);
-  return '<div class="ph-tree-set" style="--accent:'+c+'">'+btn(g,g,members.length,c,'block')+
+  return '<div class="ph-tree-set" style="--accent:'+c+';--tint:'+tone(g,g)+'">'+btn(g,g,members.length,c,'block')+
    (statePh.block===g?'<div class="ph-subtree">'+subs.map(s=>btn(s,s,members.filter(a=>classify(a,k).sub===s).length,tone(g,s),'sub')).join('')+'</div>':'')+'</div>';
  }).join('');
  return '<aside class="ph-sidebar" aria-label="Índice farmacológico">'+
- '<div class="ph-sidebar-sticky"><div class="ph-filter-head"><span>01 · EXPLORAR</span><strong>'+filtered.length+' / '+all.length+' fichas</strong></div>'+
+ '<div class="ph-sidebar-sticky"><div class="ph-filter-head"><div><span>01 · ÍNDICE FARMACOLÓGICO</span><h2>Familias y moléculas</h2></div><strong>'+filtered.length+' / '+all.length+' fichas</strong></div>'+
  '<label class="ph-search"><span>Buscar fármaco o familia</span><input type="search" data-ph-input="search" value="'+esc(statePh.q)+'" placeholder="Buscar molécula, grupo…" autocomplete="off"></label>'+
  '<label class="ph-check"><input type="checkbox" data-ph-change="onlyDose" '+(statePh.onlyDose?'checked':'')+'><span>Con pauta adulta documentada</span></label>'+
  '<nav class="ph-tree" aria-label="Grupos y subgrupos">'+btn('all','Todos los grupos',all.length,'#315ead','block')+options+'</nav>'+
  (statePh.block!=='all'||statePh.sub!=='all'||statePh.q||statePh.onlyDose?'<button class="ph-clear" data-ph="clear">Restablecer filtros</button>':'')+
- '<div class="ph-list-head">FÁRMACOS <span>'+filtered.length+'</span></div>'+
+ '<div class="ph-list-head"><b>FÁRMACOS EN ESTA SELECCIÓN</b><span>'+filtered.length+'</span></div>'+
  '<div class="ph-drug-list">'+(filtered.length?filtered.map(a=>{
   const g=classify(a,k),t=tone(g.block,g.sub);
   return '<button type="button" class="ph-drug'+(a.id===statePh.id?' on':'')+'" style="--accent:'+t+'" data-ph="select" data-id="'+esc(a.id)+'"><i></i><span><b>'+esc(a.name)+'</b><small>'+esc(g.sub)+'</small></span>'+(adultDoses(a).length?'<em title="Pauta de adulto verificada">Rx</em>':'')+'</button>';
@@ -438,7 +438,7 @@ function coveragePanel(a){
  const legend=[['supported','Habitual',cs.Y+cs.M],['variable','Variable',cs.S+cs.R],['no','No fiable',cs.N],['all','Todos',pcs.length]].map(([id,label,count])=>'<button class="'+(statePh.cover===id?'on':'')+'" data-ph="coverage-filter" data-val="'+id+'">'+label+' <b>'+count+'</b></button>').join('');
  const rows=shown.map(x=>{
   const cls=STATUS[x.s][1];
-  return '<div class="ph-cover-row ph-'+cls+'"><div><b>'+esc(x.p.name)+'</b><small>'+esc(groupSpecies(x.p))+'</small></div>'+badge(x.s)+(x.tier?'<span class="ph-evidence">'+esc(x.tier)+'</span>':'')+
+  return '<div role="listitem" class="ph-cover-row ph-'+cls+'" data-grade="'+esc(x.s)+'"><div><b>'+esc(x.p.name)+'</b><small>'+esc(groupSpecies(x.p))+'</small></div>'+badge(x.s)+(x.tier?'<span class="ph-evidence">'+esc(x.tier)+'</span>':'')+
    (x.note?'<p>'+esc(short(x.note,170))+'</p>':'')+'</div>';
  }).join('');
  const d=deep(a),quick=pro(d.espectro);
@@ -454,11 +454,11 @@ function coveragePanel(a){
   }).join('')+'<small>El fenotipo y la indicación clínica deben validarse; no es una escala porcentual ni un resultado de laboratorio.</small></section>':'';
  return '<aside class="ph-coverage" aria-label="Panel de cobertura de '+esc(a.name)+'"><div class="ph-cover-sticky"><div class="ph-cover-header"><span>03 · COBERTURA LATERAL</span><h2>¿Qué cubre?</h2><p>'+esc(a.name)+'</p></div>'+
  '<div class="ph-cover-counts"><div><b>'+cs.Y+'</b><span>habitual</span></div><div><b>'+cs.M+'</b><span>mayoría</span></div><div><b>'+cs.S+cs.R+'</b><span>variable</span></div><div><b>'+cs.N+'</b><span>no fiable</span></div></div>'+
- '<p class="ph-cover-caveat"><b>'+n+'</b> pares graduados; <b>'+cs.U+'</b> sin evaluación. El nivel describe actividad orientativa, <u>no</u> eficacia clínica ni sensibilidad de un aislamiento.</p>'+
+ '<p class="ph-cover-caveat"><b>'+n+'</b> pares graduados; <b>'+cs.U+'</b> sin evaluación. El nivel describe actividad orientativa, <u>no</u> eficacia clínica ni sensibilidad de un aislamiento.</p>'+ '<div class="ph-cover-key" aria-label="Escala descriptiva de actividad">'+[['Y','Habitual'],['M','Mayoría'],['S','Variable'],['R','Rara vez'],['N','No fiable'],['U','Sin evaluar']].map(([key,txt])=>'<span data-grade="'+key+'"><i aria-hidden="true"></i>'+txt+'</span>').join('')+'</div>'+
  phenotypePanel+
  (quick.length?'<details class="ph-cover-explainer"><summary>Espectro narrativo y advertencias</summary>'+paragraphs(quick)+'</details>':'')+
  '<div class="ph-cover-tabs">'+legend+'</div><label class="ph-cover-search"><span class="sr-only">Buscar patógeno</span><input type="search" data-ph-input="coverQuery" value="'+esc(statePh.coverQuery)+'" placeholder="Buscar especie…"></label>'+
- '<div class="ph-cover-list">'+(rows||'<p class="ph-empty">Sin pares registrados con este filtro. Desconocido no significa resistente.</p>')+'</div>'+
+ '<div class="ph-cover-list" role="list">'+(rows||'<p class="ph-empty">Sin pares registrados con este filtro. Desconocido no significa resistente.</p>')+'</div>'+
  (!statePh.coverMore&&sorted.length>28?'<button class="ph-more" data-ph="coverage-more">Mostrar '+(sorted.length-28)+' especies restantes</button>':'')+
  '<div class="ph-cover-footer"><h3>Interpretación responsable</h3><p>Las relaciones de clase están diferenciadas de las relaciones individuales. Para BLEE, AmpC, KPC, OXA-48, NDM/MBL y otros fenotipos no extrapolar a partir de un nombre de especie.</p>'+
  (k==='bacteria'?'<a href="https://www.idsociety.org/practice-guideline/amr-guidance/" target="_blank" rel="noopener noreferrer">IDSA AMR 2026 ↗</a>':'')+'</div></div></aside>';
