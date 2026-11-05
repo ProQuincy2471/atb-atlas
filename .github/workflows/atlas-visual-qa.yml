@@ -45,6 +45,9 @@ jobs:
       - name: Validate CARDIORA cardiology guide
         if: always()
         run: node qa/cardio-browser.cjs
+      - name: Validate INFEORA pharmacology catalog and comparison
+        if: always()
+        run: node qa/pharm-catalog-browser.cjs
       - name: Upload viewport captures and diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -57,4 +60,5 @@ jobs:
             qa/results26/
             qa/results27/
             qa/results-cardio/
+            qa/results-pharm/
           retention-days: 7
