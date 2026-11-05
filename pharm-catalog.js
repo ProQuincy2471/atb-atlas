@@ -335,9 +335,20 @@ function coveragePanel(a){
    (x.note?'<p>'+esc(short(x.note,170))+'</p>':'')+'</div>';
  }).join('');
  const d=deep(a),quick=pro(d.espectro);
+ const phenotypes=review(a).phenotypes||{};
+ const phenLabels={KPC_E:'Enterobacterales KPC',OXA48_E:'Enterobacterales OXA-48-like',MBL_E:'Enterobacterales MBL (NDM/VIM/IMP)',MBL_P:'Pseudomonas MBL',
+  ESBL:'Enterobacterales BLEE',AmpC:'AmpC inducible',DTR_P:'Pseudomonas difícil de tratar',CRAB:'A. baumannii resistente a carbapenémicos',STENO:'S. maltophilia invasiva'};
+ const phenotypePanel=Object.keys(phenotypes).length?
+  '<section class="ph-phenos"><header><span>FENOTIPOS DE RESISTENCIA</span><h3>Lectura dirigida</h3></header>'+
+  Object.entries(phenotypes).map(([key,value])=>{
+    const cls=value?.[0]==='no'?'no':value?.[0]==='yes'?'strong':'variable';
+    const lbl=cls==='no'?'No fiable':cls==='strong'?'Actividad documentada':'Condicionado a AST';
+    return '<div class="ph-pheno ph-'+cls+'"><div><b>'+esc(phenLabels[key]||key)+'</b><span>'+lbl+'</span></div><p>'+esc(value?.[1]||'Revisar susceptibilidad y ficha individual.')+'</p></div>';
+  }).join('')+'<small>El fenotipo y la indicación clínica deben validarse; no es una escala porcentual ni un resultado de laboratorio.</small></section>':'';
  return '<aside class="ph-coverage" aria-label="Panel de cobertura de '+esc(a.name)+'"><div class="ph-cover-sticky"><div class="ph-cover-header"><span>03 · COBERTURA LATERAL</span><h2>¿Qué cubre?</h2><p>'+esc(a.name)+'</p></div>'+
  '<div class="ph-cover-counts"><div><b>'+cs.Y+'</b><span>habitual</span></div><div><b>'+cs.M+'</b><span>mayoría</span></div><div><b>'+cs.S+cs.R+'</b><span>variable</span></div><div><b>'+cs.N+'</b><span>no fiable</span></div></div>'+
  '<p class="ph-cover-caveat"><b>'+n+'</b> pares graduados; <b>'+cs.U+'</b> sin evaluación. El nivel describe actividad orientativa, <u>no</u> eficacia clínica ni sensibilidad de un aislamiento.</p>'+
+ phenotypePanel+
  (quick.length?'<details class="ph-cover-explainer"><summary>Espectro narrativo y advertencias</summary>'+paragraphs(quick)+'</details>':'')+
  '<div class="ph-cover-tabs">'+legend+'</div><label class="ph-cover-search"><span class="sr-only">Buscar patógeno</span><input type="search" data-ph-input="coverQuery" value="'+esc(statePh.coverQuery)+'" placeholder="Buscar especie…"></label>'+
  '<div class="ph-cover-list">'+(rows||'<p class="ph-empty">Sin pares registrados con este filtro. Desconocido no significa resistente.</p>')+'</div>'+
@@ -353,7 +364,7 @@ function compareView(x){
  const block=makeRow('Clase y subgrupo',a=>{const c=classify(a,statePh.domain);return esc(c.block)+'<p>'+esc(c.sub)+'</p>';});
  const indication=makeRow('Indicaciones',a=>esc(short(pro(deep(a).indicaciones).join(' ')||a.context||'No cotejado',230)));
  const mech=makeRow('Mecanismo',a=>esc(short(pro(deep(a).mecanismo).join(' ')||a.mechanism||'No cotejado',270)));
- const safety=makeRow('Seguridad',a=>esc(short(pro(deep(a).seguridad).join(' ')||pro(ess(a)?.ea).join(' ')||'Revisar ficha individual',230)));
+ const safety=makeRow('Seguridad',a=>esc(short([...pro(review(a).precautions),...pro(review(a).contraindications),...pro(review(a).adverse),...pro(deep(a).seguridad),...pro(ess(a)?.ea)].join(' ')||'Revisar ficha individual',230)));
  const organisms=allMicro().filter(p=>p.kingdom===dKind(statePh.domain));
  const marked=statePh.domain==='bacteria'||statePh.domain==='tb'?
  ['s-aureus-mrsa','s-aureus-mssa','s-pneumoniae','e-coli-blee','p-aeruginosa','k-pneumoniae','b-fragilis','clostridioides-difficile']:
@@ -362,9 +373,17 @@ function compareView(x){
  ['plasmodium-falciparum','giardia','entamoeba','toxoplasma'];
  const sentinels=marked.map(id=>organisms.find(p=>p.id===id)).filter(Boolean).slice(0,8);
  const covRows=sentinels.map(p=>makeRow(p.name,a=>{const x=coverage(a,p);return badge(x.s)+(x.tier?'<small class="ph-compare-tier">'+esc(x.tier)+'</small>':'');})).join('');
+ const phenotypeKeys=['ESBL','AmpC','KPC_E','OXA48_E','MBL_E','MBL_P','DTR_P','CRAB','STENO'];
+ const phenotypeLabels={ESBL:'BLEE (Enterobacterales)',AmpC:'AmpC',KPC_E:'KPC',OXA48_E:'OXA-48-like',MBL_E:'MBL en Enterobacterales',MBL_P:'MBL en Pseudomonas',DTR_P:'Pseudomonas DTR',CRAB:'CRAB',STENO:'S. maltophilia'};
+ const phenotypeRows=(statePh.domain==='bacteria'?
+  phenotypeKeys.filter(key=>chosen.some(a=>review(a).phenotypes?.[key])).map(key=>makeRow(phenotypeLabels[key],a=>{
+   const p=review(a).phenotypes?.[key];
+   if(!p)return '<small class="ph-na">Sin evaluación</small>';
+   return '<span class="ph-status ph-'+(p[0]==='no'?'no':'variable')+'">'+(p[0]==='no'?'No fiable':'Según AST')+'</span><p>'+esc(p[1])+'</p>';
+  })).join(''):'');
  return '<section class="ph-compare"><header><span>COMPARADOR CLÍNICO</span><h2>Comparar lado a lado</h2><p>Selecciona de 2 a 4 fármacos de este territorio. Las pautas y los cruces se muestran únicamente cuando están documentados.</p></header>'+
  '<div class="ph-compare-picker"><label>Añadir medicamento<select data-ph-change="comparePick"><option value="">Seleccionar fármaco…</option>'+x.all.filter(a=>!chosen.some(y=>y.id===a.id)).map(a=>'<option value="'+esc(a.id)+'">'+esc(a.name)+'</option>').join('')+'</select></label><b>'+chosen.length+'/4</b><button data-ph="compare-clear">Vaciar</button></div>'+
- (chosen.length?'<div class="ph-compare-scroll"><table><thead><tr><th>DIMENSIÓN</th>'+cols+'</tr></thead><tbody>'+block+mech+indication+rx+safety+covRows+'</tbody></table></div>':'<div class="ph-blank">Elige dos fármacos desde la lista o desde sus fichas individuales.</div>')+
+ (chosen.length?'<div class="ph-compare-scroll"><table><thead><tr><th>DIMENSIÓN</th>'+cols+'</tr></thead><tbody>'+block+mech+indication+rx+safety+phenotypeRows+covRows+'</tbody></table></div>':'<div class="ph-blank">Elige dos fármacos desde la lista o desde sus fichas individuales.</div>')+
  '<footer>La cobertura no es una probabilidad de curación. Los datos de clase son orientativos y no equivalen a AST, CMI ni indicación clínica. Dosis adulta: función renal normal salvo indicación.</footer></section>';
 }
 function page(){
@@ -373,7 +392,8 @@ function page(){
    const n=roster(id).length;
    return '<button class="ph-domain '+(k===id?'on':'')+'" style="--accent:'+color+'" data-ph="domain" data-val="'+id+'" aria-pressed="'+(k===id)+'"><span>'+esc(name)+'</span><b>'+n+'</b><small>'+esc(desc)+'</small></button>';
  }).join('');
- const footer='<div class="ph-inline-notice"><b>Fuente y alcance</b> · Catálogo académico en desarrollo basado en archivos clínicos del proyecto, MSF, guías y fichas regulatorias. La presencia de una ficha no implica revisión completa ni aprobación en México. Los datos sin revisión se señalan, no se infieren.</div>';
+ const documented=[...new Set(rootDrugs().filter(a=>adultDoses(a).length).map(a=>a.id))].length;
+ const footer='<div class="ph-inline-notice"><b>Estado documental</b> · '+documented+' de '+rootDrugs().length+' fichas tienen al menos una pauta adulta atribuida a una fuente; esto no significa revisión clínica integral. El resto requiere cotejo específico. Las relaciones de cobertura sin evidencia se muestran como desconocidas. Disponibilidad regulatoria en México no comprobada de forma universal.</div>';
  return '<div class="ph-catalog"><header class="ph-top"><span class="ph-eyebrow">INFEORA / FARMACOLOGÍA / EDICIÓN NOVIEMBRE 2026</span><div class="ph-topline"><div><h1>Catálogo de antimicrobianos</h1><p>Del mecanismo molecular al paciente: grupos y subgrupos, pauta de adulto cuando existe respaldo, seguridad y cobertura separada.</p></div><div class="ph-topstat"><strong>'+rootDrugs().length+'</strong><span>fichas del banco</span></div></div></header>'+
  '<nav class="ph-domains" aria-label="Territorios farmacológicos">'+allDomains+'</nav>'+
  '<div class="ph-controls"><div><b>'+esc(nameOf(k))+'</b><span>'+esc(INTRO[orderedBlocks(k,x.all)[0]]||'Explora las familias, el mecanismo y sus limitaciones.')+'</span></div>'+
