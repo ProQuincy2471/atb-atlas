@@ -55,7 +55,7 @@ for(const [key,s] of Object.entries(sources)){
 }
 function requireRegimen(id,part){
  const v=drugs[id]?.doses||[];
- ensure(v.some(x=>x.ad.includes(part)),'Expected evidence-based regimen missing: '+id+' '+part);
+ ensure(v.some(x=>(x.ad+' '+x.t).includes(part)),'Expected evidence-based regimen missing: '+id+' '+part);
 }
 requireRegimen('cefiderocol','2 g IV');
 requireRegimen('pivmecilinam','370 mg');
