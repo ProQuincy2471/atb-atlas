@@ -11,10 +11,11 @@ R.sources.FDA_BIX26={label:'DailyMed · BIXLENVO (bictegravir/lenacapavir), agos
 R.sources.FDA_IDV26={label:'DailyMed · IDVYNSO (doravirina/islatravir), abril 2026',url:'https://www.dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=11aaeb53-9848-433c-be7f-db8a5bc0b26f&type=display',reviewed:'2026-11-04'};
 const put=(id,doses,detail={})=>{
  const prev=R.drugs[id]||{};
- R.drugs[id]={...prev,
+ const {sourceKeys:extraSources,...fields}=detail;
+ R.drugs[id]={...prev,...fields,
   doses:[...(prev.doses||[]),...doses.map(([t,ad,comment])=>({t,ad,comment:comment||'',sourceKey:'NIH_ARV26'}))],
-  sourceKeys:[...new Set([...(prev.sourceKeys||[]),'NIH_ARV26',...(detail.sourceKeys||[])])],
-  reviewDate:'2026-11-04',...detail};
+  sourceKeys:[...new Set([...(prev.sourceKeys||[]),'NIH_ARV26',...(extraSources||[])])],
+  reviewDate:'2026-11-04'};
 };
 put('dolutegravir',[
  ['VIH: parte de régimen combinado, sin resistencia INSTI','50 mg VO una vez al día'],
