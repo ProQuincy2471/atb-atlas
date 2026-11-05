@@ -1,4 +1,5 @@
 /* CARDIORA — iconos de interfaz originales (SVG de trazo 24×24) y paletas por nivel, categoría y grupo.
+   Paleta «trazo anotado»: tinta, rojo de plumilla ECG, azul de bolígrafo, ámbar de marcador y pocos tonos de apoyo.
    Son señales de navegación, no ilustraciones científicas. */
 (function(){
 const P={
@@ -25,7 +26,7 @@ const P={
  layers:'<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/>',
  scan:'<path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M7 12h10"/>',
  book:'<path d="M2.5 5.5C5 4 8 4 12 6c4-2 7-2 9.5-.5V19c-2.5-1.5-5.5-1.5-9.5.5-4-2-7-2-9.5-.5z"/><path d="M12 6v13.5"/>',
- // categorías clínicas
+ pen:'<path d="M15.5 4.5 19.5 8.5 8.5 19.5H4.5v-4z"/><path d="m13 7 4 4"/>',
  coronaria:'<path d="M12 20s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.3a4.2 4.2 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20z"/><path d="M6.5 12h3l1.6-2.6 1.8 4.4 1.4-1.8h3.2"/>',
  ic:'<path d="M12 3s6.5 6.8 6.5 11.3a6.5 6.5 0 0 1-13 0C5.5 9.8 12 3 12 3z"/><path d="M9 14.5a3 3 0 0 0 3 3"/>',
  arritmia:'<path d="M2 12.5h3l1.5-4 2.5 8 2-10 2.5 9 1.5-3H22"/>',
@@ -36,11 +37,13 @@ const P={
  otros:'<circle cx="7" cy="7" r="2.2"/><circle cx="17" cy="7" r="2.2"/><circle cx="7" cy="17" r="2.2"/><circle cx="17" cy="17" r="2.2"/>'
 };
 window.CI=(name,cls)=>`<svg class="ci ${cls||''}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${P[name]||P.otros}</svg>`;
-/* Paletas: color principal y tinta oscura para texto sobre tinte */
+const RED=['#d7261e','#8e1410'],BLUE=['#2440c4','#142a8a'],ORANGE=['#d96a0b','#8a4304'],OX=['#8a1538','#560a22'],GREEN=['#2f6b4f','#1b4430'],PLUM=['#6a3a8c','#41205a'],STEEL=['#36657f','#1f4256'],GRAPH=['#5b5047','#352d27'],INK=['#16120f','#16120f'];
+/* [color, tinta oscura, icono de familia] */
 window.CPAL={
- nivel:{1:['#3b4fa6','#22307a'],2:['#d0283e','#8f1326'],3:['#df6a24','#93400c'],4:['#6b2fc4','#43177f'],5:['#0a7fae','#064f6e']},
- cat:{coronaria:['#d0283e','#8f1326'],ic:['#3b4fa6','#22307a'],arritmia:['#df6a24','#93400c'],hta:['#b3246f','#701344'],valvular:['#6b2fc4','#43177f'],mio:['#0a7fae','#064f6e'],vascular:['#1c7d4c','#0f4f2f'],otros:['#56658a','#323d58']},
- ritmo:{Sinusales:['#1c7d4c','#0f4f2f'],Supraventriculares:['#3b4fa6','#22307a'],Ventriculares:['#d0283e','#8f1326'],'Bloqueos AV':['#6b2fc4','#43177f'],Paro:['#0a1633','#0a1633'],Patrones:['#df6a24','#93400c']},
- grupo:{'Antitrombóticos':['#d0283e','#8f1326','ic'],Neurohormonales:['#3b4fa6','#22307a','hta'],'Cardiometabólicos':['#1c7d4c','#0f4f2f','layers'],'Diuréticos':['#0a7fae','#064f6e','ic'],Vasodilatadores:['#b3246f','#701344','vascular'],'Antiarrítmicos':['#df6a24','#93400c','arritmia'],'Cuidados críticos':['#6b2fc4','#43177f','acls']}
+ nivel:{1:BLUE,2:RED,3:ORANGE,4:OX,5:GREEN},
+ cat:{coronaria:RED,ic:BLUE,arritmia:ORANGE,hta:OX,valvular:PLUM,mio:STEEL,vascular:GREEN,otros:GRAPH},
+ ritmo:{Sinusales:GREEN,Supraventriculares:BLUE,Ventriculares:RED,'Bloqueos AV':PLUM,Paro:INK,Patrones:ORANGE},
+ grupo:{'Antitrombóticos':[...RED,'ic'],Neurohormonales:[...BLUE,'hta'],'Cardiometabólicos':[...GREEN,'layers'],'Diuréticos':[...STEEL,'ic'],Vasodilatadores:[...OX,'vascular'],'Antiarrítmicos':[...ORANGE,'arritmia'],'Cuidados críticos':[...PLUM,'acls']},
+ practica:OX,herramientas:BLUE,fuentes:GRAPH
 };
 })();
